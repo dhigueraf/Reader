@@ -7,32 +7,65 @@
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Controller" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="LB_Carpetas" type="Label" parent="CanvasLayer/Controller"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -509.0
-margin_top = -297.0
-margin_right = -424.0
-margin_bottom = -266.0
+margin_left = -395.0
+margin_top = -247.0
+margin_right = -310.0
+margin_bottom = -216.0
+rect_scale = Vector2( 2, 2 )
+text = "Carpetas"
+align = 1
+valign = 1
+
+[node name="ContainerCarpetas" type="ScrollContainer" parent="CanvasLayer/Controller"]
+anchor_left = 0.043
+anchor_top = 0.197
+anchor_right = 0.432
+anchor_bottom = 0.95
+margin_left = -0.0320015
+margin_top = -0.200005
+margin_right = -0.368011
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controller/ContainerCarpetas"]
+alignment = 1
+
+[node name="LB_Archivos" type="Label" parent="CanvasLayer/Controller"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 201.0
+margin_top = -242.0
+margin_right = 286.0
+margin_bottom = -211.0
 rect_scale = Vector2( 2, 2 )
 text = "Archivos"
 align = 1
 valign = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
-anchor_left = 0.001
-anchor_top = 0.085
-anchor_right = 0.978
-anchor_bottom = 0.95
-margin_left = -0.024
-margin_right = -0.472046
+[node name="ContainerArchivos" type="ScrollContainer" parent="CanvasLayer/Controller"]
+anchor_left = 0.553
+anchor_top = 0.208
+anchor_right = 0.981
+anchor_bottom = 0.943
+margin_left = -0.272034
+margin_top = 0.199997
+margin_right = 0.455933
+margin_bottom = 0.200012
 scroll_horizontal_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controller/ContainerArchivos"]
 alignment = 1
-script = ExtResource( 2 )
 
 [node name="Icon" type="Sprite" parent="."]
 position = Vector2( 166, 270 )

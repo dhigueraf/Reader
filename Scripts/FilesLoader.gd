@@ -1,7 +1,9 @@
-extends VBoxContainer
+extends Control
 
 var elemento = preload("res://Objetos/Elemento.tscn")
 var directorio = preload("res://Objetos/ElementButton.tscn")
+
+var formatsallowed = ["doc","docx","ppt","pptx","xls","xls","odt","pdf","webm","mp4","mkv"]
 
 func openfile(dir,filename):
 	print("dir and name")
@@ -35,13 +37,15 @@ func _ready():
 				var btndir = Button.new()
 				btndir.text = file_name
 				btndir.connect("pressed",self,"opendir",[dir.get_current_dir ( )+"/"+ file_name])
-				add_child(btndir)
+				$ContainerCarpetas/VBoxContainer.add_child(btndir)
 			else:
 				#print("Found file: " + file_name)
-				var btnel = Button.new()
-				btnel.text = file_name
-				btnel.connect("pressed",self,"openfile",[basepath, file_name])
-				add_child(btnel)
+				var filearray = file_name.split(".")
+				if(formatsallowed.has(filearray[-1])):
+					var btnel = Button.new()
+					btnel.text = file_name
+					btnel.connect("pressed",self,"openfile",[basepath, file_name])
+					$ContainerArchivos/VBoxContainer.add_child(btnel)
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
