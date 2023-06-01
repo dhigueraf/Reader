@@ -69,35 +69,74 @@ scroll_horizontal_enabled = false
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controller/ContainerArchivos"]
 alignment = 1
 
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/Controller"]
+[node name="BtnBack" type="TextureButton" parent="CanvasLayer/Controller"]
 modulate = Color( 0.309804, 0.980392, 0.0901961, 1 )
 anchor_left = 0.059
 anchor_top = 0.763
 anchor_right = 0.297
 anchor_bottom = 0.901
-margin_left = -0.416004
-margin_top = 0.199982
-margin_right = 517.872
-margin_bottom = 176.4
+margin_left = -589.416
+margin_top = -64.8
+margin_right = -71.128
+margin_bottom = 111.4
 rect_scale = Vector2( 0.32, 0.32 )
+rect_pivot_offset = Vector2( 868.75, 93.75 )
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 4 )
-stretch_mode = 4
 
-[node name="Label" type="Label" parent="CanvasLayer/Controller/TextureButton"]
+[node name="Label" type="Label" parent="CanvasLayer/Controller/BtnBack"]
 anchor_left = 0.033
 anchor_top = 0.12
 anchor_right = 0.97
 anchor_bottom = 0.903
-margin_left = -6.146
-margin_top = -0.0800018
-margin_right = -600.14
-margin_bottom = -168.877
+margin_left = 0.63525
+margin_top = 0.95125
+margin_right = -593.359
+margin_bottom = -168.846
 rect_scale = Vector2( 6, 6 )
 text = "Atras
 "
 align = 1
 valign = 1
+
+[node name="BtnHome" type="TextureButton" parent="CanvasLayer/Controller"]
+modulate = Color( 0.309804, 0.980392, 0.0901961, 1 )
+anchor_left = 0.059
+anchor_top = 0.763
+anchor_right = 0.297
+anchor_bottom = 0.901
+margin_left = -331.416
+margin_top = -65.8
+margin_right = 186.872
+margin_bottom = 110.4
+rect_scale = Vector2( 0.32, 0.32 )
+rect_pivot_offset = Vector2( 868.75, 93.75 )
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="CanvasLayer/Controller/BtnHome"]
+anchor_left = 0.033
+anchor_top = 0.12
+anchor_right = 0.97
+anchor_bottom = 0.903
+margin_left = -5.61475
+margin_top = 4.07625
+margin_right = -599.609
+margin_bottom = -165.721
+rect_scale = Vector2( 6, 6 )
+text = "Home
+"
+align = 1
+valign = 1
+
+[node name="FileRute" type="TextEdit" parent="CanvasLayer/Controller"]
+anchor_left = 0.031
+anchor_top = 0.022
+anchor_right = 0.933
+anchor_bottom = 0.095
+margin_left = 0.255999
+margin_top = -0.200001
+margin_right = -0.392029
 
 [node name="Icon" type="Sprite" parent="."]
 position = Vector2( 166, 270 )
@@ -115,4 +154,5 @@ texture = ExtResource( 1 )
 position = Vector2( 876, 266 )
 texture = ExtResource( 1 )
 
-[connection signal="pressed" from="CanvasLayer/Controller/TextureButton" to="CanvasLayer/Controller" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/Controller/BtnBack" to="CanvasLayer/Controller" method="_on_BtnBack_pressed"]
+[connection signal="pressed" from="CanvasLayer/Controller/BtnHome" to="CanvasLayer/Controller" method="_on_BtnHome_pressed"]
