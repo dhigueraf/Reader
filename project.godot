@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Reference",
+"class": "Snake",
+"language": "GDScript",
+"path": "res://snake/Scripts/Snake.gd"
+} ]
+_global_script_class_icons={
+"Snake": ""
+}
+
 [application]
 
 config/name="Pdf Loader"
