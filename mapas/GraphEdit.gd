@@ -45,7 +45,9 @@ func load_save():
 			c.free()
 	
 	save_graph.open(basedir + "/savegraph.json", File.READ)
-	var save_data = parse_json(save_graph.get_line())
+	print(save_graph)
+	var save_data = parse_json(save_graph.get_as_text())
+	print(save_data)
 	for node in save_data["nodes"]:
 		var graph_node_instance = graph_node.instance()
 		graph_node_instance.set_size(Vector2(float(node["size_x"]), float(node["size_y"])))
