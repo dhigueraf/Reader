@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://backgrounds/pagina_1.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/PagesLoader.gd" type="Script" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 2 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
+anchor_left = 0.289
+anchor_top = 0.007
+anchor_right = 0.718
+anchor_bottom = 1.005
+margin_left = 0.0639954
+margin_top = -0.2
+margin_right = -0.232056
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ScrollContainer"]
+margin_right = 4967.0
+margin_bottom = 7017.0
+texture = ExtResource( 1 )

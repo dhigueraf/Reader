@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Extras.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/FoldersLoader.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/boton-01.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/boton-01_pressed.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/logocmm.png" type="Texture" id=5]
+[ext_resource path="res://Objetos/pdfbuttons.tscn" type="PackedScene" id=6]
 
 [node name="Scene" type="Node2D"]
 script = ExtResource( 1 )
@@ -185,6 +186,12 @@ margin_right = 726.0
 margin_bottom = 572.0
 text = "Mapas Conceptuales"
 
+[node name="pdfbuttons" parent="CanvasLayer/Controller" instance=ExtResource( 6 )]
+margin_left = 349.0
+margin_top = 161.0
+margin_right = 349.056
+margin_bottom = 161.0
+
 [node name="Logocmm" type="Sprite" parent="."]
 position = Vector2( 958, 559 )
 scale = Vector2( 0.399225, 0.434959 )
@@ -195,3 +202,7 @@ texture = ExtResource( 5 )
 [connection signal="pressed" from="CanvasLayer/Controller/BtnHome2" to="CanvasLayer/Controller" method="_on_BtnHome_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/Button2" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Controller/pdfbuttons/ColorRect/BtnExterno" to="CanvasLayer/Controller" method="_on_BtnExterno_pressed"]
+[connection signal="pressed" from="CanvasLayer/Controller/pdfbuttons/ColorRect/BtnNotas" to="CanvasLayer/Controller" method="_on_BtnNotas_pressed"]
+
+[editable path="CanvasLayer/Controller/pdfbuttons"]

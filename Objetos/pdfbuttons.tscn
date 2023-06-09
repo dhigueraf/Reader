@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/closebtn.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/closebtn_pressed.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/pdfbuttons.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/loading.png" type="Texture" id=4]
+
+[node name="pdfbuttons" type="Control"]
+anchor_right = 0.331
+anchor_bottom = 0.455
+margin_right = 0.0559692
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 0.997
+anchor_bottom = 1.005
+margin_right = 0.0169983
+margin_bottom = 0.774994
+color = Color( 0.247059, 0.247059, 0.247059, 0.560784 )
+
+[node name="BtnExterno" type="Button" parent="ColorRect"]
+margin_left = 78.0
+margin_top = 32.0
+margin_right = 259.0
+margin_bottom = 72.0
+text = "Abrir con tu lector externo"
+
+[node name="BtnNotas" type="Button" parent="ColorRect"]
+margin_left = 78.0
+margin_top = 113.0
+margin_right = 259.0
+margin_bottom = 153.0
+text = "Tomar notas internas"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 301.0
+margin_top = -29.0
+margin_right = 365.0
+margin_bottom = 35.0
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+
+[node name="LoadingSpr" type="Sprite" parent="."]
+visible = false
+position = Vector2( 168, 212 )
+texture = ExtResource( 4 )
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

@@ -6,8 +6,21 @@ export var discartednames= [".",".."]
 export var formatsallowed = ["doc","docx","ppt","pptx","xls","xls","odt","pdf","webm","mp4","mkv","png","jpg","jpeg"]
 var history = []
 var basedir =""
+var converterdir = ""
 var currentdir = ""
 var previusdir = ""
+var filetoopen = ""
+
+func _ready():
+	var path = OS.get_executable_path()
+	#print (path)
+	basedir = path.get_base_dir() + "/cursos"
+	converterdir = path.get_base_dir() + "/converter"
+	currentdir = basedir
+	previusdir = basedir
+	
+	iteratedirectorys(currentdir)
+	$pdfbuttons.visible = false
 
 func opendir(dir):
 	previusdir = currentdir
@@ -16,25 +29,11 @@ func opendir(dir):
 	cleanContainers()
 	iteratedirectorys(currentdir)
 	
-	#print(history)
 
-func openfile(dir,filename):
-	#print("dir and name")
-	#print(dir)
-	#print(filename)
-	#$FileRute.text = str("file://", dir + "/" + filename )
-	$FileRute.text = str(dir + "/" + filename )
-	OS.shell_open(str(dir + "/" + filename ) )
+func openfile(filedir):
+	$FileRute.text = str(filedir)
+	OS.shell_open(filedir)
 
-
-func _ready():
-	var path = OS.get_executable_path()
-	#print (path)
-	basedir = path.get_base_dir() + "/cursos"
-	currentdir = basedir
-	previusdir = basedir
-	
-	iteratedirectorys(currentdir)
 
 func iteratedirectorys(directory):
 	print("directorio: "+ directory)
@@ -76,7 +75,7 @@ func generateListOfFilesButtons():
 		for file in listoffiles:
 			var btndir = Button.new()
 			btndir.text = file
-			btndir.connect("pressed",self,"openfile",[currentdir,file])
+			btndir.connect("pressed",self,"pdfButtons",[currentdir+"/"+file])
 			$ContainerArchivos/VBoxContainer.add_child(btndir)
 
 func cleanContainers():
@@ -118,6 +117,12 @@ func _on_BtnBack_pressed():
 		iteratedirectorys(currentdir)
 
 
+func pdfButtons(filename):
+	print("PDF buttons")
+	$pdfbuttons.visible = true
+	filetoopen = filename
+	
+
 func _on_BtnHome_pressed():
 	currentdir = basedir;
 	
@@ -125,3 +130,40 @@ func _on_BtnHome_pressed():
 	
 	cleanContainers()
 	iteratedirectorys(currentdir)
+
+
+func _on_BtnExterno_pressed():
+	openfile(filetoopen)
+
+
+func _on_BtnNotas_pressed():
+	$pdfbuttons.activateLoading()
+	prepararanotas()
+	
+	
+func prepararanotas():
+	var dir = Directory.new()
+	print("eliminar imagenes anteriores")
+	if dir.open(converterdir) == OK:
+		dir.list_dir_begin()
+		var iteratedname = dir.get_next()
+		while (iteratedname != ""):
+			if not dir.current_is_dir():
+				#print("Found file: " + iteratedname)
+				var filearray = iteratedname.split(".")
+				if( filearray[-1] == "png" ):
+					print(iteratedname)
+					dir.remove(converterdir + "/" + iteratedname)
+			iteratedname = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+	
+	
+	print("generar pdf images")
+	var ejecutable = converterdir + "/pdf2pngimg.exe"
+	var output = []
+	OS.execute(ejecutable, [filetoopen], true, output)
+	for text in output:
+		print(text)
+	
+	get_tree().change_scene("res://Ecenas/notas.tscn")
