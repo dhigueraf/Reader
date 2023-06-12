@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var pages = []
+var actualindex = 0
 
 func _ready():
 	var path = OS.get_executable_path()
@@ -13,7 +14,7 @@ func _ready():
 		var iteratedname = dir.get_next()
 		while (iteratedname != ""):
 			if not dir.current_is_dir():
-				#print("Found file: " + iteratedname)
+				print("Found file: " + iteratedname)
 				var filearray = iteratedname.split(".")
 				if( filearray[-1] == "png" ):
 					print(iteratedname)
@@ -25,9 +26,10 @@ func _ready():
 		
 		
 	var image = Image.new()
-	var err = image.load(pages[1])
-	var texture = ImageTexture.new()
-	texture.create_from_image(image, 0)
-	print(texture)
-	$ScrollContainer/TextureRect.texture = texture
+	if(pages.size() > 0):
+		var err = image.load(pages[actualindex])
+		var texture = ImageTexture.new()
+		texture.create_from_image(image, 0)
+		print(texture)
+		$ScrollContainer/TextureRect.texture = texture
 

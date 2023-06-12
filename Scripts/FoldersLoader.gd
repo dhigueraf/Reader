@@ -149,7 +149,7 @@ func prepararanotas():
 		var iteratedname = dir.get_next()
 		while (iteratedname != ""):
 			if not dir.current_is_dir():
-				#print("Found file: " + iteratedname)
+				print("Found file: " + iteratedname)
 				var filearray = iteratedname.split(".")
 				if( filearray[-1] == "png" ):
 					print(iteratedname)
@@ -160,10 +160,24 @@ func prepararanotas():
 	
 	
 	print("generar pdf images")
-	var ejecutable = converterdir + "/pdf2pngimg.exe"
-	var output = []
-	OS.execute(ejecutable, [filetoopen], true, output)
-	for text in output:
-		print(text)
+	
+	var filetoopenarray = filetoopen.split(".")
+	
+	if filetoopenarray[-1] == "pdf":
+		print("es convertible")
+		var sistemaoperativo = OS.get_name()
+		print(sistemaoperativo)
+		var ejecutable = converterdir + "/pdf2pngimg.exe"
+		if sistemaoperativo.to_lower() == "windows":
+			print("windows")
+			ejecutable = converterdir + "/pdf2pngimg.exe"
+		elif sistemaoperativo.to_lower() == "x11" || sistemaoperativo.to_lower() == "linux":
+			print("linux")
+			ejecutable = converterdir + "/pdf2pngimg"
+		
+		var output = []
+		OS.execute(ejecutable, [filetoopen], true, output)
+		for text in output:
+			print(text)
 	
 	get_tree().change_scene("res://Ecenas/notas.tscn")
