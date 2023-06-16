@@ -11,6 +11,17 @@ var currentdir = ""
 var previusdir = ""
 var filetoopen = ""
 
+onready var http : HTTPRequest = $HTTPRequest
+
+const PROJECT_ID := "prueba-front-746df"
+const FIRESTORE_URL := "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/" % PROJECT_ID
+
+func get_documentorcollection(path: String) -> void:
+	var url := FIRESTORE_URL + path
+	http.request(url)
+	
+
+
 func _ready():
 	var path = OS.get_executable_path()
 	#print (path)
@@ -21,6 +32,18 @@ func _ready():
 	
 	iteratedirectorys(currentdir)
 	$pdfbuttons.visible = false
+	
+	get_documentorcollection("colecciondeprueba")
+	#var colprueba =  Firebase.get_document_or_collection("colecciondeprueba",http)
+	#print(colprueba)
+	#print(http)
+	
+func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
+	if body and JSON.parse(body.get_string_from_ascii()).result:
+		var request_result := JSON.parse(body.get_string_from_ascii()).result as Dictionary
+		print(request_result)
+		#var res = firebase_firestore_parse(request_result)
+
 
 func opendir(dir):
 	previusdir = currentdir
@@ -28,6 +51,7 @@ func opendir(dir):
 	history.append(previusdir)
 	cleanContainers()
 	iteratedirectorys(currentdir)
+	
 	
 
 func openfile(filedir):
@@ -70,12 +94,16 @@ func generateListOfFolderButtons():
 			$ContainerCarpetas/VBoxContainer.add_child(btndir)
 
 func generateListOfFilesButtons():
-	#print(listoffiles)
+	print(listoffiles)
 	if (listoffiles.size() > 0):
 		for file in listoffiles:
 			var btndir = Button.new()
 			btndir.text = file
-			btndir.connect("pressed",self,"pdfButtons",[currentdir+"/"+file])
+			var filearray = file.split(".")
+			if( filearray[-1] == "pdf" ):
+				btndir.connect("pressed",self,"pdfButtons",[currentdir+"/"+file])
+			else:
+				btndir.connect("pressed",self,"openfile",[currentdir+"/"+file])
 			$ContainerArchivos/VBoxContainer.add_child(btndir)
 
 func cleanContainers():
@@ -138,6 +166,11 @@ func _on_BtnExterno_pressed():
 
 func _on_BtnNotas_pressed():
 	$pdfbuttons.activateLoading()
+	
+	Global.FileReading.nombrecompleto = filetoopen
+	print(Global.FileReading.nombre)
+
+	
 	prepararanotas()
 	
 	

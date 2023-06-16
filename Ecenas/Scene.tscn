@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Extras.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/FoldersLoader.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Manager.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/boton-01.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/boton-01_pressed.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/logocmm.png" type="Texture" id=5]
@@ -192,6 +192,8 @@ margin_top = 161.0
 margin_right = 349.056
 margin_bottom = 161.0
 
+[node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer/Controller"]
+
 [node name="Logocmm" type="Sprite" parent="."]
 position = Vector2( 958, 559 )
 scale = Vector2( 0.399225, 0.434959 )
@@ -204,5 +206,6 @@ texture = ExtResource( 5 )
 [connection signal="pressed" from="CanvasLayer/Controller/Button2" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/pdfbuttons/ColorRect/BtnExterno" to="CanvasLayer/Controller" method="_on_BtnExterno_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/pdfbuttons/ColorRect/BtnNotas" to="CanvasLayer/Controller" method="_on_BtnNotas_pressed"]
+[connection signal="request_completed" from="CanvasLayer/Controller/HTTPRequest" to="CanvasLayer/Controller" method="_on_HTTPRequest_request_completed"]
 
 [editable path="CanvasLayer/Controller/pdfbuttons"]
