@@ -1,11 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://mapas/GraphNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://mapas/GraphEdit.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/floppy.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/floppy_pressed.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/btnplus_pressed.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/btnplus.png" type="Texture" id=6]
 
 [node name="GraphEdit" type="GraphEdit"]
 anchor_right = 1.0
@@ -32,22 +28,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="saveButton" type="TextureButton" parent="."]
-margin_left = 6.0
-margin_top = 44.0
-margin_right = 70.0
-margin_bottom = 108.0
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 4 )
-
-[node name="PlusButton" type="TextureButton" parent="."]
-margin_left = 7.0
-margin_top = 118.0
-margin_right = 71.0
-margin_bottom = 182.0
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 5 )
-
 [connection signal="_end_node_move" from="." to="." method="_on_GraphEdit__end_node_move"]
 [connection signal="connection_from_empty" from="." to="." method="_on_GraphEdit_connection_from_empty"]
 [connection signal="connection_request" from="." to="." method="_on_GraphEdit_connection_request"]
@@ -58,5 +38,3 @@ texture_pressed = ExtResource( 5 )
 [connection signal="duplicate_nodes_request" from="." to="." method="_on_GraphEdit_duplicate_nodes_request"]
 [connection signal="node_selected" from="." to="." method="_on_GraphEdit_node_selected"]
 [connection signal="paste_nodes_request" from="." to="." method="_on_GraphEdit_paste_nodes_request"]
-[connection signal="pressed" from="saveButton" to="." method="_on_TextureButton_pressed"]
-[connection signal="pressed" from="PlusButton" to="." method="_on_PlusButton_pressed"]

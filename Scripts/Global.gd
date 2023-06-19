@@ -4,8 +4,10 @@ extends Node
 var FileReading = {
 	nombre = "",
 	nombrecompleto = "",
-	location = ""
-	
+	location = "",
+	nombrelocation ="",
+	extension = ".",
+	numeropaginas = 0
 }
 
 var interactivos = {

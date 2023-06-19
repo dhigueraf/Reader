@@ -101,7 +101,7 @@ func generateListOfFilesButtons():
 			btndir.text = file
 			var filearray = file.split(".")
 			if( filearray[-1] == "pdf" ):
-				btndir.connect("pressed",self,"pdfButtons",[currentdir+"/"+file])
+				btndir.connect("pressed",self,"pdfButtons",[currentdir+"/"+file,file])
 			else:
 				btndir.connect("pressed",self,"openfile",[currentdir+"/"+file])
 			$ContainerArchivos/VBoxContainer.add_child(btndir)
@@ -145,10 +145,17 @@ func _on_BtnBack_pressed():
 		iteratedirectorys(currentdir)
 
 
-func pdfButtons(filename):
+func pdfButtons(filedir,filename):
 	print("PDF buttons")
 	$pdfbuttons.visible = true
-	filetoopen = filename
+	Global.FileReading.location = currentdir
+	var filenamearray = filename.split(".") 
+	Global.FileReading.nombre = filenamearray[0]
+	Global.FileReading.extension = filenamearray[-1]
+	Global.FileReading.nombrecompleto = filename
+	Global.FileReading.nombrelocation = filedir
+	print(Global.FileReading)
+	filetoopen = filedir
 	
 
 func _on_BtnHome_pressed():
@@ -166,11 +173,6 @@ func _on_BtnExterno_pressed():
 
 func _on_BtnNotas_pressed():
 	$pdfbuttons.activateLoading()
-	
-	Global.FileReading.nombrecompleto = filetoopen
-	print(Global.FileReading.nombre)
-
-	
 	prepararanotas()
 	
 	
@@ -210,7 +212,10 @@ func prepararanotas():
 		
 		var output = []
 		OS.execute(ejecutable, [filetoopen], true, output)
+		print("Ouput: ")
 		for text in output:
 			print(text)
+		print("Fin Ejecución")
 	
-	get_tree().change_scene("res://Ecenas/notas.tscn")
+	print("Cambiar de escena")
+	get_tree().change_scene("res://Escenas/notas.tscn")

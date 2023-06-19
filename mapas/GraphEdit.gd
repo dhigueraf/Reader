@@ -151,13 +151,16 @@ func _on_GraphEdit__end_node_move():
 	pass
 
 
-func _on_TextureButton_pressed():
-	save()
-
-
 func _on_PlusButton_pressed():
 	var graph_node_instance = graph_node.instance()
 	graph_node_instance.set_size(Vector2(float(160), float(120) ))
 	graph_node_instance.set_offset(Vector2(float(100), float(100)))
 	add_child(graph_node_instance)
-	
+
+
+func _on_saveButton_pressed():
+	save()
+
+
+func _on_Button_pressed():
+	get_tree().change_scene("res://Escenas/notas.tscn")

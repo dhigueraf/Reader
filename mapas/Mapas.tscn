@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://mapas/theme.tres" type="Theme" id=1]
 [ext_resource path="res://mapas/GraphEdit.tscn" type="PackedScene" id=2]
 [ext_resource path="res://mapas/PopupDialog.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/btnplus_pressed.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/floppy_pressed.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/btnplus.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/floppy.png" type="Texture" id=7]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -100,7 +104,33 @@ margin_bottom = 29.0
 size_flags_horizontal = 3
 color = Color( 0.333333, 0.113725, 0.113725, 1 )
 
+[node name="saveButton" type="TextureButton" parent="."]
+margin_left = 6.0
+margin_top = 44.0
+margin_right = 70.0
+margin_bottom = 108.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 5 )
+
+[node name="PlusButton" type="TextureButton" parent="."]
+margin_left = 7.0
+margin_top = 118.0
+margin_right = 71.0
+margin_bottom = 182.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 4 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = 21.0
+margin_top = 560.0
+margin_right = 73.0
+margin_bottom = 580.0
+text = "Volver"
+
 [connection signal="pressed" from="PopupDialog/MarginContainer/VBoxContainer/Save" to="PopupDialog" method="_on_Save_pressed"]
 [connection signal="text_changed" from="PopupDialog/MarginContainer/VBoxContainer/HBoxContainer/TextEdit" to="PopupDialog" method="_on_TextEdit_text_changed"]
 [connection signal="color_changed" from="PopupDialog/MarginContainer/VBoxContainer/HBoxContainer2/ColorFrame" to="PopupDialog" method="_on_ColorFrame_color_changed"]
 [connection signal="color_changed" from="PopupDialog/MarginContainer/VBoxContainer/HBoxContainer3/ColorSelected" to="PopupDialog" method="_on_ColorSelected_color_changed"]
+[connection signal="pressed" from="saveButton" to="GraphEdit" method="_on_saveButton_pressed"]
+[connection signal="pressed" from="PlusButton" to="GraphEdit" method="_on_PlusButton_pressed"]
+[connection signal="pressed" from="Button" to="GraphEdit" method="_on_Button_pressed"]
