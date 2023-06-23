@@ -7,7 +7,8 @@ var FileToRead = {
 	location = "",
 	nombrelocation ="",
 	extension = ".",
-	numeropaginas = 0
+	numeropaginas = 0,
+	currentintex = 0
 }
 
 var FileReading = {}

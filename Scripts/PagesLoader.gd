@@ -9,21 +9,6 @@ func _ready():
 	var converterdir = path.get_base_dir() + "/converter"
 	var dir = Directory.new()
 	
-	print("File loaded")
-	print(Global.FileToRead)
-		
-	var jsonpdf = File.new()
-	if not jsonpdf.file_exists(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json"):
-		print("No existe")
-		jsonpdf.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.WRITE)
-		jsonpdf.store_line( to_json( generate_json(maxindex) ) )
-		jsonpdf.close()
-		
-	jsonpdf.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.READ)
-	Global.FileReading = parse_json(jsonpdf.get_as_text())
-	print("Save data")
-	print(Global.FileReading)
-	
 	if dir.open(converterdir) == OK:
 		dir.list_dir_begin()
 		var iteratedname = dir.get_next()
@@ -35,19 +20,38 @@ func _ready():
 					print(iteratedname)
 					pages.append(converterdir + "/" + iteratedname)
 			iteratedname = dir.get_next()
-
 	else:
 		print("An error occurred when trying to access the path.")
-		
+	
 	if(pages.size() > 0):
 		maxindex = pages.size()
 		Global.FileToRead.numeropaginas = maxindex
-		updateindex(0)
 	else:
 		maxindex = 0
+	
+	print("File loaded")
+	print(Global.FileToRead)
+	
 		
+	var jsonpdf = File.new()
+	if not jsonpdf.file_exists(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json"):
+		print("No existe")
+		jsonpdf.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.WRITE)
+		jsonpdf.store_line( to_json( generate_json(maxindex) ) )
+		jsonpdf.close()
+		
+	jsonpdf.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.READ)
+	if jsonpdf.get_as_text() != "" :
+		Global.FileReading = parse_json(jsonpdf.get_as_text())
+	else: 
+		Global.FileReading = generate_json(maxindex)
+	print("Save data")
+	print(Global.FileReading)
+	
+	updateindex(0)
 	
 func generate_json(num):
+	print("Crear json de " + str(num) + " paginas")
 	var emptyjson = {
 		paginas = [],
 		nombre = Global.FileToRead.nombrecompleto,
@@ -58,10 +62,14 @@ func generate_json(num):
 		var pagtoadd = {
 			id = iterator,
 			notas = "",
-			mapaideas = {}
+			mapaideas = {
+				connections = [],
+				nodes = []
+			}
 		}
 		emptyjson.paginas.append(pagtoadd)
 		iterator+= 1
+	print(emptyjson)
 	return emptyjson
 
 
@@ -80,7 +88,13 @@ func setimage(index):
 	print(texture)
 	$ScrollContainer/TextureRect.texture = texture
 	$EtiquetaPagina.text = "Notas pagina " + str(index)
-	$NotasContainer.text = Global.FileReading.paginas[index].notas
+	if Global.FileReading.has('paginas'):
+		if range( Global.FileReading.paginas.size() ).has(index):
+			$NotasContainer.text = Global.FileReading.paginas[index].notas
+		else:
+			$NotasContainer.text = ""
+	else:
+		$NotasContainer.text = ""
 	
 func updateindex(num):
 	print("actualindex " + str(actualindex) )
@@ -97,6 +111,7 @@ func updateindex(num):
 			actualindex = 0
 			$retroceder.disabled = true
 	
+	Global.FileToRead.actualindex = actualindex
 	setimage(actualindex)	
 
 

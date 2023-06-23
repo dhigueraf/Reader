@@ -19,7 +19,7 @@ func _ready():
 
 func save():
 	var save_graph = File.new()
-	save_graph.open(basedir + "/savegraph.json", File.WRITE)
+	save_graph.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.WRITE)
 	var node_data = []
 	for c in get_children():
 		if c is GraphNode:
@@ -30,13 +30,14 @@ func save():
 								"size_y":c.get_rect().size.y,
 								"data": c.get_data()})
 	var data = {"connections": get_connection_list(), "nodes": node_data}
-	save_graph.store_line(to_json(data))
+	Global.FileReading.paginas[Global.FileToRead.actualindex].mapaideas = data
+	save_graph.store_line( to_json(Global.FileReading) )
 	save_graph.close()
 	print("saved!")
 
 func load_save():
 	var save_graph = File.new()
-	if not save_graph.file_exists(basedir + "/savegraph.json"):
+	if not save_graph.file_exists(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json"):
 		return # Error! We don't have a save to load.
 		
 	# clear graphedit
@@ -44,9 +45,12 @@ func load_save():
 		if c is GraphNode: 
 			c.free()
 	
-	save_graph.open(basedir + "/savegraph.json", File.READ)
-	print(save_graph)
-	var save_data = parse_json(save_graph.get_as_text())
+	print(Global.FileToRead)
+	print(Global.FileToRead.actualindex)
+	print(Global.FileReading)
+	print(Global.FileReading.paginas)
+	print(Global.FileReading.paginas[Global.FileToRead.actualindex])
+	var save_data = Global.FileReading.paginas[Global.FileToRead.actualindex].mapaideas
 	print(save_data)
 	for node in save_data["nodes"]:
 		var graph_node_instance = graph_node.instance()
@@ -59,7 +63,7 @@ func load_save():
 	
 	for conn in save_data["connections"]:
 		connect_node(conn["from"], conn["from_port"], conn["to"], conn["to_port"])
-	save_graph.close()
+	#save_graph.close()
 	print("loaded!")
 
 func get_connections(node_name):

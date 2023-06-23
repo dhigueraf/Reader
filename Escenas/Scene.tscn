@@ -173,18 +173,11 @@ margin_top = -0.200001
 margin_right = -0.392029
 
 [node name="Button" type="Button" parent="CanvasLayer/Controller"]
-margin_left = 587.0
-margin_top = 460.0
-margin_right = 727.0
-margin_bottom = 511.0
+margin_left = 595.0
+margin_top = 471.0
+margin_right = 735.0
+margin_bottom = 522.0
 text = "Play Snake"
-
-[node name="Button2" type="Button" parent="CanvasLayer/Controller"]
-margin_left = 586.0
-margin_top = 521.0
-margin_right = 726.0
-margin_bottom = 572.0
-text = "Mapas Conceptuales"
 
 [node name="pdfbuttons" parent="CanvasLayer/Controller" instance=ExtResource( 6 )]
 margin_left = 349.0
@@ -203,7 +196,6 @@ texture = ExtResource( 4 )
 [connection signal="pressed" from="CanvasLayer/Controller/BtnHome" to="CanvasLayer/Controller" method="_on_BtnHome_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/BtnHome2" to="CanvasLayer/Controller" method="_on_BtnHome_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/Button" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Controller/Button2" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/pdfbuttons/ColorRect/BtnExterno" to="CanvasLayer/Controller" method="_on_BtnExterno_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/pdfbuttons/ColorRect/BtnNotas" to="CanvasLayer/Controller" method="_on_BtnNotas_pressed"]
 [connection signal="request_completed" from="CanvasLayer/Controller/HTTPRequest" to="CanvasLayer/Controller" method="_on_HTTPRequest_request_completed"]
