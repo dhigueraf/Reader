@@ -148,13 +148,13 @@ func _on_BtnBack_pressed():
 func pdfButtons(filedir,filename):
 	print("PDF buttons")
 	$pdfbuttons.visible = true
-	Global.FileReading.location = currentdir
+	Global.FileToRead.location = currentdir
 	var filenamearray = filename.split(".") 
-	Global.FileReading.nombre = filenamearray[0]
-	Global.FileReading.extension = filenamearray[-1]
-	Global.FileReading.nombrecompleto = filename
-	Global.FileReading.nombrelocation = filedir
-	print(Global.FileReading)
+	Global.FileToRead.nombre = filenamearray[0]
+	Global.FileToRead.extension = filenamearray[-1]
+	Global.FileToRead.nombrecompleto = filename
+	Global.FileToRead.nombrelocation = filedir
+	print(Global.FileToRead)
 	filetoopen = filedir
 	
 

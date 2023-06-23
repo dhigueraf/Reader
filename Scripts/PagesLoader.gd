@@ -9,6 +9,21 @@ func _ready():
 	var converterdir = path.get_base_dir() + "/converter"
 	var dir = Directory.new()
 	
+	print("File loaded")
+	print(Global.FileToRead)
+		
+	var jsonpdf = File.new()
+	if not jsonpdf.file_exists(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json"):
+		print("No existe")
+		jsonpdf.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.WRITE)
+		jsonpdf.store_line( to_json( generate_json(maxindex) ) )
+		jsonpdf.close()
+		
+	jsonpdf.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.READ)
+	Global.FileReading = parse_json(jsonpdf.get_as_text())
+	print("Save data")
+	print(Global.FileReading)
+	
 	if dir.open(converterdir) == OK:
 		dir.list_dir_begin()
 		var iteratedname = dir.get_next()
@@ -26,29 +41,16 @@ func _ready():
 		
 	if(pages.size() > 0):
 		maxindex = pages.size()
-		Global.FileReading.numeropaginas = maxindex
+		Global.FileToRead.numeropaginas = maxindex
 		updateindex(0)
 	else:
 		maxindex = 0
 		
-	print("File loaded")
-	print(Global.FileReading)
-		
-	var jsonpdf = File.new()
-	if not jsonpdf.file_exists(Global.FileReading.location + "/" + Global.FileReading.nombre  +".json"):
-		print("No existe")
-		jsonpdf.open(Global.FileReading.location + "/" + Global.FileReading.nombre  +".json", File.WRITE)
-		jsonpdf.store_line( to_json( generate_json(maxindex) ) )
-		jsonpdf.close()
-		
-	jsonpdf.open(Global.FileReading.location + "/" + Global.FileReading.nombre  +".json", File.READ)
-	var save_data = parse_json(jsonpdf.get_as_text())
-	print("Save data")
-	print(save_data)
 	
 func generate_json(num):
 	var emptyjson = {
 		paginas = [],
+		nombre = Global.FileToRead.nombrecompleto,
 		numerodepaginas = num
 	}
 	var iterator = 0
@@ -62,6 +64,13 @@ func generate_json(num):
 		iterator+= 1
 	return emptyjson
 
+
+func save():
+	var jsontosave = File.new()
+	jsontosave.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.WRITE)
+	jsontosave.store_line( to_json( Global.FileReading ) )
+	jsontosave.close()
+
 func setimage(index):
 	print("set iamge index: " + str(index))
 	var image = Image.new()
@@ -70,9 +79,9 @@ func setimage(index):
 	texture.create_from_image(image, 0)
 	print(texture)
 	$ScrollContainer/TextureRect.texture = texture
-	
 	$EtiquetaPagina.text = "Notas pagina " + str(index)
-
+	$NotasContainer.text = Global.FileReading.paginas[index].notas
+	
 func updateindex(num):
 	print("actualindex " + str(actualindex) )
 	actualindex += num
@@ -98,5 +107,14 @@ func _on_avanzar_pressed():
 	updateindex(1)
 
 
-func _on_Button_pressed():
+func _on_ButtonSave_pressed():
+	print("Guardar")
+	save()
+
+func _on_ButtonMapa_pressed():
 	get_tree().change_scene("res://mapas/Mapas.tscn")
+
+
+func _on_NotasContainer_text_changed():
+	print( "editaste el texto " + str(actualindex) )
+	Global.FileReading.paginas[actualindex].notas = $NotasContainer.text 

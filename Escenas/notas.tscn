@@ -54,15 +54,16 @@ texture_pressed = ExtResource( 4 )
 texture_disabled = ExtResource( 2 )
 flip_h = true
 
-[node name="TextEdit" type="TextEdit" parent="CanvasLayer"]
-anchor_left = 0.746
+[node name="NotasContainer" type="TextEdit" parent="CanvasLayer"]
+anchor_left = 0.751
 anchor_top = 0.152
-anchor_right = 0.979
-anchor_bottom = 0.767
-margin_left = 5.09607
+anchor_right = 0.984
+anchor_bottom = 0.763
+margin_left = -0.0239868
 margin_top = -2.19999
-margin_right = 5.50409
-margin_bottom = -2.20001
+margin_right = 0.384033
+margin_bottom = 0.199982
+wrap_enabled = true
 
 [node name="EtiquetaPagina" type="Label" parent="CanvasLayer"]
 anchor_left = 0.752
@@ -77,13 +78,22 @@ text = "Etiqueta pagina"
 align = 1
 valign = 1
 
-[node name="Button" type="Button" parent="CanvasLayer"]
-margin_left = 793.0
-margin_top = 516.0
-margin_right = 951.0
-margin_bottom = 536.0
+[node name="ButtonSave" type="Button" parent="CanvasLayer"]
+margin_left = 811.0
+margin_top = 497.0
+margin_right = 969.0
+margin_bottom = 517.0
+text = "Guardar"
+
+[node name="ButtonMapa" type="Button" parent="CanvasLayer"]
+margin_left = 811.0
+margin_top = 526.0
+margin_right = 969.0
+margin_bottom = 546.0
 text = "Mapa coneptual pagina"
 
 [connection signal="pressed" from="CanvasLayer/retroceder" to="CanvasLayer" method="_on_retroceder_pressed"]
 [connection signal="pressed" from="CanvasLayer/avanzar" to="CanvasLayer" method="_on_avanzar_pressed"]
-[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_on_Button_pressed"]
+[connection signal="text_changed" from="CanvasLayer/NotasContainer" to="CanvasLayer" method="_on_NotasContainer_text_changed"]
+[connection signal="pressed" from="CanvasLayer/ButtonSave" to="CanvasLayer" method="_on_ButtonSave_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonMapa" to="CanvasLayer" method="_on_ButtonMapa_pressed"]

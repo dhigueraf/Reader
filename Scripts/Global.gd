@@ -1,7 +1,7 @@
 extends Node
 
 
-var FileReading = {
+var FileToRead = {
 	nombre = "",
 	nombrecompleto = "",
 	location = "",
@@ -9,6 +9,8 @@ var FileReading = {
 	extension = ".",
 	numeropaginas = 0
 }
+
+var FileReading = {}
 
 var interactivos = {
 	

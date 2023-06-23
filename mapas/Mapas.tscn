@@ -2,11 +2,12 @@
 
 [ext_resource path="res://mapas/theme.tres" type="Theme" id=1]
 [ext_resource path="res://mapas/GraphEdit.tscn" type="PackedScene" id=2]
-[ext_resource path="res://mapas/PopupDialog.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/mapas/PopupDialog.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/btnplus_pressed.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/floppy_pressed.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/btnplus.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/floppy.png" type="Texture" id=7]
+
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
