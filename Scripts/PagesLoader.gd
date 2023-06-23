@@ -48,7 +48,7 @@ func _ready():
 	print("Save data")
 	print(Global.FileReading)
 	
-	updateindex(0)
+	updateindex(Global.FileToRead.currentintex)
 	
 func generate_json(num):
 	print("Crear json de " + str(num) + " paginas")

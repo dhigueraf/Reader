@@ -154,6 +154,7 @@ func pdfButtons(filedir,filename):
 	Global.FileToRead.extension = filenamearray[-1]
 	Global.FileToRead.nombrecompleto = filename
 	Global.FileToRead.nombrelocation = filedir
+	Global.FileToRead.currentintex = 0
 	print(Global.FileToRead)
 	filetoopen = filedir
 	
