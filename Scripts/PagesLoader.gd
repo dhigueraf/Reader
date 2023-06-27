@@ -29,6 +29,8 @@ func _ready():
 	else:
 		maxindex = 0
 	
+	print("current index " + str(Global.FileToRead.currentindex) )
+	
 	print("File loaded")
 	print(Global.FileToRead)
 	
@@ -46,10 +48,11 @@ func _ready():
 	else: 
 		Global.FileReading = generate_json(maxindex)
 	print("Save data")
-	print(Global.FileReading)
+	#print(Global.FileReading)
 	
-	updateindex(Global.FileToRead.currentintex)
-	
+	updateindex(Global.FileToRead.currentindex)
+
+
 func generate_json(num):
 	print("Crear json de " + str(num) + " paginas")
 	var emptyjson = {
@@ -81,12 +84,15 @@ func save():
 
 func setimage(index):
 	print("set iamge index: " + str(index))
+	print(pages[index])
 	var image = Image.new()
 	var err = image.load(pages[index])
 	var texture = ImageTexture.new()
 	texture.create_from_image(image, 0)
 	print(texture)
+	
 	$ScrollContainer/TextureRect.texture = texture
+	
 	$EtiquetaPagina.text = "Notas pagina " + str(index)
 	if Global.FileReading.has('paginas'):
 		if range( Global.FileReading.paginas.size() ).has(index):
@@ -111,8 +117,8 @@ func updateindex(num):
 			actualindex = 0
 			$retroceder.disabled = true
 	
-	Global.FileToRead.actualindex = actualindex
-	setimage(actualindex)	
+	Global.FileToRead.currentindex = actualindex
+	setimage(actualindex)
 
 
 func _on_retroceder_pressed():
@@ -133,3 +139,15 @@ func _on_ButtonMapa_pressed():
 func _on_NotasContainer_text_changed():
 	print( "editaste el texto " + str(actualindex) )
 	Global.FileReading.paginas[actualindex].notas = $NotasContainer.text 
+
+
+func _on_Button_pressed():
+	pass # Replace with function body.
+
+
+func _on_ButtonPlus_pressed():
+	pass # Replace with function body.
+
+
+func _on_ButtonMinus_pressed():
+	pass # Replace with function body.

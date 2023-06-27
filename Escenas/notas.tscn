@@ -12,19 +12,19 @@
 script = ExtResource( 1 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
-anchor_left = 0.289
 anchor_top = 0.007
-anchor_right = 0.718
-anchor_bottom = 1.005
-margin_left = -289.936
+anchor_right = 0.435
+anchor_bottom = 0.992
+margin_left = 6.0
 margin_top = -8.2
-margin_right = -290.232
-margin_bottom = -8.0
+margin_right = -0.440033
+margin_bottom = -0.200012
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/ScrollContainer"]
 margin_right = 4967.0
 margin_bottom = 7017.0
 texture = ExtResource( 5 )
+stretch_mode = 1
 
 [node name="retroceder" type="TextureButton" parent="CanvasLayer"]
 anchor_left = 0.5
@@ -92,8 +92,24 @@ margin_right = 969.0
 margin_bottom = 546.0
 text = "Mapa coneptual pagina"
 
+[node name="ButtonPlus" type="Button" parent="CanvasLayer"]
+margin_left = 479.0
+margin_top = 155.0
+margin_right = 499.0
+margin_bottom = 175.0
+text = "+"
+
+[node name="ButtonMinus" type="Button" parent="CanvasLayer"]
+margin_left = 479.0
+margin_top = 189.0
+margin_right = 499.0
+margin_bottom = 209.0
+text = "-"
+
 [connection signal="pressed" from="CanvasLayer/retroceder" to="CanvasLayer" method="_on_retroceder_pressed"]
 [connection signal="pressed" from="CanvasLayer/avanzar" to="CanvasLayer" method="_on_avanzar_pressed"]
 [connection signal="text_changed" from="CanvasLayer/NotasContainer" to="CanvasLayer" method="_on_NotasContainer_text_changed"]
 [connection signal="pressed" from="CanvasLayer/ButtonSave" to="CanvasLayer" method="_on_ButtonSave_pressed"]
 [connection signal="pressed" from="CanvasLayer/ButtonMapa" to="CanvasLayer" method="_on_ButtonMapa_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonPlus" to="CanvasLayer" method="_on_ButtonPlus_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonMinus" to="CanvasLayer" method="_on_ButtonMinus_pressed"]

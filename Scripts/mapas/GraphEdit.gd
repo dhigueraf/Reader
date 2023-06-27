@@ -46,12 +46,12 @@ func load_save():
 			c.free()
 	
 	print(Global.FileToRead)
-	print(Global.FileToRead.actualindex)
-	print(Global.FileReading)
-	print(Global.FileReading.paginas)
-	print(Global.FileReading.paginas[Global.FileToRead.actualindex])
-	var save_data = Global.FileReading.paginas[Global.FileToRead.actualindex].mapaideas
-	print(save_data)
+	#print(Global.FileToRead.actualindex)
+	#print(Global.FileReading)
+	#print(Global.FileReading.paginas)
+	#print(Global.FileReading.paginas[Global.FileToRead.actualindex])
+	var save_data = Global.FileReading.paginas[Global.FileToRead.currentindex].mapaideas
+	#print(save_data)
 	for node in save_data["nodes"]:
 		var graph_node_instance = graph_node.instance()
 		graph_node_instance.set_size(Vector2(float(node["size_x"]), float(node["size_y"])))
@@ -167,4 +167,6 @@ func _on_saveButton_pressed():
 
 
 func _on_Button_pressed():
+	print("volver al libro")
+	print(Global.FileToRead.currentindex)
 	get_tree().change_scene("res://Escenas/notas.tscn")

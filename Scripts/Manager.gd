@@ -203,10 +203,10 @@ func prepararanotas():
 		print("es convertible")
 		var sistemaoperativo = OS.get_name()
 		print(sistemaoperativo)
-		var ejecutable = converterdir + "/pdf2pngimg.exe"
+		var ejecutable = converterdir + "/pdf2pngimgs.exe"
 		if sistemaoperativo.to_lower() == "windows":
 			print("windows")
-			ejecutable = converterdir + "/pdf2pngimg.exe"
+			ejecutable = converterdir + "/pdf2pngimgs.exe"
 		elif sistemaoperativo.to_lower() == "x11" || sistemaoperativo.to_lower() == "linux":
 			print("linux")
 			ejecutable = converterdir + "/pdf2pngimg"
