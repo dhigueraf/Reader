@@ -206,21 +206,18 @@ offset_right = 0.106445
 offset_bottom = 0.0322266
 
 [node name="BtnExterno" parent="CanvasLayer/Controller/pdfbuttons/ColorRect" index="0"]
-layout_mode = 0
 offset_left = 71.0
 offset_top = 53.0
 offset_right = 284.0
 offset_bottom = 93.0
 
 [node name="BtnNotas" parent="CanvasLayer/Controller/pdfbuttons/ColorRect" index="1"]
-layout_mode = 0
 offset_left = 88.0
 offset_top = 112.0
 offset_right = 269.0
 offset_bottom = 152.0
 
 [node name="TextureButton" parent="CanvasLayer/Controller/pdfbuttons" index="1"]
-layout_mode = 0
 offset_left = 344.0
 offset_top = -28.0
 offset_right = 408.0
