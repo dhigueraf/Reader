@@ -3,7 +3,7 @@ var snake
 var window_border
 
 func _ready():
-	window_border = OS.get_window_size()
+	window_border = get_window().get_size()
 	var classLoad = load("res://snake/Scripts/Snake.gd")
 	snake = classLoad.new()
 	draw_apple()
@@ -32,7 +32,7 @@ func draw_snake():
 		lastChilde.name = "body " + str($snake.get_child_count())
 		$snake.add_child(lastChilde)	
 	for index in range(0,snake.body.size()):
-		$snake.get_child(index).rect_position = snake.body[index]
+		$snake.get_child(index).position = snake.body[index]
 
 
 func is_apple_colide():
@@ -75,4 +75,4 @@ func _on_Timer_timeout():
 		snake.is_apple_colide = true
 
 func _on_Button_pressed():
-	get_tree().change_scene("res://Ecenas/Scene.tscn")
+	get_tree().change_scene_to_file("res://Ecenas/Scene.tscn")

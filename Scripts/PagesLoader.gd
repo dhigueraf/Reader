@@ -7,10 +7,10 @@ var maxindex = 1
 func _ready():
 	var path = OS.get_executable_path()
 	var converterdir = path.get_base_dir() + "/converter"
-	var dir = Directory.new()
+	var dir = DirAccess.open(converterdir)
 	
-	if dir.open(converterdir) == OK:
-		dir.list_dir_begin()
+	if dir:
+		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var iteratedname = dir.get_next()
 		while (iteratedname != ""):
 			if not dir.current_is_dir():
@@ -34,21 +34,23 @@ func _ready():
 	print("File loaded")
 	print(Global.FileToRead)
 	
-		
-	var jsonpdf = File.new()
-	if not jsonpdf.file_exists(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json"):
+	var json_path = Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json"
+	#var jsonpdf = FileAccess.open(json_path, )
+	if not FileAccess.file_exists(json_path):
 		print("No existe")
-		jsonpdf.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.WRITE)
-		jsonpdf.store_line( to_json( generate_json(maxindex) ) )
+		var jsonpdf = FileAccess.open(json_path, FileAccess.WRITE)
+		jsonpdf.store_line(JSON.new().stringify(generate_json(maxindex)))
 		jsonpdf.close()
+	else:
+		var jsonpdf = FileAccess.get_file_as_string(json_path)
 		
-	jsonpdf.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.READ)
-	if jsonpdf.get_as_text() != "" :
-		Global.FileReading = parse_json(jsonpdf.get_as_text())
-	else: 
-		Global.FileReading = generate_json(maxindex)
-	print("Save data")
-	#print(Global.FileReading)
+		if not jsonpdf.is_empty():
+			var test_json_conv = JSON.parse_string(jsonpdf)
+			Global.FileReading = test_json_conv
+		else: 
+			Global.FileReading = generate_json(maxindex)
+		print("Save data")
+		#print(Global.FileReading)
 	
 	updateindex(Global.FileToRead.currentindex)
 
@@ -77,22 +79,24 @@ func generate_json(num):
 
 
 func save():
-	var jsontosave = File.new()
-	jsontosave.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.WRITE)
-	jsontosave.store_line( to_json( Global.FileReading ) )
+	var path_file = Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json"
+	var jsontosave = FileAccess.open(path_file, FileAccess.WRITE)
+	jsontosave.store_line( JSON.new().stringify( Global.FileReading ) )
 	jsontosave.close()
 
 func setimage(index):
 	print("set iamge index: " + str(index))
 	print(pages[index])
-	var image = Image.new()
-	var err = image.load(pages[index])
-	var texture = ImageTexture.new()
-	texture.create_from_image(image, 0)
+	#var image = Image.new()
+	#var err = image.load(pages[index])
+	
+	var image = Image.load_from_file(pages[index])
+	var texture = ImageTexture.create_from_image(image)
 	print(texture)
 	
 	$ScrollContainer/TextureRect.texture = texture
-	
+	$Control/GraphEdit/GraphNode/TextureRect2.texture = texture
+
 	$EtiquetaPagina.text = "Notas pagina " + str(index)
 	if Global.FileReading.has('paginas'):
 		if range( Global.FileReading.paginas.size() ).has(index):
@@ -133,7 +137,7 @@ func _on_ButtonSave_pressed():
 	save()
 
 func _on_ButtonMapa_pressed():
-	get_tree().change_scene("res://mapas/Mapas.tscn")
+	get_tree().change_scene_to_file("res://mapas/Mapas.tscn")
 
 
 func _on_NotasContainer_text_changed():
@@ -151,3 +155,7 @@ func _on_ButtonPlus_pressed():
 
 func _on_ButtonMinus_pressed():
 	pass # Replace with function body.
+
+
+func _on_GraphNode_dragged(from, to):
+	print(from, to)

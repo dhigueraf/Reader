@@ -1,9 +1,9 @@
 extends Control
 
-onready var listoffolders = []
-onready var listoffiles = []
-export var discartednames= [".",".."]
-export var formatsallowed = ["doc","docx","ppt","pptx","xls","xls","odt","pdf","webm","mp4","mkv","png","jpg","jpeg"]
+@onready var listoffolders = []
+@onready var listoffiles = []
+@export var discartednames= [".",".."]
+@export var formatsallowed = ["doc","docx","ppt","pptx","xls","xls","odt","pdf","webm","mp4","mkv","png","jpg","jpeg"]
 var history = []
 var basedir =""
 var converterdir = ""
@@ -11,7 +11,7 @@ var currentdir = ""
 var previusdir = ""
 var filetoopen = ""
 
-onready var http : HTTPRequest = $HTTPRequest
+@onready var http : HTTPRequest = $HTTPRequest
 
 const PROJECT_ID := "prueba-front-746df"
 const FIRESTORE_URL := "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/" % PROJECT_ID
@@ -24,7 +24,7 @@ func get_documentorcollection(path: String) -> void:
 
 func _ready():
 	var path = OS.get_executable_path()
-	#print (path)
+	print (path)
 	basedir = path.get_base_dir() + "/cursos"
 	converterdir = path.get_base_dir() + "/converter"
 	currentdir = basedir
@@ -38,11 +38,7 @@ func _ready():
 	#print(colprueba)
 	#print(http)
 	
-func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
-	if body and JSON.parse(body.get_string_from_ascii()).result:
-		var request_result := JSON.parse(body.get_string_from_ascii()).result as Dictionary
-		print(request_result)
-		#var res = firebase_firestore_parse(request_result)
+
 
 
 func opendir(dir):
@@ -61,10 +57,10 @@ func openfile(filedir):
 
 func iteratedirectorys(directory):
 	print("directorio: "+ directory)
-	var dir = Directory.new()
+	var dir = DirAccess.open(directory)
 	
-	if dir.open(directory) == OK:
-		dir.list_dir_begin()
+	if dir:
+		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var iteratedname = dir.get_next()
 		while (iteratedname != ""):
 			if dir.current_is_dir():
@@ -90,7 +86,7 @@ func generateListOfFolderButtons():
 		for folder in listoffolders:
 			var btndir = Button.new()
 			btndir.text = folder
-			btndir.connect("pressed",self,"opendir",[currentdir+"/"+ folder])
+			btndir.connect("pressed", Callable(self, "opendir").bind(currentdir+"/"+ folder))
 			$ContainerCarpetas/VBoxContainer.add_child(btndir)
 
 func generateListOfFilesButtons():
@@ -101,9 +97,9 @@ func generateListOfFilesButtons():
 			btndir.text = file
 			var filearray = file.split(".")
 			if( filearray[-1] == "pdf" ):
-				btndir.connect("pressed",self,"pdfButtons",[currentdir+"/"+file,file])
+				btndir.connect("pressed", Callable(self, "pdfButtons").bind(currentdir+"/"+file,file))
 			else:
-				btndir.connect("pressed",self,"openfile",[currentdir+"/"+file])
+				btndir.connect("pressed", Callable(self, "openfile").bind(currentdir+"/"+file))
 			$ContainerArchivos/VBoxContainer.add_child(btndir)
 
 func cleanContainers():
@@ -178,10 +174,10 @@ func _on_BtnNotas_pressed():
 	
 	
 func prepararanotas():
-	var dir = Directory.new()
+	var dir = DirAccess.open(converterdir)
 	print("eliminar imagenes anteriores")
-	if dir.open(converterdir) == OK:
-		dir.list_dir_begin()
+	if dir:
+		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var iteratedname = dir.get_next()
 		while (iteratedname != ""):
 			if not dir.current_is_dir():
@@ -212,11 +208,12 @@ func prepararanotas():
 			ejecutable = converterdir + "/pdf2pngimg"
 		
 		var output = []
-		OS.execute(ejecutable, [filetoopen], true, output)
+		OS.execute(ejecutable, [filetoopen], output, true)
+		
 		print("Ouput: ")
 		for text in output:
 			print(text)
 		print("Fin Ejecución")
 	
 	print("Cambiar de escena")
-	get_tree().change_scene("res://Escenas/notas.tscn")
+	get_tree().change_scene_to_file("res://Escenas/notas.tscn")
