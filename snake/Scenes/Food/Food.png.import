@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5j7mqk6v5vbg"
-path="res://.godot/imported/logocmm.png-256e1846f480ceb3a8b0abf722fe7189.ctex"
+uid="uid://bfl5h65fd0e0h"
+path="res://.godot/imported/Food.png-dfd1072d2e6927665f54c5403e172caa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://snake/Sprites/logocmm.png"
-dest_files=["res://.godot/imported/logocmm.png-256e1846f480ceb3a8b0abf722fe7189.ctex"]
+source_file="res://snake/Scenes/Food/Food.png"
+dest_files=["res://.godot/imported/Food.png-dfd1072d2e6927665f54c5403e172caa.ctex"]
 
 [params]
 

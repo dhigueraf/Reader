@@ -1,74 +1,72 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://dhlwjhlgsykoy"]
 
-[ext_resource path="res://snake/Sound/crunch.wav" type="AudioStream" id=1]
-[ext_resource path="res://snake/Scripts/GameController.gd" type="Script" id=2]
-[ext_resource path="res://snake/Sprites/grass.png" type="Texture2D" id=3]
-[ext_resource path="res://snake/Sprites/apple.png" type="Texture2D" id=4]
-[ext_resource path="res://Sprites/logocmm.png" type="Texture2D" id=5]
+[ext_resource type="PackedScene" uid="uid://d3l6gt5ixq5w" path="res://snake/Scenes/UI/ui_layer.tscn" id="1_lbfvg"]
+[ext_resource type="Script" path="res://snake/Scenes/UI/ui_layer.gd" id="2_p8sac"]
+[ext_resource type="Script" path="res://snake/Scenes/Walls.gd" id="3_4yk2s"]
+[ext_resource type="Texture2D" uid="uid://do1yri4fjwmve" path="res://snake/Scenes/top-bottom-wall.png" id="4_y5tfe"]
+[ext_resource type="PackedScene" uid="uid://ddvl7k8cfb308" path="res://snake/Scenes/Snake/snake.tscn" id="5_nj62j"]
+[ext_resource type="Script" path="res://snake/Scenes/FoodSpawner.gd" id="6_emlme"]
+[ext_resource type="PackedScene" uid="uid://ccype6alh3wbp" path="res://snake/Scenes/Food/food.tscn" id="7_xaulk"]
 
-[node name="GameController" type="Node2D"]
-script = ExtResource( 2 )
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oebbh"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Game" type="Node2D"]
+material = SubResource("CanvasItemMaterial_oebbh")
 
-[node name="body 1" type="ColorRect" parent="CanvasLayer"]
-modulate = Color( 1, 1, 1, 0.388235 )
-anchor_left = 0.546
-anchor_top = 0.753
-anchor_right = 1.001
+[node name="Background" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Background"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -0.104004
-offset_top = 0.199982
-offset_right = -0.0240479
-color = Color( 0.215686, 0.211765, 0.211765, 1 )
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/body 1"]
-offset_left = 22.0
-offset_top = 12.0
-offset_right = 280.0
-offset_bottom = 135.0
-texture = ExtResource( 5 )
+[node name="ColorRect" type="ColorRect" parent="Background/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
-[node name="Button" type="Button" parent="CanvasLayer"]
-offset_left = 889.0
-offset_top = 501.0
-offset_right = 972.0
-offset_bottom = 534.0
-text = "Volver"
+[node name="UILayer" parent="." node_paths=PackedStringArray("snake") instance=ExtResource("1_lbfvg")]
+script = ExtResource("2_p8sac")
+snake = NodePath("../Snake")
 
-[node name="Background" type="TextureRect" parent="."]
-offset_right = 1081.0
-offset_bottom = 652.0
-texture = ExtResource( 3 )
-stretch_mode = 2
+[node name="Walls" type="Node" parent="."]
+script = ExtResource("3_4yk2s")
 
-[node name="snake" type="Node" parent="."]
+[node name="BottomWall" type="Sprite2D" parent="Walls" groups=["walls"]]
+position = Vector2(0, 480)
+scale = Vector2(1.933, 1)
+texture = ExtResource("4_y5tfe")
 
-[node name="body 0" type="ColorRect" parent="snake"]
-anchor_bottom = 0.002
-offset_left = 40.0
-offset_right = 80.0
-offset_bottom = 38.4
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="TopWall" type="Sprite2D" parent="Walls" groups=["walls"]]
+position = Vector2(0, -480)
+scale = Vector2(1.933, 1)
+texture = ExtResource("4_y5tfe")
 
-[node name="body 1" type="ColorRect" parent="snake"]
-anchor_bottom = 0.002
-offset_right = 40.0
-offset_bottom = 38.4
-color = Color( 0.215686, 0.211765, 0.211765, 1 )
+[node name="RightWall" type="Sprite2D" parent="Walls" groups=["walls"]]
+position = Vector2(896, 0)
+rotation = 1.5708
+texture = ExtResource("4_y5tfe")
 
-[node name="apple" type="Sprite2D" parent="."]
-texture = ExtResource( 4 )
-offset = Vector2( 20, 20 )
+[node name="LeftWall" type="Sprite2D" parent="Walls" groups=["walls"]]
+position = Vector2(-896, 0)
+rotation = -1.5708
+texture = ExtResource("4_y5tfe")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.2
-autostart = true
+[node name="Snake" parent="." node_paths=PackedStringArray("walls") instance=ExtResource("5_nj62j")]
+walls = NodePath("../Walls")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 1 )
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
 
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_Button_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[node name="FoodSpawner" type="Node" parent="." node_paths=PackedStringArray("walls") groups=["food_spawner"]]
+script = ExtResource("6_emlme")
+walls = NodePath("../Walls")
+food_scene = ExtResource("7_xaulk")

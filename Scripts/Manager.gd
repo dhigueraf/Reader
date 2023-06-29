@@ -10,6 +10,7 @@ var converterdir = ""
 var currentdir = ""
 var previusdir = ""
 var filetoopen = ""
+var nombreinteract = "interactivos"
 
 @onready var http : HTTPRequest = $HTTPRequest
 
@@ -37,7 +38,7 @@ func _ready():
 	#var colprueba =  Firebase.get_document_or_collection("colecciondeprueba",http)
 	#print(colprueba)
 	#print(http)
-	
+	looadinteractivos()
 
 
 
@@ -217,3 +218,15 @@ func prepararanotas():
 	
 	print("Cambiar de escena")
 	get_tree().change_scene_to_file("res://Escenas/notas.tscn")
+
+func looadinteractivos():
+	print("buscar interactivos")
+	var json_path = basedir + "/" + nombreinteract  +".json"
+	print(json_path)
+	if FileAccess.file_exists(json_path):
+		var interactivos = FileAccess.get_file_as_string(json_path)
+		if not interactivos.is_empty():
+			var jsoninteractivos = JSON.parse_string(interactivos)
+			Global.interactivos = jsoninteractivos
+	print(Global.interactivos)
+

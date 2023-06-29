@@ -75,15 +75,15 @@ texture = ExtResource("5")
 expand_mode = 1
 
 [node name="retroceder" type="TextureButton" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 158.0
-offset_top = 239.0
-offset_right = 222.0
-offset_bottom = 303.0
+anchors_preset = -1
+anchor_left = 0.665
+anchor_top = 0.918
+anchor_right = 0.665
+anchor_bottom = 0.918
+offset_left = -32.08
+offset_top = -31.864
+offset_right = 31.92
+offset_bottom = 32.136
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -94,15 +94,15 @@ texture_pressed = ExtResource("4")
 texture_disabled = ExtResource("2")
 
 [node name="avanzar" type="TextureButton" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 236.0
-offset_top = 240.0
-offset_right = 300.0
-offset_bottom = 304.0
+anchors_preset = -1
+anchor_left = 0.733
+anchor_top = 0.92
+anchor_right = 0.733
+anchor_bottom = 0.92
+offset_left = -32.416
+offset_top = -32.16
+offset_right = 31.584
+offset_bottom = 31.84
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
@@ -121,6 +121,8 @@ offset_left = -0.152039
 offset_top = -0.0400009
 offset_right = 0.432007
 offset_bottom = 0.0319824
+placeholder_text = "Ingrese notas aquí"
+wrap_mode = 1
 
 [node name="EtiquetaPagina" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
@@ -135,18 +137,59 @@ offset_bottom = 0.215996
 text = "Etiqueta pagina"
 
 [node name="ButtonSave" type="Button" parent="CanvasLayer"]
-offset_left = 925.0
-offset_top = 331.0
-offset_right = 1083.0
-offset_bottom = 362.0
+anchors_preset = -1
+anchor_left = 0.873
+anchor_top = 0.515
+anchor_right = 0.873
+anchor_bottom = 0.515
+offset_left = -78.696
+offset_top = -18.72
+offset_right = 79.304
+offset_bottom = 12.28
 text = "Guardar"
+metadata/_edit_use_anchors_ = true
 
 [node name="ButtonMapa" type="Button" parent="CanvasLayer"]
-offset_left = 914.0
-offset_top = 382.0
-offset_right = 1103.0
-offset_bottom = 413.0
+anchors_preset = -1
+anchor_left = 0.875
+anchor_top = 0.581
+anchor_right = 0.875
+anchor_bottom = 0.581
+offset_left = -95.0001
+offset_top = -15.488
+offset_right = 93.9999
+offset_bottom = 15.512
 text = "Mapa coneptual pagina"
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonReturn" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.876
+anchor_top = 0.677
+anchor_right = 0.876
+anchor_bottom = 0.677
+offset_left = -66.152
+offset_top = -15.696
+offset_right = 66.848
+offset_bottom = 15.304
+text = "Volver"
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonInteactivo" type="Button" parent="CanvasLayer"]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -416.0
+offset_top = -140.0
+offset_right = -283.0
+offset_bottom = -109.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 8
+text = "Volver"
 
 [connection signal="dragged" from="CanvasLayer/Control/GraphEdit/GraphNode" to="CanvasLayer" method="_on_GraphNode_dragged"]
 [connection signal="pressed" from="CanvasLayer/retroceder" to="CanvasLayer" method="_on_retroceder_pressed"]
@@ -154,3 +197,4 @@ text = "Mapa coneptual pagina"
 [connection signal="text_changed" from="CanvasLayer/NotasContainer" to="CanvasLayer" method="_on_NotasContainer_text_changed"]
 [connection signal="pressed" from="CanvasLayer/ButtonSave" to="CanvasLayer" method="_on_ButtonSave_pressed"]
 [connection signal="pressed" from="CanvasLayer/ButtonMapa" to="CanvasLayer" method="_on_ButtonMapa_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonReturn" to="CanvasLayer" method="_on_button_return_pressed"]

@@ -177,14 +177,6 @@ offset_left = 0.255999
 offset_top = -0.200001
 offset_right = -0.392029
 
-[node name="Button" type="Button" parent="CanvasLayer/Controller"]
-layout_mode = 0
-offset_left = 595.0
-offset_top = 471.0
-offset_right = 735.0
-offset_bottom = 522.0
-text = "Play Snake"
-
 [node name="pdfbuttons" parent="CanvasLayer/Controller" instance=ExtResource("6")]
 visible = false
 layout_mode = 1
@@ -233,7 +225,6 @@ texture = ExtResource("4")
 [connection signal="pressed" from="CanvasLayer/Controller/BtnBack" to="CanvasLayer/Controller" method="_on_BtnBack_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/BtnHome" to="CanvasLayer/Controller" method="_on_BtnHome_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/BtnHome2" to="CanvasLayer/Controller" method="_on_BtnHome_pressed"]
-[connection signal="pressed" from="CanvasLayer/Controller/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/pdfbuttons/ColorRect/BtnExterno" to="CanvasLayer/Controller" method="_on_BtnExterno_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/pdfbuttons/ColorRect/BtnNotas" to="CanvasLayer/Controller" method="_on_BtnNotas_pressed"]
 [connection signal="request_completed" from="CanvasLayer/Controller/HTTPRequest" to="CanvasLayer/Controller" method="_on_HTTPRequest_request_completed"]

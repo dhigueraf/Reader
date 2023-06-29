@@ -1,0 +1,21 @@
+[
+    {
+        "nombre": "instrucciones de uso.pdf",
+        "interactivos": [
+            {
+                "pagina" : 1,
+                "nombre" : "snake",
+                "tipo": "nodo",
+                "escenaoarchivo": "res://snake/SnakeMainScene.tscn",
+                "textoboton": "jugar snake"
+            },
+            {
+                "pagina" : 2,
+                "nombre" : "presentación",
+                "tipo": "ppt",
+                "escenaoarchivo": "",
+                "textoboton": "abrirpresentación"
+            }
+        ]
+    }
+]

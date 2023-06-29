@@ -3,6 +3,7 @@ extends CanvasLayer
 var pages = []
 var actualindex = 0
 var maxindex = 1
+var interactivos = []
 
 func _ready():
 	var path = OS.get_executable_path()
@@ -51,6 +52,13 @@ func _ready():
 			Global.FileReading = generate_json(maxindex)
 		print("Save data")
 		#print(Global.FileReading)
+		
+	print("Interactivos")
+	for inter in Global.interactivos:
+		print(inter["nombre"])
+		if inter["nombre"] == Global.FileToRead["nombrecompleto"]:
+			interactivos = inter
+	print(interactivos)
 	
 	updateindex(Global.FileToRead.currentindex)
 
@@ -122,11 +130,32 @@ func updateindex(num):
 			$retroceder.disabled = true
 	
 	Global.FileToRead.currentindex = actualindex
+	
+	var showbutton = false
+	var textoasignar = "interactivo"
+
+	
+	for intera in interactivos["interactivos"]:
+		if actualindex == intera["pagina"]:
+			print("pagina con interactivos")
+			textoasignar = intera["textoboton"]
+			showbutton = true;
+			if intera["tipo"] == "nodo":
+				$ButtonInteactivo.connect("pressed", Callable(self, "interactnode").bind(intera["escenaoarchivo"]))
+			elif intera["tipo"] == "ppt":
+				$ButtonInteactivo.connect("pressed", Callable(self, "interactexternal").bind(Global.FileToRead.nombrelocation))
+		
+	if showbutton: 
+		$ButtonInteactivo.visible = true
+		$ButtonInteactivo.text = textoasignar
+	else:
+		$ButtonInteactivo.visible = false
+		$ButtonInteactivo.text = "interactivo"
+	
 	setimage(actualindex)
 
+func disconect
 
-func _on_retroceder_pressed():
-	updateindex(-1)
 
 func _on_avanzar_pressed():
 	updateindex(1)
@@ -159,3 +188,15 @@ func _on_ButtonMinus_pressed():
 
 func _on_GraphNode_dragged(from, to):
 	print(from, to)
+
+
+func _on_button_return_pressed():
+	print("Volver inicio")
+	get_tree().change_scene_to_file("res://Escenas/Scene.tscn")
+
+
+func interactnode(nodedir):
+	get_tree().change_scene_to_file(nodedir)
+	
+func interactexternal(filedir):
+	OS.shell_open(filedir)
