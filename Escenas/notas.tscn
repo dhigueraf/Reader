@@ -198,3 +198,4 @@ text = "Volver"
 [connection signal="pressed" from="CanvasLayer/ButtonSave" to="CanvasLayer" method="_on_ButtonSave_pressed"]
 [connection signal="pressed" from="CanvasLayer/ButtonMapa" to="CanvasLayer" method="_on_ButtonMapa_pressed"]
 [connection signal="pressed" from="CanvasLayer/ButtonReturn" to="CanvasLayer" method="_on_button_return_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonInteactivo" to="CanvasLayer" method="_on_button_inteactivo_pressed"]

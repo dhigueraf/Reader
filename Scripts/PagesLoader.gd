@@ -4,6 +4,8 @@ var pages = []
 var actualindex = 0
 var maxindex = 1
 var interactivos = []
+var tipointeraccion = "nada"
+var parametrointera = ""
 
 func _ready():
 	var path = OS.get_executable_path()
@@ -134,17 +136,14 @@ func updateindex(num):
 	var showbutton = false
 	var textoasignar = "interactivo"
 
-	
-	for intera in interactivos["interactivos"]:
-		if actualindex == intera["pagina"]:
-			print("pagina con interactivos")
-			textoasignar = intera["textoboton"]
-			showbutton = true;
-			if intera["tipo"] == "nodo":
-				$ButtonInteactivo.connect("pressed", Callable(self, "interactnode").bind(intera["escenaoarchivo"]))
-			elif intera["tipo"] == "ppt":
-				$ButtonInteactivo.connect("pressed", Callable(self, "interactexternal").bind(Global.FileToRead.nombrelocation))
-		
+	if not interactivos.is_empty():
+		for intera in interactivos["interactivos"]:
+			if actualindex == intera["pagina"]:
+				print("pagina con interactivos")
+				textoasignar = intera["textoboton"]
+				showbutton = true;
+				tipointeraccion = intera["tipo"]
+				parametrointera = intera["escenaoarchivo"]
 	if showbutton: 
 		$ButtonInteactivo.visible = true
 		$ButtonInteactivo.text = textoasignar
@@ -154,12 +153,15 @@ func updateindex(num):
 	
 	setimage(actualindex)
 
-func disconect
+#func disconectallnodes():
+#	pass
 
 
 func _on_avanzar_pressed():
 	updateindex(1)
 
+func _on_retroceder_pressed():
+	updateindex(-1)
 
 func _on_ButtonSave_pressed():
 	print("Guardar")
@@ -200,3 +202,15 @@ func interactnode(nodedir):
 	
 func interactexternal(filedir):
 	OS.shell_open(filedir)
+
+
+func _on_button_inteactivo_pressed():
+	print("Interactivo")
+	
+	if tipointeraccion == "nodo":
+		interactnode(parametrointera)
+	elif tipointeraccion == "ppt":
+		interactexternal(parametrointera)
+
+
+

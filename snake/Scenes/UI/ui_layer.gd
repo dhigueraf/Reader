@@ -6,6 +6,7 @@ var button_container: HBoxContainer
 @onready var label: Label = $GameOverLabel
 @onready var restart_button: Button = $%Restart
 @onready var quit_button: Button = $%Quit
+@onready var volver_button: Button = $%ButtonVolver
 @onready var points_label:Label = $PointsLabel
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +17,7 @@ func _ready():
 	button_container = get_node("ButonContainer")
 	restart_button.pressed.connect(on_restart_button_pressed)
 	quit_button.pressed.connect(on_quit_button_pressed)
+	volver_button.pressed.connect(on_button_volver_pressed)
 
 func on_game_over():
 	button_container.visible = true
@@ -29,5 +31,9 @@ func on_point_scored(points):
 	points_label.text = "Points: %d" % points
 
 func on_quit_button_pressed():
-		get_tree().quit()
+	#get_tree().quit()
+	get_tree().change_scene_to_file("res://EscQuitenas/notas.tscn")
+	
+func on_button_volver_pressed():
+	get_tree().change_scene_to_file("res://Escenas/notas.tscn")
 

@@ -227,6 +227,7 @@ func looadinteractivos():
 		var interactivos = FileAccess.get_file_as_string(json_path)
 		if not interactivos.is_empty():
 			var jsoninteractivos = JSON.parse_string(interactivos)
-			Global.interactivos = jsoninteractivos
+			print("version: " + str(jsoninteractivos["version"]) )
+			Global.interactivos = jsoninteractivos["interactivos"]
 	print(Global.interactivos)
 
