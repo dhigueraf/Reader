@@ -227,6 +227,6 @@ texture = ExtResource("4")
 [connection signal="pressed" from="CanvasLayer/Controller/BtnHome2" to="CanvasLayer/Controller" method="_on_BtnHome_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/pdfbuttons/ColorRect/BtnExterno" to="CanvasLayer/Controller" method="_on_BtnExterno_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller/pdfbuttons/ColorRect/BtnNotas" to="CanvasLayer/Controller" method="_on_BtnNotas_pressed"]
-[connection signal="request_completed" from="CanvasLayer/Controller/HTTPRequest" to="CanvasLayer/Controller" method="_on_HTTPRequest_request_completed"]
+[connection signal="request_completed" from="CanvasLayer/Controller/HTTPRequest" to="CanvasLayer/Controller" method="_on_http_request_request_completed"]
 
 [editable path="CanvasLayer/Controller/pdfbuttons"]

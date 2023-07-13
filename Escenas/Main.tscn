@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmwywicq2em6f"]
+
+[ext_resource type="Script" path="res://Scripts/Manager.gd" id="1_anyd4"]
+
+[node name="Main" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_anyd4")
+
+[node name="BtnCursos" type="Button" parent="CanvasLayer/Control"]
+offset_left = 105.0
+offset_top = 60.0
+offset_right = 166.0
+offset_bottom = 91.0
+text = "Cursos"
+
+[node name="BtnAyudas" type="Button" parent="CanvasLayer/Control"]
+offset_left = 282.0
+offset_top = 61.0
+offset_right = 347.0
+offset_bottom = 92.0
+text = "Ayudas"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 2.525
+anchor_top = 3.6
+anchor_right = 14.9
+anchor_bottom = 14.15
