@@ -1,6 +1,6 @@
 extends Node
 
-var softwaeeinfo = {
+var softwareinfo = {
 	"nombre": "Sumo Primero software",
 	"version": 0,
 	"carpetabase": "cursos",
