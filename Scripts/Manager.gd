@@ -25,7 +25,10 @@ func getlocalconfig():
 
 func findlocalconfig():
 	var json_path = configdir + "/config.json"
-	#ar jsonpdf = FileAccess.open(json_path, )
+	print(json_path)
+	var dir = DirAccess.open(basedir)
+	if not dir.dir_exists("/config") :
+		dir.make_dir("config")
 	if not FileAccess.file_exists(json_path):
 		print("No existe")
 		var jsonpdf = FileAccess.open(json_path, FileAccess.WRITE)
@@ -83,12 +86,32 @@ func _ready():
 
 func checkfilesystem():
 	print("primera carpeta " + str(Global.softwareinfo.carpetabase) + ".")
-	
+	var primeracarpeta = str(Global.softwareinfo.carpetabase)
 	var dir = DirAccess.open(basedir)
-	if dir.dir_exists(Global.softwareinfo.carpetabase) :
+	if dir.dir_exists(primeracarpeta) :
 		print("directorio existe")
 		
-		for key in Global.softwareinfo.sistemarchivos:
+	else:
+		print("directorio no existe")
+		dir.make_dir(primeracarpeta)
+		iteratefoldersandfiles(basedir + "/" + primeracarpeta,Global.softwareinfo.sistemarchivos)
+		
+	generateButtons()
+
+func iteratefoldersandfiles(folder,filesystem):
+	var dir = DirAccess.open(folder)
+	for key in filesystem:
+			print(key)
+			if "tipo" in key:
+				if key.tipo == "carpeta":
+					dir.make_dir(key.nombre.carpeta)
+				
+					#iteratefoldersandfiles()
+	
+
+func generateButtons():
+	var dir = DirAccess.open(basedir)
+	for key in Global.softwareinfo.sistemarchivos:
 			print(key)
 			if "nombre" in key:
 				print(key.nombre)
@@ -100,9 +123,3 @@ func checkfilesystem():
 				#else:
 				#	btndir.connect("pressed", Callable(self, "openfile").bind(currentdir+"/"+file))
 				$VBoxContainer.add_child(btndir)
-		
-		
-	else:
-		print("directorio no existe")
-		dir.make_dir(Global.softwareinfo.carpetabase)
-
