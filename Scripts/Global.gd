@@ -7,6 +7,15 @@ var softwareinfo = {
 	"sistemarchivos": []
 }
 
+var SelectedCurso = {
+	"nombre" : {
+		"carpeta":"Carpeta",
+		"boton":"Botón"
+	},
+	"location" : "",
+	"archivos" : ""
+}
+
 var FileToRead = {
 	nombre = "",
 	nombrecompleto = "",

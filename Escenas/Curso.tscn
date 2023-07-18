@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbpjyk5q14yw5"]
+
+[ext_resource type="Script" path="res://Scripts/CursoManager.gd" id="1_d1j7j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bvkvh"]
+font_size = 32
+
+[node name="Curso" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d1j7j")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.066
+anchor_top = 0.046
+anchor_right = 0.918
+anchor_bottom = 0.17
+offset_left = -0.0319977
+offset_top = 0.00799751
+offset_right = 0.463989
+offset_bottom = 0.159996
+text = "Nombre del curso"
+label_settings = SubResource("LabelSettings_bvkvh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_top = 0.225
+anchor_right = 0.982
+anchor_bottom = 0.956
+offset_left = 0.287998
+offset_top = 0.299988
+offset_right = -0.264038
+offset_bottom = -0.312012

@@ -8,12 +8,18 @@
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_anyd4")
 
-[node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer/Control"]
+[node name="RequestConfig" type="HTTPRequest" parent="CanvasLayer/Control"]
+
+[node name="Downloader" type="HTTPRequest" parent="CanvasLayer/Control"]
 
 [node name="BtnCursos" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
@@ -34,10 +40,37 @@ text = "Ayudas"
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 2.775
-anchor_top = 3.2
-anchor_right = 26.175
-anchor_bottom = 14.75
-offset_bottom = -6.10352e-05
+anchor_left = 0.032
+anchor_top = 0.291
+anchor_right = 0.979
+anchor_bottom = 0.954
+offset_left = 0.199997
+offset_top = -0.277008
+offset_right = 0.149902
+offset_bottom = -0.238037
+grow_horizontal = 2
+grow_vertical = 2
 
-[connection signal="request_completed" from="CanvasLayer/Control/HTTPRequest" to="CanvasLayer/Control" method="_on_http_request_request_completed"]
+[node name="ProcessLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 16.0
+offset_right = 1131.0
+offset_bottom = 69.0
+text = "Process"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DownloadLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 462.0
+offset_top = 75.0
+offset_right = 1137.0
+offset_bottom = 128.0
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="request_completed" from="CanvasLayer/Control/RequestConfig" to="CanvasLayer/Control" method="_on_request_config_request_completed"]
+[connection signal="request_completed" from="CanvasLayer/Control/Downloader" to="CanvasLayer/Control" method="_on_downloader_request_completed"]
