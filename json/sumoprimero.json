@@ -26,7 +26,48 @@
 							"extension":"pdf",
 							"version": 0,
 							"url" : "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
-							"location": "primerobasico/textosdelestudiante/"
+							"location": "primerobasico/textosdelestudiante/",
+							"capitulos":[
+								{
+									"nombre":"Capítulo 1",
+									"paginainicio": 1,
+									"paginasrelevantes":[],
+									"paginatermino": 2
+								},
+								{
+									"nombre":"Capítulo 2",
+									"paginainicio": 3,
+									"paginasrelevantes":[],
+									"paginatermino": 12
+								},
+								{
+									"nombre":"Capítulo 3",
+									"paginainicio": 13,
+									"paginasrelevantes":[],
+									"paginatermino": 35
+								},
+								{
+									"nombre":"Capítulo muy relevante",
+									"paginainicio": 36,
+									"paginasrelevantes":[
+										{
+											"nombre":"Cosa relevsante 1",
+											"pagina":38
+										},
+										{
+											"nombre":"Cosa relevsante 2",
+											"pagina":40
+										}
+									],
+									"paginatermino": 45
+								},
+								{
+									"nombre":"Capítulo 4",
+									"paginainicio": 46,
+									"paginasrelevantes":[],
+									"paginatermino": 50
+								}
+							]
 						},
 						{
 							"tipo":"archivo",
@@ -37,7 +78,48 @@
 							"extension":"pdf",
 							"version": 0,
 							"url" : "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
-							"location": "primerobasico/textosdelestudiante/"
+							"location": "primerobasico/textosdelestudiante/",
+							"capitulos":[
+								{
+									"nombre":"Capítulo 1",
+									"paginainicio": 1,
+									"paginasrelevantes":[],
+									"paginatermino": 2
+								},
+								{
+									"nombre":"Capítulo 2",
+									"paginainicio": 3,
+									"paginasrelevantes":[],
+									"paginatermino": 12
+								},
+								{
+									"nombre":"Capítulo 3",
+									"paginainicio": 13,
+									"paginasrelevantes":[],
+									"paginatermino": 35
+								},
+								{
+									"nombre":"Capítulo muy relevante",
+									"paginainicio": 36,
+									"paginasrelevantes":[
+										{
+											"nombre":"Cosa relevsante 1",
+											"pagina":38
+										},
+										{
+											"nombre":"Cosa relevsante 2",
+											"pagina":40
+										}
+									],
+									"paginatermino": 45
+								},
+								{
+									"nombre":"Capítulo 4",
+									"paginainicio": 46,
+									"paginasrelevantes":[],
+									"paginatermino": 50
+								}
+							]
 						}
 					]
 				},
@@ -57,7 +139,48 @@
 							"extension":"pdf",
 							"version": 0,
 							"url" : "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
-							"location": "primerobasico/guiadidacticadeldocente/"
+							"location": "primerobasico/guiadidacticadeldocente/",
+							"capitulos":[
+								{
+									"nombre":"Capítulo 1",
+									"paginainicio": 1,
+									"paginasrelevantes":[],
+									"paginatermino": 2
+								},
+								{
+									"nombre":"Capítulo 2",
+									"paginainicio": 3,
+									"paginasrelevantes":[],
+									"paginatermino": 12
+								},
+								{
+									"nombre":"Capítulo 3",
+									"paginainicio": 13,
+									"paginasrelevantes":[],
+									"paginatermino": 35
+								},
+								{
+									"nombre":"Capítulo muy relevante",
+									"paginainicio": 36,
+									"paginasrelevantes":[
+										{
+											"nombre":"Cosa relevsante 1",
+											"pagina":38
+										},
+										{
+											"nombre":"Cosa relevsante 2",
+											"pagina":40
+										}
+									],
+									"paginatermino": 45
+								},
+								{
+									"nombre":"Capítulo 4",
+									"paginainicio": 46,
+									"paginasrelevantes":[],
+									"paginatermino": 50
+								}
+							]
 						},
 						{
 							"tipo":"archivo",
@@ -68,7 +191,48 @@
 							"extension":"pdf",
 							"version": 0,
 							"url" : "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
-							"location": "primerobasico/guiadidacticadeldocente/"
+							"location": "primerobasico/guiadidacticadeldocente/",
+							"capitulos":[
+								{
+									"nombre":"Capítulo 1",
+									"paginainicio": 1,
+									"paginasrelevantes":[],
+									"paginatermino": 2
+								},
+								{
+									"nombre":"Capítulo 2",
+									"paginainicio": 3,
+									"paginasrelevantes":[],
+									"paginatermino": 12
+								},
+								{
+									"nombre":"Capítulo 3",
+									"paginainicio": 13,
+									"paginasrelevantes":[],
+									"paginatermino": 35
+								},
+								{
+									"nombre":"Capítulo muy relevante",
+									"paginainicio": 36,
+									"paginasrelevantes":[
+										{
+											"nombre":"Cosa relevsante 1",
+											"pagina":38
+										},
+										{
+											"nombre":"Cosa relevsante 2",
+											"pagina":40
+										}
+									],
+									"paginatermino": 45
+								},
+								{
+									"nombre":"Capítulo 4",
+									"paginainicio": 46,
+									"paginasrelevantes":[],
+									"paginatermino": 50
+								}
+							]
 						}
 					]
 				}

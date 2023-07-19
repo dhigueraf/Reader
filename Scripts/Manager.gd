@@ -105,7 +105,6 @@ func checkfilesystem():
 	var dir = DirAccess.open(basedir)
 	if dir.dir_exists(primeracarpeta) :
 		print("directorio existe")
-		
 	else:
 		print("directorio no existe")
 		dir.make_dir(primeracarpeta)

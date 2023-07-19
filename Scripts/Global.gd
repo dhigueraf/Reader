@@ -29,7 +29,6 @@ var FileToRead = {
 var FileReading = {}
 
 var interactivos = {
-	
 }
 
 func _ready():

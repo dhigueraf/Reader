@@ -1,11 +1,15 @@
 extends Control
 
-var btncurso = preload("res://Objetos/BtnCurso.tscn")
+var btncurso = preload("res://Objetos/BtnCursoDocs.tscn")
+@export_node_path() var panelpath
+var panel
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print( Global.SelectedCurso)
 	$Label.text = Global.SelectedCurso.nombre.boton
 	generateButtons()
+	panel = get_node(panelpath)
 
 
 func generateButtons():
@@ -19,17 +23,18 @@ func generateButtons():
 			if "nombre" in key:
 				print(key.nombre)
 				var btndir = btncurso.instantiate()
-				btndir.text = str(key.nombre.boton)
-				btndir.disabled = true
+				btndir.changeTitle( str(key.nombre.boton) )
 				
 				var selcur = {
 					"nombre" : key.nombre,
 					"archivos" : key.subelementos
  				}
 				
-				btndir.connect("pressed", Callable(self, "openCurso").bind(selcur))
+				for subele in key.subelementos:
+					btndir.addbutton(subele)
+				#btndir.connect("pressed", Callable(self, "activatePanel").bind())
 				$HBoxContainer.add_child(btndir)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func activatePanel(document):
+	print("activate panel")
+	panel.activate(document)
