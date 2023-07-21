@@ -19,6 +19,7 @@ func generateButtons():
 	print("dir acces")
 	print(dir)
 	for key in Global.SelectedCurso.archivos:
+			print("Archivo")
 			print(key)
 			if "nombre" in key:
 				print(key.nombre)
@@ -27,7 +28,7 @@ func generateButtons():
 				
 				var selcur = {
 					"nombre" : key.nombre,
-					"archivos" : key.subelementos
+					"archivos" : key.subelementos,
  				}
 				
 				for subele in key.subelementos:
@@ -37,4 +38,5 @@ func generateButtons():
 
 func activatePanel(document):
 	print("activate panel")
+	print(document)
 	panel.activate(document)

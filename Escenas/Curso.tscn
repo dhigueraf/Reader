@@ -50,14 +50,4 @@ offset_bottom = -0.312012
 
 [node name="ModalDocumento" parent="." instance=ExtResource("2_m5ict")]
 
-[node name="TextureButton" parent="ModalDocumento/Control" index="1"]
-anchor_left = 0.722
-anchor_top = 0.042
-anchor_right = 0.778
-anchor_bottom = 0.14
-offset_left = 0.25592
-offset_top = -0.216002
-offset_right = -0.256042
-offset_bottom = 0.279999
-
 [editable path="ModalDocumento"]

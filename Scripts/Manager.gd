@@ -19,6 +19,10 @@ var onlineversion = 0
 
 var btncurso = preload("res://Objetos/BtnCurso.tscn")
 
+var downloads = []
+var downloadingfile = ""
+var downloadindex = 0
+
 func getlocalconfig():
 	var defaultjsonlocation = "res://json/sumoprimero.json"
 	var json_as_text = FileAccess.get_file_as_string(defaultjsonlocation)
@@ -93,8 +97,9 @@ func _ready():
 	$ProcessLabel.text = "Verificar sistema de archivos"
 	await checkfilesystem()
 	#await generateButtons()
+	print("Hacer las descargas")
+	await doDownload(downloadindex)
 	$ProcessLabel.text = "Activar botones"
-	await activatebuttons()
 	print("pantalla lista")
 	$ProcessLabel.text = "Listo"
 
@@ -109,45 +114,67 @@ func checkfilesystem():
 		print("directorio no existe")
 		dir.make_dir(primeracarpeta)
 		print("primera iteración")
-	await iteratefoldersandfiles(basedir + "/" + primeracarpeta,Global.softwareinfo.sistemarchivos)
+	await iteratefoldersandfiles(primeracarpeta,Global.softwareinfo.sistemarchivos, [] )
 	
 	generateButtons()
 	print("done filessytem")
 
-func iteratefoldersandfiles(folder,filesystem):
+func iteratefoldersandfiles(folder,filesystem, road):
 	print("iterar: "  + str(folder))
-	var dir = DirAccess.open(folder)
+	var dir = DirAccess.open(basedir + "/" + folder)
+	var recorrido = road
+	print("mi recorrido hasta ahora")
+	print(recorrido)
+	recorrido.append(0)
+	var iterator = 0
 	for elemento in filesystem:
-			#print(elemento)
-			if "tipo" in elemento:
-				if elemento.tipo == "carpeta":
-					print("Es una carpeta")
-					
-					var nombrecarpeta = elemento.nombre.carpeta
-					
-					if dir.dir_exists(nombrecarpeta) :
-						print("directorio existe")
-					else:
-						print("directorio no existe")
-						dir.make_dir(nombrecarpeta)
-					if "subelementos" in elemento:
-						var subfolder = elemento["subelementos"]
-						iteratefoldersandfiles(folder + "/" + nombrecarpeta,subfolder)
-				elif elemento.tipo == "archivo":
-					print("Es un archivo")
-					if dir.file_exists(folder + "/" + elemento.nombre.carpeta + "." + elemento.extension):
-						print("archivo existe")
-					else:
-						print("descargarlo")
-						print(elemento.url)
-					$Downloader.set_download_file(folder + "/" + elemento.nombre.carpeta + "." + elemento.extension)
-					print("descargando")
-					$DownloadLabel.text = "Descargando... " + elemento.nombre.carpeta + "." + elemento.extension
-					await $Downloader.request(elemento.url)
-					print("se ha descargado descargado " + elemento.nombre.carpeta + "." + elemento.extension)
+		#print(elemento)
+		print("elemento " +str(iterator) + " " + str(elemento.nombre.carpeta)) 
+		recorrido[-1] = iterator
+		print(recorrido)
+		if "tipo" in elemento:
+			if elemento.tipo == "carpeta":
+				print("Es una carpeta")
 				
-					#iteratefoldersandfiles()
+				var nombrecarpeta = elemento.nombre.carpeta
+				
+				if dir.dir_exists(nombrecarpeta) :
+					print("directorio existe")
+				else:
+					print("directorio no existe")
+					dir.make_dir(nombrecarpeta)
+				if "subelementos" in elemento:
+					var subfolder = elemento["subelementos"]
+					print("llamar iterador de archivos")
+					var newrecorrido = recorrido
+					print(newrecorrido)
+					iteratefoldersandfiles(folder + "/" + nombrecarpeta,subfolder,newrecorrido)
+					recorrido = [0,iterator]
+			elif elemento.tipo == "archivo":
+				print("Es un archivo")
+				if dir.file_exists(elemento.nombre.carpeta + "." + elemento.extension):
+					print("archivo existe")
+				else:
+					print("descargarlo")
+					print(elemento.url)
+					var download = {
+					"name" : elemento.nombre.carpeta + "." + elemento.extension,
+					"location" : basedir + "/" +folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,
+					"url" : elemento.url,
+					"place": recorrido
+					}
+					
+					downloads.append(download)
+					
+				#print("Location: " + str(elemento.nombre.carpeta + "." + elemento.extension,recorrido))
+				updatelocation(folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,recorrido)
+					
+				
+		iterator+= 1
+	print("sali del for" )
 	
+	
+
 
 func generateButtons():
 	var dir = DirAccess.open(basedir)
@@ -162,6 +189,7 @@ func generateButtons():
 				var selcur = {
 					"nombre" : key.nombre,
 					"location": basedir + key.nombre.carpeta,
+					"folder":  key.nombre.carpeta,
 					"archivos" : key.subelementos
  				}
 				
@@ -187,3 +215,36 @@ func openCurso(curso):
 func _on_downloader_request_completed(result, response_code, headers, body):
 	print("download result:")
 	print(result)
+	print("ahora descargar " + str(downloadindex))
+	downloadindex += 1
+	await doDownload(downloadindex)
+	
+func doDownload(index):
+	print("Hacer las descargas")
+	if index < downloads.size():
+		var download = downloads[index]
+		downloadingfile = download.name
+		print(download)
+		$Downloader.set_download_file(download.location)
+		print("descargando")
+		$DownloadLabel.text = "Descargando... " + download.name
+		await $Downloader.request(download.url)
+		print("se ha descargado descargado " + download.name)
+	else:
+		await activatebuttons()
+
+
+func _process(delta):
+	if $Downloader.get_body_size() > 0:
+		var arr = float($Downloader.get_downloaded_bytes()/1024)
+		var total = float($Downloader.get_body_size()/1024)
+		$Avancelabel.text = downloadingfile + ": " + str(arr) + "/" + str(total) + "[Kb]"
+
+
+func updatelocation(locationtoupdate,road):
+	print("Update Location:")
+	print(locationtoupdate)
+	print(road)
+	if road.size() == 3:
+		Global.softwareinfo.sistemarchivos[road[0]].subelementos[road[1]].subelementos[road[2]].location = locationtoupdate
+		print( Global.softwareinfo.sistemarchivos[road[0]].subelementos[road[1]].subelementos[road[2]] )
