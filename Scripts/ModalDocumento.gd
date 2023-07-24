@@ -1,6 +1,6 @@
 extends Control
 
-var eldocu = preload("res://Objetos/OptionsCurso.tscn")
+var eldocu = preload("res://Objetos/BtnPagina.tscn")
 var documento = {}
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,7 +27,8 @@ func activate(document):
 		var eldocum = eldocu.instantiate()
 		eldocum.setNombre(capitulo.nombre)
 		eldocum.setPagina(capitulo.paginainicio)
-		$ColorRect/ScrollContainer/VBoxContainer.add_child(eldocum) 
+		$ColorRect/ScrollContainer/VBoxContainer.add_child(eldocum)
+		Global.FileToRead = documento
 	
 	visible = true
 	
@@ -42,4 +43,5 @@ func _on_cross_button_pressed():
 
 func _on_btn_lector_pressed():
 	print("abrir con lector externo")
-	print(documento)
+	print(Global.basedir + "/" + documento.location)
+	OS.shell_open(Global.basedir  + "/" +  documento.location)

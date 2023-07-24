@@ -1,0 +1,159 @@
+[gd_scene load_steps=6 format=3 uid="uid://nr0reu7bvhl"]
+
+[ext_resource type="Script" path="res://Scripts/PagesLoader.gd" id="1_72bc6"]
+[ext_resource type="Texture2D" uid="uid://b8a67fjcxil8p" path="res://backgrounds/pagina_1.png" id="1_nj48v"]
+[ext_resource type="Texture2D" uid="uid://vnymbqfvmudb" path="res://Sprites/btn_advance.png" id="2_2duke"]
+[ext_resource type="Texture2D" uid="uid://iv0ebn0xad0k" path="res://Sprites/btn_advance_pressed.png" id="3_pmwli"]
+[ext_resource type="Texture2D" uid="uid://dmhkj7bkxgvw3" path="res://Sprites/btn_advance_disabled.png" id="4_id2tc"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_72bc6")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GraphEdit" type="GraphEdit" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+use_snap = false
+zoom = 0.232568
+zoom_min = 0.063
+zoom_max = 4.219
+show_zoom_label = true
+arrange_nodes_button_hidden = true
+
+[node name="GraphNode" type="GraphNode" parent="CanvasLayer/Control/GraphEdit"]
+process_mode = 1
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 5003.0
+offset_bottom = 7071.0
+scale = Vector2(0.232568, 0.232568)
+mouse_filter = 1
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/GraphEdit/GraphNode"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_nj48v")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_top = 0.007
+anchor_right = 0.435
+anchor_bottom = 0.992
+offset_left = 6.0
+offset_top = -8.2
+offset_right = -0.440033
+offset_bottom = -0.200012
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ScrollContainer"]
+custom_minimum_size = Vector2(1000, 1000)
+layout_mode = 2
+texture = ExtResource("1_nj48v")
+expand_mode = 1
+
+[node name="retroceder" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.665
+anchor_top = 0.918
+anchor_right = 0.665
+anchor_bottom = 0.918
+offset_left = -32.08
+offset_top = -31.864
+offset_right = 31.92
+offset_bottom = 32.136
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+disabled = true
+texture_normal = ExtResource("2_2duke")
+texture_pressed = ExtResource("3_pmwli")
+texture_disabled = ExtResource("4_id2tc")
+
+[node name="avanzar" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.733
+anchor_top = 0.92
+anchor_right = 0.733
+anchor_bottom = 0.92
+offset_left = -32.4161
+offset_top = -32.16
+offset_right = 31.5839
+offset_bottom = 31.84
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+texture_normal = ExtResource("2_2duke")
+texture_pressed = ExtResource("3_pmwli")
+texture_disabled = ExtResource("4_id2tc")
+flip_h = true
+
+[node name="EtiquetaPagina" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.752
+anchor_top = 0.037
+anchor_right = 0.975
+anchor_bottom = 0.083
+offset_left = -0.304016
+offset_top = 0.0240002
+offset_right = -0.200073
+offset_bottom = 0.215996
+text = "Etiqueta pagina"
+
+[node name="ButtonReturn" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.501
+anchor_top = 0.897
+anchor_right = 0.616
+anchor_bottom = 0.944
+offset_left = -0.152039
+offset_top = -0.255981
+offset_right = 0.36792
+offset_bottom = 0.287964
+text = "Volver"
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonInteactivo" type="Button" parent="CanvasLayer"]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -416.0
+offset_top = -140.0
+offset_right = -283.0
+offset_bottom = -109.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 8
+text = "Volver"
+
+[connection signal="dragged" from="CanvasLayer/Control/GraphEdit/GraphNode" to="CanvasLayer" method="_on_GraphNode_dragged"]
+[connection signal="pressed" from="CanvasLayer/retroceder" to="CanvasLayer" method="_on_retroceder_pressed"]
+[connection signal="pressed" from="CanvasLayer/avanzar" to="CanvasLayer" method="_on_avanzar_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonReturn" to="CanvasLayer" method="_on_button_return_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonInteactivo" to="CanvasLayer" method="_on_button_inteactivo_pressed"]

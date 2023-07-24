@@ -6,7 +6,6 @@ extends Control
 @export var formatsallowed = ["doc","docx","ppt","pptx","xls","xls","odt","pdf","webm","mp4","mkv","png","jpg","jpeg"]
 
 var history = []
-var basedir =""
 var configdir = ""
 var converterdir = ""
 var currentdir = ""
@@ -22,6 +21,7 @@ var btncurso = preload("res://Objetos/BtnCurso.tscn")
 var downloads = []
 var downloadingfile = ""
 var downloadindex = 0
+var numcambios = 0
 
 func getlocalconfig():
 	var defaultjsonlocation = "res://json/sumoprimero.json"
@@ -29,10 +29,18 @@ func getlocalconfig():
 	#print(json_as_text)
 	return json_as_text
 
+func savejson():
+	print("Guardar")
+	var json_path = configdir + "/config.json"
+	var jsonpdf = FileAccess.open(json_path, FileAccess.WRITE)
+	jsonpdf.store_line( str(Global.softwareinfo) )
+	jsonpdf.close()
+	Global.softwareinfo = JSON.parse_string( getlocalconfig() )
+
 func findlocalconfig():
 	var json_path = configdir + "/config.json"
 	print(json_path)
-	var dir = DirAccess.open(basedir)
+	var dir = DirAccess.open(Global.basedir)
 	if not dir.dir_exists("/config") :
 		dir.make_dir("config")
 	if not FileAccess.file_exists(json_path):
@@ -72,19 +80,19 @@ func _on_request_config_request_completed(result, response_code, headers, body):
 
 func setinitialvariables():
 	var path = OS.get_executable_path()
-	basedir = path.get_base_dir()
-	converterdir = basedir + "/converter"
-	configdir = basedir + "/config"
-	currentdir = basedir
-	previusdir = basedir
+	Global.basedir = path.get_base_dir()
+	converterdir = Global.basedir + "/converter"
+	configdir = Global.basedir + "/config"
+	currentdir = Global.basedir
+	previusdir = Global.basedir
 
 func _ready():
 	var path = OS.get_executable_path()
-	basedir = path.get_base_dir()
-	converterdir = basedir + "/converter"
-	configdir = basedir + "/config"
-	currentdir = basedir
-	previusdir = basedir
+	Global.basedir = path.get_base_dir()
+	converterdir = Global.basedir + "/converter"
+	configdir = Global.basedir + "/config"
+	currentdir = Global.basedir
+	previusdir = Global.basedir
 	
 	$ProcessLabel.text = "Verificar versión online"
 	
@@ -107,7 +115,7 @@ func _ready():
 func checkfilesystem():
 	print("primera carpeta " + str(Global.softwareinfo.carpetabase) + ".")
 	var primeracarpeta = str(Global.softwareinfo.carpetabase)
-	var dir = DirAccess.open(basedir)
+	var dir = DirAccess.open(Global.basedir)
 	if dir.dir_exists(primeracarpeta) :
 		print("directorio existe")
 	else:
@@ -121,7 +129,7 @@ func checkfilesystem():
 
 func iteratefoldersandfiles(folder,filesystem, road):
 	print("iterar: "  + str(folder))
-	var dir = DirAccess.open(basedir + "/" + folder)
+	var dir = DirAccess.open(Global.basedir + "/" + folder)
 	var recorrido = road
 	print("mi recorrido hasta ahora")
 	print(recorrido)
@@ -159,17 +167,18 @@ func iteratefoldersandfiles(folder,filesystem, road):
 					print(elemento.url)
 					var download = {
 					"name" : elemento.nombre.carpeta + "." + elemento.extension,
-					"location" : basedir + "/" +folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,
+					"location" : Global.basedir + "/" +folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,
 					"url" : elemento.url,
 					"place": recorrido
 					}
 					
 					downloads.append(download)
 					
-				#print("Location: " + str(elemento.nombre.carpeta + "." + elemento.extension,recorrido))
-				updatelocation(folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,recorrido)
-					
-				
+				print("comparar locaciones")
+				print( str( folder + "/"  + elemento.nombre.carpeta + "." + elemento.extension) )
+				print( str( elemento.location ) )
+				if str(elemento.location) != str(folder + "/" + elemento.nombre.carpeta + "." + elemento.extension):
+					updatelocation(folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,recorrido)
 		iterator+= 1
 	print("sali del for" )
 	
@@ -177,7 +186,7 @@ func iteratefoldersandfiles(folder,filesystem, road):
 
 
 func generateButtons():
-	var dir = DirAccess.open(basedir)
+	var dir = DirAccess.open(Global.basedir)
 	for key in Global.softwareinfo.sistemarchivos:
 			print(key)
 			if "nombre" in key:
@@ -188,7 +197,7 @@ func generateButtons():
 				
 				var selcur = {
 					"nombre" : key.nombre,
-					"location": basedir + key.nombre.carpeta,
+					"location": Global.basedir + key.nombre.carpeta,
 					"folder":  key.nombre.carpeta,
 					"archivos" : key.subelementos
  				}
@@ -199,7 +208,8 @@ func generateButtons():
 func activatebuttons():
 	var buttons = []
 	buttons = $VBoxContainer.get_children()
-	
+	if numcambios > 0:
+		savejson()
 	for btn in buttons:
 		btn.disabled = false
 
@@ -246,5 +256,6 @@ func updatelocation(locationtoupdate,road):
 	print(locationtoupdate)
 	print(road)
 	if road.size() == 3:
+		numcambios += 1
 		Global.softwareinfo.sistemarchivos[road[0]].subelementos[road[1]].subelementos[road[2]].location = locationtoupdate
 		print( Global.softwareinfo.sistemarchivos[road[0]].subelementos[road[1]].subelementos[road[2]] )

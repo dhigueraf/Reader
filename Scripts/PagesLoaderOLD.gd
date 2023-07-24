@@ -7,9 +7,9 @@ var interactivos = []
 var tipointeraccion = "nada"
 var parametrointera = ""
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	var converterdir = Global.basedir + "/converter"
+	var path = OS.get_executable_path()
+	var converterdir = path.get_base_dir() + "/converter"
 	var dir = DirAccess.open(converterdir)
 	
 	if dir:
@@ -25,20 +25,74 @@ func _ready():
 			iteratedname = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
-		
+	
 	if(pages.size() > 0):
 		maxindex = pages.size()
-		Global.FileReading.numeropaginas = maxindex
-		Global.FileReading.paginas = pages
+		Global.FileToRead.numeropaginas = maxindex
 	else:
 		maxindex = 0
 	
-	print("current index " + str(Global.FileReading.currentindex) )
+	print("current index " + str(Global.FileToRead.currentindex) )
 	
 	print("File loaded")
-	print(Global.FileReading)
+	print(Global.FileToRead)
 	
-	updateindex(Global.FileReading.currentindex)
+	var json_path = Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json"
+	#var jsonpdf = FileAccess.open(json_path, )
+	if not FileAccess.file_exists(json_path):
+		print("No existe")
+		var jsonpdf = FileAccess.open(json_path, FileAccess.WRITE)
+		jsonpdf.store_line(JSON.new().stringify(generate_json(maxindex)))
+		jsonpdf.close()
+	else:
+		var jsonpdf = FileAccess.get_file_as_string(json_path)
+		
+		if not jsonpdf.is_empty():
+			var test_json_conv = JSON.parse_string(jsonpdf)
+			Global.FileReading = test_json_conv
+		else: 
+			Global.FileReading = generate_json(maxindex)
+		print("Save data")
+		#print(Global.FileReading)
+		
+	print("Interactivos")
+	for inter in Global.interactivos:
+		print(inter["nombre"])
+		if inter["nombre"] == Global.FileToRead["nombrecompleto"]:
+			interactivos = inter
+	print(interactivos)
+	
+	updateindex(Global.FileToRead.currentindex)
+
+
+func generate_json(num):
+	print("Crear json de " + str(num) + " paginas")
+	var emptyjson = {
+		paginas = [],
+		nombre = Global.FileToRead.nombrecompleto,
+		numerodepaginas = num
+	}
+	var iterator = 0
+	while iterator < num :
+		var pagtoadd = {
+			id = iterator,
+			notas = "",
+			mapaideas = {
+				connections = [],
+				nodes = []
+			}
+		}
+		emptyjson.paginas.append(pagtoadd)
+		iterator+= 1
+	print(emptyjson)
+	return emptyjson
+
+
+func save():
+	var path_file = Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json"
+	var jsontosave = FileAccess.open(path_file, FileAccess.WRITE)
+	jsontosave.store_line( JSON.new().stringify( Global.FileReading ) )
+	jsontosave.close()
 
 func setimage(index):
 	print("set iamge index: " + str(index))
@@ -77,12 +131,11 @@ func updateindex(num):
 			actualindex = 0
 			$retroceder.disabled = true
 	
-	Global.FileReading.currentindex = actualindex
+	Global.FileToRead.currentindex = actualindex
 	
 	var showbutton = false
 	var textoasignar = "interactivo"
 
-	'''
 	if not interactivos.is_empty():
 		for intera in interactivos["interactivos"]:
 			if actualindex == intera["pagina"]:
@@ -97,7 +150,6 @@ func updateindex(num):
 	else:
 		$ButtonInteactivo.visible = false
 		$ButtonInteactivo.text = "interactivo"
-	'''
 	
 	setimage(actualindex)
 
@@ -110,6 +162,10 @@ func _on_avanzar_pressed():
 
 func _on_retroceder_pressed():
 	updateindex(-1)
+
+func _on_ButtonSave_pressed():
+	print("Guardar")
+	save()
 
 func _on_ButtonMapa_pressed():
 	get_tree().change_scene_to_file("res://mapas/Mapas.tscn")
@@ -155,3 +211,6 @@ func _on_button_inteactivo_pressed():
 		interactnode(parametrointera)
 	elif tipointeraccion == "ppt":
 		interactexternal(parametrointera)
+
+
+

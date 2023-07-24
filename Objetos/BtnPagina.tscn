@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b13b4cd333222"]
 
-[ext_resource type="Script" path="res://Scripts/OptionsCurso.gd" id="1_0b6tf"]
+[ext_resource type="Script" path="res://Scripts/pagButton.gd" id="1_2fe5e"]
 
 [node name="OptionCapitulo" type="Control"]
 custom_minimum_size = Vector2(432, 64)
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_0b6tf")
+script = ExtResource("1_2fe5e")
 
 [node name="Nombre" type="Label" parent="."]
 layout_mode = 0
@@ -28,3 +28,5 @@ offset_left = -18.0
 offset_bottom = 31.0
 grow_horizontal = 0
 text = "1"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

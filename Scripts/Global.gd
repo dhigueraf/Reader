@@ -1,5 +1,8 @@
 extends Node
 
+
+var basedir = ""
+
 var softwareinfo = {
 	"nombre": "Sumo Primero software",
 	"version": 0,
@@ -17,16 +20,13 @@ var SelectedCurso = {
 }
 
 var FileToRead = {
-	nombre = "",
-	nombrecompleto = "",
-	location = "",
-	nombrelocation ="",
-	extension = ".",
-	numeropaginas = 0,
-	currentindex = 0
 }
 
-var FileReading = {}
+var FileReading = {
+	paginas = [],
+	currentindex = 0,
+	numeropaginas = 0
+}
 
 var interactivos = {
 }
