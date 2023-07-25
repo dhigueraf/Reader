@@ -45,3 +45,19 @@ func _on_btn_lector_pressed():
 	print("abrir con lector externo")
 	print(Global.basedir + "/" + documento.location)
 	OS.shell_open(Global.basedir  + "/" +  documento.location)
+
+
+func _on_btn_portada_pressed():
+	await Global.DeletePreviousImages()
+	await Global.GenerarImagenes(Global.FileToRead.location,0)
+	print("Cambiar de escena")
+	get_tree().change_scene_to_file("res://Escenas/Visualizador.tscn")
+
+
+func _on_btn_pagina_pressed():
+	var pagvalue = $ColorRect/paginput.get_value()
+	await Global.DeletePreviousImages()
+	print("pagvalue " + str(pagvalue))
+	await Global.GenerarImagenes(Global.FileToRead.location,pagvalue)
+	print("Cambiar de escena")
+	get_tree().change_scene_to_file("res://Escenas/Visualizador.tscn")

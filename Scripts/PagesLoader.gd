@@ -7,97 +7,84 @@ var interactivos = []
 var tipointeraccion = "nada"
 var parametrointera = ""
 
+@onready var dir = DirAccess.open( Global.basedir + "/converter")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var converterdir = Global.basedir + "/converter"
-	var dir = DirAccess.open(converterdir)
-	
-	if dir:
-		dir.list_dir_begin()
-		var iteratedname = dir.get_next()
-		while (iteratedname != ""):
-			if not dir.current_is_dir():
-				print("Found file: " + iteratedname)
-				var filearray = iteratedname.split(".")
-				if( filearray[-1] == "png" ):
-					print(iteratedname)
-					pages.append(converterdir + "/" + iteratedname)
-			iteratedname = dir.get_next()
-	else:
-		print("An error occurred when trying to access the path.")
+
+	var pagiterator = 0
 		
-	if(pages.size() > 0):
-		maxindex = pages.size()
-		Global.FileReading.numeropaginas = maxindex
-		Global.FileReading.paginas = pages
-	else:
-		maxindex = 0
-	
+
+	maxindex = Global.FileReading.numeropaginas
+	#Global.FileReading.numeropaginas = maxindex
+	#Global.FileReading.paginas = pages
+
 	print("current index " + str(Global.FileReading.currentindex) )
 	
 	print("File loaded")
 	print(Global.FileReading)
 	
+	if Global.FileReading.currentindex > 0:
+		$avanzar.disabled = false
+		$retroceder.disabled = false
+	if Global.FileReading.currentindex >= Global.FileReading.numeropaginas-1:
+		$avanzar.disabled = true
+		$retroceder.disabled = false
 	updateindex(Global.FileReading.currentindex)
 
 func setimage(index):
 	print("set iamge index: " + str(index))
-	print(pages[index])
-	#var image = Image.new()
-	#var err = image.load(pages[index])
 	
-	var image = Image.load_from_file(pages[index])
-	var texture = ImageTexture.create_from_image(image)
-	print(texture)
+	if dir.file_exists("pagina_" + str(index) + ".png"):
 	
-	$ScrollContainer/TextureRect.texture = texture
-	$Control/GraphEdit/GraphNode/TextureRect2.texture = texture
-
-	$EtiquetaPagina.text = "Notas pagina " + str(index)
-	if Global.FileReading.has('paginas'):
-		if range( Global.FileReading.paginas.size() ).has(index):
-			$NotasContainer.text = Global.FileReading.paginas[index].notas
-		else:
-			$NotasContainer.text = ""
+		var image = Image.load_from_file(Global.basedir + "/converter/" + "pagina_" + str(index) + ".png")
+		var texture = ImageTexture.create_from_image(image)
+		print(texture)
+		
+		$ScrollContainer/TextureRect.texture = texture
+		$Control/GraphEdit/GraphNode/TextureRect2.texture = texture
+	
 	else:
-		$NotasContainer.text = ""
+		print("no existe la imagen")
+		await Global.GenerarImagenes(Global.FileToRead.location,index)
+		
+		print("ahora cargarla")
+		var image = Image.load_from_file(Global.basedir + "/converter/" + "pagina_" + str(index) + ".png")
+		var texture = ImageTexture.create_from_image(image)
+		print(texture)
+		
+		$ScrollContainer/TextureRect.texture = texture
+		$Control/GraphEdit/GraphNode/TextureRect2.texture = texture
+
+	if index == 0:
+		$EtiquetaPagina.text = "Portada"
+	else:
+		$EtiquetaPagina.text = "Pagina " + str(index)
 	
 func updateindex(num):
 	print("actualindex " + str(actualindex) )
 	actualindex += num
-
-	if num == 1:
+	
+	if num == 0:
+		$avanzar.disabled = false
+		actualindex = 0
+		$retroceder.disabled = true
+	elif num == 1:
 		$retroceder.disabled = false
 		if actualindex > maxindex -2:
 			actualindex = maxindex -1
 			$avanzar.disabled = true
-	elif num == -1:
+	elif num == -1 or num == 0:
 		$avanzar.disabled = false
 		if actualindex < 1:
 			actualindex = 0
 			$retroceder.disabled = true
-	
+			
+			
 	Global.FileReading.currentindex = actualindex
 	
 	var showbutton = false
 	var textoasignar = "interactivo"
 
-	'''
-	if not interactivos.is_empty():
-		for intera in interactivos["interactivos"]:
-			if actualindex == intera["pagina"]:
-				print("pagina con interactivos")
-				textoasignar = intera["textoboton"]
-				showbutton = true;
-				tipointeraccion = intera["tipo"]
-				parametrointera = intera["escenaoarchivo"]
-	if showbutton: 
-		$ButtonInteactivo.visible = true
-		$ButtonInteactivo.text = textoasignar
-	else:
-		$ButtonInteactivo.visible = false
-		$ButtonInteactivo.text = "interactivo"
-	'''
 	
 	setimage(actualindex)
 
@@ -113,12 +100,6 @@ func _on_retroceder_pressed():
 
 func _on_ButtonMapa_pressed():
 	get_tree().change_scene_to_file("res://mapas/Mapas.tscn")
-
-
-func _on_NotasContainer_text_changed():
-	print( "editaste el texto " + str(actualindex) )
-	Global.FileReading.paginas[actualindex].notas = $NotasContainer.text 
-
 
 func _on_Button_pressed():
 	pass # Replace with function body.
@@ -138,7 +119,7 @@ func _on_GraphNode_dragged(from, to):
 
 func _on_button_return_pressed():
 	print("Volver inicio")
-	get_tree().change_scene_to_file("res://Escenas/Scene.tscn")
+	get_tree().change_scene_to_file("res://Escenas/Main.tscn")
 
 
 func interactnode(nodedir):

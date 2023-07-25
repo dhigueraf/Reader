@@ -50,4 +50,6 @@ offset_bottom = -0.312012
 
 [node name="ModalDocumento" parent="." instance=ExtResource("2_m5ict")]
 
+[connection signal="changed" from="ModalDocumento/Control/ColorRect/paginput" to="CanvasLayer/Control" method="_on_paginput_changed"]
+
 [editable path="ModalDocumento"]

@@ -3,6 +3,7 @@ extends Control
 var btncurso = preload("res://Objetos/BtnCursoDocs.tscn")
 @export_node_path() var panelpath
 var panel
+var numberinput
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,3 +41,5 @@ func activatePanel(document):
 	print("activate panel")
 	print(document)
 	panel.activate(document)
+
+
