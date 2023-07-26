@@ -17,6 +17,6 @@ func _on_button_pressed():
 	print(Global.FileToRead)
 	
 	await Global.DeletePreviousImages()
-	await Global.GenerarImagenes(Global.FileToRead.location,numpa)
+	await Global.GenerarImagenes(Global.FileToRead.location,numpa,true)
 	print("Cambiar de escena")
 	get_tree().change_scene_to_file("res://Escenas/Visualizador.tscn")

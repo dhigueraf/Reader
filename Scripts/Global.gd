@@ -53,7 +53,7 @@ func DeletePreviousImages():
 	else:
 		print("An error occurred when trying to access the path.")
 	
-func GenerarImagenes(location,pag):
+func GenerarImagenes(location,pag,wait):
 	print("iniciar en pagina " + str(pag))
 	var converterdir = Global.basedir + "/converter"
 	var filetoopen = Global.basedir + "/" + location
@@ -101,8 +101,7 @@ func GenerarImagenes(location,pag):
 		print(numpagstr)
 		var totalpagstr = "0"
 		
-		OS.execute(ejecutable, [filetoopen, numpagstr], output, true)
-		
+		OS.execute(ejecutable, [filetoopen, numpagstr], output, wait)
 		'''
 		print("-----Ouput: -----")
 		for text in output:

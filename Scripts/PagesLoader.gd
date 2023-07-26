@@ -43,10 +43,25 @@ func setimage(index):
 		
 		$ScrollContainer/TextureRect.texture = texture
 		$Control/GraphEdit/GraphNode/TextureRect2.texture = texture
-	
+		
+		#var thread1 = Thread.new()
+		#var thread2 = Thread.new()
+		
+		print("Checkear proximos")
+		if not dir.file_exists( "pagina_" + str(index + 3) + ".png" ) and (index + 3) > maxindex :
+			print("cargar por adelantado " + str(index + 3) )
+			#thread1.start( Global.GenerarImagenes(Global.FileToRead.location,index + 3,false) )
+			Global.GenerarImagenes(Global.FileToRead.location,index + 3,false)
+		else:
+			print("existe siguiente" + "pagina_" + str(index + 3) + ".png")
+		if not dir.file_exists( "pagina_" + str(index - 3) + ".png" ) and (index - 3) > 0:
+			print("cargar por adelantado " + str(index - 3) )
+			#thread2.start( Global.GenerarImagenes(Global.FileToRead.location,index - 3,false) )
+			Global.GenerarImagenes(Global.FileToRead.location,index - 3,false)
+			print("existe anterior" + "pagina_" + str(index - 3) + ".png")
 	else:
 		print("no existe la imagen")
-		await Global.GenerarImagenes(Global.FileToRead.location,index)
+		await Global.GenerarImagenes(Global.FileToRead.location,index,true)
 		
 		print("ahora cargarla")
 		var image = Image.load_from_file(Global.basedir + "/converter/" + "pagina_" + str(index) + ".png")

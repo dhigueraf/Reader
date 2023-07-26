@@ -49,7 +49,7 @@ func _on_btn_lector_pressed():
 
 func _on_btn_portada_pressed():
 	await Global.DeletePreviousImages()
-	await Global.GenerarImagenes(Global.FileToRead.location,0)
+	await Global.GenerarImagenes(Global.FileToRead.location,0,true)
 	print("Cambiar de escena")
 	get_tree().change_scene_to_file("res://Escenas/Visualizador.tscn")
 
@@ -58,6 +58,6 @@ func _on_btn_pagina_pressed():
 	var pagvalue = $ColorRect/paginput.get_value()
 	await Global.DeletePreviousImages()
 	print("pagvalue " + str(pagvalue))
-	await Global.GenerarImagenes(Global.FileToRead.location,pagvalue)
+	await Global.GenerarImagenes(Global.FileToRead.location,pagvalue,true)
 	print("Cambiar de escena")
 	get_tree().change_scene_to_file("res://Escenas/Visualizador.tscn")
