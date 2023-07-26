@@ -1,222 +1,261 @@
 extends Control
 
-onready var listoffolders = []
-onready var listoffiles = []
-export var discartednames= [".",".."]
-export var formatsallowed = ["doc","docx","ppt","pptx","xls","xls","odt","pdf","webm","mp4","mkv","png","jpg","jpeg"]
+@onready var listoffolders = []
+@onready var listoffiles = []
+@export var discartednames= [".",".."]
+@export var formatsallowed = ["doc","docx","ppt","pptx","xls","xls","odt","pdf","webm","mp4","mkv","png","jpg","jpeg"]
+
 var history = []
-var basedir =""
+var configdir = ""
 var converterdir = ""
 var currentdir = ""
 var previusdir = ""
 var filetoopen = ""
+var nombreinteract = "interactivos"
 
-onready var http : HTTPRequest = $HTTPRequest
+var localversion = 0
+var onlineversion = 0
 
-const PROJECT_ID := "prueba-front-746df"
-const FIRESTORE_URL := "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/" % PROJECT_ID
+var btncurso = preload("res://Objetos/BtnCurso.tscn")
 
-func get_documentorcollection(path: String) -> void:
-	var url := FIRESTORE_URL + path
-	http.request(url)
+var downloads = []
+var downloadingfile = ""
+var downloadindex = 0
+var numcambios = 0
+
+func getlocalconfig():
+	var defaultjsonlocation = "res://json/sumoprimero.json"
+	var json_as_text = FileAccess.get_file_as_string(defaultjsonlocation)
+	#print(json_as_text)
+	return json_as_text
+
+func savejson():
+	print("Guardar")
+	var json_path = configdir + "/config.json"
+	var jsonpdf = FileAccess.open(json_path, FileAccess.WRITE)
+	jsonpdf.store_line( str(Global.softwareinfo) )
+	jsonpdf.close()
+	Global.softwareinfo = JSON.parse_string( getlocalconfig() )
+
+func findlocalconfig():
+	var json_path = configdir + "/config.json"
+	print(json_path)
+	var dir = DirAccess.open(Global.basedir)
+	if not dir.dir_exists("/config") :
+		dir.make_dir("config")
+	if not FileAccess.file_exists(json_path):
+		print("No existe")
+		var jsonpdf = FileAccess.open(json_path, FileAccess.WRITE)
+		jsonpdf.store_line( getlocalconfig() )
+		jsonpdf.close()
+		Global.softwareinfo = JSON.parse_string( getlocalconfig() )
+	else:
+		var jsonpdf = FileAccess.get_file_as_string(json_path)
+		if not jsonpdf.is_empty():
+			Global.softwareinfo =  JSON.parse_string(jsonpdf)
+		else: 
+			print("Esta vacio")
+			jsonpdf = FileAccess.open(json_path, FileAccess.WRITE)
+			jsonpdf.store_line( getlocalconfig() )
+			jsonpdf.close()
+			Global.softwareinfo = JSON.parse_string( getlocalconfig() )
+			
+		print("Save data")
+		print(Global.softwareinfo)
+		
+		localversion = Global.softwareinfo.version
+		
+
+func _on_request_config_request_completed(result, response_code, headers, body):
+	var prejson = body.get_string_from_utf8()
+	var obtainedjson = JSON.parse_string(prejson)
 	
+	print("Obtener Json:")
+	#print(obtainedjson)
+	if str(obtainedjson) != "<null>":
+		onlineversion = obtainedjson["version"]
+		print("listo web")
+	else:
+		print("No hay internetus")
 
+func setinitialvariables():
+	var path = OS.get_executable_path()
+	Global.basedir = path.get_base_dir()
+	converterdir = Global.basedir + "/converter"
+	configdir = Global.basedir + "/config"
+	currentdir = Global.basedir
+	previusdir = Global.basedir
 
 func _ready():
 	var path = OS.get_executable_path()
-	#print (path)
-	basedir = path.get_base_dir() + "/cursos"
-	converterdir = path.get_base_dir() + "/converter"
-	currentdir = basedir
-	previusdir = basedir
+	Global.basedir = path.get_base_dir()
+	converterdir = Global.basedir + "/converter"
+	configdir = Global.basedir + "/config"
+	currentdir = Global.basedir
+	previusdir = Global.basedir
 	
-	iteratedirectorys(currentdir)
-	$pdfbuttons.visible = false
+	$ProcessLabel.text = "Verificar versión online"
 	
-	get_documentorcollection("colecciondeprueba")
-	#var colprueba =  Firebase.get_document_or_collection("colecciondeprueba",http)
-	#print(colprueba)
-	#print(http)
-	
-func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
-	if body and JSON.parse(body.get_string_from_ascii()).result:
-		var request_result := JSON.parse(body.get_string_from_ascii()).result as Dictionary
-		print(request_result)
-		#var res = firebase_firestore_parse(request_result)
+	await $RequestConfig.request("https://static.sumaysigue.uchile.cl/Sumo%20Primero/Json/sumoprimero.json")
+	$ProcessLabel.text = "Cargar configucarión local"
+	await findlocalconfig()
+
+	print("software info:")
+	print(Global.softwareinfo)
+	$ProcessLabel.text = "Verificar sistema de archivos"
+	await checkfilesystem()
+	#await generateButtons()
+	print("Hacer las descargas")
+	await doDownload(downloadindex)
+	$ProcessLabel.text = "Activar botones"
+	print("pantalla lista")
+	$ProcessLabel.text = "Listo"
 
 
-func opendir(dir):
-	previusdir = currentdir
-	currentdir = dir
-	history.append(previusdir)
-	cleanContainers()
-	iteratedirectorys(currentdir)
-	
-	
-
-func openfile(filedir):
-	$FileRute.text = str(filedir)
-	OS.shell_open(filedir)
-
-
-func iteratedirectorys(directory):
-	print("directorio: "+ directory)
-	var dir = Directory.new()
-	
-	if dir.open(directory) == OK:
-		dir.list_dir_begin()
-		var iteratedname = dir.get_next()
-		while (iteratedname != ""):
-			if dir.current_is_dir():
-				#print("Found directory: " + iteratedname)
-				if not (discartednames.has(iteratedname)):
-					listoffolders.append(iteratedname)
-			else:
-				#print("Found file: " + iteratedname)
-				var filearray = iteratedname.split(".")
-				if(formatsallowed.has(filearray[-1])):
-					listoffiles.append(iteratedname)
-			iteratedname = dir.get_next()
-		generateListOfFolderButtons()
-		generateListOfFilesButtons()
+func checkfilesystem():
+	print("primera carpeta " + str(Global.softwareinfo.carpetabase) + ".")
+	var primeracarpeta = str(Global.softwareinfo.carpetabase)
+	var dir = DirAccess.open(Global.basedir)
+	if dir.dir_exists(primeracarpeta) :
+		print("directorio existe")
 	else:
-		print("An error occurred when trying to access the path.")
-		
+		print("directorio no existe")
+		dir.make_dir(primeracarpeta)
+		print("primera iteración")
+	await iteratefoldersandfiles(primeracarpeta,Global.softwareinfo.sistemarchivos, [] )
 	
+	generateButtons()
+	print("done filessytem")
 
-func generateListOfFolderButtons():
-	#print(listoffolders)
-	if (listoffolders.size() > 0):
-		for folder in listoffolders:
-			var btndir = Button.new()
-			btndir.text = folder
-			btndir.connect("pressed",self,"opendir",[currentdir+"/"+ folder])
-			$ContainerCarpetas/VBoxContainer.add_child(btndir)
-
-func generateListOfFilesButtons():
-	print(listoffiles)
-	if (listoffiles.size() > 0):
-		for file in listoffiles:
-			var btndir = Button.new()
-			btndir.text = file
-			var filearray = file.split(".")
-			if( filearray[-1] == "pdf" ):
-				btndir.connect("pressed",self,"pdfButtons",[currentdir+"/"+file,file])
-			else:
-				btndir.connect("pressed",self,"openfile",[currentdir+"/"+file])
-			$ContainerArchivos/VBoxContainer.add_child(btndir)
-
-func cleanContainers():
-	listoffolders = []
-	listoffiles = []
-	
-	var folderchilds =  $ContainerCarpetas/VBoxContainer.get_children()
-	for foldchi in folderchilds:
-		$ContainerCarpetas/VBoxContainer.remove_child(foldchi)
-		#foldchi.queque_free()
-		
-	var fileschilds =  $ContainerArchivos/VBoxContainer.get_children()
-	for filchi in fileschilds:
-		$ContainerArchivos/VBoxContainer.remove_child(filchi)
-		#filchi .queque_free()
-	
-	#print("limpiar")
-	
-
-func makehistory(tope):
+func iteratefoldersandfiles(folder,filesystem, road):
+	print("iterar: "  + str(folder))
+	var dir = DirAccess.open(Global.basedir + "/" + folder)
+	var recorrido = road
+	print("mi recorrido hasta ahora")
+	print(recorrido)
+	recorrido.append(0)
 	var iterator = 0
-	var array= [] 
-	while( iterator  <  tope ):
-		array.append(history[iterator])
-		iterator += 1
-	return array
-
-
-func _on_BtnBack_pressed():
-	print("Histori")
-	print(history)
-	
-	if(history.size()  > 0):
-		print("ir atras")
-		currentdir = history[-1]
-		history = makehistory(history.size() - 1)
-		print(history)
-		cleanContainers()
-		iteratedirectorys(currentdir)
-
-
-func pdfButtons(filedir,filename):
-	print("PDF buttons")
-	$pdfbuttons.visible = true
-	Global.FileToRead.location = currentdir
-	var filenamearray = filename.split(".") 
-	Global.FileToRead.nombre = filenamearray[0]
-	Global.FileToRead.extension = filenamearray[-1]
-	Global.FileToRead.nombrecompleto = filename
-	Global.FileToRead.nombrelocation = filedir
-	Global.FileToRead.currentintex = 0
-	print(Global.FileToRead)
-	filetoopen = filedir
-	
-
-func _on_BtnHome_pressed():
-	currentdir = basedir;
-	
-	history = []
-	
-	cleanContainers()
-	iteratedirectorys(currentdir)
-
-
-func _on_BtnExterno_pressed():
-	openfile(filetoopen)
-
-
-func _on_BtnNotas_pressed():
-	$pdfbuttons.activateLoading()
-	prepararanotas()
+	for elemento in filesystem:
+		#print(elemento)
+		print("elemento " +str(iterator) + " " + str(elemento.nombre.carpeta)) 
+		recorrido[-1] = iterator
+		print(recorrido)
+		if "tipo" in elemento:
+			if elemento.tipo == "carpeta":
+				print("Es una carpeta")
+				
+				var nombrecarpeta = elemento.nombre.carpeta
+				
+				if dir.dir_exists(nombrecarpeta) :
+					print("directorio existe")
+				else:
+					print("directorio no existe")
+					dir.make_dir(nombrecarpeta)
+				if "subelementos" in elemento:
+					var subfolder = elemento["subelementos"]
+					print("llamar iterador de archivos")
+					var newrecorrido = recorrido
+					print(newrecorrido)
+					iteratefoldersandfiles(folder + "/" + nombrecarpeta,subfolder,newrecorrido)
+					recorrido = [0,iterator]
+			elif elemento.tipo == "archivo":
+				print("Es un archivo")
+				if dir.file_exists(elemento.nombre.carpeta + "." + elemento.extension):
+					print("archivo existe")
+				else:
+					print("descargarlo")
+					print(elemento.url)
+					var download = {
+					"name" : elemento.nombre.carpeta + "." + elemento.extension,
+					"location" : Global.basedir + "/" +folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,
+					"url" : elemento.url,
+					"place": recorrido
+					}
+					
+					downloads.append(download)
+					
+				print("comparar locaciones")
+				print( str( folder + "/"  + elemento.nombre.carpeta + "." + elemento.extension) )
+				print( str( elemento.location ) )
+				if str(elemento.location) != str(folder + "/" + elemento.nombre.carpeta + "." + elemento.extension):
+					updatelocation(folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,recorrido)
+		iterator+= 1
+	print("sali del for" )
 	
 	
-func prepararanotas():
-	var dir = Directory.new()
-	print("eliminar imagenes anteriores")
-	if dir.open(converterdir) == OK:
-		dir.list_dir_begin()
-		var iteratedname = dir.get_next()
-		while (iteratedname != ""):
-			if not dir.current_is_dir():
-				print("Found file: " + iteratedname)
-				var filearray = iteratedname.split(".")
-				if( filearray[-1] == "png" ):
-					print(iteratedname)
-					dir.remove(converterdir + "/" + iteratedname)
-			iteratedname = dir.get_next()
+
+
+func generateButtons():
+	var dir = DirAccess.open(Global.basedir)
+	for key in Global.softwareinfo.sistemarchivos:
+			print(key)
+			if "nombre" in key:
+				print(key.nombre)
+				var btndir = btncurso.instantiate()
+				btndir.text = str(key.nombre.boton)
+				btndir.disabled = true
+				
+				var selcur = {
+					"nombre" : key.nombre,
+					"location": Global.basedir + key.nombre.carpeta,
+					"folder":  key.nombre.carpeta,
+					"archivos" : key.subelementos
+ 				}
+				
+				btndir.connect("pressed", Callable(self, "openCurso").bind(selcur))
+				$VBoxContainer.add_child(btndir)
+
+func activatebuttons():
+	var buttons = []
+	buttons = $VBoxContainer.get_children()
+	if numcambios > 0:
+		savejson()
+	for btn in buttons:
+		btn.disabled = false
+
+
+func clickbutton():
+	print("click")
+
+func openCurso(curso):
+	print("presionaste: " + curso.nombre.boton)
+	Global.SelectedCurso = curso
+	get_tree().change_scene_to_file("res://Escenas/Curso.tscn")
+
+func _on_downloader_request_completed(result, response_code, headers, body):
+	print("download result:")
+	print(result)
+	print("ahora descargar " + str(downloadindex))
+	downloadindex += 1
+	await doDownload(downloadindex)
+	
+func doDownload(index):
+	print("Hacer las descargas")
+	if index < downloads.size():
+		var download = downloads[index]
+		downloadingfile = download.name
+		print(download)
+		$Downloader.set_download_file(download.location)
+		print("descargando")
+		$DownloadLabel.text = "Descargando... " + download.name
+		await $Downloader.request(download.url)
+		print("se ha descargado descargado " + download.name)
 	else:
-		print("An error occurred when trying to access the path.")
-	
-	
-	print("generar pdf images")
-	
-	var filetoopenarray = filetoopen.split(".")
-	
-	if filetoopenarray[-1] == "pdf":
-		print("es convertible")
-		var sistemaoperativo = OS.get_name()
-		print(sistemaoperativo)
-		var ejecutable = converterdir + "/pdf2pngimgs.exe"
-		if sistemaoperativo.to_lower() == "windows":
-			print("windows")
-			ejecutable = converterdir + "/pdf2pngimgs.exe"
-		elif sistemaoperativo.to_lower() == "x11" || sistemaoperativo.to_lower() == "linux":
-			print("linux")
-			ejecutable = converterdir + "/pdf2pngimg"
-		
-		var output = []
-		OS.execute(ejecutable, [filetoopen], true, output)
-		print("Ouput: ")
-		for text in output:
-			print(text)
-		print("Fin Ejecución")
-	
-	print("Cambiar de escena")
-	get_tree().change_scene("res://Escenas/notas.tscn")
+		await activatebuttons()
+
+
+func _process(delta):
+	if $Downloader.get_body_size() > 0:
+		var arr = float($Downloader.get_downloaded_bytes()/1024)
+		var total = float($Downloader.get_body_size()/1024)
+		$Avancelabel.text = downloadingfile + ": " + str(arr) + "/" + str(total) + "[Kb]"
+
+
+func updatelocation(locationtoupdate,road):
+	print("Update Location:")
+	print(locationtoupdate)
+	print(road)
+	if road.size() == 3:
+		numcambios += 1
+		Global.softwareinfo.sistemarchivos[road[0]].subelementos[road[1]].subelementos[road[2]].location = locationtoupdate
+		print( Global.softwareinfo.sistemarchivos[road[0]].subelementos[road[1]].subelementos[road[2]] )

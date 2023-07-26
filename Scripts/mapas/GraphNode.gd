@@ -5,7 +5,7 @@ extends GraphNode
 # var a = 2
 # var b = "text"
 
-onready var text_edit = $TextEdit
+@onready var text_edit = $TextEdit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,8 +17,8 @@ func _ready():
 #	pass
 
 func get_data():
-	var frame_color = get("custom_styles/frame").get_border_color()
-	var selected_frame_color = get("custom_styles/selectedframe").get_border_color()
+	var frame_color = get("theme_override_styles/frame").get_border_color()
+	var selected_frame_color = get("theme_override_styles/selected_frame").get_border_color()
 	return {"text": text_edit.text, "title": get_title(), 
 	"frame_color": {"r": frame_color.r, "g": frame_color.g, "b": frame_color.b}, 
 	"selected_frame_color": {"r": selected_frame_color.r, "g": selected_frame_color.g, "b": selected_frame_color.b}}
@@ -30,21 +30,21 @@ func set_data(data):
 	
 	
 func set_border_color_rgb(color_frame:Color, color_selected:Color):
-	var style = get("custom_styles/frame").duplicate()
+	var style = get("theme_override_styles/frame").duplicate()
 	style.set_border_color(color_frame)
-	set("custom_styles/frame", style)
-	var style_selected = get("custom_styles/selectedframe").duplicate()
+	set("theme_override_styles/frame", style)
+	var style_selected = get("theme_override_styles/selected_frame").duplicate()
 	style_selected.set_border_color(color_selected)
-	set("custom_styles/selectedframe", style_selected)
+	set("theme_override_styles/selected_frame", style_selected)
 	
 	
 func set_border_color(color_frame:Dictionary, color_selected:Dictionary):
-	var style = get("custom_styles/frame").duplicate()
+	var style = get("theme_override_styles/frame").duplicate()
 	style.set_border_color(Color(color_frame["r"],color_frame["g"],color_frame["b"]))
-	set("custom_styles/frame", style)
-	var style_selected = get("custom_styles/selectedframe").duplicate()
+	set("theme_override_styles/frame", style)
+	var style_selected = get("theme_override_styles/selected_frame").duplicate()
 	style_selected.set_border_color(Color(color_selected["r"],color_selected["g"],color_selected["b"]))
-	set("custom_styles/selectedframe", style_selected)
+	set("theme_override_styles/selected_frame", style_selected)
 
 
 func _on_close_request():
@@ -57,11 +57,11 @@ func _on_resize_request(new_size):
 	var graph = get_parent()
 	if graph.has_method("is_using_snap") and graph.is_using_snap():
 		var snap = graph.get_snap()
-		rect_size.x = int(new_size.x/snap)*snap
-		rect_size.y = int(new_size.y/snap)*snap
+		size.x = int(new_size.x/snap)*snap
+		size.y = int(new_size.y/snap)*snap
 	else:
-		rect_size = new_size
-	text_edit.set_custom_minimum_size(Vector2(-1, rect_size.y-35))
+		size = new_size
+	text_edit.set_custom_minimum_size(Vector2(-1, size.y-35))
 	#get_parent().save()
 
 
@@ -74,5 +74,6 @@ func _on_TextEdit_text_changed():
 	pass
 
 func _on_GraphNode_gui_input(event):
-	if event is InputEventMouseButton and event.doubleclick:
+	if event is InputEventMouseButton and event.double_click:
+		#print(event)
 		get_parent().change_title(self)

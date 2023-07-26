@@ -4,10 +4,9 @@ extends Node2D
 func _ready():
 	pass # Replace with function body.
 
-
 func _on_Button_pressed():
-	get_tree().change_scene("res://snake/SnakeMainScene.tscn")
+	get_tree().change_scene_to_file("res://snake/SnakeMainScene.tscn")
 
 
 func _on_Button2_pressed():
-	get_tree().change_scene("res://mapas/Mapas.tscn")
+	get_tree().change_scene_to_file("res://mapas/Mapas.tscn")

@@ -1,0 +1,201 @@
+[gd_scene load_steps=6 format=3 uid="uid://nr0reu7bvhl"]
+
+[ext_resource type="Script" path="res://Scripts/PagesLoader.gd" id="1_72bc6"]
+[ext_resource type="Texture2D" uid="uid://b8a67fjcxil8p" path="res://backgrounds/pagina_1.png" id="1_nj48v"]
+[ext_resource type="Texture2D" uid="uid://vnymbqfvmudb" path="res://Sprites/btn_advance.png" id="2_2duke"]
+[ext_resource type="Texture2D" uid="uid://iv0ebn0xad0k" path="res://Sprites/btn_advance_pressed.png" id="3_pmwli"]
+[ext_resource type="Texture2D" uid="uid://dmhkj7bkxgvw3" path="res://Sprites/btn_advance_disabled.png" id="4_id2tc"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_72bc6")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GraphEdit" type="GraphEdit" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+use_snap = false
+zoom = 0.232568
+zoom_min = 0.063
+zoom_max = 4.219
+show_zoom_label = true
+arrange_nodes_button_hidden = true
+
+[node name="GraphNode" type="GraphNode" parent="CanvasLayer/Control/GraphEdit"]
+process_mode = 1
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 5003.0
+offset_bottom = 7071.0
+scale = Vector2(0.232568, 0.232568)
+mouse_filter = 1
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/GraphEdit/GraphNode"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_nj48v")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_top = 0.007
+anchor_right = 0.435
+anchor_bottom = 0.992
+offset_left = 6.0
+offset_top = -8.2
+offset_right = -0.440033
+offset_bottom = -0.200012
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ScrollContainer"]
+custom_minimum_size = Vector2(1000, 1000)
+layout_mode = 2
+texture = ExtResource("1_nj48v")
+expand_mode = 1
+
+[node name="retroceder" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.637
+anchor_top = 0.869
+anchor_right = 0.693
+anchor_bottom = 0.968
+offset_left = 0.175964
+offset_top = -0.112
+offset_right = -0.335999
+offset_bottom = -0.264038
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+disabled = true
+texture_normal = ExtResource("2_2duke")
+texture_pressed = ExtResource("3_pmwli")
+texture_disabled = ExtResource("4_id2tc")
+
+[node name="avanzar" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.705
+anchor_top = 0.87
+anchor_right = 0.76
+anchor_bottom = 0.969
+offset_left = -0.160156
+offset_top = 0.23999
+offset_right = 0.479797
+offset_bottom = 0.0880127
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+texture_normal = ExtResource("2_2duke")
+texture_pressed = ExtResource("3_pmwli")
+texture_disabled = ExtResource("4_id2tc")
+flip_h = true
+
+[node name="ButtonReturn" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.501
+anchor_top = 0.897
+anchor_right = 0.616
+anchor_bottom = 0.944
+offset_left = -0.152039
+offset_top = -0.255981
+offset_right = 0.36792
+offset_bottom = 0.287964
+text = "Volver"
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonInteactivo" type="Button" parent="CanvasLayer"]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -416.0
+offset_top = -140.0
+offset_right = -283.0
+offset_bottom = -109.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 8
+text = "Interactivo"
+
+[node name="ButtonIrPagina" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.793
+anchor_top = 0.677
+anchor_right = 0.859
+anchor_bottom = 0.725
+offset_left = 0.463928
+offset_top = 0.303955
+offset_right = 0.431946
+offset_bottom = 0.199982
+text = "Ir Pagina"
+
+[node name="InputPaginas" type="SpinBox" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.867
+anchor_top = 0.676
+anchor_right = 0.939
+anchor_bottom = 0.725
+offset_left = 0.215942
+offset_top = 0.951965
+offset_right = 0.334473
+offset_bottom = 0.199982
+max_value = 1000.0
+
+[node name="LabelPortada" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.868
+anchor_top = 0.633
+anchor_right = 0.922
+anchor_bottom = 0.673
+offset_left = 0.0639648
+offset_top = -0.184021
+offset_right = -0.144043
+offset_bottom = -0.104034
+text = "Portada"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelNumPag" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.94
+anchor_top = 0.682
+anchor_right = 0.985
+anchor_bottom = 0.722
+offset_left = 0.119873
+offset_top = 0.0639648
+offset_right = 0.279907
+offset_bottom = 0.143951
+text = "/9999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="dragged" from="CanvasLayer/Control/GraphEdit/GraphNode" to="CanvasLayer" method="_on_GraphNode_dragged"]
+[connection signal="pressed" from="CanvasLayer/retroceder" to="CanvasLayer" method="_on_retroceder_pressed"]
+[connection signal="pressed" from="CanvasLayer/avanzar" to="CanvasLayer" method="_on_avanzar_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonReturn" to="CanvasLayer" method="_on_button_return_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonInteactivo" to="CanvasLayer" method="_on_button_inteactivo_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonIrPagina" to="CanvasLayer" method="_on_button_ir_pagina_pressed"]

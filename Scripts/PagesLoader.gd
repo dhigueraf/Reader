@@ -3,143 +3,110 @@ extends CanvasLayer
 var pages = []
 var actualindex = 0
 var maxindex = 1
+var interactivos = []
+var tipointeraccion = "nada"
+var parametrointera = ""
 
+@onready var dir = DirAccess.open( Global.basedir + "/converter")
+# Called when the node enters the scene tree for the first time.
 func _ready():
-	var path = OS.get_executable_path()
-	var converterdir = path.get_base_dir() + "/converter"
-	var dir = Directory.new()
+
+	var pagiterator = 0
+		
+
+	maxindex = Global.FileReading.numeropaginas -1
+	$LabelNumPag.text = "/" + str(maxindex)
 	
-	if dir.open(converterdir) == OK:
-		dir.list_dir_begin()
-		var iteratedname = dir.get_next()
-		while (iteratedname != ""):
-			if not dir.current_is_dir():
-				print("Found file: " + iteratedname)
-				var filearray = iteratedname.split(".")
-				if( filearray[-1] == "png" ):
-					print(iteratedname)
-					pages.append(converterdir + "/" + iteratedname)
-			iteratedname = dir.get_next()
-	else:
-		print("An error occurred when trying to access the path.")
-	
-	if(pages.size() > 0):
-		maxindex = pages.size()
-		Global.FileToRead.numeropaginas = maxindex
-	else:
-		maxindex = 0
-	
-	print("current index " + str(Global.FileToRead.currentindex) )
+	$InputPaginas.max_value = maxindex
+
+	print("current index " + str(Global.FileReading.currentindex) )
 	
 	print("File loaded")
-	print(Global.FileToRead)
+	print(Global.FileReading)
 	
-		
-	var jsonpdf = File.new()
-	if not jsonpdf.file_exists(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json"):
-		print("No existe")
-		jsonpdf.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.WRITE)
-		jsonpdf.store_line( to_json( generate_json(maxindex) ) )
-		jsonpdf.close()
-		
-	jsonpdf.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.READ)
-	if jsonpdf.get_as_text() != "" :
-		Global.FileReading = parse_json(jsonpdf.get_as_text())
-	else: 
-		Global.FileReading = generate_json(maxindex)
-	print("Save data")
-	#print(Global.FileReading)
-	
-	updateindex(Global.FileToRead.currentindex)
-
-
-func generate_json(num):
-	print("Crear json de " + str(num) + " paginas")
-	var emptyjson = {
-		paginas = [],
-		nombre = Global.FileToRead.nombrecompleto,
-		numerodepaginas = num
-	}
-	var iterator = 0
-	while iterator < num :
-		var pagtoadd = {
-			id = iterator,
-			notas = "",
-			mapaideas = {
-				connections = [],
-				nodes = []
-			}
-		}
-		emptyjson.paginas.append(pagtoadd)
-		iterator+= 1
-	print(emptyjson)
-	return emptyjson
-
-
-func save():
-	var jsontosave = File.new()
-	jsontosave.open(Global.FileToRead.location + "/" + Global.FileToRead.nombre  +".json", File.WRITE)
-	jsontosave.store_line( to_json( Global.FileReading ) )
-	jsontosave.close()
+	if Global.FileReading.currentindex > 0:
+		$avanzar.disabled = false
+		$retroceder.disabled = false
+	if Global.FileReading.currentindex >= Global.FileReading.numeropaginas-1:
+		$avanzar.disabled = true
+		$retroceder.disabled = false
+	updateindex(Global.FileReading.currentindex)
 
 func setimage(index):
 	print("set iamge index: " + str(index))
-	print(pages[index])
-	var image = Image.new()
-	var err = image.load(pages[index])
-	var texture = ImageTexture.new()
-	texture.create_from_image(image, 0)
-	print(texture)
 	
-	$ScrollContainer/TextureRect.texture = texture
+	if dir.file_exists("pagina_" + str(index) + ".png"):
 	
-	$EtiquetaPagina.text = "Notas pagina " + str(index)
-	if Global.FileReading.has('paginas'):
-		if range( Global.FileReading.paginas.size() ).has(index):
-			$NotasContainer.text = Global.FileReading.paginas[index].notas
-		else:
-			$NotasContainer.text = ""
+		var image = Image.load_from_file(Global.basedir + "/converter/" + "pagina_" + str(index) + ".png")
+		var texture = ImageTexture.create_from_image(image)
+		print(texture)
+		
+		$ScrollContainer/TextureRect.texture = texture
+		$Control/GraphEdit/GraphNode/TextureRect2.texture = texture
+	
 	else:
-		$NotasContainer.text = ""
-	
+		print("no existe la imagen")
+		await Global.GenerarImagenes(Global.FileToRead.location,index)
+		
+		print("ahora cargarla")
+		var image = Image.load_from_file(Global.basedir + "/converter/" + "pagina_" + str(index) + ".png")
+		var texture = ImageTexture.create_from_image(image)
+		print(texture)
+		
+		$ScrollContainer/TextureRect.texture = texture
+		$Control/GraphEdit/GraphNode/TextureRect2.texture = texture
+
+
 func updateindex(num):
+	actualindex = num
+	Global.FileReading.currentindex = actualindex
+	
+	if actualindex == 0:
+		$LabelPortada.visible = true
+		$InputPaginas.set_value(0)
+	else:
+		$LabelPortada.visible = false
+		$InputPaginas.set_value(actualindex)
+		
+	if actualindex == maxindex:
+		$avanzar.disabled = true
+	
+	var showbutton = false
+	var textoasignar = "interactivo"
+	#Verificar si es interactivo
+	
+	setimage(actualindex)
+
+func addtoindex(num):
 	print("actualindex " + str(actualindex) )
 	actualindex += num
-
+	
 	if num == 1:
 		$retroceder.disabled = false
-		if actualindex > maxindex -2:
-			actualindex = maxindex -1
+		if actualindex > maxindex -1:
+			actualindex = maxindex
 			$avanzar.disabled = true
-	elif num == -1:
+	elif num == -1 or num == 0:
 		$avanzar.disabled = false
 		if actualindex < 1:
 			actualindex = 0
 			$retroceder.disabled = true
-	
-	Global.FileToRead.currentindex = actualindex
-	setimage(actualindex)
+			
+	#Global.FileReading.currentindex = actualindex	
+	updateindex(actualindex)
 
+#func disconectallnodes():
+#	pass
 
-func _on_retroceder_pressed():
-	updateindex(-1)
 
 func _on_avanzar_pressed():
-	updateindex(1)
+	addtoindex(1)
 
-
-func _on_ButtonSave_pressed():
-	print("Guardar")
-	save()
+func _on_retroceder_pressed():
+	addtoindex(-1)
 
 func _on_ButtonMapa_pressed():
-	get_tree().change_scene("res://mapas/Mapas.tscn")
-
-
-func _on_NotasContainer_text_changed():
-	print( "editaste el texto " + str(actualindex) )
-	Global.FileReading.paginas[actualindex].notas = $NotasContainer.text 
-
+	get_tree().change_scene_to_file("res://mapas/Mapas.tscn")
 
 func _on_Button_pressed():
 	pass # Replace with function body.
@@ -151,3 +118,37 @@ func _on_ButtonPlus_pressed():
 
 func _on_ButtonMinus_pressed():
 	pass # Replace with function body.
+
+
+func _on_GraphNode_dragged(from, to):
+	print(from, to)
+
+
+func _on_button_return_pressed():
+	print("Volver inicio")
+	get_tree().change_scene_to_file("res://Escenas/Main.tscn")
+
+
+func interactnode(nodedir):
+	get_tree().change_scene_to_file(nodedir)
+	
+func interactexternal(filedir):
+	OS.shell_open(filedir)
+
+
+func _on_button_inteactivo_pressed():
+	print("Interactivo")
+	
+	if tipointeraccion == "nodo":
+		interactnode(parametrointera)
+	elif tipointeraccion == "ppt":
+		interactexternal(parametrointera)
+
+
+func _on_button_ir_pagina_pressed():
+	var pagvalue = $InputPaginas.get_value()
+	if pagvalue > maxindex:
+		pagvalue = maxindex
+	elif pagvalue < 0:
+		pagvalue = 0
+	updateindex(pagvalue)

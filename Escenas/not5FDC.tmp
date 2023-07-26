@@ -1,0 +1,148 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlext0p16e2r"]
+
+[ext_resource type="Script" path="res://Scripts/PagesLoader.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dmhkj7bkxgvw3" path="res://Sprites/btn_advance_disabled.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://vnymbqfvmudb" path="res://Sprites/btn_advance.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://iv0ebn0xad0k" path="res://Sprites/btn_advance_pressed.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://b8a67fjcxil8p" path="res://backgrounds/pagina_1.png" id="5"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_top = 0.007
+anchor_right = 0.435
+anchor_bottom = 0.992
+offset_left = 6.0
+offset_top = -8.2
+offset_right = -0.440033
+offset_bottom = -0.200012
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ScrollContainer"]
+custom_minimum_size = Vector2(1000, 1000)
+layout_mode = 2
+texture = ExtResource("5")
+expand_mode = 1
+
+[node name="retroceder" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = 222.0
+offset_right = 3.0
+offset_bottom = 286.0
+disabled = true
+texture_normal = ExtResource("3")
+texture_pressed = ExtResource("4")
+texture_disabled = ExtResource("2")
+
+[node name="avanzar" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = 223.0
+offset_right = 74.0
+offset_bottom = 287.0
+texture_normal = ExtResource("3")
+texture_pressed = ExtResource("4")
+texture_disabled = ExtResource("2")
+flip_h = true
+
+[node name="NotasContainer" type="TextEdit" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.751
+anchor_top = 0.152
+anchor_right = 0.984
+anchor_bottom = 0.763
+offset_left = -0.0239868
+offset_top = -2.19999
+offset_right = 0.384033
+offset_bottom = 0.199982
+
+[node name="EtiquetaPagina" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.752
+anchor_top = 0.037
+anchor_right = 0.975
+anchor_bottom = 0.122
+offset_left = -0.0480347
+offset_top = -0.200001
+offset_right = -0.400024
+offset_bottom = -0.200005
+text = "Etiqueta pagina"
+
+[node name="ButtonSave" type="Button" parent="CanvasLayer"]
+offset_left = 811.0
+offset_top = 497.0
+offset_right = 969.0
+offset_bottom = 517.0
+text = "Guardar"
+
+[node name="ButtonMapa" type="Button" parent="CanvasLayer"]
+offset_left = 811.0
+offset_top = 526.0
+offset_right = 969.0
+offset_bottom = 546.0
+text = "Mapa coneptual pagina"
+
+[node name="ButtonPlus" type="Button" parent="CanvasLayer"]
+offset_left = 479.0
+offset_top = 155.0
+offset_right = 499.0
+offset_bottom = 175.0
+text = "+"
+
+[node name="ButtonMinus" type="Button" parent="CanvasLayer"]
+offset_left = 479.0
+offset_top = 189.0
+offset_right = 499.0
+offset_bottom = 209.0
+text = "-"
+
+[node name="GraphEdit" type="GraphEdit" parent="."]
+offset_right = 700.0
+offset_bottom = 600.0
+scroll_offset = Vector2(-40, -40)
+
+[node name="GraphNode" type="GraphNode" parent="GraphEdit"]
+process_mode = 1
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 276.0
+offset_bottom = 294.0
+mouse_filter = 1
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+
+[node name="TextureRect2" type="TextureRect" parent="GraphEdit/GraphNode"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("5")
+expand_mode = 1
+
+[connection signal="pressed" from="CanvasLayer/retroceder" to="CanvasLayer" method="_on_retroceder_pressed"]
+[connection signal="pressed" from="CanvasLayer/avanzar" to="CanvasLayer" method="_on_avanzar_pressed"]
+[connection signal="text_changed" from="CanvasLayer/NotasContainer" to="CanvasLayer" method="_on_NotasContainer_text_changed"]
+[connection signal="pressed" from="CanvasLayer/ButtonSave" to="CanvasLayer" method="_on_ButtonSave_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonMapa" to="CanvasLayer" method="_on_ButtonMapa_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonPlus" to="CanvasLayer" method="_on_ButtonPlus_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonMinus" to="CanvasLayer" method="_on_ButtonMinus_pressed"]
+[connection signal="dragged" from="GraphEdit/GraphNode" to="CanvasLayer" method="_on_GraphNode_dragged"]

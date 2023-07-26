@@ -1,0 +1,258 @@
+{
+	"nombre": "Sumo Primero software",
+	"version": 0,
+	"carpetabase": "cursos",
+	"sistemarchivos": [
+		{
+			"tipo": "carpeta",
+			"nombre": {
+				"carpeta": "primero basico",
+				"boton": "Primero Básico"
+			},
+			"subelementos": [
+				{
+					"tipo": "carpeta",
+					"nombre": {
+						"carpeta": "textos del estudiante",
+						"boton": "Textos del Estudiante"
+					},
+					"subelementos": [
+						{
+							"tipo": "archivo",
+							"nombre": {
+								"carpeta": "tomo1",
+								"boton": "Tomo 1"
+							},
+							"extension": "pdf",
+							"version": 0,
+							"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
+							"location": "cursos/primero basico/textos del estudiante/tomo1.pdf",
+							"capitulos": [
+								{
+									"nombre": "Capítulo 1",
+									"paginainicio": 1,
+									"paginasrelevantes": [],
+									"paginatermino": 2
+								},
+								{
+									"nombre": "Capítulo 2",
+									"paginainicio": 3,
+									"paginasrelevantes": [],
+									"paginatermino": 12
+								},
+								{
+									"nombre": "Capítulo 3",
+									"paginainicio": 13,
+									"paginasrelevantes": [],
+									"paginatermino": 35
+								},
+								{
+									"nombre": "Capítulo muy relevante",
+									"paginainicio": 36,
+									"paginasrelevantes": [
+										{
+											"nombre": "Cosa relevsante 1",
+											"pagina": 38
+										},
+										{
+											"nombre": "Cosa relevsante 2",
+											"pagina": 40
+										}
+									],
+									"paginatermino": 45
+								},
+								{
+									"nombre": "Capítulo 4",
+									"paginainicio": 46,
+									"paginasrelevantes": [],
+									"paginatermino": 50
+								}
+							]
+						},
+						{
+							"tipo": "archivo",
+							"nombre": {
+								"carpeta": "tomo2",
+								"boton": "Tomo 2"
+							},
+							"extension": "pdf",
+							"version": 0,
+							"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
+							"location": "cursos/primero basico/textos del estudiante/tomo2.pdf",
+							"capitulos": [
+								{
+									"nombre": "Capítulo 1",
+									"paginainicio": 1,
+									"paginasrelevantes": [],
+									"paginatermino": 2
+								},
+								{
+									"nombre": "Capítulo 2",
+									"paginainicio": 3,
+									"paginasrelevantes": [],
+									"paginatermino": 12
+								},
+								{
+									"nombre": "Capítulo 3",
+									"paginainicio": 13,
+									"paginasrelevantes": [],
+									"paginatermino": 35
+								},
+								{
+									"nombre": "Capítulo muy relevante",
+									"paginainicio": 36,
+									"paginasrelevantes": [
+										{
+											"nombre": "Cosa relevsante 1",
+											"pagina": 38
+										},
+										{
+											"nombre": "Cosa relevsante 2",
+											"pagina": 40
+										}
+									],
+									"paginatermino": 45
+								},
+								{
+									"nombre": "Capítulo 4",
+									"paginainicio": 46,
+									"paginasrelevantes": [],
+									"paginatermino": 50
+								}
+							]
+						}
+					]
+				},
+				{
+					"tipo": "carpeta",
+					"nombre": {
+						"carpeta": "guia didactica del docente",
+						"boton": "Guía Didáctica del Docente"
+					},
+					"subelementos": [
+						{
+							"tipo": "archivo",
+							"nombre": {
+								"carpeta": "tomo1",
+								"boton": "Tomo 1"
+							},
+							"extension": "pdf",
+							"version": 0,
+							"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
+							"location": "cursos/primero basico/guia didactica del docente/tomo1.pdf",
+							"capitulos": [
+								{
+									"nombre": "Capítulo 1",
+									"paginainicio": 1,
+									"paginasrelevantes": [],
+									"paginatermino": 2
+								},
+								{
+									"nombre": "Capítulo 2",
+									"paginainicio": 3,
+									"paginasrelevantes": [],
+									"paginatermino": 12
+								},
+								{
+									"nombre": "Capítulo 3",
+									"paginainicio": 13,
+									"paginasrelevantes": [],
+									"paginatermino": 35
+								},
+								{
+									"nombre": "Capítulo muy relevante",
+									"paginainicio": 36,
+									"paginasrelevantes": [
+										{
+											"nombre": "Cosa relevsante 1",
+											"pagina": 38
+										},
+										{
+											"nombre": "Cosa relevsante 2",
+											"pagina": 40
+										}
+									],
+									"paginatermino": 45
+								},
+								{
+									"nombre": "Capítulo 4",
+									"paginainicio": 46,
+									"paginasrelevantes": [],
+									"paginatermino": 50
+								}
+							]
+						},
+						{
+							"tipo": "archivo",
+							"nombre": {
+								"carpeta": "tomo2",
+								"boton": "Tomo 2"
+							},
+							"extension": "pdf",
+							"version": 0,
+							"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
+							"location": "cursos/primero basico/guia didactica del docente/tomo2.pdf",
+							"capitulos": [
+								{
+									"nombre": "Capítulo 1",
+									"paginainicio": 1,
+									"paginasrelevantes": [],
+									"paginatermino": 2
+								},
+								{
+									"nombre": "Capítulo 2",
+									"paginainicio": 3,
+									"paginasrelevantes": [],
+									"paginatermino": 12
+								},
+								{
+									"nombre": "Capítulo 3",
+									"paginainicio": 13,
+									"paginasrelevantes": [],
+									"paginatermino": 35
+								},
+								{
+									"nombre": "Capítulo muy relevante",
+									"paginainicio": 36,
+									"paginasrelevantes": [
+										{
+											"nombre": "Cosa relevsante 1",
+											"pagina": 38
+										},
+										{
+											"nombre": "Cosa relevsante 2",
+											"pagina": 40
+										}
+									],
+									"paginatermino": 45
+								},
+								{
+									"nombre": "Capítulo 4",
+									"paginainicio": 46,
+									"paginasrelevantes": [],
+									"paginatermino": 50
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"tipo": "carpeta",
+			"nombre": {
+				"carpeta": "segundo basico",
+				"boton": "Segundo Básico"
+			},
+			"subelementos": []
+		},
+		{
+			"tipo": "carpeta",
+			"nombre": {
+				"carpeta": "tercero basico",
+				"boton": "Tercero Básico"
+			},
+			"subelementos": []
+		}
+	]
+}

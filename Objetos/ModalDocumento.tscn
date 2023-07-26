@@ -1,0 +1,133 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfbpy2frau5rn"]
+
+[ext_resource type="Script" path="res://Scripts/ModalDocumento.gd" id="1_0f57l"]
+[ext_resource type="Texture2D" uid="uid://dehtwygigjkme" path="res://Sprites/closebtn.png" id="2_rgtkx"]
+[ext_resource type="Texture2D" uid="uid://dcsw5ailkc0un" path="res://Sprites/closebtn_pressed.png" id="3_2wowt"]
+
+[node name="ModalDocumento" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0f57l")
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.267
+anchor_top = 0.08
+anchor_right = 0.752
+anchor_bottom = 0.907
+offset_left = 0.415985
+offset_top = 0.159996
+offset_right = -0.304016
+offset_bottom = 0.263977
+color = Color(0.223529, 0.223529, 0.223529, 0.878431)
+
+[node name="Label" type="Label" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.116
+anchor_top = 0.03
+anchor_right = 0.921
+anchor_bottom = 0.166
+offset_left = 0.271996
+offset_top = -0.0799999
+offset_right = 0.0819702
+offset_bottom = 0.0239944
+text = "Titulo del Documento"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.039
+anchor_top = 0.392
+anchor_right = 0.953
+anchor_bottom = 0.95
+offset_left = 0.237999
+offset_top = -0.112015
+offset_right = 0.225952
+offset_bottom = -0.199982
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ColorRect/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BtnPortada" type="Button" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.034
+anchor_top = 0.267
+anchor_right = 0.335
+anchor_bottom = 0.325
+offset_left = 0.0280304
+offset_top = -0.112015
+offset_right = 0.0700226
+offset_bottom = -0.200012
+text = "Ver desde la portada"
+
+[node name="BtnPagina" type="Button" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.478
+anchor_top = 0.267
+anchor_right = 0.754
+anchor_bottom = 0.325
+offset_left = 0.276001
+offset_top = -0.112015
+offset_right = 0.268005
+offset_bottom = -0.200012
+grow_horizontal = 2
+grow_vertical = 2
+text = "Ver desde página..."
+
+[node name="paginput" type="SpinBox" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.776
+anchor_top = 0.267
+anchor_right = 0.978
+anchor_bottom = 0.325
+offset_left = -0.00802612
+offset_top = -0.112015
+offset_right = 0.276001
+offset_bottom = -0.200012
+max_value = 200.0
+
+[node name="CrossButton" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.727
+anchor_top = 0.031
+anchor_right = 0.783
+anchor_bottom = 0.13
+offset_left = 0.495911
+offset_top = -0.0880013
+offset_right = -0.0160522
+offset_bottom = -0.240005
+texture_normal = ExtResource("2_rgtkx")
+texture_pressed = ExtResource("3_2wowt")
+
+[node name="btnLector" type="Button" parent="Control/CrossButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.305
+anchor_top = 0.162
+anchor_right = 0.737
+anchor_bottom = 0.22
+offset_left = -379.52
+offset_top = 108.632
+offset_right = -166.168
+offset_bottom = 135.92
+text = "Abrir con visualizador externo"
+
+[connection signal="pressed" from="Control/ColorRect/BtnPortada" to="Control" method="_on_btn_portada_pressed"]
+[connection signal="pressed" from="Control/ColorRect/BtnPagina" to="Control" method="_on_btn_pagina_pressed"]
+[connection signal="pressed" from="Control/CrossButton" to="Control" method="_on_cross_button_pressed"]
+[connection signal="pressed" from="Control/CrossButton/btnLector" to="Control" method="_on_btn_lector_pressed"]
