@@ -88,7 +88,7 @@ func GenerarImagenes(location,pag):
 			ejecutable = converterdir + "/pdf2pngimgs.exe"
 		elif sistemaoperativo.to_lower() == "x11" || sistemaoperativo.to_lower() == "linux":
 			print("linux")
-			ejecutable = converterdir + "/pdf2pngimg"
+			ejecutable = converterdir + "/pdf2pngimgs"
 		
 		var output = []
 		
@@ -117,12 +117,21 @@ func GenerarImagenes(location,pag):
 		
 		#obtener numero de paginas
 		print("-----Ouput: -----")
-		var ouputarray = output[0].split("\r\n")
+		
+		var ouputarray = output[0].split(",")
+		
+		if "\r\n" in output[0]:
+			ouputarray = output[0].split("\r\n")
+		elif "\n":
+			ouputarray = output[0].split("\n")
+		elif "\r":
+			ouputarray = output[0].split("\r")
+			
 		for text in ouputarray:
-			print(text)
-			if "total de paginas:" in str(text):
-				print("Es el final " + str(text))
-				totalpagstr = str(text).trim_prefix("total de paginas: ")
+				print(text)
+				if "total de paginas:" in str(text):
+					print("Es el final " + str(text))
+					totalpagstr = str(text).trim_prefix("total de paginas: ")
 		#print(totalpagstr)
 		print("-----Fin Ouput-----")
 		print("numero de paginas: " + totalpagstr)

@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlext0p16e2r"]
+[gd_scene load_steps=7 format=3 uid="uid://dlext0p16e2r"]
 
 [ext_resource type="Script" path="res://Scripts/PagesLoader.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dmhkj7bkxgvw3" path="res://Sprites/btn_advance_disabled.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://vnymbqfvmudb" path="res://Sprites/btn_advance.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://iv0ebn0xad0k" path="res://Sprites/btn_advance_pressed.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://b8a67fjcxil8p" path="res://backgrounds/pagina_1.png" id="5"]
+
+[sub_resource type="Theme" id="Theme_v4umy"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -164,14 +166,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ButtonReturn" type="Button" parent="CanvasLayer"]
 anchors_preset = -1
-anchor_left = 0.876
-anchor_top = 0.677
-anchor_right = 0.876
-anchor_bottom = 0.677
-offset_left = -66.152
-offset_top = -15.696
-offset_right = 66.848
-offset_bottom = 15.304
+anchor_bottom = 1.0
+offset_right = 57.0
+grow_vertical = 2
+theme = SubResource("Theme_v4umy")
 text = "Volver"
 metadata/_edit_use_anchors_ = true
 

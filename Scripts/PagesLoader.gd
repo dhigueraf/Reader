@@ -14,9 +14,10 @@ func _ready():
 	var pagiterator = 0
 		
 
-	maxindex = Global.FileReading.numeropaginas
-	#Global.FileReading.numeropaginas = maxindex
-	#Global.FileReading.paginas = pages
+	maxindex = Global.FileReading.numeropaginas -1
+	$LabelNumPag.text = "/" + str(maxindex)
+	
+	$InputPaginas.max_value = maxindex
 
 	print("current index " + str(Global.FileReading.currentindex) )
 	
@@ -55,23 +56,35 @@ func setimage(index):
 		$ScrollContainer/TextureRect.texture = texture
 		$Control/GraphEdit/GraphNode/TextureRect2.texture = texture
 
-	if index == 0:
-		$EtiquetaPagina.text = "Portada"
-	else:
-		$EtiquetaPagina.text = "Pagina " + str(index)
-	
+
 func updateindex(num):
+	actualindex = num
+	Global.FileReading.currentindex = actualindex
+	
+	if actualindex == 0:
+		$LabelPortada.visible = true
+		$InputPaginas.set_value(0)
+	else:
+		$LabelPortada.visible = false
+		$InputPaginas.set_value(actualindex)
+		
+	if actualindex == maxindex:
+		$avanzar.disabled = true
+	
+	var showbutton = false
+	var textoasignar = "interactivo"
+	#Verificar si es interactivo
+	
+	setimage(actualindex)
+
+func addtoindex(num):
 	print("actualindex " + str(actualindex) )
 	actualindex += num
 	
-	if num == 0:
-		$avanzar.disabled = false
-		actualindex = 0
-		$retroceder.disabled = true
-	elif num == 1:
+	if num == 1:
 		$retroceder.disabled = false
-		if actualindex > maxindex -2:
-			actualindex = maxindex -1
+		if actualindex > maxindex -1:
+			actualindex = maxindex
 			$avanzar.disabled = true
 	elif num == -1 or num == 0:
 		$avanzar.disabled = false
@@ -79,24 +92,18 @@ func updateindex(num):
 			actualindex = 0
 			$retroceder.disabled = true
 			
-			
-	Global.FileReading.currentindex = actualindex
-	
-	var showbutton = false
-	var textoasignar = "interactivo"
-
-	
-	setimage(actualindex)
+	#Global.FileReading.currentindex = actualindex	
+	updateindex(actualindex)
 
 #func disconectallnodes():
 #	pass
 
 
 func _on_avanzar_pressed():
-	updateindex(1)
+	addtoindex(1)
 
 func _on_retroceder_pressed():
-	updateindex(-1)
+	addtoindex(-1)
 
 func _on_ButtonMapa_pressed():
 	get_tree().change_scene_to_file("res://mapas/Mapas.tscn")
@@ -136,3 +143,12 @@ func _on_button_inteactivo_pressed():
 		interactnode(parametrointera)
 	elif tipointeraccion == "ppt":
 		interactexternal(parametrointera)
+
+
+func _on_button_ir_pagina_pressed():
+	var pagvalue = $InputPaginas.get_value()
+	if pagvalue > maxindex:
+		pagvalue = maxindex
+	elif pagvalue < 0:
+		pagvalue = 0
+	updateindex(pagvalue)
