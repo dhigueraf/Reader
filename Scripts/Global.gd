@@ -80,7 +80,7 @@ func GenerarImagenes(location,pag,wait):
 	
 	if filetoopenarray[-1] == "pdf":
 		print("es convertible")
-		var sistemaoperativo = OS.get_name()
+		var sistemaoperativo = OS.get_name() #Chequear sistema operativo
 		print(sistemaoperativo)
 		var ejecutable = converterdir + "/pdf2pngimgs.exe"
 		if sistemaoperativo.to_lower() == "windows":

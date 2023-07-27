@@ -21,6 +21,8 @@ script = ExtResource("1_anyd4")
 
 [node name="Downloader" type="HTTPRequest" parent="CanvasLayer/Control"]
 
+[node name="Downloader2" type="HTTPRequest" parent="CanvasLayer/Control"]
+
 [node name="BtnCursos" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
 offset_left = 105.0
@@ -85,3 +87,4 @@ autowrap_mode = 2
 
 [connection signal="request_completed" from="CanvasLayer/Control/RequestConfig" to="CanvasLayer/Control" method="_on_request_config_request_completed"]
 [connection signal="request_completed" from="CanvasLayer/Control/Downloader" to="CanvasLayer/Control" method="_on_downloader_request_completed"]
+[connection signal="request_completed" from="CanvasLayer/Control/Downloader2" to="CanvasLayer/Control" method="_on_downloader_2_request_completed"]

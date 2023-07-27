@@ -254,5 +254,20 @@
 			},
 			"subelementos": []
 		}
-	]
+	],
+	"converter":{
+		"carpeta" : "converter",
+		"versiones": {
+			"windows": {
+				"nombre": "pdf2pngimgs.exe",
+				"url": "",
+				"version": 0
+			},
+			"linux":{
+				"nombre": "pdf2pngimgs",
+				"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/converter/pdf2pngimgs",
+				"version": 0
+			}
+		}
+	}
 }

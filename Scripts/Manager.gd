@@ -96,12 +96,14 @@ func _ready():
 	
 	$ProcessLabel.text = "Verificar versión online"
 	
-	await $RequestConfig.request("https://static.sumaysigue.uchile.cl/Sumo%20Primero/Json/sumoprimero.json")
+	await $RequestConfig.request("https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/Json/sumoprimero.json")
 	$ProcessLabel.text = "Cargar configucarión local"
 	await findlocalconfig()
 
 	print("software info:")
 	print(Global.softwareinfo)
+	$ProcessLabel.text = "Verificar conversores"
+	await checkDonwnloadConverter()
 	$ProcessLabel.text = "Verificar sistema de archivos"
 	await checkfilesystem()
 	#await generateButtons()
@@ -110,6 +112,8 @@ func _ready():
 	$ProcessLabel.text = "Activar botones"
 	print("pantalla lista")
 	$ProcessLabel.text = "Listo"
+	
+	
 
 
 func checkfilesystem():
@@ -243,7 +247,52 @@ func doDownload(index):
 	else:
 		await activatebuttons()
 
-
+func checkDonwnloadConverter():
+	print("chequear converter")
+	var dir = DirAccess.open(Global.basedir)
+	converterdir = str(Global.softwareinfo.converter.carpeta)
+	if dir.dir_exists( converterdir ):
+		print("existe la carpeta")
+		if not dir.file_exists(converterdir + "/" +  Global.softwareinfo.converter.versiones.windows.nombre):
+			var download = {
+				"name" : "pdf2pngimgs.exe",
+				"location" : Global.basedir + "/" + Global.softwareinfo.converter.carpeta + "/" + Global.softwareinfo.converter.versiones.windows.nombre,
+				"url" : Global.softwareinfo.converter.versiones.windows.url,
+				"place": "converter/"
+			}
+			#downloads.append(download)
+		else:
+			print("existe converter para windows")
+			
+		if not dir.file_exists(converterdir + "/" +  Global.softwareinfo.converter.versiones.linux.nombre):
+			var download = {
+				"name" : "pdf2pngimgs",
+				"location" : Global.basedir + "/" + Global.softwareinfo.converter.carpeta + "/" + Global.softwareinfo.converter.versiones.linux.nombre,
+				"url" : Global.softwareinfo.converter.versiones.linux.url,
+				"place": "converter/"
+			}
+			downloads.append(download)
+		else:
+			print("existe converter para linux")
+	else:
+		print("no existe crearla")
+		dir.make_dir(converterdir)
+		
+		var download1= {
+			"name" : "pdf2pngimgs.exe",
+			"location" : Global.basedir + "/" + Global.softwareinfo.converter.carpeta + "/" + Global.softwareinfo.converter.versiones.windows.nombre,
+			"url" : Global.softwareinfo.converter.versiones.windows.url,
+			"place": "converter/"
+		}
+		var download2 = {
+			"name" : "pdf2pngimgs",
+			"location" : Global.basedir + "/" + Global.softwareinfo.converter.carpeta + "/" + Global.softwareinfo.converter.versiones.linux.nombre,
+			"url" : Global.softwareinfo.converter.versiones.linux.url,
+			"place": "converter/"
+		}
+		#downloads.append(download1)
+		downloads.append(download2)
+		
 func _process(delta):
 	if $Downloader.get_body_size() > 0:
 		var arr = float($Downloader.get_downloaded_bytes()/1024)
@@ -259,3 +308,9 @@ func updatelocation(locationtoupdate,road):
 		numcambios += 1
 		Global.softwareinfo.sistemarchivos[road[0]].subelementos[road[1]].subelementos[road[2]].location = locationtoupdate
 		print( Global.softwareinfo.sistemarchivos[road[0]].subelementos[road[1]].subelementos[road[2]] )
+
+
+func _on_downloader_2_request_completed(result, response_code, headers, body):
+	print("download result:")
+	print(result)
+
