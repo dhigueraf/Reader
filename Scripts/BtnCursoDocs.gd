@@ -20,6 +20,10 @@ func addbutton(dictionary):
 func openDocumentPanel(documento):
 	print("abrir documento")
 	print(documento)
-	print( get_parent().get_parent() )
-	get_parent().get_parent().activatePanel(documento)
+	#print( get_parent().get_parent() )
+	if documento.soloexterno:
+		print(Global.basedir + "/" + documento.location)
+		OS.shell_open(Global.basedir  + "/" +  documento.location)
+	else:
+		get_parent().get_parent().activatePanel(documento)
 	#activatePanel.emit()

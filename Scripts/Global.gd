@@ -1,6 +1,5 @@
 extends Node
 
-
 var basedir = ""
 
 var softwareinfo = {
@@ -25,7 +24,9 @@ var FileToRead = {
 var FileReading = {
 	paginas = [],
 	currentindex = 0,
-	numeropaginas = 0
+	numeropaginas = 0,
+	nombre = "",
+	curso = ""
 }
 
 var interactivos = {
@@ -140,5 +141,7 @@ func GenerarImagenes(location,pag,wait):
 			Global.FileReading.currentindex = Global.FileReading.numeropaginas -1
 		else:
 			Global.FileReading.currentindex = pag
+			
+		Global.FileReading.nombre = Global.FileToRead.nombre.boton
 		print("imagenes generadas")
 		print(Global.FileReading)

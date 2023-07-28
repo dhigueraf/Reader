@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 var pages = []
 var actualindex = 0
@@ -26,6 +26,8 @@ func _ready():
 	print("File loaded")
 	print(Global.FileReading)
 	
+	$Titulo.text = str(Global.FileReading.curso) + " -> " + str(Global.FileReading.nombre)
+	
 	if Global.FileReading.currentindex > 0:
 		$avanzar.disabled = false
 		$retroceder.disabled = false
@@ -43,8 +45,7 @@ func setimage(index):
 		var texture = ImageTexture.create_from_image(image)
 		print(texture)
 		
-		$ScrollContainer/TextureRect.texture = texture
-		$Control/GraphEdit/GraphNode/TextureRect2.texture = texture
+		$GraphEdit/GraphNode/TextureRect2.texture = texture
 		
 		thread = Thread.new()
 		#var thread2 = Thread.new()
@@ -70,8 +71,7 @@ func setimage(index):
 		var texture = ImageTexture.create_from_image(image)
 		print(texture)
 		
-		$ScrollContainer/TextureRect.texture = texture
-		$Control/GraphEdit/GraphNode/TextureRect2.texture = texture
+		$GraphEdit/GraphNode/TextureRect2.texture = texture
 
 
 func updateindex(num):
@@ -135,17 +135,13 @@ func _on_ButtonPlus_pressed():
 	pass # Replace with function body.
 
 
-func _on_ButtonMinus_pressed():
-	pass # Replace with function body.
-
-
 func _on_GraphNode_dragged(from, to):
 	print(from, to)
 
 
 func _on_button_return_pressed():
 	print("Volver inicio")
-	get_tree().change_scene_to_file("res://Escenas/Main.tscn")
+	get_tree().change_scene_to_file("res://Escenas/Curso.tscn")
 
 
 func interactnode(nodedir):

@@ -9,6 +9,7 @@ var numberinput
 func _ready():
 	print( Global.SelectedCurso)
 	$Label.text = Global.SelectedCurso.nombre.boton
+	Global.FileReading.curso = Global.SelectedCurso.nombre.boton
 	generateButtons()
 	panel = get_node(panelpath)
 
@@ -40,6 +41,13 @@ func generateButtons():
 func activatePanel(document):
 	print("activate panel")
 	print(document)
+	
+	
+	
 	panel.activate(document)
 
 
+
+func _on_btn_volver_pressed():
+	print("Volver inicio")
+	get_tree().change_scene_to_file("res://Escenas/Main.tscn")

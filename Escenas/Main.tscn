@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmwywicq2em6f"]
+[gd_scene load_steps=3 format=3 uid="uid://cmwywicq2em6f"]
 
 [ext_resource type="Script" path="res://Scripts/Manager.gd" id="1_anyd4"]
+[ext_resource type="PackedScene" uid="uid://10iiwg8j4f58" path="res://Objetos/logos.tscn" id="2_iy58q"]
 
 [node name="Main" type="Node2D"]
 
@@ -17,69 +18,80 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_anyd4")
 
+[node name="Logos" parent="CanvasLayer/Control" instance=ExtResource("2_iy58q")]
+z_index = -10
+layout_mode = 1
+
 [node name="RequestConfig" type="HTTPRequest" parent="CanvasLayer/Control"]
 
 [node name="Downloader" type="HTTPRequest" parent="CanvasLayer/Control"]
 
 [node name="Downloader2" type="HTTPRequest" parent="CanvasLayer/Control"]
 
-[node name="BtnCursos" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 105.0
-offset_top = 60.0
-offset_right = 166.0
-offset_bottom = 91.0
-text = "Cursos"
-
 [node name="BtnAyudas" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 282.0
-offset_top = 61.0
-offset_right = 347.0
-offset_bottom = 92.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -149.0
+offset_top = 26.0
+offset_right = -18.0
+offset_bottom = 91.0
+grow_horizontal = 0
 text = "Ayudas"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.032
-anchor_top = 0.291
+anchor_top = 0.325
 anchor_right = 0.979
-anchor_bottom = 0.954
+anchor_bottom = 0.988
 offset_left = 0.199997
-offset_top = -0.277008
+offset_top = -0.275009
 offset_right = 0.149902
-offset_bottom = -0.238037
+offset_bottom = -0.236084
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ProcessLabel" type="Label" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 456.0
-offset_top = 16.0
-offset_right = 1131.0
-offset_bottom = 69.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -693.0
+offset_top = 23.0
+offset_right = -18.0
+offset_bottom = 76.0
+grow_horizontal = 0
 text = "Process"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="DownloadLabel" type="Label" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 462.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -688.0
 offset_top = 75.0
-offset_right = 1137.0
+offset_right = -13.0
 offset_bottom = 128.0
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Avancelabel" type="Label" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 980.0
-offset_top = 24.0
-offset_right = 1132.0
-offset_bottom = 77.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -432.0
+offset_top = 65.0
+offset_right = -280.0
+offset_bottom = 118.0
+grow_horizontal = 0
 text = "0/0"
 horizontal_alignment = 1
 vertical_alignment = 1

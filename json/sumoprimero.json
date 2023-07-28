@@ -19,6 +19,7 @@
 					"subelementos": [
 						{
 							"tipo": "archivo",
+							"soloexterno" : true,
 							"nombre": {
 								"carpeta": "tomo1",
 								"boton": "Tomo 1"
@@ -71,6 +72,7 @@
 						},
 						{
 							"tipo": "archivo",
+							"soloexterno" : true,
 							"nombre": {
 								"carpeta": "tomo2",
 								"boton": "Tomo 2"
@@ -132,6 +134,7 @@
 					"subelementos": [
 						{
 							"tipo": "archivo",
+							"soloexterno" : false,
 							"nombre": {
 								"carpeta": "tomo1",
 								"boton": "Tomo 1"
@@ -184,6 +187,7 @@
 						},
 						{
 							"tipo": "archivo",
+							"soloexterno" : false,
 							"nombre": {
 								"carpeta": "tomo2",
 								"boton": "Tomo 2"

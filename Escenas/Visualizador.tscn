@@ -1,15 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://nr0reu7bvhl"]
+[gd_scene load_steps=10 format=3 uid="uid://nr0reu7bvhl"]
 
 [ext_resource type="Script" path="res://Scripts/PagesLoader.gd" id="1_72bc6"]
 [ext_resource type="Texture2D" uid="uid://b8a67fjcxil8p" path="res://backgrounds/pagina_1.png" id="1_nj48v"]
 [ext_resource type="Texture2D" uid="uid://vnymbqfvmudb" path="res://Sprites/btn_advance.png" id="2_2duke"]
+[ext_resource type="Texture2D" uid="uid://bg0xae15rltlu" path="res://Sprites/logos/logoMineduc.png" id="2_orlbw"]
 [ext_resource type="Texture2D" uid="uid://iv0ebn0xad0k" path="res://Sprites/btn_advance_pressed.png" id="3_pmwli"]
+[ext_resource type="Texture2D" uid="uid://btaur40ife8wc" path="res://Sprites/logos/logoCMMEdu.png" id="3_tddox"]
 [ext_resource type="Texture2D" uid="uid://dmhkj7bkxgvw3" path="res://Sprites/btn_advance_disabled.png" id="4_id2tc"]
+[ext_resource type="Texture2D" uid="uid://d18kqin0hdcsj" path="res://Sprites/logos/LogoSumoPrimero.png" id="4_oalmn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kflv7"]
+font_size = 24
 
 [node name="Node2D" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("1_72bc6")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -18,6 +23,57 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_72bc6")
+
+[node name="Logos" type="Control" parent="CanvasLayer/Control"]
+z_index = -5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="logoMineduc" type="TextureRect" parent="CanvasLayer/Control/Logos"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -88.0
+offset_top = 11.0
+offset_right = 250.0
+offset_bottom = 340.0
+grow_horizontal = 0
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("2_orlbw")
+expand_mode = 1
+
+[node name="logoMineduc2" type="TextureRect" parent="CanvasLayer/Control/Logos"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -354.0
+offset_top = 40.0
+offset_right = 276.0
+offset_bottom = 158.0
+grow_horizontal = 0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_tddox")
+expand_mode = 1
+
+[node name="logoSumoPrimero" type="TextureRect" parent="CanvasLayer/Control/Logos"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.511
+anchor_right = 0.511
+offset_left = -164.672
+offset_top = 26.0
+offset_right = 663.328
+offset_bottom = 181.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_oalmn")
+expand_mode = 1
 
 [node name="GraphEdit" type="GraphEdit" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -59,33 +115,27 @@ layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("1_nj48v")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
-visible = false
-anchors_preset = -1
-anchor_top = 0.007
-anchor_right = 0.435
-anchor_bottom = 0.992
-offset_left = 6.0
-offset_top = -8.2
-offset_right = -0.440033
-offset_bottom = -0.200012
+[node name="Titulo" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 9.0
+offset_right = 414.0
+offset_bottom = 91.0
+text = "Titulo"
+label_settings = SubResource("LabelSettings_kflv7")
+vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ScrollContainer"]
-custom_minimum_size = Vector2(1000, 1000)
-layout_mode = 2
-texture = ExtResource("1_nj48v")
-expand_mode = 1
-
-[node name="retroceder" type="TextureButton" parent="CanvasLayer"]
+[node name="retroceder" type="TextureButton" parent="CanvasLayer/Control"]
+layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.637
-anchor_top = 0.869
-anchor_right = 0.693
-anchor_bottom = 0.968
-offset_left = 0.175964
-offset_top = -0.112
-offset_right = -0.335999
-offset_bottom = -0.264038
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -418.0
+offset_top = -85.0
+offset_right = -354.0
+offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -95,16 +145,17 @@ texture_normal = ExtResource("2_2duke")
 texture_pressed = ExtResource("3_pmwli")
 texture_disabled = ExtResource("4_id2tc")
 
-[node name="avanzar" type="TextureButton" parent="CanvasLayer"]
+[node name="avanzar" type="TextureButton" parent="CanvasLayer/Control"]
+layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.705
-anchor_top = 0.87
-anchor_right = 0.76
-anchor_bottom = 0.969
-offset_left = -0.160156
-offset_top = 0.23999
-offset_right = 0.479797
-offset_bottom = 0.0880127
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -340.0
+offset_top = -84.0
+offset_right = -276.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
@@ -113,7 +164,8 @@ texture_pressed = ExtResource("3_pmwli")
 texture_disabled = ExtResource("4_id2tc")
 flip_h = true
 
-[node name="ButtonReturn" type="Button" parent="CanvasLayer"]
+[node name="ButtonReturn" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.501
 anchor_top = 0.897
@@ -122,12 +174,13 @@ anchor_bottom = 0.944
 offset_left = -0.152039
 offset_top = -0.255981
 offset_right = 0.36792
-offset_bottom = 0.287964
+offset_bottom = 0.288025
 text = "Volver"
 metadata/_edit_use_anchors_ = true
 
-[node name="ButtonInteactivo" type="Button" parent="CanvasLayer"]
+[node name="ButtonInteactivo" type="Button" parent="CanvasLayer/Control"]
 visible = false
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -142,7 +195,8 @@ grow_vertical = 0
 size_flags_vertical = 8
 text = "Interactivo"
 
-[node name="ButtonIrPagina" type="Button" parent="CanvasLayer"]
+[node name="ButtonIrPagina" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.793
 anchor_top = 0.677
@@ -154,7 +208,8 @@ offset_right = 0.431946
 offset_bottom = 0.199982
 text = "Ir Pagina"
 
-[node name="InputPaginas" type="SpinBox" parent="CanvasLayer"]
+[node name="InputPaginas" type="SpinBox" parent="CanvasLayer/Control"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.867
 anchor_top = 0.676
@@ -166,8 +221,9 @@ offset_right = 0.334473
 offset_bottom = 0.199982
 max_value = 1000.0
 
-[node name="LabelPortada" type="Label" parent="CanvasLayer"]
+[node name="LabelPortada" type="Label" parent="CanvasLayer/Control"]
 visible = false
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.868
 anchor_top = 0.633
@@ -176,12 +232,13 @@ anchor_bottom = 0.673
 offset_left = 0.0639648
 offset_top = -0.184021
 offset_right = -0.144043
-offset_bottom = -0.104034
+offset_bottom = -0.103973
 text = "Portada"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LabelNumPag" type="Label" parent="CanvasLayer"]
+[node name="LabelNumPag" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.94
 anchor_top = 0.682
@@ -195,9 +252,9 @@ text = "/9999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="dragged" from="CanvasLayer/Control/GraphEdit/GraphNode" to="CanvasLayer" method="_on_GraphNode_dragged"]
-[connection signal="pressed" from="CanvasLayer/retroceder" to="CanvasLayer" method="_on_retroceder_pressed"]
-[connection signal="pressed" from="CanvasLayer/avanzar" to="CanvasLayer" method="_on_avanzar_pressed"]
-[connection signal="pressed" from="CanvasLayer/ButtonReturn" to="CanvasLayer" method="_on_button_return_pressed"]
-[connection signal="pressed" from="CanvasLayer/ButtonInteactivo" to="CanvasLayer" method="_on_button_inteactivo_pressed"]
-[connection signal="pressed" from="CanvasLayer/ButtonIrPagina" to="CanvasLayer" method="_on_button_ir_pagina_pressed"]
+[connection signal="dragged" from="CanvasLayer/Control/GraphEdit/GraphNode" to="CanvasLayer/Control" method="_on_GraphNode_dragged"]
+[connection signal="pressed" from="CanvasLayer/Control/retroceder" to="CanvasLayer/Control" method="_on_retroceder_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/avanzar" to="CanvasLayer/Control" method="_on_avanzar_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/ButtonReturn" to="CanvasLayer/Control" method="_on_button_return_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/ButtonInteactivo" to="CanvasLayer/Control" method="_on_button_inteactivo_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/ButtonIrPagina" to="CanvasLayer/Control" method="_on_button_ir_pagina_pressed"]
