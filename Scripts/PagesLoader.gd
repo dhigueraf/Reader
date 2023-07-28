@@ -6,13 +6,15 @@ var maxindex = 1
 var interactivos = []
 var tipointeraccion = "nada"
 var parametrointera = ""
+var lastdirection = 0
+
+var thread
 
 @onready var dir = DirAccess.open( Global.basedir + "/converter")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 
 	var pagiterator = 0
-		
 
 	maxindex = Global.FileReading.numeropaginas -1
 	$LabelNumPag.text = "/" + str(maxindex)
@@ -44,21 +46,21 @@ func setimage(index):
 		$ScrollContainer/TextureRect.texture = texture
 		$Control/GraphEdit/GraphNode/TextureRect2.texture = texture
 		
-		#var thread1 = Thread.new()
+		thread = Thread.new()
 		#var thread2 = Thread.new()
 		
-		print("Checkear proximos")
-		if not dir.file_exists( "pagina_" + str(index + 3) + ".png" ) and (index + 3) > maxindex :
+		print("Checkear proximo" )
+		print( "pagina_" + str(index + 3) + ".png")
+		
+		if ( lastdirection == 1 ) and not ( dir.file_exists( "pagina_" + str(index + 3) + ".png" ) ) and ( (index + 3) < maxindex ):
 			print("cargar por adelantado " + str(index + 3) )
-			#thread1.start( Global.GenerarImagenes(Global.FileToRead.location,index + 3,false) )
-			Global.GenerarImagenes(Global.FileToRead.location,index + 3,false)
+			thread.start( _thread_LoadPages.bind(index + 3) )
+			#Global.GenerarImagenes(Global.FileToRead.location,index + 3,false)
 		else:
 			print("existe siguiente" + "pagina_" + str(index + 3) + ".png")
-		if not dir.file_exists( "pagina_" + str(index - 3) + ".png" ) and (index - 3) > 0:
+		if ( lastdirection == -1 ) and not ( dir.file_exists( "pagina_" + str(index - 3) + ".png" ) ) and ( (index - 3) > 0 ):
 			print("cargar por adelantado " + str(index - 3) )
-			#thread2.start( Global.GenerarImagenes(Global.FileToRead.location,index - 3,false) )
-			Global.GenerarImagenes(Global.FileToRead.location,index - 3,false)
-			print("existe anterior" + "pagina_" + str(index - 3) + ".png")
+			thread.start( _thread_LoadPages.bind(index - 3) )
 	else:
 		print("no existe la imagen")
 		await Global.GenerarImagenes(Global.FileToRead.location,index,true)
@@ -101,11 +103,13 @@ func addtoindex(num):
 		if actualindex > maxindex -1:
 			actualindex = maxindex
 			$avanzar.disabled = true
+		lastdirection = 1
 	elif num == -1 or num == 0:
 		$avanzar.disabled = false
 		if actualindex < 1:
 			actualindex = 0
 			$retroceder.disabled = true
+		lastdirection = -1
 			
 	#Global.FileReading.currentindex = actualindex	
 	updateindex(actualindex)
@@ -167,3 +171,11 @@ func _on_button_ir_pagina_pressed():
 	elif pagvalue < 0:
 		pagvalue = 0
 	updateindex(pagvalue)
+	
+func _thread_LoadPages(number):
+	print("I'm a thread! number is: ", str(number) )
+	Global.GenerarImagenes(Global.FileToRead.location,number,false)
+	
+func _exit_tree():
+	print("cerrar thread")
+	thread.wait_to_finish()

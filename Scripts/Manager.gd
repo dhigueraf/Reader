@@ -102,10 +102,10 @@ func _ready():
 
 	print("software info:")
 	print(Global.softwareinfo)
-	$ProcessLabel.text = "Verificar conversores"
-	await checkDonwnloadConverter()
 	$ProcessLabel.text = "Verificar sistema de archivos"
 	await checkfilesystem()
+	$ProcessLabel.text = "Verificar conversores"
+	await checkDonwnloadConverter()
 	#await generateButtons()
 	print("Hacer las descargas")
 	await doDownload(downloadindex)
@@ -260,7 +260,7 @@ func checkDonwnloadConverter():
 				"url" : Global.softwareinfo.converter.versiones.windows.url,
 				"place": "converter/"
 			}
-			#downloads.append(download)
+			downloads.append(download)
 		else:
 			print("existe converter para windows")
 			
@@ -290,7 +290,7 @@ func checkDonwnloadConverter():
 			"url" : Global.softwareinfo.converter.versiones.linux.url,
 			"place": "converter/"
 		}
-		#downloads.append(download1)
+		downloads.append(download1)
 		downloads.append(download2)
 		
 func _process(delta):

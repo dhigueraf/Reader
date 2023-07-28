@@ -260,7 +260,7 @@
 		"versiones": {
 			"windows": {
 				"nombre": "pdf2pngimgs.exe",
-				"url": "",
+				"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/converter/pdf2pngimgs.exe",
 				"version": 0
 			},
 			"linux":{
