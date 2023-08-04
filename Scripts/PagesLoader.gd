@@ -10,16 +10,21 @@ var lastdirection = 0
 
 var thread
 
+@export_node_path() var panelpath
+var panel
+
 @onready var dir = DirAccess.open( Global.basedir + "/converter")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 
 	var pagiterator = 0
+	
+	panel = get_node(panelpath)
 
 	maxindex = Global.FileReading.numeropaginas -1
-	$LabelNumPag.text = "/" + str(maxindex)
+	$PageChanger/LabelNumPag.text = "/" + str(maxindex)
 	
-	$InputPaginas.max_value = maxindex
+	$PageChanger/InputPaginas.max_value = maxindex
 
 	print("current index " + str(Global.FileReading.currentindex) )
 	
@@ -29,12 +34,14 @@ func _ready():
 	$Titulo.text = str(Global.FileReading.curso) + " -> " + str(Global.FileReading.nombre)
 	
 	if Global.FileReading.currentindex > 0:
-		$avanzar.disabled = false
-		$retroceder.disabled = false
+		$PageChanger/avanzar.disabled = false
+		$PageChanger/retroceder.disabled = false
 	if Global.FileReading.currentindex >= Global.FileReading.numeropaginas-1:
-		$avanzar.disabled = true
-		$retroceder.disabled = false
+		$PageChanger/avanzar.disabled = true
+		$PageChanger/retroceder.disabled = false
 	updateindex(Global.FileReading.currentindex)
+	
+	panel.deactivate()
 
 func setimage(index):
 	print("set iamge index: " + str(index))
@@ -80,13 +87,13 @@ func updateindex(num):
 	
 	if actualindex == 0:
 		$LabelPortada.visible = true
-		$InputPaginas.set_value(0)
+		$PageChanger/InputPaginas.set_value(0)
 	else:
 		$LabelPortada.visible = false
-		$InputPaginas.set_value(actualindex)
+		$PageChanger/InputPaginas.set_value(actualindex)
 		
 	if actualindex == maxindex:
-		$avanzar.disabled = true
+		$PageChanger/avanzar.disabled = true
 	
 	var showbutton = false
 	var textoasignar = "interactivo"
@@ -99,16 +106,16 @@ func addtoindex(num):
 	actualindex += num
 	
 	if num == 1:
-		$retroceder.disabled = false
+		$PageChanger/retroceder.disabled = false
 		if actualindex > maxindex -1:
 			actualindex = maxindex
-			$avanzar.disabled = true
+			$PageChanger/avanzar.disabled = true
 		lastdirection = 1
 	elif num == -1 or num == 0:
-		$avanzar.disabled = false
+		$PageChanger/avanzar.disabled = false
 		if actualindex < 1:
 			actualindex = 0
-			$retroceder.disabled = true
+			$PageChanger/retroceder.disabled = true
 		lastdirection = -1
 			
 	#Global.FileReading.currentindex = actualindex	
@@ -161,7 +168,7 @@ func _on_button_inteactivo_pressed():
 
 
 func _on_button_ir_pagina_pressed():
-	var pagvalue = $InputPaginas.get_value()
+	var pagvalue = $PageChanger/InputPaginas.get_value()
 	if pagvalue > maxindex:
 		pagvalue = maxindex
 	elif pagvalue < 0:
@@ -175,3 +182,8 @@ func _thread_LoadPages(number):
 func _exit_tree():
 	print("cerrar thread")
 	thread.wait_to_finish()
+
+
+func _on_print_button_pressed():
+	print("Imprerosa")
+	panel.activate("")
