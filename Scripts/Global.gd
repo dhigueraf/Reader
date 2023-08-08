@@ -18,8 +18,7 @@ var SelectedCurso = {
 	"archivos" : ""
 }
 
-var FileToRead = {
-}
+var FileToRead = {}
 
 var FileReading = {
 	paginas = [],
@@ -27,6 +26,11 @@ var FileReading = {
 	numeropaginas = 0,
 	nombre = "",
 	curso = ""
+}
+
+var captituloactual = {
+	numero = -1,
+	capitulo = {}
 }
 
 var interactivos = {

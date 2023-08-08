@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://nr0reu7bvhl"]
+[gd_scene load_steps=13 format=3 uid="uid://nr0reu7bvhl"]
 
 [ext_resource type="Script" path="res://Scripts/PagesLoader.gd" id="1_72bc6"]
 [ext_resource type="Texture2D" uid="uid://b8a67fjcxil8p" path="res://backgrounds/pagina_1.png" id="1_nj48v"]
@@ -13,6 +13,8 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_kflv7"]
 font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_4sf4r"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -56,10 +58,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -354.0
-offset_top = 15.0
-offset_right = 183.0
-offset_bottom = 107.0
+offset_left = -287.0
+offset_top = 16.0
+offset_right = 133.0
+offset_bottom = 96.0
 grow_horizontal = 0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_tddox")
@@ -70,10 +72,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.511
 anchor_right = 0.511
-offset_left = -167.672
-offset_top = 10.0
-offset_right = 660.328
-offset_bottom = 165.0
+offset_left = -134.672
+offset_top = 5.0
+offset_right = 563.328
+offset_bottom = 130.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_oalmn")
 expand_mode = 1
@@ -122,10 +124,20 @@ texture = ExtResource("1_nj48v")
 layout_mode = 0
 offset_left = 7.0
 offset_top = 9.0
-offset_right = 396.0
+offset_right = 419.0
 offset_bottom = 65.0
 text = "Titulo"
 label_settings = SubResource("LabelSettings_kflv7")
+vertical_alignment = 1
+
+[node name="Capitulo" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 55.0
+offset_right = 418.0
+offset_bottom = 92.0
+text = "Capitulo"
+label_settings = SubResource("LabelSettings_4sf4r")
 vertical_alignment = 1
 
 [node name="ButtonReturn" type="Button" parent="CanvasLayer/Control"]

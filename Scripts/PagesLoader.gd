@@ -100,6 +100,7 @@ func updateindex(num):
 	#Verificar si es interactivo
 	
 	setimage(actualindex)
+	checkcapitulo(actualindex)
 
 func addtoindex(num):
 	print("actualindex " + str(actualindex) )
@@ -121,9 +122,28 @@ func addtoindex(num):
 	#Global.FileReading.currentindex = actualindex	
 	updateindex(actualindex)
 
-#func disconectallnodes():
-#	pass
-
+func checkcapitulo(pag):
+	#print("verificar capitulo:")
+	
+	var encontrado = false
+	var iterator = 0
+	
+	for cap in Global.FileToRead.capitulos:
+		#print(cap.nombre)
+		#print( str(cap.paginainicio) + " - " + str(cap.paginatermino) )
+		if pag >= cap.paginainicio and pag <= cap.paginatermino:
+			encontrado = true
+			Global.captituloactual.numero = iterator
+			Global.captituloactual.capitulo = cap
+			$Capitulo.text = cap.nombre
+			break
+		iterator +=1
+	if not encontrado:
+		$Capitulo.text = ""
+		Global.captituloactual.numero = -1
+		Global.captituloactual.capitulo = {}
+	#print("Capitulo finalmente")
+	#print(Global.captituloactual)
 
 func _on_avanzar_pressed():
 	addtoindex(1)
