@@ -107,13 +107,15 @@ func _ready():
 	$ProcessLabel.text = "Verificar conversores"
 	await checkDonwnloadConverter()
 	#await generateButtons()
-	print("Hacer las descargas")
-	await doDownload(downloadindex)
-	$ProcessLabel.text = "Activar botones"
+	#print("Hacer las descargas")
+	#print( downloads.size() )
+	if downloads.size() > 0:
+		doDownload(downloadindex)
+	else:
+		$ProcessLabel.text = "Activar botones"
+		await activatebuttons()
 	print("pantalla lista")
 	$ProcessLabel.text = "Listo"
-	
-	
 
 
 func checkfilesystem():
@@ -245,6 +247,7 @@ func doDownload(index):
 		await $Downloader.request(download.url)
 		print("se ha descargado descargado " + download.name)
 	else:
+		print("Ya no hay mas descargas")
 		await activatebuttons()
 
 func checkDonwnloadConverter():

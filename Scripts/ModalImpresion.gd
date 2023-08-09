@@ -32,6 +32,7 @@ func activate(document):
 	visible = true
 	$ColorRect/CasoCaptiulo/CapOptions.select(Global.captituloactual.numero)
 	$ColorRect/PrintOptions.select(0)
+	slectprintoptions(0)
 	
 func deactivate():
 	visible = false
@@ -42,13 +43,19 @@ func _on_cross_button_pressed():
 
 func _on_print_options_item_selected(index):
 	print("Seleccionado Index " + str(index))
-	
-	match index:
+	slectprintoptions(index)
+
+func slectprintoptions(numero):
+	match numero:
 		0:
 			$ColorRect/CasoCaptiulo.visible = true
 			$ColorRect/CasoCaptiulo/CapOptions.select(Global.captituloactual.numero)
 			
+			$ColorRect/CasoRango.visible = false
+			
 		1:
 			$ColorRect/CasoCaptiulo.visible = false
+			$ColorRect/CasoRango.visible = true
 		2:
 			$ColorRect/CasoCaptiulo.visible = false
+			$ColorRect/CasoRango.visible = false

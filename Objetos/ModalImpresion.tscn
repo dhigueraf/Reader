@@ -62,27 +62,144 @@ popup/item_0/text = "Capitulo"
 popup/item_0/id = 0
 popup/item_1/text = "Rango de paginas"
 popup/item_1/id = 1
-popup/item_2/text = "Completod"
+popup/item_2/text = "Completo"
 popup/item_2/id = 2
 
 [node name="CasoCaptiulo" type="Control" parent="Control/ColorRect"]
+visible = false
 layout_mode = 1
-anchors_preset = 0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
 
 [node name="txt_capitulo" type="Label" parent="Control/ColorRect/CasoCaptiulo"]
-layout_mode = 0
-offset_left = 84.0
-offset_top = 175.0
-offset_right = 153.0
-offset_bottom = 201.0
+layout_mode = 1
+offset_left = -220.0
+offset_top = 178.0
+offset_right = -151.0
+offset_bottom = 204.0
 text = "Capitulo:"
 
 [node name="CapOptions" type="OptionButton" parent="Control/ColorRect/CasoCaptiulo"]
+layout_mode = 1
+offset_left = -143.0
+offset_top = 180.0
+offset_right = 229.0
+offset_bottom = 200.0
+
+[node name="CasoRango" type="Control" parent="Control/ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="txt_desde" type="Label" parent="Control/ColorRect/CasoRango"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -219.0
+offset_top = 178.0
+offset_right = -92.0
+offset_bottom = 204.0
+grow_horizontal = 2
+text = "Desde la página:"
+
+[node name="inputDesde" type="SpinBox" parent="Control/ColorRect/CasoRango"]
 layout_mode = 0
-offset_left = 176.0
-offset_top = 177.0
-offset_right = 472.0
-offset_bottom = 197.0
+offset_left = -82.0
+offset_top = 176.0
+offset_right = 1.06253
+offset_bottom = 207.0
+
+[node name="txt_hasta" type="Label" parent="Control/ColorRect/CasoRango"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 10.0
+offset_top = 179.0
+offset_right = 132.0
+offset_bottom = 205.0
+grow_horizontal = 2
+text = "hasta la página:"
+
+[node name="inputHasta" type="SpinBox" parent="Control/ColorRect/CasoRango"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 176.0
+offset_right = 220.063
+offset_bottom = 207.0
+
+[node name="txt_cuadriculadas" type="Label" parent="Control/ColorRect"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 240.0
+offset_right = 224.0
+offset_bottom = 266.0
+text = "Cantidad de hojas cuadriculadas a 7 [milimetros]"
+
+[node name="txt_cuadriculadas2" type="Label" parent="Control/ColorRect"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 283.0
+offset_right = 424.0
+offset_bottom = 309.0
+text = "Cantidad de hojas cuadriculadas a 5 [milimetros]"
+
+[node name="txt_lineas" type="Label" parent="Control/ColorRect"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 327.0
+offset_right = 423.0
+offset_bottom = 353.0
+text = "Cantidad de hojas con linea simple"
+
+[node name="InputCuadriculada7" type="SpinBox" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -124.0
+offset_top = 239.0
+offset_right = -40.9375
+offset_bottom = 270.0
+grow_horizontal = 0
+
+[node name="InputCuadriculada5" type="SpinBox" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -124.0
+offset_top = 281.0
+offset_right = -40.9375
+offset_bottom = 312.0
+
+[node name="InputLineas" type="SpinBox" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -124.0
+offset_top = 326.0
+offset_right = -40.9375
+offset_bottom = 357.0
+grow_horizontal = 0
+
+[node name="Button" type="Button" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.0
+offset_top = 409.0
+offset_right = 98.0
+offset_bottom = 449.0
+text = "Generar Documento"
 
 [node name="CrossButton" type="TextureButton" parent="Control"]
 layout_mode = 1
