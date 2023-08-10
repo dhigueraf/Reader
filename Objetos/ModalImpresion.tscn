@@ -114,6 +114,7 @@ offset_left = -82.0
 offset_top = 176.0
 offset_right = 1.06253
 offset_bottom = 207.0
+max_value = 9999.0
 
 [node name="txt_hasta" type="Label" parent="Control/ColorRect/CasoRango"]
 layout_mode = 1
@@ -133,6 +134,9 @@ offset_left = 137.0
 offset_top = 176.0
 offset_right = 220.063
 offset_bottom = 207.0
+min_value = 1.0
+max_value = 9999.0
+value = 1.0
 
 [node name="txt_cuadriculadas" type="Label" parent="Control/ColorRect"]
 layout_mode = 0
@@ -178,6 +182,7 @@ offset_left = -124.0
 offset_top = 281.0
 offset_right = -40.9375
 offset_bottom = 312.0
+grow_horizontal = 0
 
 [node name="InputLineas" type="SpinBox" parent="Control/ColorRect"]
 layout_mode = 1
@@ -190,7 +195,7 @@ offset_right = -40.9375
 offset_bottom = 357.0
 grow_horizontal = 0
 
-[node name="Button" type="Button" parent="Control/ColorRect"]
+[node name="btnGenerar" type="Button" parent="Control/ColorRect"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -216,4 +221,7 @@ texture_normal = ExtResource("2_0r133")
 texture_pressed = ExtResource("3_p10ta")
 
 [connection signal="item_selected" from="Control/ColorRect/PrintOptions" to="Control" method="_on_print_options_item_selected"]
+[connection signal="value_changed" from="Control/ColorRect/CasoRango/inputDesde" to="Control" method="_on_input_desde_value_changed"]
+[connection signal="value_changed" from="Control/ColorRect/CasoRango/inputHasta" to="Control" method="_on_input_hasta_value_changed"]
+[connection signal="pressed" from="Control/ColorRect/btnGenerar" to="Control" method="_on_btn_generar_pressed"]
 [connection signal="pressed" from="Control/CrossButton" to="Control" method="_on_cross_button_pressed"]

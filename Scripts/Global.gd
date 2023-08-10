@@ -149,3 +149,12 @@ func GenerarImagenes(location,pag,wait):
 		Global.FileReading.nombre = Global.FileToRead.nombre.boton
 		print("imagenes generadas")
 		print(Global.FileReading)
+
+
+func generatePDF(rango,notas):
+	print("Generar PDF")
+	var converterdir = Global.basedir + "/converter"
+	print(converterdir)
+	print("archivos")
+	print(Global.FileToRead.location)
+	#OS.execute(ejecutable, [filetoopen, numpagstr], output, wait)

@@ -12,6 +12,7 @@ var currentdir = ""
 var previusdir = ""
 var filetoopen = ""
 var nombreinteract = "interactivos"
+var otherfolders = ["assets","generated"]
 
 var localversion = 0
 var onlineversion = 0
@@ -104,12 +105,14 @@ func _ready():
 	print(Global.softwareinfo)
 	$ProcessLabel.text = "Verificar sistema de archivos"
 	await checkfilesystem()
+	await checkOtherFolders()
 	$ProcessLabel.text = "Verificar conversores"
 	await checkDonwnloadConverter()
 	#await generateButtons()
 	#print("Hacer las descargas")
 	#print( downloads.size() )
 	if downloads.size() > 0:
+		print(downloads)
 		doDownload(downloadindex)
 	else:
 		$ProcessLabel.text = "Activar botones"
@@ -316,4 +319,38 @@ func updatelocation(locationtoupdate,road):
 func _on_downloader_2_request_completed(result, response_code, headers, body):
 	print("download result:")
 	print(result)
+	
 
+func checkOtherFolders():
+	print("chequear segundo filesystm")
+	var dir = DirAccess.open(Global.basedir)
+	var assetsdir = str(Global.softwareinfo.assets.carpeta)
+	
+	if dir.dir_exists( assetsdir ):
+		print("verificar carpeta de assets")
+		for asset in Global.softwareinfo.assets.archivos:
+			if not dir.file_exists( assetsdir + "/" + asset.nombre ):
+				var download = {
+					"name" : "pdf2pngimgs.exe",
+					"location" : Global.basedir + "/" + Global.softwareinfo.assets.carpeta + "/" + asset.nombre,
+					"url" : asset.url,
+					"place": "assets/"
+				}
+				downloads.append(download)
+			else:
+				print("existe el asset actual")
+	else:
+		print("crear la carpeta de assets")
+		dir.make_dir(assetsdir)
+		for asset in Global.softwareinfo.assets.archivos:
+			var download = {
+				"name" : "pdf2pngimgs.exe",
+				"location" : Global.basedir + "/" + str(Global.softwareinfo.assets.carpeta) + "/" + asset.nombre,
+				"url" : asset.url,
+				"place": "assets/"
+			}
+			downloads.append(download)
+		
+	if not dir.dir_exists( Global.softwareinfo.carpetagenerados ):
+		#print("no existe crearla")
+		dir.make_dir(Global.softwareinfo.carpetagenerados)

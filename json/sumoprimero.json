@@ -273,5 +273,15 @@
 				"version": 0
 			}
 		}
-	}
+	},
+	"assets":{
+		"carpeta" : "assets",
+		"archivos": [
+			{
+				"nombre":"formatonotas.pdf",
+				"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/formatonotas.pdf"
+			}
+		]
+	},
+	"carpetagenerados":"generado"
 }
