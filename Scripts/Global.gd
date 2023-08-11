@@ -151,10 +151,43 @@ func GenerarImagenes(location,pag,wait):
 		print(Global.FileReading)
 
 
-func generatePDF(rango,notas):
+func generatePDF(rango,notas,all,nombre,wait):
 	print("Generar PDF")
+	print(Global.FileToRead)
 	var converterdir = Global.basedir + "/converter"
-	print(converterdir)
+	var filedir = Global.basedir + "/" + Global.FileToRead.location
+	var notasdir = Global.basedir + "/assets/" + "formatonotas.pdf" 
+	var finalfile = Global.basedir + "/generado/" + nombre + ".pdf"  
+	
+	
+	var sistemaoperativo = OS.get_name() #Chequear sistema operativo
+	var ejecutable = converterdir + "/pdf2pdfnotes.exe"
+	
+	if sistemaoperativo.to_lower() == "windows":
+		print("windows")
+		ejecutable = converterdir + "/pdf2pdfnotes.exe"
+	elif sistemaoperativo.to_lower() == "x11" || sistemaoperativo.to_lower() == "linux":
+		print("linux")
+		ejecutable = converterdir + "/pdf2pdfnotes"
+
+	if all:
+		rango = "all"
+
 	print("archivos")
-	print(Global.FileToRead.location)
-	#OS.execute(ejecutable, [filetoopen, numpagstr], output, wait)
+	print(filedir)
+	print(notasdir)
+	print("ejecutable")
+	print(ejecutable)
+	print(rango)
+	print(notas)
+	print(finalfile)
+	
+	var output = []
+	
+	OS.execute(ejecutable, [filedir, notasdir, rango, notas,finalfile], output, wait)
+	
+	print(output)
+	print("-----Ouput: -----")
+	for text in output:
+		print(text)
+	print("-----Fin Ejecución-----")

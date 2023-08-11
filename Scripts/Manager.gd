@@ -24,6 +24,8 @@ var downloadingfile = ""
 var downloadindex = 0
 var numcambios = 0
 
+var sistemasoperativos = ["windows","linux"]
+
 func getlocalconfig():
 	var defaultjsonlocation = "res://json/sumoprimero.json"
 	var json_as_text = FileAccess.get_file_as_string(defaultjsonlocation)
@@ -257,47 +259,36 @@ func checkDonwnloadConverter():
 	print("chequear converter")
 	var dir = DirAccess.open(Global.basedir)
 	converterdir = str(Global.softwareinfo.converter.carpeta)
+	var sistemasop
 	if dir.dir_exists( converterdir ):
 		print("existe la carpeta")
-		if not dir.file_exists(converterdir + "/" +  Global.softwareinfo.converter.versiones.windows.nombre):
-			var download = {
-				"name" : "pdf2pngimgs.exe",
-				"location" : Global.basedir + "/" + Global.softwareinfo.converter.carpeta + "/" + Global.softwareinfo.converter.versiones.windows.nombre,
-				"url" : Global.softwareinfo.converter.versiones.windows.url,
-				"place": "converter/"
-			}
-			downloads.append(download)
-		else:
-			print("existe converter para windows")
-			
-		if not dir.file_exists(converterdir + "/" +  Global.softwareinfo.converter.versiones.linux.nombre):
-			var download = {
-				"name" : "pdf2pngimgs",
-				"location" : Global.basedir + "/" + Global.softwareinfo.converter.carpeta + "/" + Global.softwareinfo.converter.versiones.linux.nombre,
-				"url" : Global.softwareinfo.converter.versiones.linux.url,
-				"place": "converter/"
-			}
-			downloads.append(download)
-		else:
-			print("existe converter para linux")
+		for ejecutable in Global.softwareinfo.converter.ejecutables:
+			for OpSi in sistemasoperativos:
+				if not dir.file_exists(converterdir + "/" +  ejecutable.versiones[OpSi].nombre):
+					var ejecutosi = ejecutable.versiones[OpSi]
+					var download = {
+						"name" :  ejecutosi.nombre,
+						"location" : Global.basedir + "/" + str( Global.softwareinfo.converter.carpeta ) + "/" + ejecutosi.nombre,
+						"url" : ejecutosi.url,
+						"place": "assets/"
+					}
+					downloads.append(download)
 	else:
 		print("no existe crearla")
 		dir.make_dir(converterdir)
 		
-		var download1= {
-			"name" : "pdf2pngimgs.exe",
-			"location" : Global.basedir + "/" + Global.softwareinfo.converter.carpeta + "/" + Global.softwareinfo.converter.versiones.windows.nombre,
-			"url" : Global.softwareinfo.converter.versiones.windows.url,
-			"place": "converter/"
-		}
-		var download2 = {
-			"name" : "pdf2pngimgs",
-			"location" : Global.basedir + "/" + Global.softwareinfo.converter.carpeta + "/" + Global.softwareinfo.converter.versiones.linux.nombre,
-			"url" : Global.softwareinfo.converter.versiones.linux.url,
-			"place": "converter/"
-		}
-		downloads.append(download1)
-		downloads.append(download2)
+		for ejecutable in Global.softwareinfo.converter.ejecutables:
+			for OpSi in sistemasoperativos:
+				var ejecutosi = ejecutable.versiones[OpSi]
+				var download = {
+					"name" :  ejecutosi.nombre,
+					"location" : Global.basedir + "/" + str( Global.softwareinfo.converter.carpeta ) + "/" + ejecutosi.nombre,
+					"url" : ejecutosi.url,
+					"place": "assets/"
+				}
+				
+				downloads.append(download)
+
 		
 func _process(delta):
 	if $Downloader.get_body_size() > 0:
@@ -331,7 +322,7 @@ func checkOtherFolders():
 		for asset in Global.softwareinfo.assets.archivos:
 			if not dir.file_exists( assetsdir + "/" + asset.nombre ):
 				var download = {
-					"name" : "pdf2pngimgs.exe",
+					"name" :  asset.nombre,
 					"location" : Global.basedir + "/" + Global.softwareinfo.assets.carpeta + "/" + asset.nombre,
 					"url" : asset.url,
 					"place": "assets/"
@@ -344,7 +335,7 @@ func checkOtherFolders():
 		dir.make_dir(assetsdir)
 		for asset in Global.softwareinfo.assets.archivos:
 			var download = {
-				"name" : "pdf2pngimgs.exe",
+				"name" :  asset.nombre,
 				"location" : Global.basedir + "/" + str(Global.softwareinfo.assets.carpeta) + "/" + asset.nombre,
 				"url" : asset.url,
 				"place": "assets/"

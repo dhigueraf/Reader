@@ -7,6 +7,7 @@ var pini = 0
 var pfin = 0
 var rangopags = ""
 var notaspags = "0_0_0"
+var nombrearchivo = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,6 +36,7 @@ func activate(document):
 	$ColorRect/CasoCaptiulo/CapOptions.select(Global.captituloactual.numero)
 	$ColorRect/PrintOptions.select(0)
 	slectprintoptions(0)
+	$ColorRect/InputNombre.text = Global.FileToRead.nombre.boton + "_notas"
 	
 func deactivate():
 	visible = false
@@ -76,13 +78,14 @@ func _on_btn_generar_pressed():
 	#print(global)
 	rangopags = ""
 	notaspags = "0_0_0"
+	var all = false
 	
 	match option:
 		0:
 			print("Capitulo")
-			print(Global.captituloactual)
-			pini = Global.captituloactual.capitulo.paginainicio
-			pfin = Global.captituloactual.capitulo.paginatermino
+			var selcap = $ColorRect/CasoCaptiulo/CapOptions.selected
+			pini = Global.FileToRead.capitulos[selcap].paginainicio
+			pfin = Global.FileToRead.capitulos[selcap].paginatermino
 		1:
 			print("Rango")
 			pini = $ColorRect/CasoRango/inputDesde.value
@@ -91,7 +94,10 @@ func _on_btn_generar_pressed():
 			print("Completo")
 			pini = 0
 			pfin = Global.FileReading.numeropaginas -1
-			
+			all = true
+	
+	nombrearchivo = $ColorRect/InputNombre.text
+	
 	generaterangearray(pini,pfin)
 	
 	var arrynotasp = [0,0,0]
@@ -105,7 +111,8 @@ func _on_btn_generar_pressed():
 	print("arreglo de hojas")
 	print(notaspags)
 
-	Global.generatePDF(rangopags,notaspags)
+	Global.generatePDF(rangopags,notaspags,all,nombrearchivo,true)
+
 
 func _on_input_desde_value_changed(value):
 	if value  > Global.FileReading.numeropaginas -1:
@@ -118,3 +125,4 @@ func _on_input_hasta_value_changed(value):
 		
 	if value < $ColorRect/CasoRango/inputDesde.value:
 		$ColorRect/CasoRango/inputHasta.value = $ColorRect/CasoRango/inputDesde.value
+

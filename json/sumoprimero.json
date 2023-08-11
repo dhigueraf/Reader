@@ -261,18 +261,38 @@
 	],
 	"converter":{
 		"carpeta" : "converter",
-		"versiones": {
-			"windows": {
-				"nombre": "pdf2pngimgs.exe",
-				"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/converter/pdf2pngimgs.exe",
-				"version": 0
+		"ejecutables":[
+			{
+				"nombre": "generador de imagenes",
+				"versiones": {
+					"windows": {
+						"nombre": "pdf2pngimgs.exe",
+						"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/converter/pdf2pngimgs.exe",
+						"version": 0
+					},
+					"linux":{
+						"nombre": "pdf2pngimgs",
+						"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/converter/pdf2pngimgs",
+						"version": 0
+					}
+				}
 			},
-			"linux":{
-				"nombre": "pdf2pngimgs",
-				"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/converter/pdf2pngimgs",
-				"version": 0
+			{
+				"nombre": "generador de paginas con notas",
+				"versiones": {
+					"windows": {
+						"nombre": "pdf2pdfnotes.exe",
+						"url": "http://static.sumaysigue.uchile.cl/Sumo%20Primero/App/converter/pdf2pdfnotes.exe",
+						"version": 0
+					},
+					"linux":{
+						"nombre": "pdf2pdfnotes",
+						"url": "http://static.sumaysigue.uchile.cl/Sumo%20Primero/App/converter/pdf2pdfnotes",
+						"version": 0
+					}
+				}
 			}
-		}
+		]
 	},
 	"assets":{
 		"carpeta" : "assets",

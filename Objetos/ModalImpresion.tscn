@@ -195,15 +195,42 @@ offset_right = -40.9375
 offset_bottom = 357.0
 grow_horizontal = 0
 
+[node name="txt_nombrearchivo" type="Label" parent="Control/ColorRect"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 383.0
+offset_right = 509.0
+offset_bottom = 409.0
+text = "Nombre del archivo exportado:"
+
+[node name="InputNombre" type="LineEdit" parent="Control/ColorRect"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 415.0
+offset_right = 443.0
+offset_bottom = 446.0
+
+[node name="txt pdflabel" type="Label" parent="Control/ColorRect"]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 419.0
+offset_right = 490.0
+offset_bottom = 445.0
+text = ".pdf"
+
 [node name="btnGenerar" type="Button" parent="Control/ColorRect"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-offset_left = -76.0
-offset_top = 409.0
-offset_right = 98.0
-offset_bottom = 449.0
+anchor_bottom = 1.0
+offset_left = -86.0
+offset_top = -68.0
+offset_right = 88.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "Generar Documento"
 
 [node name="CrossButton" type="TextureButton" parent="Control"]
