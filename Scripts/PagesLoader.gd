@@ -173,7 +173,8 @@ func _on_button_return_pressed():
 
 func interactnode(nodedir):
 	get_tree().change_scene_to_file(nodedir)
-	
+
+
 func interactexternal(filedir):
 	OS.shell_open(filedir)
 
@@ -194,11 +195,13 @@ func _on_button_ir_pagina_pressed():
 	elif pagvalue < 0:
 		pagvalue = 0
 	updateindex(pagvalue)
-	
+
+
 func _thread_LoadPages(number):
 	print("I'm a thread! number is: ", str(number) )
 	Global.GenerarImagenes(Global.FileToRead.location,number,false)
-	
+
+
 func _exit_tree():
 	print("cerrar thread")
 	thread.wait_to_finish()

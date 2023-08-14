@@ -192,8 +192,6 @@ func iteratefoldersandfiles(folder,filesystem, road):
 					updatelocation(folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,recorrido)
 		iterator+= 1
 	print("sali del for" )
-	
-	
 
 
 func generateButtons():

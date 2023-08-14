@@ -112,6 +112,9 @@ func _on_btn_generar_pressed():
 	print(notaspags)
 
 	Global.generatePDF(rangopags,notaspags,all,nombrearchivo,true)
+	print("abrir archivos")
+	print(Global.basedir  + "/generado/" +  nombrearchivo + ".pdf")
+	OS.shell_open(Global.basedir  + "/generado/" +  nombrearchivo + ".pdf")
 
 
 func _on_input_desde_value_changed(value):
