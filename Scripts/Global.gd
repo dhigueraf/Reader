@@ -9,6 +9,8 @@ var softwareinfo = {
 	"sistemarchivos": []
 }
 
+var softwareOnline = {}
+
 var SelectedCurso = {
 	"nombre" : {
 		"carpeta":"Carpeta",

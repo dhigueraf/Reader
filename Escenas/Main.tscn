@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmwywicq2em6f"]
+[gd_scene load_steps=6 format=3 uid="uid://cmwywicq2em6f"]
 
 [ext_resource type="Script" path="res://Scripts/Manager.gd" id="1_anyd4"]
 [ext_resource type="PackedScene" uid="uid://10iiwg8j4f58" path="res://Objetos/logos.tscn" id="2_iy58q"]
+[ext_resource type="Texture2D" uid="uid://dv1v81f4fq6u0" path="res://Sprites/internet_logo.png" id="3_3vdqq"]
+[ext_resource type="Script" path="res://Scripts/InternetChecker.gd" id="3_oq5gb"]
+[ext_resource type="Texture2D" uid="uid://jg0cl84gxgjt" path="res://Sprites/cross-png.png" id="4_5lbi7"]
 
 [node name="Main" type="Node2D"]
 
@@ -22,11 +25,34 @@ script = ExtResource("1_anyd4")
 z_index = -10
 layout_mode = 1
 
+[node name="InternetStatus" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 62.0
+offset_top = 164.0
+offset_right = 102.0
+offset_bottom = 204.0
+script = ExtResource("3_oq5gb")
+
+[node name="InternetIcon" type="TextureRect" parent="CanvasLayer/Control/InternetStatus"]
+layout_mode = 0
+offset_left = -53.0
+offset_top = -55.0
+offset_right = 59.0
+offset_bottom = 57.0
+texture = ExtResource("3_3vdqq")
+
+[node name="Cross" type="TextureRect" parent="CanvasLayer/Control/InternetStatus"]
+layout_mode = 0
+offset_left = -60.0
+offset_top = -65.0
+offset_right = 64.0
+offset_bottom = 63.0
+texture = ExtResource("4_5lbi7")
+
 [node name="RequestConfig" type="HTTPRequest" parent="CanvasLayer/Control"]
 
 [node name="Downloader" type="HTTPRequest" parent="CanvasLayer/Control"]
-
-[node name="Downloader2" type="HTTPRequest" parent="CanvasLayer/Control"]
 
 [node name="BtnAyudas" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -44,13 +70,13 @@ text = "Ayudas"
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.032
-anchor_top = 0.325
+anchor_top = 0.363
 anchor_right = 0.979
 anchor_bottom = 0.988
 offset_left = 0.199997
-offset_top = -0.275009
+offset_top = 0.138992
 offset_right = 0.149902
-offset_bottom = -0.236084
+offset_bottom = -0.235962
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -97,6 +123,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="CheckOnline" type="Timer" parent="CanvasLayer/Control"]
+wait_time = 6.24
+
 [connection signal="request_completed" from="CanvasLayer/Control/RequestConfig" to="CanvasLayer/Control" method="_on_request_config_request_completed"]
 [connection signal="request_completed" from="CanvasLayer/Control/Downloader" to="CanvasLayer/Control" method="_on_downloader_request_completed"]
-[connection signal="request_completed" from="CanvasLayer/Control/Downloader2" to="CanvasLayer/Control" method="_on_downloader_2_request_completed"]
+[connection signal="timeout" from="CanvasLayer/Control/CheckOnline" to="CanvasLayer/Control" method="_on_check_online_timeout"]

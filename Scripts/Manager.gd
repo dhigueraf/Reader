@@ -13,6 +13,8 @@ var previusdir = ""
 var filetoopen = ""
 var nombreinteract = "interactivos"
 var otherfolders = ["assets","generated"]
+var online = false
+var inicio = true
 
 var localversion = 0
 var onlineversion = 0
@@ -25,6 +27,37 @@ var downloadindex = 0
 var numcambios = 0
 
 var sistemasoperativos = ["windows","linux"]
+
+
+func _ready():
+	var path = OS.get_executable_path()
+	Global.basedir = path.get_base_dir()
+	converterdir = Global.basedir + "/converter"
+	configdir = Global.basedir + "/config"
+	currentdir = Global.basedir
+	previusdir = Global.basedir
+	
+	$ProcessLabel.text = "Verificar versión online"
+	
+	await $RequestConfig.request("https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/Json/sumoprimero.json")#paso1
+
+
+func verificareiniciar():
+	print("software info:")
+	print(Global.softwareinfo)
+	$ProcessLabel.text = "Verificar sistema de archivos"
+	await checkfilesystem() #paso4
+
+	if downloads.size() > 0: #paso7
+		print(downloads)
+		doDownload(downloadindex) 
+	else:
+		$ProcessLabel.text = "Activar botones"
+		await activatebuttons() #paso8
+	print("pantalla lista")
+	$ProcessLabel.text = "Listo"
+	print(listoffiles)
+
 
 func getlocalconfig():
 	var defaultjsonlocation = "res://json/sumoprimero.json"
@@ -67,19 +100,46 @@ func findlocalconfig():
 		print(Global.softwareinfo)
 		
 		localversion = Global.softwareinfo.version
-		
+		print("configuración local finalizada")
+		verificareiniciar() #paso3
+
 
 func _on_request_config_request_completed(result, response_code, headers, body):
 	var prejson = body.get_string_from_utf8()
 	var obtainedjson = JSON.parse_string(prejson)
+	
+	online = false
 	
 	print("Obtener Json:")
 	#print(obtainedjson)
 	if str(obtainedjson) != "<null>":
 		onlineversion = obtainedjson["version"]
 		print("listo web")
+		online = true
+		print( "Versión web" + str(onlineversion) )
+		
+		Global.softwareOnline = obtainedjson
+		print(Global.softwareOnline)
 	else:
 		print("No hay internetus")
+		online = false
+		
+	print("software info:")
+	print(Global.softwareinfo)
+	#Global.softwareOnline = obtainedjson
+	$InternetStatus.setInternetIcon(online)
+		
+		
+	if inicio: 
+		inicio = false
+		print("Inicio")
+		$ProcessLabel.text = "Cargar configucarión local"
+		await findlocalconfig() #paso2
+		$CheckOnline.start()
+	else:
+		$CheckOnline.start()
+
+
 
 func setinitialvariables():
 	var path = OS.get_executable_path()
@@ -88,40 +148,6 @@ func setinitialvariables():
 	configdir = Global.basedir + "/config"
 	currentdir = Global.basedir
 	previusdir = Global.basedir
-
-func _ready():
-	var path = OS.get_executable_path()
-	Global.basedir = path.get_base_dir()
-	converterdir = Global.basedir + "/converter"
-	configdir = Global.basedir + "/config"
-	currentdir = Global.basedir
-	previusdir = Global.basedir
-	
-	$ProcessLabel.text = "Verificar versión online"
-	
-	await $RequestConfig.request("https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/Json/sumoprimero.json")
-	$ProcessLabel.text = "Cargar configucarión local"
-	await findlocalconfig()
-
-	print("software info:")
-	print(Global.softwareinfo)
-	$ProcessLabel.text = "Verificar sistema de archivos"
-	await checkfilesystem()
-	await checkOtherFolders()
-	$ProcessLabel.text = "Verificar conversores"
-	await checkDonwnloadConverter()
-	#await generateButtons()
-	#print("Hacer las descargas")
-	#print( downloads.size() )
-	if downloads.size() > 0:
-		print(downloads)
-		doDownload(downloadindex)
-	else:
-		$ProcessLabel.text = "Activar botones"
-		await activatebuttons()
-	print("pantalla lista")
-	$ProcessLabel.text = "Listo"
-
 
 func checkfilesystem():
 	print("primera carpeta " + str(Global.softwareinfo.carpetabase) + ".")
@@ -137,6 +163,9 @@ func checkfilesystem():
 	
 	generateButtons()
 	print("done filessytem")
+	await checkOtherFolders() #paso5
+
+	
 
 func iteratefoldersandfiles(folder,filesystem, road):
 	print("iterar: "  + str(folder))
@@ -173,14 +202,22 @@ func iteratefoldersandfiles(folder,filesystem, road):
 				print("Es un archivo")
 				if dir.file_exists(elemento.nombre.carpeta + "." + elemento.extension):
 					print("archivo existe")
+					var udpate = {
+						"name" : elemento.nombre.carpeta + "." + elemento.extension,
+						"location" : Global.basedir + "/" +folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,
+						"url" : elemento.url,
+						"place": recorrido,
+						"version": elemento.version
+					}
+					listoffiles.append(udpate)
 				else:
 					print("descargarlo")
 					print(elemento.url)
 					var download = {
-					"name" : elemento.nombre.carpeta + "." + elemento.extension,
-					"location" : Global.basedir + "/" +folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,
-					"url" : elemento.url,
-					"place": recorrido
+						"name" : elemento.nombre.carpeta + "." + elemento.extension,
+						"location" : Global.basedir + "/" +folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,
+						"url" : elemento.url,
+						"place": recorrido
 					}
 					
 					downloads.append(download)
@@ -251,7 +288,7 @@ func doDownload(index):
 		print("se ha descargado descargado " + download.name)
 	else:
 		print("Ya no hay mas descargas")
-		await activatebuttons()
+		await activatebuttons() #paso8
 
 func checkDonwnloadConverter():
 	print("chequear converter")
@@ -343,3 +380,12 @@ func checkOtherFolders():
 	if not dir.dir_exists( Global.softwareinfo.carpetagenerados ):
 		#print("no existe crearla")
 		dir.make_dir(Global.softwareinfo.carpetagenerados)
+		
+	$ProcessLabel.text = "Verificar conversores"
+	await checkDonwnloadConverter()#paso6
+
+
+func _on_check_online_timeout():
+	print("Verificar conexión")
+	
+	$RequestConfig.request("https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/Json/sumoprimero.json")

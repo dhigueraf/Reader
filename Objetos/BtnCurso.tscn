@@ -21,4 +21,5 @@ offset_right = -0.440063
 offset_bottom = 0.0479736
 grow_horizontal = 0
 grow_vertical = 0
+disabled = true
 text = "Actualizar"

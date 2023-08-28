@@ -144,7 +144,7 @@ offset_left = 48.0
 offset_top = 240.0
 offset_right = 224.0
 offset_bottom = 266.0
-text = "Cantidad de hojas cuadriculadas a 7 [milimetros]"
+text = "Cantidad de hojas cuadriculadas a 5 [milimetros]"
 
 [node name="txt_cuadriculadas2" type="Label" parent="Control/ColorRect"]
 layout_mode = 0
@@ -152,7 +152,7 @@ offset_left = 48.0
 offset_top = 283.0
 offset_right = 424.0
 offset_bottom = 309.0
-text = "Cantidad de hojas cuadriculadas a 5 [milimetros]"
+text = "Cantidad de hojas cuadriculadas a 7 [milimetros]"
 
 [node name="txt_lineas" type="Label" parent="Control/ColorRect"]
 layout_mode = 0
@@ -167,10 +167,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -124.0
-offset_top = 239.0
-offset_right = -40.9375
-offset_bottom = 270.0
+offset_left = -125.0
+offset_top = 281.0
+offset_right = -41.9375
+offset_bottom = 312.0
 grow_horizontal = 0
 
 [node name="InputCuadriculada5" type="SpinBox" parent="Control/ColorRect"]
@@ -178,10 +178,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -124.0
-offset_top = 281.0
-offset_right = -40.9375
-offset_bottom = 312.0
+offset_left = -127.0
+offset_top = 235.0
+offset_right = -43.9375
+offset_bottom = 266.0
 grow_horizontal = 0
 
 [node name="InputLineas" type="SpinBox" parent="Control/ColorRect"]
