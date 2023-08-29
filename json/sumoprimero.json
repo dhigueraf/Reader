@@ -298,8 +298,10 @@
 		"carpeta" : "assets",
 		"archivos": [
 			{
-				"nombre":"formatonotas.pdf",
-				"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/formatonotas.pdf"
+				"nombre":"formatonotas",
+				"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/formatonotas.pdf",
+				"version": 0,
+				"extension": "pdf"
 			}
 		]
 	},

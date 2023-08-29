@@ -22,6 +22,7 @@ var onlineversion = 0
 var btncurso = preload("res://Objetos/BtnCurso.tscn")
 
 var downloads = []
+var updates = [	]
 var downloadingfile = ""
 var downloadindex = 0
 var numcambios = 0
@@ -46,7 +47,7 @@ func verificareiniciar():
 	print("software info:")
 	print(Global.softwareinfo)
 	$ProcessLabel.text = "Verificar sistema de archivos"
-	await checkfilesystem() #paso4
+	await checkfilesystem() #paso3
 
 	if downloads.size() > 0: #paso7
 		print(downloads)
@@ -101,7 +102,7 @@ func findlocalconfig():
 		
 		localversion = Global.softwareinfo.version
 		print("configuración local finalizada")
-		verificareiniciar() #paso3
+		verificareiniciar() #paso2
 
 
 func _on_request_config_request_completed(result, response_code, headers, body):
@@ -116,10 +117,11 @@ func _on_request_config_request_completed(result, response_code, headers, body):
 		onlineversion = obtainedjson["version"]
 		print("listo web")
 		online = true
-		print( "Versión web" + str(onlineversion) )
+		print( "Versión web " + str(onlineversion) )
 		
 		Global.softwareOnline = obtainedjson
-		print(Global.softwareOnline)
+		Global.softwareinfo = obtainedjson
+		#print(Global.softwareOnline)
 	else:
 		print("No hay internetus")
 		online = false
@@ -133,8 +135,11 @@ func _on_request_config_request_completed(result, response_code, headers, body):
 	if inicio: 
 		inicio = false
 		print("Inicio")
-		$ProcessLabel.text = "Cargar configucarión local"
-		await findlocalconfig() #paso2
+		if online == false:
+			$ProcessLabel.text = "Cargar configucarión local"
+			await findlocalconfig() #paso 1b
+		else: 
+			await verificareiniciar() #paso 2
 		$CheckOnline.start()
 	else:
 		$CheckOnline.start()
@@ -199,28 +204,45 @@ func iteratefoldersandfiles(folder,filesystem, road):
 					iteratefoldersandfiles(folder + "/" + nombrecarpeta,subfolder,newrecorrido)
 					recorrido = [0,iterator]
 			elif elemento.tipo == "archivo":
+				var fileinfojson = {}
 				print("Es un archivo")
 				if dir.file_exists(elemento.nombre.carpeta + "." + elemento.extension):
 					print("archivo existe")
-					var udpate = {
-						"name" : elemento.nombre.carpeta + "." + elemento.extension,
-						"location" : Global.basedir + "/" +folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,
-						"url" : elemento.url,
-						"place": recorrido,
-						"version": elemento.version
-					}
-					listoffiles.append(udpate)
+					if dir.file_exists(elemento.nombre.carpeta + "_info" + ".json" ):
+						print("existe el json")
+						var fileinfo = FileAccess.get_file_as_string( dir.get_current_dir() + "/" + elemento.nombre.carpeta + "_info" + ".json")
+						if not fileinfo.is_empty():
+							fileinfojson=  JSON.parse_string(fileinfo)
+					else:
+						var jsonpdf = FileAccess.open( dir.get_current_dir() + "/" + elemento.nombre.carpeta + "_info" + ".json", FileAccess.WRITE )
+						jsonpdf.store_line( '{ "version": 0 }' )
+						jsonpdf.close()
+						
+					if fileinfojson.version < elemento.version: #Actualizar
+						var udpate = {
+							"name" : elemento.nombre.carpeta + "." + elemento.extension,
+							"location" : Global.basedir + "/" +folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,
+							"url" : elemento.url,
+							"place": recorrido,
+							"onlineversion": elemento.version,
+							"localversion": fileinfojson.version,
+							"aviable": true
+						}
+						updates.append(udpate)
 				else:
-					print("descargarlo")
+					print("se puede descargar")
 					print(elemento.url)
 					var download = {
 						"name" : elemento.nombre.carpeta + "." + elemento.extension,
 						"location" : Global.basedir + "/" +folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,
 						"url" : elemento.url,
+						"onlineversion": elemento.version,
+						"localversion": -1,
 						"place": recorrido
 					}
 					
-					downloads.append(download)
+					#downloads.append(download)
+					listoffiles.append(downloads)
 					
 				print("comparar locaciones")
 				print( str( folder + "/"  + elemento.nombre.carpeta + "." + elemento.extension) )
@@ -286,6 +308,13 @@ func doDownload(index):
 		$DownloadLabel.text = "Descargando... " + download.name
 		await $Downloader.request(download.url)
 		print("se ha descargado descargado " + download.name)
+		
+		var namearray = download.location.split(".")
+		var jsoninfo = FileAccess.open( namearray[0] + "_info" + ".json", FileAccess.WRITE )
+		print(namearray[0])
+		jsoninfo.store_line( '{ "version": ' + str(download.onlineversion) + ' }' )
+		jsoninfo.close()
+		
 	else:
 		print("Ya no hay mas descargas")
 		await activatebuttons() #paso8
@@ -355,27 +384,66 @@ func checkOtherFolders():
 	if dir.dir_exists( assetsdir ):
 		print("verificar carpeta de assets")
 		for asset in Global.softwareinfo.assets.archivos:
-			if not dir.file_exists( assetsdir + "/" + asset.nombre ):
+			var assetinfojson = { "version":0 }
+			if not dir.file_exists( assetsdir + "/" + asset.nombre + "." + asset.extension):
+				var jsonpdf = FileAccess.open( dir.get_current_dir() + "/" +  assetsdir + "/" + asset.nombre + "_info" + ".json", FileAccess.WRITE )
+				jsonpdf.store_line( '{ "version": 0 }' )
+				jsonpdf.close()
+				
 				var download = {
 					"name" :  asset.nombre,
-					"location" : Global.basedir + "/" + Global.softwareinfo.assets.carpeta + "/" + asset.nombre,
+					"location" : Global.basedir + "/" + Global.softwareinfo.assets.carpeta + "/" + asset.nombre + "." + asset.extension,
 					"url" : asset.url,
-					"place": "assets/"
+					"place": "assets/",
+					"onlineversion": asset.version,
+					"localversion":0
 				}
 				downloads.append(download)
 			else:
 				print("existe el asset actual")
+				if dir.file_exists( assetsdir + "/" + asset.nombre + "_info" + ".json" ):
+					print("existe el json")
+					var fileinfo = FileAccess.get_file_as_string( dir.get_current_dir() + "/" +  assetsdir + "/" + asset.nombre + "_info" + ".json")
+					if not fileinfo.is_empty():
+						assetinfojson = JSON.parse_string(fileinfo)
+				else:
+					var jsonpdf = FileAccess.open( dir.get_current_dir() + "/" +  assetsdir + "/" + asset.nombre + "_info" + ".json", FileAccess.WRITE )
+					jsonpdf.store_line( '{ "version": 0 }' )
+					jsonpdf.close()
+					
+				print("Comparar versiones")
+				print(asset.version)
+				print(assetinfojson.version)
+				if assetinfojson.version < asset.version : #Actualizar asset
+					print("actualizar "  + asset.nombre )
+					var udpate = {
+						"name" :  asset.nombre,
+						"location" : Global.basedir + "/" + Global.softwareinfo.assets.carpeta + "/" + asset.nombre + "." + asset.extension,
+						"url" : asset.url,
+						"place": "assets/",
+						"onlineversion": asset.version,
+						"localversion": assetinfojson.version,
+						"aviable": true
+					}
+					
+					downloads.append(udpate)
+					
 	else:
 		print("crear la carpeta de assets")
 		dir.make_dir(assetsdir)
 		for asset in Global.softwareinfo.assets.archivos:
 			var download = {
 				"name" :  asset.nombre,
-				"location" : Global.basedir + "/" + str(Global.softwareinfo.assets.carpeta) + "/" + asset.nombre,
+				"location" : Global.basedir + "/" + Global.softwareinfo.assets.carpeta + "/" + asset.nombre,
 				"url" : asset.url,
-				"place": "assets/"
+				"place": "assets/",
+				"onlineversion": 0,
+				"localversion":0
 			}
 			downloads.append(download)
+			var jsonpdf = FileAccess.open( dir.get_current_dir() + "/" +  assetsdir + "/" + asset.nombre + "_info" + ".json", FileAccess.WRITE )
+			jsonpdf.store_line( '{ "version": 0 }' )
+			jsonpdf.close()
 		
 	if not dir.dir_exists( Global.softwareinfo.carpetagenerados ):
 		#print("no existe crearla")
