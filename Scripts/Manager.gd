@@ -22,13 +22,14 @@ var onlineversion = 0
 var btncurso = preload("res://Objetos/BtnCurso.tscn")
 
 var downloads = []
-var updates = [	]
+var updates = []
 var downloadingfile = ""
 var downloadindex = 0
 var numcambios = 0
 
 var sistemasoperativos = ["windows","linux"]
 
+var botones = []
 
 func _ready():
 	var path = OS.get_executable_path()
@@ -57,7 +58,9 @@ func verificareiniciar():
 		await activatebuttons() #paso8
 	print("pantalla lista")
 	$ProcessLabel.text = "Listo"
-	print(listoffiles)
+	#print(listoffiles)
+	#print(updates)
+	print(botones)
 
 
 func getlocalconfig():
@@ -96,7 +99,6 @@ func findlocalconfig():
 			jsonpdf.store_line( getlocalconfig() )
 			jsonpdf.close()
 			Global.softwareinfo = JSON.parse_string( getlocalconfig() )
-			
 		print("Save data")
 		print(Global.softwareinfo)
 		
@@ -115,9 +117,9 @@ func _on_request_config_request_completed(result, response_code, headers, body):
 	#print(obtainedjson)
 	if str(obtainedjson) != "<null>":
 		onlineversion = obtainedjson["version"]
-		print("listo web")
+		#print("listo web")
 		online = true
-		print( "Versión web " + str(onlineversion) )
+		#print( "Versión web " + str(onlineversion) )
 		
 		Global.softwareOnline = obtainedjson
 		Global.softwareinfo = obtainedjson
@@ -126,20 +128,20 @@ func _on_request_config_request_completed(result, response_code, headers, body):
 		print("No hay internetus")
 		online = false
 		
-	print("software info:")
-	print(Global.softwareinfo)
+	#print("software info:")
+	#print(Global.softwareinfo)
 	#Global.softwareOnline = obtainedjson
 	$InternetStatus.setInternetIcon(online)
 		
 		
 	if inicio: 
 		inicio = false
-		print("Inicio")
+		#print("Inicio")
 		if online == false:
 			$ProcessLabel.text = "Cargar configucarión local"
-			await findlocalconfig() #paso 1b
+			await findlocalconfig() #paso1b
 		else: 
-			await verificareiniciar() #paso 2
+			await verificareiniciar() #paso2
 		$CheckOnline.start()
 	else:
 		$CheckOnline.start()
@@ -164,13 +166,50 @@ func checkfilesystem():
 		print("directorio no existe")
 		dir.make_dir(primeracarpeta)
 		print("primera iteración")
-	await iteratefoldersandfiles(primeracarpeta,Global.softwareinfo.sistemarchivos, [] )
+	#await iteratefoldersandfiles(primeracarpeta,Global.softwareinfo.sistemarchivos, [] )#paso4
+	await iteratefoldercursos(primeracarpeta,Global.softwareinfo.sistemarchivos)
 	
 	generateButtons()
 	print("done filessytem")
 	await checkOtherFolders() #paso5
 
-	
+
+func iteratefoldercursos(folder,filesystem):
+	var dir = DirAccess.open(Global.basedir + "/" + folder)
+	var iterator = 0
+	for elemento in filesystem:
+		print("elemento " +str(iterator) + " " + str(elemento.nombre.carpeta)) 
+		if "tipo" in elemento:
+			if elemento.tipo == "carpeta":
+				var boton = {
+					"nombre": elemento.nombre.boton,
+					"updates": false,
+					"archivos": []
+				}
+				
+				if dir.dir_exists(elemento.nombre.carpeta) :
+					print("directorio existe")
+				else:
+					print("directorio no existe")
+					dir.make_dir(elemento.nombre.carpeta)
+				
+				var elementoarchivos = iteratesubfolders( folder + "/" + elemento.nombre.carpeta , elemento.subelementos )
+				
+				botones.append(boton)
+
+
+func iteratesubfolders(folder,filesystem):
+	var dir = DirAccess.open(Global.basedir + "/" + folder)
+	var iterator 
+	var archivos = []
+	for elemento in filesystem:
+		if "tipo" in elemento:
+			if elemento.tipo == "carpeta":
+				var subarchivos = iteratesubfolders( folder + "/" + elemento.nombre.carpeta , elemento.subelementos )
+				archivos += subarchivos
+			elif elemento.tipo == "archivo":
+				archivos.append(elemento.nombre.boton)
+	return archivos
 
 func iteratefoldersandfiles(folder,filesystem, road):
 	print("iterar: "  + str(folder))
@@ -204,7 +243,7 @@ func iteratefoldersandfiles(folder,filesystem, road):
 					iteratefoldersandfiles(folder + "/" + nombrecarpeta,subfolder,newrecorrido)
 					recorrido = [0,iterator]
 			elif elemento.tipo == "archivo":
-				var fileinfojson = {}
+				var fileinfojson = { "version": 0}
 				print("Es un archivo")
 				if dir.file_exists(elemento.nombre.carpeta + "." + elemento.extension):
 					print("archivo existe")
@@ -218,6 +257,8 @@ func iteratefoldersandfiles(folder,filesystem, road):
 						jsonpdf.store_line( '{ "version": 0 }' )
 						jsonpdf.close()
 						
+					print(fileinfojson)
+					print(elemento)
 					if fileinfojson.version < elemento.version: #Actualizar
 						var udpate = {
 							"name" : elemento.nombre.carpeta + "." + elemento.extension,
@@ -252,129 +293,6 @@ func iteratefoldersandfiles(folder,filesystem, road):
 		iterator+= 1
 	print("sali del for" )
 
-
-func generateButtons():
-	var dir = DirAccess.open(Global.basedir)
-	for key in Global.softwareinfo.sistemarchivos:
-			print(key)
-			if "nombre" in key:
-				print(key.nombre)
-				var btndir = btncurso.instantiate()
-				btndir.text = str(key.nombre.boton)
-				btndir.disabled = true
-				
-				var selcur = {
-					"nombre" : key.nombre,
-					"location": Global.basedir + key.nombre.carpeta,
-					"folder":  key.nombre.carpeta,
-					"archivos" : key.subelementos
- 				}
-				
-				btndir.connect("pressed", Callable(self, "openCurso").bind(selcur))
-				$VBoxContainer.add_child(btndir)
-
-func activatebuttons():
-	var buttons = []
-	buttons = $VBoxContainer.get_children()
-	if numcambios > 0:
-		savejson()
-	for btn in buttons:
-		btn.disabled = false
-
-
-func clickbutton():
-	print("click")
-
-func openCurso(curso):
-	print("presionaste: " + curso.nombre.boton)
-	Global.SelectedCurso = curso
-	get_tree().change_scene_to_file("res://Escenas/Curso.tscn")
-
-func _on_downloader_request_completed(result, response_code, headers, body):
-	print("download result:")
-	print(result)
-	print("ahora descargar " + str(downloadindex))
-	downloadindex += 1
-	await doDownload(downloadindex)
-	
-func doDownload(index):
-	print("Hacer las descargas")
-	if index < downloads.size():
-		var download = downloads[index]
-		downloadingfile = download.name
-		print(download)
-		$Downloader.set_download_file(download.location)
-		print("descargando")
-		$DownloadLabel.text = "Descargando... " + download.name
-		await $Downloader.request(download.url)
-		print("se ha descargado descargado " + download.name)
-		
-		var namearray = download.location.split(".")
-		var jsoninfo = FileAccess.open( namearray[0] + "_info" + ".json", FileAccess.WRITE )
-		print(namearray[0])
-		jsoninfo.store_line( '{ "version": ' + str(download.onlineversion) + ' }' )
-		jsoninfo.close()
-		
-	else:
-		print("Ya no hay mas descargas")
-		await activatebuttons() #paso8
-
-func checkDonwnloadConverter():
-	print("chequear converter")
-	var dir = DirAccess.open(Global.basedir)
-	converterdir = str(Global.softwareinfo.converter.carpeta)
-	var sistemasop
-	if dir.dir_exists( converterdir ):
-		print("existe la carpeta")
-		for ejecutable in Global.softwareinfo.converter.ejecutables:
-			for OpSi in sistemasoperativos:
-				if not dir.file_exists(converterdir + "/" +  ejecutable.versiones[OpSi].nombre):
-					var ejecutosi = ejecutable.versiones[OpSi]
-					var download = {
-						"name" :  ejecutosi.nombre,
-						"location" : Global.basedir + "/" + str( Global.softwareinfo.converter.carpeta ) + "/" + ejecutosi.nombre,
-						"url" : ejecutosi.url,
-						"place": "assets/"
-					}
-					downloads.append(download)
-	else:
-		print("no existe crearla")
-		dir.make_dir(converterdir)
-		
-		for ejecutable in Global.softwareinfo.converter.ejecutables:
-			for OpSi in sistemasoperativos:
-				var ejecutosi = ejecutable.versiones[OpSi]
-				var download = {
-					"name" :  ejecutosi.nombre,
-					"location" : Global.basedir + "/" + str( Global.softwareinfo.converter.carpeta ) + "/" + ejecutosi.nombre,
-					"url" : ejecutosi.url,
-					"place": "assets/"
-				}
-				
-				downloads.append(download)
-
-		
-func _process(delta):
-	if $Downloader.get_body_size() > 0:
-		var arr = float($Downloader.get_downloaded_bytes()/1024)
-		var total = float($Downloader.get_body_size()/1024)
-		$Avancelabel.text = downloadingfile + ": " + str(arr) + "/" + str(total) + "[Kb]"
-
-
-func updatelocation(locationtoupdate,road):
-	print("Update Location:")
-	print(locationtoupdate)
-	print(road)
-	if road.size() == 3:
-		numcambios += 1
-		Global.softwareinfo.sistemarchivos[road[0]].subelementos[road[1]].subelementos[road[2]].location = locationtoupdate
-		print( Global.softwareinfo.sistemarchivos[road[0]].subelementos[road[1]].subelementos[road[2]] )
-
-
-func _on_downloader_2_request_completed(result, response_code, headers, body):
-	print("download result:")
-	print(result)
-	
 
 func checkOtherFolders():
 	print("chequear segundo filesystm")
@@ -451,6 +369,167 @@ func checkOtherFolders():
 		
 	$ProcessLabel.text = "Verificar conversores"
 	await checkDonwnloadConverter()#paso6
+
+
+func checkDonwnloadConverter():
+	print("chequear converter")
+	var dir = DirAccess.open(Global.basedir)
+	converterdir = str(Global.softwareinfo.converter.carpeta)
+	var sistemasop
+	if dir.dir_exists( converterdir ):
+		print("existe la carpeta")
+		for ejecutable in Global.softwareinfo.converter.ejecutables:
+			for OpSi in sistemasoperativos:
+				var converterinfojson = {"version":0}
+				if not dir.file_exists(converterdir + "/" +  ejecutable.versiones[OpSi].nombre):
+					var ejecutosi = ejecutable.versiones[OpSi]
+					var download = {
+						"name" :  ejecutosi.nombre,
+						"location" : Global.basedir + "/" + str( Global.softwareinfo.converter.carpeta ) + "/" + ejecutosi.nombre,
+						"url" : ejecutosi.url,
+						"place": "assets/",
+						"onlineversion": ejecutable.versiones[OpSi].version,
+						"localversion":0
+					}
+					
+					if dir.file_exists( converterdir + "/" + ejecutable.versiones[OpSi].nombre + "_info" + ".json" ):
+						print("existe el json")
+						var converterinfo = FileAccess.get_file_as_string( dir.get_current_dir() + "/" +  converterdir + "/" + ejecutable.versiones[OpSi].nombre + "_info" + ".json")
+						if not converterinfo.is_empty():
+							converterinfojson = JSON.parse_string(converterinfo)
+					else:
+						var jsonconverterinfo = FileAccess.open( dir.get_current_dir() + "/" +  converterdir + "/" + ejecutable.versiones[OpSi].nombre + "_info" + ".json", FileAccess.WRITE )
+						jsonconverterinfo.store_line( '{ "version": 0 }' )
+						jsonconverterinfo.close()
+					
+					downloads.append(download)
+				else:
+					if dir.file_exists( converterdir + "/" + ejecutable.versiones[OpSi].nombre + "_info" + ".json" ):
+						print("existe el json")
+						var converterinfo = FileAccess.get_file_as_string( dir.get_current_dir() + "/" +  converterdir + "/" + ejecutable.versiones[OpSi].nombre + "_info" + ".json")
+						if not converterinfo.is_empty():
+							converterinfojson = JSON.parse_string(converterinfo)
+					else:
+						var jsonconverterinfo = FileAccess.open( dir.get_current_dir() + "/" +  converterdir + "/" + ejecutable.versiones[OpSi].nombre + "_info" + ".json", FileAccess.WRITE )
+						jsonconverterinfo.store_line( '{ "version": 0 }' )
+						jsonconverterinfo.close()
+						
+					if converterinfojson.version < ejecutable.versiones[OpSi].version:
+						var ejecutosi = ejecutable.versiones[OpSi]
+						var update = {
+							"name" :  ejecutosi.nombre,
+							"location" : Global.basedir + "/" + str( Global.softwareinfo.converter.carpeta ) + "/" + ejecutosi.nombre,
+							"url" : ejecutosi.url,
+							"place": "assets/",
+							"onlineversion": ejecutable.versiones[OpSi].version,
+							"localversion": converterinfojson.version
+						}
+						
+						updates.append(update)
+	else:
+		print("no existe crearla")
+		dir.make_dir(converterdir)
+		
+		for ejecutable in Global.softwareinfo.converter.ejecutables:
+			for OpSi in sistemasoperativos:
+				var ejecutosi = ejecutable.versiones[OpSi]
+				var download = {
+					"name" :  ejecutosi.nombre,
+					"location" : Global.basedir + "/" + str( Global.softwareinfo.converter.carpeta ) + "/" + ejecutosi.nombre,
+					"url" : ejecutosi.url,
+					"place": "assets/"
+				}
+				
+				downloads.append(download)
+
+
+func generateButtons():
+	var dir = DirAccess.open(Global.basedir)
+	for key in Global.softwareinfo.sistemarchivos:
+			print(key)
+			if "nombre" in key:
+				print(key.nombre)
+				var btndir = btncurso.instantiate()
+				btndir.text = str(key.nombre.boton)
+				btndir.disabled = true
+				
+				var selcur = {
+					"nombre" : key.nombre,
+					"location": Global.basedir + key.nombre.carpeta,
+					"folder":  key.nombre.carpeta,
+					"archivos" : key.subelementos
+ 				}
+				
+				btndir.connect("pressed", Callable(self, "openCurso").bind(selcur))
+				$VBoxContainer.add_child(btndir)
+
+func activatebuttons():
+	var buttons = []
+	buttons = $VBoxContainer.get_children()
+	if numcambios > 0:
+		savejson()
+	for btn in buttons:
+		btn.disabled = false
+
+
+func clickbutton():
+	print("click")
+
+func openCurso(curso):
+	print("presionaste: " + curso.nombre.boton)
+	Global.SelectedCurso = curso
+	get_tree().change_scene_to_file("res://Escenas/Curso.tscn")
+
+func _on_downloader_request_completed(result, response_code, headers, body):
+	print("download result:")
+	print(result)
+	print("ahora descargar " + str(downloadindex))
+	downloadindex += 1
+	await doDownload(downloadindex)
+	
+func doDownload(index):
+	print("Hacer las descargas")
+	if index < downloads.size():
+		var download = downloads[index]
+		downloadingfile = download.name
+		print(download)
+		$Downloader.set_download_file(download.location)
+		print("descargando")
+		$DownloadLabel.text = "Descargando... " + download.name
+		await $Downloader.request(download.url)
+		print("se ha descargado descargado " + download.name)
+		
+		var namearray = download.location.split(".")
+		var jsoninfo = FileAccess.open( namearray[0] + "_info" + ".json", FileAccess.WRITE )
+		print(namearray[0])
+		jsoninfo.store_line( '{ "version": ' + str(download.onlineversion) + ' }' )
+		jsoninfo.close()
+		
+	else:
+		print("Ya no hay mas descargas")
+		await activatebuttons() #paso8
+
+		
+func _process(delta):
+	if $Downloader.get_body_size() > 0:
+		var arr = float($Downloader.get_downloaded_bytes()/1024)
+		var total = float($Downloader.get_body_size()/1024)
+		$Avancelabel.text = downloadingfile + ": " + str(arr) + "/" + str(total) + "[Kb]"
+
+
+func updatelocation(locationtoupdate,road):
+	print("Update Location:")
+	print(locationtoupdate)
+	print(road)
+	if road.size() == 3:
+		numcambios += 1
+		Global.softwareinfo.sistemarchivos[road[0]].subelementos[road[1]].subelementos[road[2]].location = locationtoupdate
+		print( Global.softwareinfo.sistemarchivos[road[0]].subelementos[road[1]].subelementos[road[2]] )
+
+
+func _on_downloader_2_request_completed(result, response_code, headers, body):
+	print("download result:")
+	print(result)
 
 
 func _on_check_online_timeout():
