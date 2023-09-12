@@ -174,7 +174,7 @@ func checkfilesystem():
 	await checkOtherFolders() #paso5
 
 
-func iteratefoldercursos(folder,filesystem):
+func iteratefoldercursos(folder,filesystem): #Nueva iteración
 	var dir = DirAccess.open(Global.basedir + "/" + folder)
 	var iterator = 0
 	for elemento in filesystem:
@@ -195,7 +195,12 @@ func iteratefoldercursos(folder,filesystem):
 				
 				var elementoarchivos = iteratesubfolders( folder + "/" + elemento.nombre.carpeta , elemento.subelementos )
 				
+				boton.archivos = elementoarchivos
+				
 				botones.append(boton)
+				
+				
+	
 
 
 func iteratesubfolders(folder,filesystem):
@@ -208,7 +213,23 @@ func iteratesubfolders(folder,filesystem):
 				var subarchivos = iteratesubfolders( folder + "/" + elemento.nombre.carpeta , elemento.subelementos )
 				archivos += subarchivos
 			elif elemento.tipo == "archivo":
-				archivos.append(elemento.nombre.boton)
+				var archivo ={
+					"nombre" : elemento.nombre.boton,
+					"existe" : false,
+					"versionweb" : elemento.version,
+					"versionlocal" : -1
+				}
+				
+				if dir.file_exists(elemento.nombre.carpeta+"."+elemento.extension):
+					archivo.existe = true
+				else:
+					if dir.file_exists(elemento.nombre.carpeta+"_info.json"):
+						var fileinfo = FileAccess.open(Global.basedir + "/" + folder +"/"+ elemento.nombre.carpeta+"_info.json", FileAccess.READ )
+						if not fileinfo.is_empty():
+							var jsoninfo = JSON.parse_string(fileinfo)
+							if "version" in jsoninfo:
+								archivo.versionlocal = jsoninfo.local
+				archivos.append(archivo)
 	return archivos
 
 func iteratefoldersandfiles(folder,filesystem, road):
