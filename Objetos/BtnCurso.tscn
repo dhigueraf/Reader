@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://c1c8fbb0by7d3"]
+[gd_scene load_steps=2 format=3 uid="uid://c1c8fbb0by7d3"]
+
+[ext_resource type="Script" path="res://Objetos/BtnCurso.gd" id="1_d3ie5"]
 
 [node name="Button" type="Button"]
 anchors_preset = 15
@@ -7,8 +9,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "texto"
+script = ExtResource("1_d3ie5")
 
-[node name="Button" type="Button" parent="."]
+[node name="UpdateButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.85

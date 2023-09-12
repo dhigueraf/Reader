@@ -507,7 +507,10 @@ func generateButtons():
 				$VBoxContainer.add_child(btndir)
 
 func checkupdates(ckey):
-	return true
+	for ar in ckey.archivos:
+		if ar.accion != "OK":
+			return true
+	return false
 
 func activatebuttons():
 	var buttons = []
