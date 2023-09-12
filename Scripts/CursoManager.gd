@@ -8,8 +8,8 @@ var numberinput
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print( Global.SelectedCurso)
-	$Label.text = Global.SelectedCurso.nombre.boton
-	Global.FileReading.curso = Global.SelectedCurso.nombre.boton
+	$Label.text = Global.SelectedCurso.nombre
+	Global.FileReading.curso = Global.SelectedCurso.nombre #Global.SelectedCurso.nombre.boton
 	generateButtons()
 	panel = get_node(panelpath)
 

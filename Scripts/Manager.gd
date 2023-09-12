@@ -184,6 +184,7 @@ func iteratefoldercursos(folder,filesystem): #Nueva iteración
 				var boton = {
 					"nombre": elemento.nombre.boton,
 					"updates": false,
+					"location": dir.get_current_dir() + elemento.nombre.carpeta,
 					"archivos": []
 				}
 				
@@ -198,9 +199,6 @@ func iteratefoldercursos(folder,filesystem): #Nueva iteración
 				boton.archivos = elementoarchivos
 				
 				botones.append(boton)
-				
-				
-	
 
 
 func iteratesubfolders(folder,filesystem):
@@ -210,6 +208,11 @@ func iteratesubfolders(folder,filesystem):
 	for elemento in filesystem:
 		if "tipo" in elemento:
 			if elemento.tipo == "carpeta":
+				if dir.dir_exists(elemento.nombre.carpeta) :
+					print("directorio existe")
+				else:
+					print("directorio no existe")
+					dir.make_dir(elemento.nombre.carpeta)
 				var subarchivos = iteratesubfolders( folder + "/" + elemento.nombre.carpeta , elemento.subelementos )
 				archivos += subarchivos
 			elif elemento.tipo == "archivo":
@@ -217,18 +220,28 @@ func iteratesubfolders(folder,filesystem):
 					"nombre" : elemento.nombre.boton,
 					"existe" : false,
 					"versionweb" : elemento.version,
-					"versionlocal" : -1
+					"versionlocal" : -1,
+					"accion": "OK",
+					"location": dir.get_current_dir() + "/" + elemento.nombre.carpeta + "." + elemento.extension
 				}
 				
-				if dir.file_exists(elemento.nombre.carpeta+"."+elemento.extension):
+				if dir.file_exists( elemento.nombre.carpeta+"."+elemento.extension ):
+					print("archivo existe")
 					archivo.existe = true
-				else:
 					if dir.file_exists(elemento.nombre.carpeta+"_info.json"):
-						var fileinfo = FileAccess.open(Global.basedir + "/" + folder +"/"+ elemento.nombre.carpeta+"_info.json", FileAccess.READ )
+						print("info existe")
+						var fileinfo = FileAccess.get_file_as_string( dir.get_current_dir() + "/" + elemento.nombre.carpeta + "_info" + ".json" )
+						print("File info: " + fileinfo)
 						if not fileinfo.is_empty():
 							var jsoninfo = JSON.parse_string(fileinfo)
 							if "version" in jsoninfo:
-								archivo.versionlocal = jsoninfo.local
+								archivo.versionlocal = jsoninfo.version
+						if archivo.versionweb > archivo.versionlocal:
+							archivo.accion = "actualizar"
+				else:
+					if not dir.file_exists(elemento.nombre.carpeta+"_info.json"):
+						print("")
+					archivo.accion = "descargar"
 				archivos.append(archivo)
 	return archivos
 
@@ -466,19 +479,19 @@ func checkDonwnloadConverter():
 
 func generateButtons():
 	var dir = DirAccess.open(Global.basedir)
-	for key in Global.softwareinfo.sistemarchivos:
+	for key in botones:
 			print(key)
 			if "nombre" in key:
 				print(key.nombre)
 				var btndir = btncurso.instantiate()
-				btndir.text = str(key.nombre.boton)
+				btndir.text = str(key.nombre)
 				btndir.disabled = true
 				
 				var selcur = {
 					"nombre" : key.nombre,
-					"location": Global.basedir + key.nombre.carpeta,
-					"folder":  key.nombre.carpeta,
-					"archivos" : key.subelementos
+					"location": key.location,
+					"folder":  key.nombre,
+					"archivos" : "key.subelementos"
  				}
 				
 				btndir.connect("pressed", Callable(self, "openCurso").bind(selcur))
@@ -497,7 +510,8 @@ func clickbutton():
 	print("click")
 
 func openCurso(curso):
-	print("presionaste: " + curso.nombre.boton)
+	print(curso)
+	print("presionaste: " + curso.nombre)
 	Global.SelectedCurso = curso
 	get_tree().change_scene_to_file("res://Escenas/Curso.tscn")
 
