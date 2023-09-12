@@ -499,11 +499,15 @@ func generateButtons():
 					"nombre" : key.nombre,
 					"location": key.location,
 					"folder":  key.nombre,
-					"archivos" : "key.subelementos"
+					"archivos" : "key.subelementos",
+					"actualizar": checkupdates(key)
  				}
 				
 				btndir.connect("pressed", Callable(self, "openCurso").bind(selcur))
 				$VBoxContainer.add_child(btndir)
+
+func checkupdates(ckey):
+	return true
 
 func activatebuttons():
 	var buttons = []
