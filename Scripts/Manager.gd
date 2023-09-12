@@ -104,7 +104,7 @@ func findlocalconfig():
 		
 		localversion = Global.softwareinfo.version
 		print("configuración local finalizada")
-		verificareiniciar() #paso2
+		verificareiniciar() #paso2 llamar si no hay ineternet
 
 
 func _on_request_config_request_completed(result, response_code, headers, body):
@@ -141,7 +141,7 @@ func _on_request_config_request_completed(result, response_code, headers, body):
 			$ProcessLabel.text = "Cargar configucarión local"
 			await findlocalconfig() #paso1b
 		else: 
-			await verificareiniciar() #paso2
+			await verificareiniciar() #paso2 llamado si hay internet
 		$CheckOnline.start()
 	else:
 		$CheckOnline.start()
@@ -166,8 +166,8 @@ func checkfilesystem():
 		print("directorio no existe")
 		dir.make_dir(primeracarpeta)
 		print("primera iteración")
-	#await iteratefoldersandfiles(primeracarpeta,Global.softwareinfo.sistemarchivos, [] )#paso4
-	await iteratefoldercursos(primeracarpeta,Global.softwareinfo.sistemarchivos)
+	#await iteratefoldersandfiles(primeracarpeta,Global.softwareinfo.sistemarchivos, [] )#paso4  viejo
+	await iteratefoldercursos(primeracarpeta,Global.softwareinfo.sistemarchivos)#paso4 nuevo
 	
 	generateButtons()
 	print("done filessytem")
@@ -175,6 +175,7 @@ func checkfilesystem():
 
 
 func iteratefoldercursos(folder,filesystem): #Nueva iteración
+	print("Iterar folder " + folder)
 	var dir = DirAccess.open(Global.basedir + "/" + folder)
 	var iterator = 0
 	for elemento in filesystem:
@@ -188,23 +189,28 @@ func iteratefoldercursos(folder,filesystem): #Nueva iteración
 					"archivos": []
 				}
 				
+				print("buscar carpeta "+ elemento.nombre.carpeta)
 				if dir.dir_exists(elemento.nombre.carpeta) :
 					print("directorio existe")
+					print(dir.get_current_dir() + "/" + elemento.nombre.carpeta)
 				else:
 					print("directorio no existe")
 					dir.make_dir(elemento.nombre.carpeta)
+					print("creada carpeta " + str(elemento.nombre.carpeta))
 				
 				var elementoarchivos = iteratesubfolders( folder + "/" + elemento.nombre.carpeta , elemento.subelementos )
-				
 				boton.archivos = elementoarchivos
-				
+
 				botones.append(boton)
 
 
 func iteratesubfolders(folder,filesystem):
-	var dir = DirAccess.open(Global.basedir + "/" + folder)
+	print("Iterar sub folder " + folder)
+	print(Global.basedir + "/" + folder)
 	var iterator 
 	var archivos = []
+	var dir = DirAccess.open(Global.basedir + "/" + folder)
+	print(dir)
 	for elemento in filesystem:
 		if "tipo" in elemento:
 			if elemento.tipo == "carpeta":
@@ -264,8 +270,10 @@ func iteratefoldersandfiles(folder,filesystem, road):
 				
 				var nombrecarpeta = elemento.nombre.carpeta
 				
-				if dir.dir_exists(nombrecarpeta) :
+				print("buscar carpeta " + nombrecarpeta)
+				if dir.dir_exists(nombrecarpeta):
 					print("directorio existe")
+					print(dir.get_current_dir()+ "/"+  nombrecarpeta)
 				else:
 					print("directorio no existe")
 					dir.make_dir(nombrecarpeta)
