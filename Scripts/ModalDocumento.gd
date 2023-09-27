@@ -17,18 +17,19 @@ func deleteoptions():
 func activate(document):
 	print("activar panel")
 	print(document)
-	$ColorRect/Label.text = document.nombre.boton
+	$ColorRect/Label.text = document.nombre #document.nombre.boton
 	
 	documento = document
 	
 	deleteoptions()
 	
-	for capitulo in document.capitulos:
-		var eldocum = eldocu.instantiate()
-		eldocum.setNombre(capitulo.nombre)
-		eldocum.setPagina(capitulo.paginainicio)
-		$ColorRect/ScrollContainer/VBoxContainer.add_child(eldocum)
-		Global.FileToRead = documento
+	if "capitulos" in document:
+		for capitulo in document.capitulos:
+			var eldocum = eldocu.instantiate()
+			eldocum.setNombre(capitulo.nombre)
+			eldocum.setPagina(capitulo.paginainicio)
+			$ColorRect/ScrollContainer/VBoxContainer.add_child(eldocum)
+			Global.FileToRead = documento
 	
 	visible = true
 	

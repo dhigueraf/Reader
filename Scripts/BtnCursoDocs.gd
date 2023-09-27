@@ -8,8 +8,9 @@ func changeTitle(titulo):
 	
 func addbutton(dictionary):
 	
+	print(dictionary)
 	var button = Button.new()
-	button.text = str(dictionary.nombre.boton)
+	button.text = str(dictionary.nombre)
 	#btndir.disabled = true
 	
 	print(dictionary)

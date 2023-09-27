@@ -126,6 +126,7 @@ autowrap_mode = 2
 [node name="CheckOnline" type="Timer" parent="CanvasLayer/Control"]
 wait_time = 6.24
 
+[connection signal="updatebutton" from="CanvasLayer/Control" to="CanvasLayer/Control" method="_on_updatebutton"]
 [connection signal="request_completed" from="CanvasLayer/Control/RequestConfig" to="CanvasLayer/Control" method="_on_request_config_request_completed"]
 [connection signal="request_completed" from="CanvasLayer/Control/Downloader" to="CanvasLayer/Control" method="_on_downloader_request_completed"]
 [connection signal="timeout" from="CanvasLayer/Control/CheckOnline" to="CanvasLayer/Control" method="_on_check_online_timeout"]

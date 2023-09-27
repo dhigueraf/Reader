@@ -26,3 +26,5 @@ grow_horizontal = 0
 grow_vertical = 0
 disabled = true
 text = "Actualizar"
+
+[connection signal="pressed" from="UpdateButton" to="." method="_on_update_button_pressed"]

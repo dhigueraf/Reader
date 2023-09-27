@@ -5,6 +5,8 @@ extends Control
 @export var discartednames= [".",".."]
 @export var formatsallowed = ["doc","docx","ppt","pptx","xls","xls","odt","pdf","webm","mp4","mkv","png","jpg","jpeg"]
 
+signal updatebutton
+
 var history = []
 var configdir = ""
 var converterdir = ""
@@ -23,12 +25,14 @@ var btncurso = preload("res://Objetos/BtnCurso.tscn")
 
 var downloads = []
 var updates = []
+var updatelist = []
 var downloadingfile = ""
 var downloadindex = 0
 var numcambios = 0
 
 var sistemasoperativos = ["windows","linux"]
 
+var buttonsready = false
 var botones = []
 
 func _ready():
@@ -69,6 +73,7 @@ func getlocalconfig():
 	#print(json_as_text)
 	return json_as_text
 
+
 func savejson():
 	print("Guardar")
 	var json_path = configdir + "/config.json"
@@ -76,6 +81,7 @@ func savejson():
 	jsonpdf.store_line( str(Global.softwareinfo) )
 	jsonpdf.close()
 	Global.softwareinfo = JSON.parse_string( getlocalconfig() )
+
 
 func findlocalconfig():
 	var json_path = configdir + "/config.json"
@@ -147,7 +153,6 @@ func _on_request_config_request_completed(result, response_code, headers, body):
 		$CheckOnline.start()
 
 
-
 func setinitialvariables():
 	var path = OS.get_executable_path()
 	Global.basedir = path.get_base_dir()
@@ -155,6 +160,7 @@ func setinitialvariables():
 	configdir = Global.basedir + "/config"
 	currentdir = Global.basedir
 	previusdir = Global.basedir
+
 
 func checkfilesystem():
 	print("primera carpeta " + str(Global.softwareinfo.carpetabase) + ".")
@@ -171,10 +177,10 @@ func checkfilesystem():
 	
 	generateButtons()
 	print("done filessytem")
-	await checkOtherFolders() #paso5
+	await checkAssets() #paso5
 
 
-func iteratefoldercursos(folder,filesystem): #Nueva iteración
+func iteratefoldercursos(folder,filesystem):
 	print("Iterar folder " + folder)
 	var dir = DirAccess.open(Global.basedir + "/" + folder)
 	var iterator = 0
@@ -185,7 +191,8 @@ func iteratefoldercursos(folder,filesystem): #Nueva iteración
 				var boton = {
 					"nombre": elemento.nombre.boton,
 					"updates": false,
-					"location": dir.get_current_dir() + elemento.nombre.carpeta,
+					"location": dir.get_current_dir() + "/"+ elemento.nombre.carpeta,
+					"folder": elemento.nombre.carpeta,
 					"archivos": []
 				}
 				
@@ -228,8 +235,15 @@ func iteratesubfolders(folder,filesystem):
 					"versionweb" : elemento.version,
 					"versionlocal" : -1,
 					"accion": "OK",
-					"location": dir.get_current_dir() + "/" + elemento.nombre.carpeta + "." + elemento.extension
+					"url": elemento.url,
+					"filename": elemento.nombre.carpeta,
+					"folder": dir.get_current_dir() + "/",
+					"location": dir.get_current_dir() + "/" + elemento.nombre.carpeta + "." + elemento.extension,
+					"capitulos": {}
 				}
+				
+				if "capitulos" in elemento:
+					archivo.capitulos = elemento.capitulos
 				
 				if dir.file_exists( elemento.nombre.carpeta+"."+elemento.extension ):
 					print("archivo existe")
@@ -251,92 +265,8 @@ func iteratesubfolders(folder,filesystem):
 				archivos.append(archivo)
 	return archivos
 
-func iteratefoldersandfiles(folder,filesystem, road):
-	print("iterar: "  + str(folder))
-	var dir = DirAccess.open(Global.basedir + "/" + folder)
-	var recorrido = road
-	print("mi recorrido hasta ahora")
-	print(recorrido)
-	recorrido.append(0)
-	var iterator = 0
-	for elemento in filesystem:
-		#print(elemento)
-		print("elemento " +str(iterator) + " " + str(elemento.nombre.carpeta)) 
-		recorrido[-1] = iterator
-		print(recorrido)
-		if "tipo" in elemento:
-			if elemento.tipo == "carpeta":
-				print("Es una carpeta")
-				
-				var nombrecarpeta = elemento.nombre.carpeta
-				
-				print("buscar carpeta " + nombrecarpeta)
-				if dir.dir_exists(nombrecarpeta):
-					print("directorio existe")
-					print(dir.get_current_dir()+ "/"+  nombrecarpeta)
-				else:
-					print("directorio no existe")
-					dir.make_dir(nombrecarpeta)
-				if "subelementos" in elemento:
-					var subfolder = elemento["subelementos"]
-					print("llamar iterador de archivos")
-					var newrecorrido = recorrido
-					print(newrecorrido)
-					iteratefoldersandfiles(folder + "/" + nombrecarpeta,subfolder,newrecorrido)
-					recorrido = [0,iterator]
-			elif elemento.tipo == "archivo":
-				var fileinfojson = { "version": 0}
-				print("Es un archivo")
-				if dir.file_exists(elemento.nombre.carpeta + "." + elemento.extension):
-					print("archivo existe")
-					if dir.file_exists(elemento.nombre.carpeta + "_info" + ".json" ):
-						print("existe el json")
-						var fileinfo = FileAccess.get_file_as_string( dir.get_current_dir() + "/" + elemento.nombre.carpeta + "_info" + ".json")
-						if not fileinfo.is_empty():
-							fileinfojson=  JSON.parse_string(fileinfo)
-					else:
-						var jsonpdf = FileAccess.open( dir.get_current_dir() + "/" + elemento.nombre.carpeta + "_info" + ".json", FileAccess.WRITE )
-						jsonpdf.store_line( '{ "version": 0 }' )
-						jsonpdf.close()
-						
-					print(fileinfojson)
-					print(elemento)
-					if fileinfojson.version < elemento.version: #Actualizar
-						var udpate = {
-							"name" : elemento.nombre.carpeta + "." + elemento.extension,
-							"location" : Global.basedir + "/" +folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,
-							"url" : elemento.url,
-							"place": recorrido,
-							"onlineversion": elemento.version,
-							"localversion": fileinfojson.version,
-							"aviable": true
-						}
-						updates.append(udpate)
-				else:
-					print("se puede descargar")
-					print(elemento.url)
-					var download = {
-						"name" : elemento.nombre.carpeta + "." + elemento.extension,
-						"location" : Global.basedir + "/" +folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,
-						"url" : elemento.url,
-						"onlineversion": elemento.version,
-						"localversion": -1,
-						"place": recorrido
-					}
-					
-					#downloads.append(download)
-					listoffiles.append(downloads)
-					
-				print("comparar locaciones")
-				print( str( folder + "/"  + elemento.nombre.carpeta + "." + elemento.extension) )
-				print( str( elemento.location ) )
-				if str(elemento.location) != str(folder + "/" + elemento.nombre.carpeta + "." + elemento.extension):
-					updatelocation(folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,recorrido)
-		iterator+= 1
-	print("sali del for" )
 
-
-func checkOtherFolders():
+func checkAssets(): #Busqueda De Assets
 	print("chequear segundo filesystm")
 	var dir = DirAccess.open(Global.basedir)
 	var assetsdir = str(Global.softwareinfo.assets.carpeta)
@@ -347,7 +277,7 @@ func checkOtherFolders():
 			var assetinfojson = { "version":0 }
 			if not dir.file_exists( assetsdir + "/" + asset.nombre + "." + asset.extension):
 				var jsonpdf = FileAccess.open( dir.get_current_dir() + "/" +  assetsdir + "/" + asset.nombre + "_info" + ".json", FileAccess.WRITE )
-				jsonpdf.store_line( '{ "version": 0 }' )
+				jsonpdf.store_line( '{ "version": 0 }' ) #'{ "version": 0 }'
 				jsonpdf.close()
 				
 				var download = {
@@ -356,7 +286,7 @@ func checkOtherFolders():
 					"url" : asset.url,
 					"place": "assets/",
 					"onlineversion": asset.version,
-					"localversion":0
+					"localversion":0,
 				}
 				downloads.append(download)
 			else:
@@ -368,7 +298,7 @@ func checkOtherFolders():
 						assetinfojson = JSON.parse_string(fileinfo)
 				else:
 					var jsonpdf = FileAccess.open( dir.get_current_dir() + "/" +  assetsdir + "/" + asset.nombre + "_info" + ".json", FileAccess.WRITE )
-					jsonpdf.store_line( '{ "version": 0 }' )
+					jsonpdf.store_line( '{ "version": 0 }' ) #'{ "version": 0 }'
 					jsonpdf.close()
 					
 				print("Comparar versiones")
@@ -383,11 +313,10 @@ func checkOtherFolders():
 						"place": "assets/",
 						"onlineversion": asset.version,
 						"localversion": assetinfojson.version,
-						"aviable": true
+						"aviable": true,
 					}
 					
 					downloads.append(udpate)
-					
 	else:
 		print("crear la carpeta de assets")
 		dir.make_dir(assetsdir)
@@ -402,7 +331,7 @@ func checkOtherFolders():
 			}
 			downloads.append(download)
 			var jsonpdf = FileAccess.open( dir.get_current_dir() + "/" +  assetsdir + "/" + asset.nombre + "_info" + ".json", FileAccess.WRITE )
-			jsonpdf.store_line( '{ "version": 0 }' )
+			jsonpdf.store_line( '{ "version": 0 }' ) #'{ "version": 0 }'
 			jsonpdf.close()
 		
 	if not dir.dir_exists( Global.softwareinfo.carpetagenerados ):
@@ -441,7 +370,7 @@ func checkDonwnloadConverter():
 							converterinfojson = JSON.parse_string(converterinfo)
 					else:
 						var jsonconverterinfo = FileAccess.open( dir.get_current_dir() + "/" +  converterdir + "/" + ejecutable.versiones[OpSi].nombre + "_info" + ".json", FileAccess.WRITE )
-						jsonconverterinfo.store_line( '{ "version": 0 }' )
+						jsonconverterinfo.store_line( '{ "version": 0 }' ) #'{ "version": 0 }'
 						jsonconverterinfo.close()
 					
 					downloads.append(download)
@@ -453,7 +382,7 @@ func checkDonwnloadConverter():
 							converterinfojson = JSON.parse_string(converterinfo)
 					else:
 						var jsonconverterinfo = FileAccess.open( dir.get_current_dir() + "/" +  converterdir + "/" + ejecutable.versiones[OpSi].nombre + "_info" + ".json", FileAccess.WRITE )
-						jsonconverterinfo.store_line( '{ "version": 0 }' )
+						jsonconverterinfo.store_line( '{ "version": 0 }' ) #'{ "version": 0 }'
 						jsonconverterinfo.close()
 						
 					if converterinfojson.version < ejecutable.versiones[OpSi].version:
@@ -486,11 +415,12 @@ func checkDonwnloadConverter():
 
 
 func generateButtons():
+	print("----------------------Crear botones----------------------")
 	var dir = DirAccess.open(Global.basedir)
 	for key in botones:
-			print(key)
+			#print(key)
 			if "nombre" in key:
-				print(key.nombre)
+				#print(key.nombre)
 				var btndir = btncurso.instantiate()
 				btndir.text = str(key.nombre)
 				btndir.disabled = true
@@ -498,19 +428,30 @@ func generateButtons():
 				var selcur = {
 					"nombre" : key.nombre,
 					"location": key.location,
-					"folder":  key.nombre,
-					"archivos" : "key.subelementos",
-					"actualizar": checkupdates(key)
+					"folder":  key.folder,
+					"archivos" : key.archivos,
+					"actualizar": checkupdates(key.archivos)
  				}
+				#print(selcur)
 				
-				btndir.connect("pressed", Callable(self, "openCurso").bind(selcur))
+				if selcur.actualizar:
+					print("activar botón")
+					btndir.curso = selcur
+					btndir.managerbutton = updatebutton
+					btndir.activateUButton(false)
+				
+				btndir.connect( "pressed", Callable(self, "openCurso").bind(selcur) )
 				$VBoxContainer.add_child(btndir)
 
-func checkupdates(ckey):
-	for ar in ckey.archivos:
+
+func checkupdates(archivos):
+	print("Check updates")
+	for ar in archivos:
 		if ar.accion != "OK":
+			print("hay que actualizar")
 			return true
 	return false
+
 
 func activatebuttons():
 	var buttons = []
@@ -524,11 +465,13 @@ func activatebuttons():
 func clickbutton():
 	print("click")
 
+
 func openCurso(curso):
-	print(curso)
 	print("presionaste: " + curso.nombre)
+	#print(curso)
 	Global.SelectedCurso = curso
 	get_tree().change_scene_to_file("res://Escenas/Curso.tscn")
+
 
 func _on_downloader_request_completed(result, response_code, headers, body):
 	print("download result:")
@@ -536,7 +479,8 @@ func _on_downloader_request_completed(result, response_code, headers, body):
 	print("ahora descargar " + str(downloadindex))
 	downloadindex += 1
 	await doDownload(downloadindex)
-	
+
+
 func doDownload(index):
 	print("Hacer las descargas")
 	if index < downloads.size():
@@ -552,14 +496,25 @@ func doDownload(index):
 		var namearray = download.location.split(".")
 		var jsoninfo = FileAccess.open( namearray[0] + "_info" + ".json", FileAccess.WRITE )
 		print(namearray[0])
-		jsoninfo.store_line( '{ "version": ' + str(download.onlineversion) + ' }' )
+		var dicinfo = {
+			"version" : download.onlineversion,
+			"location": download.location,
+			"url" : download.url
+		}
+		
+		if "capitulos" in download:
+			dicinfo["capitulos"] = download.capitulos
+		
+		jsoninfo.store_line( str(dicinfo) )
 		jsoninfo.close()
-		
 	else:
-		print("Ya no hay mas descargas")
-		await activatebuttons() #paso8
+		if not buttonsready:
+			print("Ya no hay mas descargas")
+			downloads = []
+			buttonsready = true
+			await activatebuttons() #paso8
 
-		
+
 func _process(delta):
 	if $Downloader.get_body_size() > 0:
 		var arr = float($Downloader.get_downloaded_bytes()/1024)
@@ -584,5 +539,34 @@ func _on_downloader_2_request_completed(result, response_code, headers, body):
 
 func _on_check_online_timeout():
 	print("Verificar conexión")
-	
 	$RequestConfig.request("https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/Json/sumoprimero.json")
+
+
+func _on_updatebutton(curso):
+	print("update pressed")
+	#print(curso)
+	downloadindex = 0
+	for updt in curso.archivos:
+		print(updt)
+		var download = {
+			"name" :  updt.filename,
+			"location" : updt.location,
+			"url" : updt.url,
+			"place": updt.folder,
+			"onlineversion": updt.versionweb,
+		}
+		
+		if "capitulos" in updt:
+			download["capitulos"] = updt.capitulos
+		
+		if updt.accion == "actualizar":
+			downloads.append(download)
+		elif updt.accion == "descargar":
+			downloads.append(download)
+	
+	print("update list:")
+	print(updatelist)
+	print("download list:")
+	print(downloads)
+	
+	doDownload(downloadindex)
