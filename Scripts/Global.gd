@@ -64,6 +64,7 @@ func GenerarImagenes(location,pag,wait):
 	print("iniciar en pagina " + str(pag))
 	var converterdir = Global.basedir + "/converter"
 	var filetoopen = Global.basedir + "/" + location
+	#var filetoopen = location
 	
 	var numerospags = [1,2,3]
 	
@@ -106,6 +107,7 @@ func GenerarImagenes(location,pag,wait):
 		
 		print("Crear paginas")
 		print(numpagstr)
+		print(filetoopen)
 		var totalpagstr = "0"
 		
 		OS.execute(ejecutable, [filetoopen, numpagstr], output, wait)
@@ -148,7 +150,8 @@ func GenerarImagenes(location,pag,wait):
 		else:
 			Global.FileReading.currentindex = pag
 			
-		Global.FileReading.nombre = Global.FileToRead.nombre.boton
+		print( Global.FileToRead )
+		Global.FileReading.nombre = Global.FileToRead.nombre
 		print("imagenes generadas")
 		print(Global.FileReading)
 
@@ -157,7 +160,8 @@ func generatePDF(rango,notas,all,nombre,wait):
 	print("Generar PDF")
 	print(Global.FileToRead)
 	var converterdir = Global.basedir + "/converter"
-	var filedir = Global.basedir + "/" + Global.FileToRead.location
+	var filedir = Global.basedir + "/" + Global.FileToRead.sublocation
+	#var filedir =  Global.FileToRead.location
 	var notasdir = Global.basedir + "/assets/" + "formatonotas.pdf" 
 	var finalfile = Global.basedir + "/generado/" + nombre + ".pdf"  
 	

@@ -63,7 +63,7 @@ func setimage(index):
 		if ( lastdirection == 1 ) and not ( dir.file_exists( "pagina_" + str(index + 3) + ".png" ) ) and ( (index + 3) < maxindex ):
 			print("cargar por adelantado " + str(index + 3) )
 			thread.start( _thread_LoadPages.bind(index + 3) )
-			#Global.GenerarImagenes(Global.FileToRead.location,index + 3,false)
+			#Global.GenerarImagenes(Global.FileToRead.sublocation,index + 3,false)
 		else:
 			print("existe siguiente" + "pagina_" + str(index + 3) + ".png")
 		if ( lastdirection == -1 ) and not ( dir.file_exists( "pagina_" + str(index - 3) + ".png" ) ) and ( (index - 3) > 0 ):
@@ -71,7 +71,7 @@ func setimage(index):
 			thread.start( _thread_LoadPages.bind(index - 3) )
 	else:
 		print("no existe la imagen")
-		await Global.GenerarImagenes(Global.FileToRead.location,index,true)
+		await Global.GenerarImagenes(Global.FileToRead.sublocation,index,true)
 		
 		print("ahora cargarla")
 		var image = Image.load_from_file(Global.basedir + "/converter/" + "pagina_" + str(index) + ".png")
@@ -199,7 +199,7 @@ func _on_button_ir_pagina_pressed():
 
 func _thread_LoadPages(number):
 	print("I'm a thread! number is: ", str(number) )
-	Global.GenerarImagenes(Global.FileToRead.location,number,false)
+	Global.GenerarImagenes(Global.FileToRead.sublocation,number,false)
 
 
 func _exit_tree():

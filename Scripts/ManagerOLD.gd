@@ -205,7 +205,6 @@ func prepararanotas():
 	
 	print("Cambiar de escena")
 	get_tree().change_scene_to_file("res://Escenas/notas.tscn")
-
 func looadinteractivos():
 	print("buscar interactivos")
 	var json_path = basedir + "/" + nombreinteract  +".json"

@@ -43,6 +43,8 @@ func _ready():
 	currentdir = Global.basedir
 	previusdir = Global.basedir
 	
+	print("Inicio")
+	
 	$ProcessLabel.text = "Verificar versión online"
 	
 	await $RequestConfig.request("https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/Json/sumoprimero.json")#paso1
@@ -134,6 +136,14 @@ func _on_request_config_request_completed(result, response_code, headers, body):
 		print("No hay internetus")
 		online = false
 		
+		var dir = DirAccess.open(Global.basedir +"/config")
+		print(dir)
+		if dir.file_exists( "config.json" ):
+			print("existe el json")
+			var config = FileAccess.get_file_as_string( dir.get_current_dir() + "/config.json")
+			if not config.is_empty():
+				Global.softwareinfo = JSON.parse_string(config)
+				
 	#print("software info:")
 	#print(Global.softwareinfo)
 	#Global.softwareOnline = obtainedjson
@@ -192,6 +202,7 @@ func iteratefoldercursos(folder,filesystem):
 					"nombre": elemento.nombre.boton,
 					"updates": false,
 					"location": dir.get_current_dir() + "/"+ elemento.nombre.carpeta,
+					"sublocation": elemento.nombre.carpeta,
 					"folder": elemento.nombre.carpeta,
 					"archivos": []
 				}
@@ -239,6 +250,7 @@ func iteratesubfolders(folder,filesystem):
 					"filename": elemento.nombre.carpeta,
 					"folder": dir.get_current_dir() + "/",
 					"location": dir.get_current_dir() + "/" + elemento.nombre.carpeta + "." + elemento.extension,
+					"sublocation": folder + "/" + elemento.nombre.carpeta + "." + elemento.extension,
 					"capitulos": {}
 				}
 				
@@ -283,6 +295,7 @@ func checkAssets(): #Busqueda De Assets
 				var download = {
 					"name" :  asset.nombre,
 					"location" : Global.basedir + "/" + Global.softwareinfo.assets.carpeta + "/" + asset.nombre + "." + asset.extension,
+					"sublocation": Global.softwareinfo.assets.carpeta + "/" + asset.nombre + "." + asset.extension,
 					"url" : asset.url,
 					"place": "assets/",
 					"onlineversion": asset.version,
@@ -309,6 +322,7 @@ func checkAssets(): #Busqueda De Assets
 					var udpate = {
 						"name" :  asset.nombre,
 						"location" : Global.basedir + "/" + Global.softwareinfo.assets.carpeta + "/" + asset.nombre + "." + asset.extension,
+						"sublocation": Global.softwareinfo.assets.carpeta + "/" + asset.nombre + "." + asset.extension,
 						"url" : asset.url,
 						"place": "assets/",
 						"onlineversion": asset.version,
@@ -324,6 +338,7 @@ func checkAssets(): #Busqueda De Assets
 			var download = {
 				"name" :  asset.nombre,
 				"location" : Global.basedir + "/" + Global.softwareinfo.assets.carpeta + "/" + asset.nombre,
+				"sublocation" : Global.softwareinfo.assets.carpeta + "/" + asset.nombre,
 				"url" : asset.url,
 				"place": "assets/",
 				"onlineversion": 0,
@@ -357,6 +372,7 @@ func checkDonwnloadConverter():
 					var download = {
 						"name" :  ejecutosi.nombre,
 						"location" : Global.basedir + "/" + str( Global.softwareinfo.converter.carpeta ) + "/" + ejecutosi.nombre,
+						"sublocation" : str( Global.softwareinfo.converter.carpeta ) + "/" + ejecutosi.nombre,
 						"url" : ejecutosi.url,
 						"place": "assets/",
 						"onlineversion": ejecutable.versiones[OpSi].version,
@@ -390,6 +406,7 @@ func checkDonwnloadConverter():
 						var update = {
 							"name" :  ejecutosi.nombre,
 							"location" : Global.basedir + "/" + str( Global.softwareinfo.converter.carpeta ) + "/" + ejecutosi.nombre,
+							"sublocation" : str( Global.softwareinfo.converter.carpeta ) + "/" + ejecutosi.nombre,
 							"url" : ejecutosi.url,
 							"place": "assets/",
 							"onlineversion": ejecutable.versiones[OpSi].version,
@@ -407,6 +424,7 @@ func checkDonwnloadConverter():
 				var download = {
 					"name" :  ejecutosi.nombre,
 					"location" : Global.basedir + "/" + str( Global.softwareinfo.converter.carpeta ) + "/" + ejecutosi.nombre,
+					"sublocation" : str( Global.softwareinfo.converter.carpeta ) + "/" + ejecutosi.nombre,
 					"url" : ejecutosi.url,
 					"place": "assets/"
 				}
@@ -428,6 +446,7 @@ func generateButtons():
 				var selcur = {
 					"nombre" : key.nombre,
 					"location": key.location,
+					"sublocation": key.sublocation,
 					"folder":  key.folder,
 					"archivos" : key.archivos,
 					"actualizar": checkupdates(key.archivos)
@@ -499,7 +518,9 @@ func doDownload(index):
 		var dicinfo = {
 			"version" : download.onlineversion,
 			"location": download.location,
-			"url" : download.url
+			"sublocation": download.sublocation,
+			"url" : download.url,
+			"nombre": download.name
 		}
 		
 		if "capitulos" in download:
@@ -551,6 +572,7 @@ func _on_updatebutton(curso):
 		var download = {
 			"name" :  updt.filename,
 			"location" : updt.location,
+			"sublocation": updt.sublocation,
 			"url" : updt.url,
 			"place": updt.folder,
 			"onlineversion": updt.versionweb,

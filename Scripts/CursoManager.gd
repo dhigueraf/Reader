@@ -45,7 +45,7 @@ func generateButtons():
 								print(file_name + " es un PDF")
 								
 								var buttontocreate = {
-									"nombre" : file_name,
+									"nombrearchivo" : file_name,
 									"soloexterno": false,
 									"capitulos": {},
 									"version": 0
@@ -59,7 +59,9 @@ func generateButtons():
 									if not fileinfo.is_empty():
 										jsoninfo = JSON.parse_string(fileinfo)
 										buttontocreate.capitulos = jsoninfo.capitulos
-									
+										buttontocreate.location = jsoninfo.location
+										buttontocreate.sublocation = jsoninfo.sublocation
+										buttontocreate.nombre = jsoninfo.nombre
 								
 								if dirorfilename == "guia didactica del docente":
 									print("encontre guia didactica del docente")

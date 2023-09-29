@@ -36,7 +36,7 @@ func activate(document):
 	$ColorRect/CasoCaptiulo/CapOptions.select(Global.captituloactual.numero)
 	$ColorRect/PrintOptions.select(0)
 	slectprintoptions(0)
-	$ColorRect/InputNombre.text = Global.FileToRead.nombre.boton + "_notas"
+	$ColorRect/InputNombre.text = Global.FileToRead.nombre + "_notas"
 	
 func deactivate():
 	visible = false
