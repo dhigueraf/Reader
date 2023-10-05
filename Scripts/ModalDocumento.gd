@@ -44,8 +44,9 @@ func _on_cross_button_pressed():
 
 func _on_btn_lector_pressed():
 	print("abrir con lector externo")
-	print(Global.basedir + "/" + documento.location)
-	OS.shell_open(Global.basedir  + "/" +  documento.location)
+	#print(documento)
+	print(Global.basedir + "/" + documento.sublocation)
+	OS.shell_open(Global.basedir  + "/" +  documento.sublocation)
 
 
 func _on_btn_portada_pressed():

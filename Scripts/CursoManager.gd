@@ -51,6 +51,9 @@ func generateButtons():
 									"version": 0
 								}
 								
+								if dirorfilename.to_lower() == "textos del estudiante":
+									buttontocreate.soloexterno = true
+									
 								var jsoninfo = {}
 								
 								if subdir.file_exists( filearray[0] + "_info.json"):
