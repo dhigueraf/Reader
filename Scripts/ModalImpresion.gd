@@ -101,9 +101,9 @@ func _on_btn_generar_pressed():
 	generaterangearray(pini,pfin)
 	
 	var arrynotasp = [0,0,0]
-	arrynotasp[0] = $ColorRect/InputCuadriculada7.value
-	arrynotasp[1] = $ColorRect/InputCuadriculada5.value
-	arrynotasp[2] = $ColorRect/InputLineas.value
+	arrynotasp[0] = $ColorRect/hojasadicionales/input7mm/InputCuadriculada7.value   
+	arrynotasp[1] = $ColorRect/hojasadicionales/input5mm/InputCuadriculada5.value
+	arrynotasp[2] = $ColorRect/hojasadicionales/inputlinea/InputLineas.value 
 	notaspags = str(arrynotasp[0]) + "_" + str(arrynotasp[1]) + "_" + str(arrynotasp[2])
 	
 	print("paginas a imprimir")
