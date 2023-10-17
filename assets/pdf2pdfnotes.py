@@ -8,7 +8,7 @@ pdf2_path = sys.argv[2] #"formatonotas.pdf" #sys.argv[2]
 #pages_to_convert = sys.argv[3]
 
 pages_from_pdf1 = sys.argv[3] #"all" #"1_2_3_4"  # Páginas del primer PDF a incluir
-pages_from_pdf2 = sys.argv[4] #"4_2_2"  # Páginas del segundo PDF a incluir
+pages_from_pdf2 = sys.argv[4] #"5mm:4_5mm:2_lin:2"  # Páginas del segundo PDF a incluir
 
 output_pdf = sys.argv[5]#'resultado.pdf'
 
@@ -33,21 +33,34 @@ with open(pdf1_path, 'rb') as pdf1, open(pdf2_path, 'rb') as pdf2:
          for page in pdf1_reader.pages:
             pdf_writer.add_page(page)
 
-    #Paginas de notas
+    #Separar paginas de notas
     notespages = []
     arraypages2str = pages_from_pdf2.split("_")
     for page in arraypages2str:
-        notespages.append( int(page) )
+        notetypearray = page.split(":")
+        pagetype = notetypearray[0]
+        pagequanty = int(notetypearray[1])
+        indextoadd = 0
+        
+        if pagetype == "5mm":
+            indextoadd = 0
+        if pagetype == "7mm":
+            indextoadd = 1
+        if pagetype == "lin":
+            indextoadd = 2
 
-    iterator = 0
-    for page_num in notespages:
         pageiter = 0
         #print("anadir " + str(page_num) + " veces")
-        while pageiter < page_num:
+        while pageiter < pagequanty:
             #print("anadir")
-            pdf_writer.add_page(pdf2_reader.pages[iterator])
+            notespages.append(indextoadd) 
             pageiter +=1
-        iterator += 1
+
+    #Agregar paginas de notas
+    for page_num in notespages:
+        pdf_writer.add_page(pdf2_reader.pages[page_num])
+
+
 
     with open(output_pdf, 'wb') as output:
         pdf_writer.write(output)

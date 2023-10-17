@@ -1,12 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4shyw6x7ij16"]
+[gd_scene load_steps=10 format=3 uid="uid://b4shyw6x7ij16"]
 
 [ext_resource type="Script" path="res://Scripts/ModalImpresion.gd" id="1_r7y5m"]
 [ext_resource type="Texture2D" uid="uid://dehtwygigjkme" path="res://Sprites/closebtn.png" id="2_0r133"]
-[ext_resource type="Texture2D" uid="uid://diamb6krxqv4a" path="res://Sprites/downarrow.png" id="2_cy5gr"]
-[ext_resource type="PackedScene" uid="uid://b4xnx10f7wogj" path="res://Objetos/inputnotas.tscn" id="2_flate"]
+[ext_resource type="PackedScene" uid="uid://mo80i3jti7g0" path="res://Objetos/inputdragable.tscn" id="2_7xerh"]
+[ext_resource type="Script" path="res://Scripts/dragobject.gd" id="3_8njkq"]
 [ext_resource type="Texture2D" uid="uid://dcsw5ailkc0un" path="res://Sprites/closebtn_pressed.png" id="3_p10ta"]
-[ext_resource type="Texture2D" uid="uid://dwgwy6baxuuu6" path="res://Sprites/downarrow2.png" id="3_u35e0"]
-[ext_resource type="Script" path="res://Scripts/btnInput.gd" id="5_43p4c"]
+[ext_resource type="PackedScene" uid="uid://cf5wfgurcwswf" path="res://Objetos/DropPos.tscn" id="3_sr4y3"]
+[ext_resource type="Texture2D" uid="uid://da55hyo6esrdl" path="res://Sprites/OOjs_UI_icon_draggable.png" id="3_tv8nk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tubdh"]
+size = Vector2(520, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kqx3w"]
+size = Vector2(520, 39)
 
 [node name="ModalImpresion" type="CanvasLayer"]
 
@@ -150,219 +156,79 @@ value = 1.0
 [node name="labelpro" type="Label" parent="Control/ColorRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.009
-anchor_top = 0.453
-anchor_right = 0.047
-anchor_bottom = 0.5
-offset_left = -0.0220003
-offset_top = 0.192001
-offset_right = -0.226002
-offset_bottom = 1.0
+anchor_top = 0.457
+anchor_bottom = 0.457
+offset_left = 5.99994
+offset_top = -12.9519
+offset_right = 26.9999
+offset_bottom = 13.0481
 grow_vertical = 2
 text = "1°"
 
 [node name="labelsdo" type="Label" parent="Control/ColorRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.009
-anchor_top = 0.53
-anchor_right = 0.043
-anchor_bottom = 0.578
-offset_left = -0.0220003
-offset_top = -0.0800171
-offset_right = 0.00599861
-offset_bottom = 0.191986
+anchor_top = 0.541
+anchor_bottom = 0.541
+offset_left = 7.99994
+offset_top = -12.9758
+offset_right = 26.9999
+offset_bottom = 13.0242
 grow_vertical = 2
 text = "2°"
 
 [node name="labeltro" type="Label" parent="Control/ColorRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.009
-anchor_top = 0.616
-anchor_right = 0.047
-anchor_bottom = 0.664
-offset_left = -0.0220003
-offset_top = -0.176025
-offset_right = -0.226002
-offset_bottom = 0.0959778
+anchor_top = 0.625
+anchor_bottom = 0.625
+offset_left = 7.99994
+offset_top = -12.9998
+offset_right = 28.9999
+offset_bottom = 13.0002
 grow_vertical = 2
 text = "3°"
-
-[node name="labeltro2" type="Label" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.009
-anchor_top = 0.616
-anchor_right = 0.047
-anchor_bottom = 0.664
-offset_left = -0.0220003
-offset_top = -0.176025
-offset_right = -0.226002
-offset_bottom = 0.0959778
-grow_vertical = 2
-text = "3°"
-
-[node name="pos1" type="PanelContainer" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.479
-anchor_right = 1.0
-anchor_bottom = 0.479
-offset_left = 60.0001
-offset_top = -19.7441
-offset_right = -8.00006
-offset_bottom = 20.256
-metadata/_edit_use_anchors_ = true
-
-[node name="input5mm" parent="Control/ColorRect/pos1" instance=ExtResource("2_flate")]
-layout_mode = 2
-etiqueta = "Cantidad de hojas cuadriculadas a 5 [milimetros]"
-textvalue = "5mm"
-
-[node name="pos2" type="PanelContainer" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.558
-anchor_right = 1.0
-anchor_bottom = 0.558
-offset_left = 60.0001
-offset_top = -20.0877
-offset_right = -8.00006
-offset_bottom = 19.9124
-metadata/_edit_use_anchors_ = true
-
-[node name="input7mm" parent="Control/ColorRect/pos2" instance=ExtResource("2_flate")]
-layout_mode = 2
-etiqueta = "Cantidad de hojas cuadriculadas a 7 [milimetros]"
-textvalue = "7mm"
-
-[node name="pos3" type="PanelContainer" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.636
-anchor_right = 1.0
-anchor_bottom = 0.636
-offset_left = 60.0001
-offset_top = -19.8958
-offset_right = -8.00006
-offset_bottom = 20.1042
-metadata/_edit_use_anchors_ = true
-
-[node name="inputlinea" parent="Control/ColorRect/pos3" instance=ExtResource("2_flate")]
-layout_mode = 2
-etiqueta = "Cantidad de hojas con linea simple"
-textvalue = "lin"
-
-[node name="down_btn" type="TextureButton" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.479
-anchor_bottom = 0.479
-offset_left = 26.9999
-offset_top = -6.7439
-offset_right = 54.9999
-offset_bottom = 6.2561
-texture_normal = ExtResource("2_cy5gr")
-texture_pressed = ExtResource("3_u35e0")
-ignore_texture_size = true
-stretch_mode = 0
-script = ExtResource("5_43p4c")
-pospath = NodePath("../pos1")
-pos2path = NodePath("../pos2")
-
-[node name="up_btn2" type="TextureButton" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.546
-anchor_bottom = 0.546
-offset_left = 28.9999
-offset_top = -6.65588
-offset_right = 56.9999
-offset_bottom = 6.34412
-texture_normal = ExtResource("2_cy5gr")
-texture_pressed = ExtResource("3_u35e0")
-ignore_texture_size = true
-stretch_mode = 0
-flip_v = true
-script = ExtResource("5_43p4c")
-pospath = NodePath("../pos2")
-pos2path = NodePath("../pos1")
-
-[node name="down_btn2" type="TextureButton" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.017
-anchor_top = 0.576
-anchor_bottom = 0.576
-offset_left = 38.4859
-offset_top = -6.73587
-offset_right = 56.9999
-offset_bottom = 6.26413
-texture_normal = ExtResource("2_cy5gr")
-texture_pressed = ExtResource("3_u35e0")
-ignore_texture_size = true
-stretch_mode = 0
-script = ExtResource("5_43p4c")
-pospath = NodePath("../pos2")
-pos2path = NodePath("../pos3")
-
-[node name="up_btn" type="TextureButton" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.638
-anchor_bottom = 0.638
-offset_left = 28.9999
-offset_top = -7.96786
-offset_right = 56.9999
-offset_bottom = 5.03214
-texture_normal = ExtResource("2_cy5gr")
-texture_pressed = ExtResource("3_u35e0")
-ignore_texture_size = true
-stretch_mode = 0
-flip_v = true
-script = ExtResource("5_43p4c")
-pospath = NodePath("../pos3")
-pos2path = NodePath("../pos2")
 
 [node name="txt_nombrearchivo" type="Label" parent="Control/ColorRect"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.763
-anchor_right = 1.0
-anchor_bottom = 0.763
-offset_left = 47.0
-offset_top = -12.9681
-offset_right = -51.0
-offset_bottom = 13.0319
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -232.0
+offset_top = -140.0
+offset_right = 228.0
+offset_bottom = -114.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Nombre del archivo exportado:"
 
 [node name="InputNombre" type="LineEdit" parent="Control/ColorRect"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.833
-anchor_right = 0.916
-anchor_bottom = 0.833
-offset_left = 46.0
-offset_top = -15.4881
-offset_right = -70.1281
-offset_bottom = 15.5119
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -233.0
+offset_top = -105.0
+offset_right = 162.0
+offset_bottom = -74.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="txt pdflabel" type="Label" parent="Control/ColorRect"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.84
-anchor_right = 1.0
-anchor_bottom = 0.84
-offset_left = -108.0
-offset_top = -13.2401
-offset_right = -68.0
-offset_bottom = 12.7599
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 171.0
+offset_top = -99.0
+offset_right = 211.0
+offset_bottom = -73.0
 grow_horizontal = 2
 grow_vertical = 0
 text = ".pdf"
@@ -382,6 +248,139 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Generar Documento"
 
+[node name="input7mm" parent="Control/ColorRect" instance=ExtResource("2_7xerh")]
+layout_mode = 1
+offset_left = 0.999939
+offset_top = 172.0
+offset_right = -4.0
+offset_bottom = -319.0
+
+[node name="input5mm" type="TextureRect" parent="Control/ColorRect"]
+layout_mode = 2
+offset_left = 581.0
+offset_top = 202.0
+offset_right = 1103.0
+offset_bottom = 258.0
+size_flags_vertical = 3
+texture = ExtResource("3_tv8nk")
+stretch_mode = 2
+script = ExtResource("3_8njkq")
+
+[node name="txt_cuadriculadas" type="Label" parent="Control/ColorRect/input5mm"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 45.0
+offset_top = -12.4996
+offset_right = 421.0
+offset_bottom = 13.5004
+grow_vertical = 2
+text = "Cantidad de hojas cuadriculadas a 5 [milimetros]"
+
+[node name="InputCuadriculada5" type="SpinBox" parent="Control/ColorRect/input5mm"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -93.0001
+offset_top = -16.0
+offset_right = -9.93756
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Area2D" type="Area2D" parent="Control/ColorRect/input5mm"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/ColorRect/input5mm/Area2D"]
+position = Vector2(262, 25.5)
+shape = SubResource("RectangleShape2D_tubdh")
+
+[node name="inputlinea" type="TextureRect" parent="Control/ColorRect"]
+layout_mode = 2
+anchor_left = 0.969534
+anchor_top = 0.0205224
+anchor_right = 0.969534
+anchor_bottom = 0.0205224
+offset_left = 40.0
+offset_top = 320.0
+offset_right = 544.0
+offset_bottom = 365.0
+size_flags_vertical = 3
+texture = ExtResource("3_tv8nk")
+stretch_mode = 4
+script = ExtResource("3_8njkq")
+
+[node name="InputLineas" type="SpinBox" parent="Control/ColorRect/inputlinea"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -71.0001
+offset_top = -13.5
+offset_right = 12.0624
+offset_bottom = 17.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="txt_lineas" type="Label" parent="Control/ColorRect/inputlinea"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 45.0
+offset_top = -13.4999
+offset_right = 421.0
+offset_bottom = 12.5001
+grow_vertical = 2
+text = "Cantidad de hojas con linea simple"
+
+[node name="Area2D" type="Area2D" parent="Control/ColorRect/inputlinea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/ColorRect/inputlinea/Area2D"]
+position = Vector2(262, 23.5)
+shape = SubResource("RectangleShape2D_kqx3w")
+
+[node name="pos1" parent="Control/ColorRect" instance=ExtResource("3_sr4y3")]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.454
+anchor_right = 0.0
+anchor_bottom = 0.454
+offset_left = 40.9999
+offset_top = -17.3439
+offset_right = 563.0
+offset_bottom = 25.6561
+
+[node name="pos2" parent="Control/ColorRect" instance=ExtResource("3_sr4y3")]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.538
+anchor_right = 0.0
+anchor_bottom = 0.538
+offset_left = 40.9999
+offset_top = -16.3679
+offset_right = 563.0
+offset_bottom = 26.6321
+
+[node name="pos3" parent="Control/ColorRect" instance=ExtResource("3_sr4y3")]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.625
+anchor_right = 0.0
+anchor_bottom = 0.625
+offset_left = 39.9999
+offset_top = -15.9999
+offset_right = 562.0
+offset_bottom = 27.0001
+
 [node name="CrossButton" type="TextureButton" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
@@ -399,9 +398,5 @@ texture_pressed = ExtResource("3_p10ta")
 [connection signal="item_selected" from="Control/ColorRect/PrintOptions" to="Control" method="_on_print_options_item_selected"]
 [connection signal="value_changed" from="Control/ColorRect/CasoRango/inputDesde" to="Control" method="_on_input_desde_value_changed"]
 [connection signal="value_changed" from="Control/ColorRect/CasoRango/inputHasta" to="Control" method="_on_input_hasta_value_changed"]
-[connection signal="pressed" from="Control/ColorRect/down_btn" to="Control/ColorRect/down_btn" method="_on_pressed"]
-[connection signal="pressed" from="Control/ColorRect/up_btn2" to="Control/ColorRect/up_btn2" method="_on_pressed"]
-[connection signal="pressed" from="Control/ColorRect/down_btn2" to="Control/ColorRect/down_btn2" method="_on_pressed"]
-[connection signal="pressed" from="Control/ColorRect/up_btn" to="Control/ColorRect/up_btn" method="_on_pressed"]
 [connection signal="pressed" from="Control/ColorRect/btnGenerar" to="Control" method="_on_btn_generar_pressed"]
 [connection signal="pressed" from="Control/CrossButton" to="Control" method="_on_cross_button_pressed"]

@@ -101,9 +101,9 @@ func _on_btn_generar_pressed():
 	generaterangearray(pini,pfin)
 	
 	var arrynotasp = [0,0,0]
-	arrynotasp[0] = $ColorRect/hojasadicionales/input7mm/InputCuadriculada7.value   
-	arrynotasp[1] = $ColorRect/hojasadicionales/input5mm/InputCuadriculada5.value
-	arrynotasp[2] = $ColorRect/hojasadicionales/inputlinea/InputLineas.value 
+	arrynotasp[0] = $ColorRect/pos1.get_child(0).getFinalValue()
+	arrynotasp[1] = $ColorRect/pos2.get_child(0).getFinalValue()
+	arrynotasp[2] = $ColorRect/pos3.get_child(0).getFinalValue()
 	notaspags = str(arrynotasp[0]) + "_" + str(arrynotasp[1]) + "_" + str(arrynotasp[2])
 	
 	print("paginas a imprimir")
@@ -128,4 +128,3 @@ func _on_input_hasta_value_changed(value):
 		
 	if value < $ColorRect/CasoRango/inputDesde.value:
 		$ColorRect/CasoRango/inputHasta.value = $ColorRect/CasoRango/inputDesde.value
-
