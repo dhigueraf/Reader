@@ -31,6 +31,18 @@ color = Color(0.223529, 0.223529, 0.223529, 0.878431)
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
+[node name="CrossButton" type="TextureButton" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.0001
+offset_top = -33.0
+offset_right = 32.9999
+offset_bottom = 31.0
+texture_normal = ExtResource("2_0r133")
+texture_pressed = ExtResource("3_p10ta")
+
 [node name="Label" type="Label" parent="Control/ColorRect"]
 layout_mode = 1
 anchors_preset = -1
@@ -49,22 +61,24 @@ vertical_alignment = 1
 [node name="txt_Seleccione" type="Label" parent="Control/ColorRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0842294
-anchor_top = 0.222015
-anchor_right = 0.399642
-anchor_bottom = 0.270522
+anchor_top = 0.246
+anchor_bottom = 0.246
+offset_left = 47.0
+offset_top = -12.856
+offset_right = 223.0
+offset_bottom = 13.1438
 text = "Seleccione una opción:"
 metadata/_edit_use_anchors_ = true
 
 [node name="PrintOptions" type="OptionButton" parent="Control/ColorRect"]
-layout_mode = 0
-anchor_left = 0.442652
-anchor_top = 0.227612
-anchor_right = 0.763441
-anchor_bottom = 0.285448
-offset_left = 1.52588e-05
-offset_right = -67.0
-offset_bottom = -11.0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.249
+anchor_bottom = 0.249
+offset_left = 251.0
+offset_top = -15.4639
+offset_right = 430.0
+offset_bottom = 15.5361
 item_count = 3
 popup/item_0/text = "Capitulo"
 popup/item_0/id = 0
@@ -77,9 +91,12 @@ metadata/_edit_use_anchors_ = true
 [node name="CasoCaptiulo" type="Control" parent="Control/ColorRect"]
 visible = false
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
+anchor_top = 0.362
+anchor_bottom = 0.362
+offset_left = 279.0
+offset_top = -194.032
+offset_right = 279.0
+offset_bottom = -194.032
 grow_horizontal = 2
 
 [node name="txt_capitulo" type="Label" parent="Control/ColorRect/CasoCaptiulo"]
@@ -100,9 +117,12 @@ offset_bottom = 200.0
 [node name="CasoRango" type="Control" parent="Control/ColorRect"]
 visible = false
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
+anchor_top = 0.357
+anchor_bottom = 0.357
+offset_left = 279.0
+offset_top = -191.352
+offset_right = 279.0
+offset_bottom = -191.352
 grow_horizontal = 2
 
 [node name="txt_desde" type="Label" parent="Control/ColorRect/CasoRango"]
@@ -150,56 +170,36 @@ value = 1.0
 [node name="labelpro" type="Label" parent="Control/ColorRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.009
-anchor_top = 0.453
-anchor_right = 0.047
-anchor_bottom = 0.5
-offset_left = -0.0220003
-offset_top = 0.192001
-offset_right = -0.226002
-offset_bottom = 1.0
+anchor_top = 0.478
+anchor_bottom = 0.478
+offset_left = 5.0
+offset_top = -13.208
+offset_right = 26.0
+offset_bottom = 12.792
 grow_vertical = 2
 text = "1°"
 
 [node name="labelsdo" type="Label" parent="Control/ColorRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.009
-anchor_top = 0.53
-anchor_right = 0.043
-anchor_bottom = 0.578
-offset_left = -0.0220003
-offset_top = -0.0800171
-offset_right = 0.00599861
-offset_bottom = 0.191986
+anchor_top = 0.554
+anchor_bottom = 0.554
+offset_left = 5.0
+offset_top = -12.944
+offset_right = 24.0
+offset_bottom = 13.056
 grow_vertical = 2
 text = "2°"
-
-[node name="labeltro" type="Label" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.009
-anchor_top = 0.616
-anchor_right = 0.047
-anchor_bottom = 0.664
-offset_left = -0.0220003
-offset_top = -0.176025
-offset_right = -0.226002
-offset_bottom = 0.0959778
-grow_vertical = 2
-text = "3°"
 
 [node name="labeltro2" type="Label" parent="Control/ColorRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.009
-anchor_top = 0.616
-anchor_right = 0.047
-anchor_bottom = 0.664
-offset_left = -0.0220003
-offset_top = -0.176025
-offset_right = -0.226002
-offset_bottom = 0.0959778
+anchor_top = 0.64
+anchor_bottom = 0.64
+offset_left = 5.0
+offset_top = -13.04
+offset_right = 26.0
+offset_bottom = 12.96
 grow_vertical = 2
 text = "3°"
 
@@ -292,13 +292,12 @@ pos2path = NodePath("../pos1")
 [node name="down_btn2" type="TextureButton" parent="Control/ColorRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.017
 anchor_top = 0.576
 anchor_bottom = 0.576
-offset_left = 38.4859
-offset_top = -6.73587
+offset_left = 28.9999
+offset_top = -6.7359
 offset_right = 56.9999
-offset_bottom = 6.26413
+offset_bottom = 6.2641
 texture_normal = ExtResource("2_cy5gr")
 texture_pressed = ExtResource("3_u35e0")
 ignore_texture_size = true
@@ -382,20 +381,7 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Generar Documento"
 
-[node name="CrossButton" type="TextureButton" parent="Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.727
-anchor_top = 0.031
-anchor_right = 0.783
-anchor_bottom = 0.13
-offset_left = 0.495911
-offset_top = -0.0880013
-offset_right = -0.0160522
-offset_bottom = -0.240005
-texture_normal = ExtResource("2_0r133")
-texture_pressed = ExtResource("3_p10ta")
-
+[connection signal="pressed" from="Control/ColorRect/CrossButton" to="Control" method="_on_cross_button_pressed"]
 [connection signal="item_selected" from="Control/ColorRect/PrintOptions" to="Control" method="_on_print_options_item_selected"]
 [connection signal="value_changed" from="Control/ColorRect/CasoRango/inputDesde" to="Control" method="_on_input_desde_value_changed"]
 [connection signal="value_changed" from="Control/ColorRect/CasoRango/inputHasta" to="Control" method="_on_input_hasta_value_changed"]
@@ -404,4 +390,3 @@ texture_pressed = ExtResource("3_p10ta")
 [connection signal="pressed" from="Control/ColorRect/down_btn2" to="Control/ColorRect/down_btn2" method="_on_pressed"]
 [connection signal="pressed" from="Control/ColorRect/up_btn" to="Control/ColorRect/up_btn" method="_on_pressed"]
 [connection signal="pressed" from="Control/ColorRect/btnGenerar" to="Control" method="_on_btn_generar_pressed"]
-[connection signal="pressed" from="Control/CrossButton" to="Control" method="_on_cross_button_pressed"]

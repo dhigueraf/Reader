@@ -22,6 +22,7 @@ grow_vertical = 2
 script = ExtResource("1_anyd4")
 
 [node name="Logos" parent="CanvasLayer/Control" instance=ExtResource("2_iy58q")]
+visible = false
 z_index = -10
 layout_mode = 1
 
@@ -38,17 +39,24 @@ script = ExtResource("3_oq5gb")
 layout_mode = 0
 offset_left = -53.0
 offset_top = -55.0
-offset_right = 59.0
-offset_bottom = 57.0
+offset_right = 10.0
+offset_bottom = 12.0
 texture = ExtResource("3_3vdqq")
+expand_mode = 1
 
 [node name="Cross" type="TextureRect" parent="CanvasLayer/Control/InternetStatus"]
-layout_mode = 0
-offset_left = -60.0
-offset_top = -65.0
-offset_right = 64.0
-offset_bottom = 63.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.5
+anchor_top = -0.512
+anchor_right = -0.5
+anchor_bottom = -0.512
+offset_left = -34.0
+offset_top = -33.52
+offset_right = 34.0
+offset_bottom = 33.48
 texture = ExtResource("4_5lbi7")
+expand_mode = 1
 
 [node name="RequestConfig" type="HTTPRequest" parent="CanvasLayer/Control"]
 
