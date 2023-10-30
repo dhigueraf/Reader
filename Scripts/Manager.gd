@@ -189,7 +189,6 @@ func checkfilesystem():
 	print("done filessytem")
 	await checkAssets() #paso5
 
-
 func iteratefoldercursos(folder,filesystem):
 	print("Iterar folder " + folder)
 	var dir = DirAccess.open(Global.basedir + "/" + folder)
@@ -453,10 +452,13 @@ func generateButtons():
  				}
 				#print(selcur)
 				
+				#btndir.setVersion(5)
+				
 				if selcur.actualizar:
 					print("activar botón")
 					btndir.curso = selcur
 					btndir.managerbutton = updatebutton
+					#btndir.acivardetalles()
 					btndir.activateUButton(false)
 				
 				btndir.connect( "pressed", Callable(self, "openCurso").bind(selcur) )

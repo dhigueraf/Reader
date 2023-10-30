@@ -6,7 +6,8 @@ var numpa = 0
 func setNombre(textonombre):
 	$Nombre.text = textonombre + "..."
 	textonom = textonombre
-	
+
+
 func setPagina(numpag):
 	numpa = numpag
 	$Button.text = "Pagina " + str(numpag) 
