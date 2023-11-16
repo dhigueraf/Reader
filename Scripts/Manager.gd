@@ -7,7 +7,7 @@ extends Control
 
 signal updatebutton
 
-var history = []
+var history = [] #Historial de accionesaunq
 var configdir = ""
 var converterdir = ""
 var currentdir = ""
@@ -35,11 +35,11 @@ var sistemasoperativos = ["windows","linux"]
 var buttonsready = false
 var botones = []
 
-func _ready():
-	var path = OS.get_executable_path()
-	Global.basedir = path.get_base_dir()
-	converterdir = Global.basedir + "/converter"
-	configdir = Global.basedir + "/config"
+func _ready(): #Inicio del programa
+	var path = OS.get_executable_path() #Ubicación del programa ejecutandose, si mismo (idelamente dentro del pendrive)
+	Global.basedir = path.get_base_dir() #Carpeta base 
+	converterdir = Global.basedir + "/converter" #Ubicacioṕn de los conversores de archivos
+	configdir = Global.basedir + "/config" #Ubicacion del archivo de configuración
 	currentdir = Global.basedir
 	previusdir = Global.basedir
 	
@@ -47,10 +47,12 @@ func _ready():
 	
 	$ProcessLabel.text = "Verificar versión online"
 	
+	#Obtener Json de la versión mas reciente 
+	#LLamado a la descarga (buscar "resulatado llamado descarga")
 	await $RequestConfig.request("https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/Json/sumoprimero.json")#paso1
 
 
-func verificareiniciar():
+func verificareiniciar(): #Iniciar tras tener json (ya sea online o offline)
 	print("software info:")
 	print(Global.softwareinfo)
 	$ProcessLabel.text = "Verificar sistema de archivos"
@@ -114,7 +116,7 @@ func findlocalconfig():
 		print("configuración local finalizada")
 		verificareiniciar() #paso2 llamar si no hay ineternet
 
-
+#resulatado llamado descarga
 func _on_request_config_request_completed(result, response_code, headers, body):
 	var prejson = body.get_string_from_utf8()
 	var obtainedjson = JSON.parse_string(prejson)
@@ -172,31 +174,32 @@ func setinitialvariables():
 	previusdir = Global.basedir
 
 
-func checkfilesystem():
+func checkfilesystem(): #Chequear sistema de archivos desde el json al del PC
 	print("primera carpeta " + str(Global.softwareinfo.carpetabase) + ".")
-	var primeracarpeta = str(Global.softwareinfo.carpetabase)
-	var dir = DirAccess.open(Global.basedir)
-	if dir.dir_exists(primeracarpeta) :
+	var primeracarpeta = str(Global.softwareinfo.carpetabase) #nombre de la carpeta base
+	var dir = DirAccess.open(Global.basedir) #ubicacion del ejecutable
+	if dir.dir_exists(primeracarpeta) : #Checkeo si existe la carpeta base
 		print("directorio existe")
-	else:
+	else: #No existe la creo
 		print("directorio no existe")
 		dir.make_dir(primeracarpeta)
 		print("primera iteración")
-	#await iteratefoldersandfiles(primeracarpeta,Global.softwareinfo.sistemarchivos, [] )#paso4  viejo
-	await iteratefoldercursos(primeracarpeta,Global.softwareinfo.sistemarchivos)#paso4 nuevo
-	
+	#Ahora que existe la carpeta  recorro el sistema de archivos 
+	#Se le envia el nombre de la carpeta y la estructura de capetas como diccionario
+	await iteratefoldercursos(primeracarpeta,Global.softwareinfo.sistemarchivos)#paso4
+	#Generar botones de cursos
 	generateButtons()
 	print("done filessytem")
 	await checkAssets() #paso5
 
-func iteratefoldercursos(folder,filesystem):
+func iteratefoldercursos(folder,filesystem): #Recorrer sistema de archivos comparando con el json
 	print("Iterar folder " + folder)
-	var dir = DirAccess.open(Global.basedir + "/" + folder)
+	var dir = DirAccess.open(Global.basedir + "/" + folder) #Abrir carpeta solicicitada
 	var iterator = 0
-	for elemento in filesystem:
-		print("elemento " +str(iterator) + " " + str(elemento.nombre.carpeta)) 
+	for elemento in filesystem: #recorrer elemetos dentro del directorio
+		print("elemento " + str(iterator) + " " + str(elemento.nombre.carpeta)) 
 		if "tipo" in elemento:
-			if elemento.tipo == "carpeta":
+			if elemento.tipo == "carpeta": #el elemento es una carpeta
 				var boton = {
 					"nombre": elemento.nombre.boton,
 					"updates": false,
@@ -207,38 +210,43 @@ func iteratefoldercursos(folder,filesystem):
 				}
 				
 				print("buscar carpeta "+ elemento.nombre.carpeta)
-				if dir.dir_exists(elemento.nombre.carpeta) :
+				if dir.dir_exists(elemento.nombre.carpeta) : #Verifico que existe la carpeta
 					print("directorio existe")
 					print(dir.get_current_dir() + "/" + elemento.nombre.carpeta)
-				else:
+				else: #No, existe la creo
 					print("directorio no existe")
 					dir.make_dir(elemento.nombre.carpeta)
 					print("creada carpeta " + str(elemento.nombre.carpeta))
 				
-				var elementoarchivos = iteratesubfolders( folder + "/" + elemento.nombre.carpeta , elemento.subelementos )
-				boton.archivos = elementoarchivos
+				#Ahora que existe la carpeta  recorro el sistema de archivos 
+				#Se le envia el nombre de la carpeta y la estructura de capetas como diccionario
+				var elementoarchivos = iteratesubfolders( folder + "/" + elemento.nombre.carpeta , elemento.subelementos ) #recorrer subcarpeta
+				boton.archivos = elementoarchivos #
 
 				botones.append(boton)
 
 
-func iteratesubfolders(folder,filesystem):
+func iteratesubfolders(folder,filesystem): #Recorrer carpetas comparando con el json
 	print("Iterar sub folder " + folder)
-	print(Global.basedir + "/" + folder)
+	print(Global.basedir + "/" + folder) 
 	var iterator 
 	var archivos = []
-	var dir = DirAccess.open(Global.basedir + "/" + folder)
+	var dir = DirAccess.open(Global.basedir + "/" + folder) #Abrir carpeta solicicitada
 	print(dir)
-	for elemento in filesystem:
+	for elemento in filesystem: #recorrer elemetos dentro del directorio
 		if "tipo" in elemento:
 			if elemento.tipo == "carpeta":
+				#es una carpeta, si no exite la creo, 
 				if dir.dir_exists(elemento.nombre.carpeta) :
 					print("directorio existe")
 				else:
 					print("directorio no existe")
 					dir.make_dir(elemento.nombre.carpeta)
+				#Recorro la carpeta
 				var subarchivos = iteratesubfolders( folder + "/" + elemento.nombre.carpeta , elemento.subelementos )
 				archivos += subarchivos
 			elif elemento.tipo == "archivo":
+				#Es un archivo
 				var archivo ={
 					"nombre" : elemento.nombre.boton,
 					"existe" : false,
@@ -256,21 +264,22 @@ func iteratesubfolders(folder,filesystem):
 				if "capitulos" in elemento:
 					archivo.capitulos = elemento.capitulos
 				
-				if dir.file_exists( elemento.nombre.carpeta+"."+elemento.extension ):
+				if dir.file_exists( elemento.nombre.carpeta+"."+elemento.extension ):#Verificar si el archivo existe
 					print("archivo existe")
 					archivo.existe = true
-					if dir.file_exists(elemento.nombre.carpeta+"_info.json"):
+					if dir.file_exists(elemento.nombre.carpeta+"_info.json"): #Si existe deberia tener un archivo de información
 						print("info existe")
+						#la infromación existe, obetenerla como diccionario
 						var fileinfo = FileAccess.get_file_as_string( dir.get_current_dir() + "/" + elemento.nombre.carpeta + "_info" + ".json" )
 						print("File info: " + fileinfo)
-						if not fileinfo.is_empty():
+						if not fileinfo.is_empty(): #No esta vacio, obtener la versión
 							var jsoninfo = JSON.parse_string(fileinfo)
 							if "version" in jsoninfo:
 								archivo.versionlocal = jsoninfo.version
-						if archivo.versionweb > archivo.versionlocal:
+						if archivo.versionweb > archivo.versionlocal: #La información esta vacia se asume que hay que actualizar
 							archivo.accion = "actualizar"
 				else:
-					if not dir.file_exists(elemento.nombre.carpeta+"_info.json"):
+					if not dir.file_exists(elemento.nombre.carpeta+"_info.json"): #El archivo no existe hay que descargarlo
 						print("")
 					archivo.accion = "descargar"
 				archivos.append(archivo)
