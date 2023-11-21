@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw4rhaiijmmy6"]
+
+[ext_resource type="Script" path="res://Scripts/curso_btn.gd" id="1_k3sp8"]
+[ext_resource type="Texture2D" uid="uid://cb7f0n3r1wuuo" path="res://Sprites/logocmm.png" id="1_ylnxw"]
+
+[node name="CursoBtn" type="Control"]
+custom_minimum_size = Vector2(332, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k3sp8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.28
+anchor_top = 0.056
+anchor_right = 0.709
+anchor_bottom = 0.673
+offset_left = -0.559998
+offset_top = -0.288002
+offset_right = 0.231934
+offset_bottom = -0.104034
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ylnxw")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 51.0
+offset_top = -107.0
+offset_right = -69.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Curso"

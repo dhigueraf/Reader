@@ -1,6 +1,7 @@
 extends Node
 
 var basedir = ""
+var online = false
 
 var softwareinfo = {
 	"nombre": "Sumo Primero software",
@@ -9,7 +10,7 @@ var softwareinfo = {
 	"sistemarchivos": []
 }
 
-var softwareOnline = {}
+var JsonGDD = {}
 
 var SelectedCurso = {
 	"nombre" : {
@@ -40,6 +41,7 @@ var interactivos = {
 
 func _ready():
 	print("Global Ready")
+	basedir = OS.get_executable_path().get_base_dir() #Carpeta base 
 	
 func DeletePreviousImages():
 	var converterdir = Global.basedir + "/converter"
@@ -159,11 +161,11 @@ func GenerarImagenes(location,pag,wait):
 func generatePDF(rango,notas,all,nombre,wait):
 	print("Generar PDF")
 	print(Global.FileToRead)
-	var converterdir = Global.basedir + "/converter"
-	var filedir = Global.basedir + "/" + Global.FileToRead.sublocation
+	var converterdir = basedir + "/converter"
+	var filedir = basedir + "/" + Global.FileToRead.sublocation
 	#var filedir =  Global.FileToRead.location
-	var notasdir = Global.basedir + "/assets/" + "formatonotas.pdf" 
-	var finalfile = Global.basedir + "/generado/" + nombre + ".pdf"  
+	var notasdir = basedir + "/assets/" + "formatonotas.pdf" 
+	var finalfile = basedir + "/generado/" + nombre + ".pdf"  
 	
 	
 	var sistemaoperativo = OS.get_name() #Chequear sistema operativo

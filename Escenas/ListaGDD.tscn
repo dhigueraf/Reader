@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1qabqhuxs6eb"]
+
+[ext_resource type="Script" path="res://Scripts/ListaGDD.gd" id="1_1ud5k"]
+[ext_resource type="PackedScene" uid="uid://cw4rhaiijmmy6" path="res://Objetos/curso_btn.tscn" id="2_fbp7i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qumli"]
+font_size = 32
+
+[sub_resource type="Theme" id="Theme_3wqm4"]
+
+[node name="ListaGDD" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ud5k")
+
+[node name="Titulo" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -403.0
+offset_top = 7.0
+offset_right = 391.0
+offset_bottom = 88.0
+grow_horizontal = 2
+text = "Guía Didáctica del Docente
+"
+label_settings = SubResource("LabelSettings_qumli")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0520833
+anchor_top = 0.243827
+anchor_right = 0.928819
+anchor_bottom = 0.796297
+offset_bottom = -0.000366211
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3wqm4")
+theme_override_constants/separation = 12
+metadata/_edit_use_anchors_ = true
+
+[node name="CursoBtn2" parent="CanvasLayer/Control/HBoxContainer" instance=ExtResource("2_fbp7i")]
+layout_mode = 2

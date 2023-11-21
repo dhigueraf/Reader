@@ -1,0 +1,420 @@
+{
+    "Color": {
+        "1": {
+            "nombre": "rojo",
+            "hexadecimal": "#d22b57"
+        },
+        "2": {
+            "nombre": "verde",
+            "hexadecimal": "#79b145"
+        },
+        "3": {
+            "nombre": "morado",
+            "hexadecimal": "#5b579d"
+        },
+        "4": {
+            "nombre": "naranjo",
+            "hexadecimal": "#df7c2f"
+        }
+    },
+    "Personaje": {
+        "1": {
+            "nombre": "Ana",
+            "foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+        },
+        "2": {
+            "nombre": "Diego",
+            "foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+        },
+        "3": {
+            "nombre": "Laura",
+            "foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+        },
+        "4": {
+            "nombre": "José",
+            "foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+        },
+        "5": {
+            "nombre": "Paula°",
+            "foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+        }
+    },
+    "Mascota": {
+        "1": {
+            "nombre": "Monito del Monte",
+            "descripcion": "Hola soy el monito del bosque, me gusta colgar de la colita, estoy contento en acompañar en esta aventura de aprender"
+        },
+        "2": {
+            "nombre": "Puma",
+            "descripcion": "Hola soy el monito del bosque, me gusta colgar de la colita, estoy contento en acompañar en esta aventura de aprender"
+        },
+        "3": {
+            "nombre": "Otro",
+            "descripcion": "Hola soy el monito del bosque, me gusta colgar de la colita, estoy contento en acompañar en esta aventura de aprender"
+        }
+    },
+    "Unidad": {
+        "1": {
+            "nombre": "Unidad 1",
+            "sigla": "U1",
+            "color_id": 1
+        },
+        "2": {
+            "nombre": "Unidad 2",
+            "sigla": "U2",
+            "color_id": 2
+        },
+        "3": {
+            "nombre": "Unidad 3",
+            "sigla": "U3",
+            "color_id": 3
+        },
+        "4": {
+            "nombre": "Unidad 4",
+            "sigla": "U4",
+            "color_id": 4
+        }
+    },
+    "Niveles": [
+        {
+            "nombre": "1° Básico",
+            "foto": "https://static.sumoprimero.cmmedu.uchile.cl",
+            "mascota_id": 1,
+            "personajes_ids": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "tomos": [
+                {
+                    "nombre": "Tomo 1",
+                    "version": "0.0.1",
+                    "unidades": [
+                        {
+                            "unidad_id": 1,
+                            "pdf": "https://static.sumoprimero.cmmedu.uchile.cl",
+                            "presentaciones": [
+                                {
+                                    "nombre": "Presentación 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Presentación 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ],
+                            "evaluaciones": [
+                                {
+                                    "nombre": "Capítulo 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 3",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 4",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 5",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ]
+                        },
+                        {
+                            "unidad_id": 2,
+                            "pdf": "https://static.sumoprimero.cmmedu.uchile.cl",
+                            "presentaciones": [
+                                {
+                                    "nombre": "Presentación 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Presentación 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ],
+                            "evaluaciones": [
+                                {
+                                    "nombre": "Capítulo 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 3",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 4",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 5",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "nombre": "Tomo 2",
+                    "version": "0.0.3",
+                    "unidades": [
+                        {
+                            "unidad_id": 3,
+                            "pdf": "https://static.sumoprimero.cmmedu.uchile.cl",
+                            "presentaciones": [
+                                {
+                                    "nombre": "Presentación 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Presentación 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ],
+                            "evaluaciones": [
+                                {
+                                    "nombre": "Capítulo 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 3",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 4",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 5",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ]
+                        },
+                        {
+                            "unidad_id": 4,
+                            "pdf": "https://static.sumoprimero.cmmedu.uchile.cl",
+                            "presentaciones": [
+                                {
+                                    "nombre": "Presentación 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Presentación 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ],
+                            "evaluaciones": [
+                                {
+                                    "nombre": "Capítulo 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 3",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 4",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 5",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "nombre": "2° Básico",
+            "foto": "https://static.sumoprimero.cmmedu.uchile.cl",
+            "mascota_id": 1,
+            "personajes_ids": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "tomos": [
+                {
+                    "nombre": "Tomo 1",
+                    "version": "0.0.1",
+                    "unidades": [
+                        {
+                            "unidad_id": 1,
+                            "pdf": "https://static.sumoprimero.cmmedu.uchile.cl",
+                            "presentaciones": [
+                                {
+                                    "nombre": "Presentación 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Presentación 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ],
+                            "evaluaciones": [
+                                {
+                                    "nombre": "Capítulo 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 3",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 4",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 5",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ]
+                        },
+                        {
+                            "unidad_id": 2,
+                            "pdf": "https://static.sumoprimero.cmmedu.uchile.cl",
+                            "presentaciones": [
+                                {
+                                    "nombre": "Presentación 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Presentación 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ],
+                            "evaluaciones": [
+                                {
+                                    "nombre": "Capítulo 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 3",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 4",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 5",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "nombre": "Tomo 2",
+                    "version": "0.0.3",
+                    "unidades": [
+                        {
+                            "unidad_id": 3,
+                            "pdf": "https://static.sumoprimero.cmmedu.uchile.cl",
+                            "presentaciones": [
+                                {
+                                    "nombre": "Presentación 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Presentación 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ],
+                            "evaluaciones": [
+                                {
+                                    "nombre": "Capítulo 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 3",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 4",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 5",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ]
+                        },
+                        {
+                            "unidad_id": 4,
+                            "pdf": "https://static.sumoprimero.cmmedu.uchile.cl",
+                            "presentaciones": [
+                                {
+                                    "nombre": "Presentación 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Presentación 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ],
+                            "evaluaciones": [
+                                {
+                                    "nombre": "Capítulo 1",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 2",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 3",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 4",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                },
+                                {
+                                    "nombre": "Capítulo 5",
+                                    "url": "https://static.sumoprimero.cmmedu.uchile.cl"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

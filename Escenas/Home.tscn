@@ -1,0 +1,151 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhm6etkpaiot3"]
+
+[ext_resource type="Script" path="res://Scripts/Home.gd" id="1_omsou"]
+[ext_resource type="Script" path="res://Scripts/InternetChecker.gd" id="1_shcjp"]
+[ext_resource type="Texture2D" uid="uid://dv1v81f4fq6u0" path="res://Sprites/internet_logo.png" id="2_sklh0"]
+[ext_resource type="Texture2D" uid="uid://jg0cl84gxgjt" path="res://Sprites/cross-png.png" id="3_hgf8n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tmq6b"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_dfxtu"]
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_rbpyi"]
+font_size = 18
+
+[node name="Home" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_omsou")
+metadata/_edit_lock_ = true
+
+[node name="Titulo" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -388.0
+offset_top = 21.0
+offset_right = 406.0
+offset_bottom = 102.0
+grow_horizontal = 2
+text = "Nombre del curso"
+label_settings = SubResource("LabelSettings_tmq6b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Texto" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 42.0
+offset_top = -209.0
+offset_right = 552.0
+offset_bottom = 297.0
+
+[node name="subtitulo" type="Label" parent="CanvasLayer/Control/Texto"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -219.0
+offset_top = 16.0
+offset_right = 213.0
+offset_bottom = 97.0
+grow_horizontal = 2
+text = "Nombre del curso"
+label_settings = SubResource("LabelSettings_dfxtu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Descripcion" type="Label" parent="CanvasLayer/Control/Texto"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -158.0
+offset_right = 221.0
+offset_bottom = 247.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "La aplicación es de una resolución de 1280x720 … Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+label_settings = SubResource("LabelSettings_rbpyi")
+horizontal_alignment = 3
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.416
+anchor_right = 1.0
+anchor_bottom = 0.416
+offset_left = -441.0
+offset_top = -40.568
+offset_right = -139.0
+offset_bottom = 40.432
+text = "Guía Didáctica del Docente"
+
+[node name="Button2" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.677
+anchor_right = 1.0
+anchor_bottom = 0.677
+offset_left = -442.0
+offset_top = -40.696
+offset_right = -140.0
+offset_bottom = 40.304
+text = "Recursos editables"
+
+[node name="InternetStatus" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 28.0
+offset_right = 108.0
+offset_bottom = 106.0
+script = ExtResource("1_shcjp")
+
+[node name="InternetIcon" type="TextureRect" parent="CanvasLayer/Control/InternetStatus"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 72.0
+offset_bottom = 73.0
+texture = ExtResource("2_sklh0")
+expand_mode = 1
+
+[node name="Cross" type="TextureRect" parent="CanvasLayer/Control/InternetStatus"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.5
+anchor_top = -0.512
+anchor_right = -0.5
+anchor_bottom = -0.512
+offset_left = 47.0
+offset_top = 46.936
+offset_right = 115.0
+offset_bottom = 113.936
+texture = ExtResource("3_hgf8n")
+expand_mode = 1
+
+[node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer/Control"]
+
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Button2" to="CanvasLayer/Control" method="_on_button_2_pressed"]
+[connection signal="request_completed" from="CanvasLayer/Control/HTTPRequest" to="CanvasLayer/Control" method="_on_http_request_request_completed"]
