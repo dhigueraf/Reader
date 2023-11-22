@@ -1,5 +1,6 @@
 extends Control
 
+var nivel = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,3 +17,13 @@ func setTexture(location):
 	
 func setButtonText(text):
 	$Button.text = text
+
+
+func openNivel(level):
+	print("Open nivel")
+	Global.nivel = level
+	print(Global.nivel)
+	get_tree().change_scene_to_file("res://Escenas/Nivel.tscn")
+
+func _on_button_pressed():
+	openNivel(nivel)

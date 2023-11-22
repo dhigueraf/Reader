@@ -1,0 +1,134 @@
+[gd_scene load_steps=5 format=3 uid="uid://di27mshkwbdn2"]
+
+[ext_resource type="Script" path="res://Scripts/NivelScreen.gd" id="1_krwxc"]
+[ext_resource type="PackedScene" uid="uid://d2xmjhu2drl0p" path="res://Objetos/PersoIcon.tscn" id="1_qufli"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_megrd"]
+font_size = 45
+
+[sub_resource type="LabelSettings" id="LabelSettings_bccnn"]
+font_size = 24
+
+[node name="Nivel" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_krwxc")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = 40.0
+offset_right = 330.0
+offset_bottom = 136.0
+grow_horizontal = 2
+text = "Titulo"
+label_settings = SubResource("LabelSettings_megrd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 2
+offset_left = 550.0
+offset_top = 216.0
+offset_right = 1105.0
+offset_bottom = 239.0
+
+[node name="ContainerMascota" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.528
+anchor_top = 0.386
+anchor_right = 0.912
+anchor_bottom = 0.386
+offset_left = -0.255981
+offset_top = -83.128
+offset_right = 0.375977
+offset_bottom = 82.872
+
+[node name="Titulo" type="Label" parent="CanvasLayer/Control/ContainerMascota"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -22.0
+offset_right = 104.0
+offset_bottom = 15.0
+text = "Mascota"
+label_settings = SubResource("LabelSettings_bccnn")
+
+[node name="Texto" type="Label" parent="CanvasLayer/Control/ContainerMascota"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.175
+anchor_right = 0.623
+anchor_bottom = 0.819
+offset_left = -0.15
+offset_top = -0.0500011
+offset_right = 0.0109863
+offset_bottom = 0.04599
+horizontal_alignment = 3
+autowrap_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/ContainerMascota"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.835
+anchor_top = 1.0
+anchor_right = 0.835
+anchor_bottom = 1.0
+offset_left = -55.905
+offset_top = -188.0
+offset_right = 56.095
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ContainerEstudiantes" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.529
+anchor_top = 0.702
+anchor_right = 0.912
+anchor_bottom = 0.702
+offset_left = -0.408081
+offset_top = -82.896
+offset_right = 1.37598
+offset_bottom = 83.104
+
+[node name="Titulo" type="Label" parent="CanvasLayer/Control/ContainerEstudiantes"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -22.0
+offset_right = 104.0
+offset_bottom = 15.0
+text = "Mascota"
+label_settings = SubResource("LabelSettings_bccnn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ContainerEstudiantes"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.102
+anchor_right = 0.975
+anchor_bottom = 0.934
+offset_left = -0.0749998
+offset_top = 0.0679989
+offset_right = 0.0749817
+offset_bottom = -0.0440063
+theme_override_constants/separation = 24
+
+[node name="PersonajeIcon" parent="CanvasLayer/Control/ContainerEstudiantes/HBoxContainer" instance=ExtResource("1_qufli")]
+layout_mode = 2
+
+[node name="PersonajeIcon2" parent="CanvasLayer/Control/ContainerEstudiantes/HBoxContainer" instance=ExtResource("1_qufli")]
+layout_mode = 2

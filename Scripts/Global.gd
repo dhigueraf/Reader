@@ -2,6 +2,7 @@ extends Node
 
 var basedir = ""
 var online = false
+var nivel = {}
 
 var softwareinfo = {
 	"nombre": "Sumo Primero software",

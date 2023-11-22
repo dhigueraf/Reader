@@ -11,7 +11,8 @@ func _ready():
 	print(listaNiveles)
 	#print(Global.JsonGDD)
 	createNivelButtons()
-	
+
+
 func createNivelButtons():
 	print("Crear la lista de botones")
 	
@@ -20,10 +21,9 @@ func createNivelButtons():
 		
 		var btnniv = btnNivel.instantiate()
 		btnniv.setButtonText(nivel.nombre)
+		btnniv.nivel = nivel
 		$HBoxContainer.add_child(btnniv)
-		
-		
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta):
 	pass

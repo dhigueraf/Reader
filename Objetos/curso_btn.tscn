@@ -41,3 +41,5 @@ offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Curso"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
