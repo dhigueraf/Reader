@@ -164,7 +164,10 @@
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "url":"",
+                    "filename": "tomo1",
+                    "formato" : "pdf"
                 },
                 {
                     "nombre": "Tomo 2",
@@ -242,7 +245,10 @@
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "url":"",
+                    "filename": "tomo2",
+                    "formato" : "pdf"
                 }
             ]
         },
@@ -334,7 +340,10 @@
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "url":"",
+                    "filename": "tomo1",
+                    "formato" : "pdf"
                 },
                 {
                     "nombre": "Tomo 2",
@@ -412,9 +421,17 @@
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "url":"",
+                    "filename": "tomo2",
+                    "formato" : "pdf"
                 }
             ]
         }
-    ]
+    ],
+    "folders":{
+        "documentos" : "documentos",
+        "configuracion": "config",
+        "assets":"assets"
+    }
 }

@@ -1,0 +1,119 @@
+[gd_scene load_steps=7 format=3 uid="uid://crb70ihk78rqt"]
+
+[ext_resource type="Texture2D" uid="uid://dcfqb5gpl3tb4" path="res://Sprites/GUI/IconFlecha.png" id="1_xvwrt"]
+[ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="2_34s8j"]
+[ext_resource type="Texture2D" uid="uid://dshmwi088ei1a" path="res://Sprites/GUI/btnTxt.png" id="3_fytgk"]
+[ext_resource type="Texture2D" uid="uid://drhpv7ndj3y5x" path="res://Sprites/GUI/btnTxt_click.png" id="4_00ah4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ubg6f"]
+font = ExtResource("2_34s8j")
+font_size = 45
+
+[sub_resource type="LabelSettings" id="LabelSettings_xwsyd"]
+font = ExtResource("2_34s8j")
+font_size = 32
+
+[node name="Editables" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -389.0
+offset_top = 106.0
+offset_right = 392.0
+offset_bottom = 189.0
+grow_horizontal = 2
+rotation = -0.0523599
+texture = ExtResource("1_xvwrt")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Recursos Editables"
+label_settings = SubResource("LabelSettings_ubg6f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PresentacionesContainer" type="HSplitContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.022
+anchor_top = 0.694
+anchor_right = 0.48
+anchor_bottom = 0.694
+offset_left = -0.344002
+offset_top = -167.712
+offset_right = 0.039978
+offset_bottom = 167.288
+
+[node name="BtnPresencaciones" type="TextureButton" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.022
+anchor_top = 0.37
+anchor_right = 0.478
+anchor_bottom = 0.37
+offset_left = -0.344002
+offset_top = -30.76
+offset_right = 0.343994
+offset_bottom = 31.24
+texture_normal = ExtResource("3_fytgk")
+texture_pressed = ExtResource("4_00ah4")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/BtnPresencaciones"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Presentaciones"
+label_settings = SubResource("LabelSettings_xwsyd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnEvaluaciones" type="TextureButton" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.503
+anchor_top = 0.37
+anchor_right = 0.96
+anchor_bottom = 0.37
+offset_left = 0.543945
+offset_top = -30.76
+offset_right = 0.0799561
+offset_bottom = 31.24
+texture_normal = ExtResource("3_fytgk")
+texture_pressed = ExtResource("4_00ah4")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/BtnEvaluaciones"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Item Evaluaciones"
+label_settings = SubResource("LabelSettings_xwsyd")
+horizontal_alignment = 1
+vertical_alignment = 1

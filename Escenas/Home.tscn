@@ -1,18 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhm6etkpaiot3"]
+[gd_scene load_steps=11 format=3 uid="uid://bhm6etkpaiot3"]
 
 [ext_resource type="Script" path="res://Scripts/Home.gd" id="1_omsou"]
 [ext_resource type="Script" path="res://Scripts/InternetChecker.gd" id="1_shcjp"]
 [ext_resource type="Texture2D" uid="uid://dv1v81f4fq6u0" path="res://Sprites/internet_logo.png" id="2_sklh0"]
+[ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="2_us1tt"]
 [ext_resource type="Texture2D" uid="uid://jg0cl84gxgjt" path="res://Sprites/cross-png.png" id="3_hgf8n"]
+[ext_resource type="FontFile" uid="uid://cfxoy7q6ip6rl" path="res://fonts/SassoonSansStd-Bold.otf" id="3_iwwju"]
+[ext_resource type="FontFile" uid="uid://7p3x2o37brcj" path="res://fonts/SassoonSansStd.otf" id="4_w66uw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tmq6b"]
-font_size = 32
+font = ExtResource("2_us1tt")
+font_size = 42
 
 [sub_resource type="LabelSettings" id="LabelSettings_dfxtu"]
-font_size = 26
+font = ExtResource("3_iwwju")
+font_size = 33
 
 [sub_resource type="LabelSettings" id="LabelSettings_rbpyi"]
-font_size = 18
+font = ExtResource("4_w66uw")
+font_size = 22
 
 [node name="Home" type="Node2D"]
 
@@ -33,10 +39,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -388.0
-offset_top = 21.0
-offset_right = 406.0
-offset_bottom = 102.0
+offset_left = -400.0
+offset_top = 27.0
+offset_right = 394.0
+offset_bottom = 108.0
 grow_horizontal = 2
 text = "Nombre del curso"
 label_settings = SubResource("LabelSettings_tmq6b")

@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cw4rhaiijmmy6"]
+[gd_scene load_steps=7 format=3 uid="uid://cw4rhaiijmmy6"]
 
 [ext_resource type="Script" path="res://Scripts/curso_btn.gd" id="1_k3sp8"]
 [ext_resource type="Texture2D" uid="uid://cb7f0n3r1wuuo" path="res://Sprites/logocmm.png" id="1_ylnxw"]
+[ext_resource type="Texture2D" uid="uid://dshmwi088ei1a" path="res://Sprites/GUI/btnTxt.png" id="3_jrowq"]
+[ext_resource type="Texture2D" uid="uid://drhpv7ndj3y5x" path="res://Sprites/GUI/btnTxt_click.png" id="4_m67dx"]
+[ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="4_nywxc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_k8l6m"]
+font = ExtResource("4_nywxc")
+font_size = 43
 
 [node name="CursoBtn" type="Control"]
 custom_minimum_size = Vector2(332, 0)
@@ -28,18 +35,33 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_ylnxw")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="TextureButton" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 51.0
+offset_left = 42.0
 offset_top = -107.0
-offset_right = -69.0
-offset_bottom = -31.0
+offset_right = -29.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 0
+texture_normal = ExtResource("3_jrowq")
+texture_pressed = ExtResource("4_m67dx")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Curso"
+label_settings = SubResource("LabelSettings_k8l6m")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

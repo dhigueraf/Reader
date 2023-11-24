@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://da1rnkkf4oape"]
+
+[ext_resource type="Script" path="res://Scripts/TomoBtn.gd" id="1_dpb7h"]
+[ext_resource type="Texture2D" uid="uid://bcdiq4o3fut0v" path="res://icon.png" id="2_kw3yw"]
+[ext_resource type="Texture2D" uid="uid://dshmwi088ei1a" path="res://Sprites/GUI/btnTxt.png" id="3_jekcd"]
+[ext_resource type="Texture2D" uid="uid://drhpv7ndj3y5x" path="res://Sprites/GUI/btnTxt_click.png" id="4_inwuk"]
+[ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="5_j1mmo"]
+[ext_resource type="Texture2D" uid="uid://bym8sv4dusefl" path="res://Sprites/GUI/pdfIcon.png" id="6_2qayg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pbofq"]
+line_spacing = 4.0
+font = ExtResource("5_j1mmo")
+font_size = 32
+
+[node name="Tomo" type="Control"]
+custom_minimum_size = Vector2(224, 0)
+layout_mode = 3
+anchor_left = 0.116
+anchor_top = 0.244
+anchor_right = 0.116
+anchor_bottom = 0.244
+offset_left = -133.632
+offset_top = -158.112
+offset_right = 133.368
+offset_bottom = 157.888
+script = ExtResource("1_dpb7h")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.085
+anchor_top = 0.419
+anchor_right = 0.866
+anchor_bottom = 0.419
+offset_left = 0.00499916
+offset_top = -110.404
+offset_right = 0.0979919
+offset_bottom = 110.596
+texture = ExtResource("2_kw3yw")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("3_jekcd")
+texture_pressed = ExtResource("4_inwuk")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="TextureButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tomo N"
+label_settings = SubResource("LabelSettings_pbofq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -40.0
+offset_right = 21.0
+offset_bottom = 31.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("6_2qayg")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

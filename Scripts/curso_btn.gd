@@ -16,8 +16,7 @@ func setTexture(location):
 	pass
 	
 func setButtonText(text):
-	$Button.text = text
-
+	$Button/Label.text = text
 
 func openNivel(level):
 	print("Open nivel")
