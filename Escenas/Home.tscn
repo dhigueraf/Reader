@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhm6etkpaiot3"]
+[gd_scene load_steps=12 format=3 uid="uid://bhm6etkpaiot3"]
 
 [ext_resource type="Script" path="res://Scripts/Home.gd" id="1_omsou"]
 [ext_resource type="Script" path="res://Scripts/InternetChecker.gd" id="1_shcjp"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://jg0cl84gxgjt" path="res://Sprites/cross-png.png" id="3_hgf8n"]
 [ext_resource type="FontFile" uid="uid://cfxoy7q6ip6rl" path="res://fonts/SassoonSansStd-Bold.otf" id="3_iwwju"]
 [ext_resource type="FontFile" uid="uid://7p3x2o37brcj" path="res://fonts/SassoonSansStd.otf" id="4_w66uw"]
+[ext_resource type="Texture2D" uid="uid://dwy5brbfa3l5u" path="res://Sprites/GUI/barra.png" id="8_126oc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tmq6b"]
 font = ExtResource("2_us1tt")
@@ -153,6 +154,22 @@ texture = ExtResource("3_hgf8n")
 expand_mode = 1
 
 [node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer/Control"]
+
+[node name="BarrasInferiores" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -618.0
+offset_top = -93.0
+offset_right = 596.0
+offset_bottom = 412.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("8_126oc")
+stretch_mode = 1
 
 [connection signal="pressed" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Button2" to="CanvasLayer/Control" method="_on_button_2_pressed"]
