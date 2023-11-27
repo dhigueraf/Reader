@@ -4,6 +4,7 @@ var basedir = ""
 var online = false
 var nivel = {}
 
+
 var softwareinfo = {
 	"nombre": "Sumo Primero software",
 	"version": 0,
@@ -43,7 +44,8 @@ var interactivos = {
 func _ready():
 	print("Global Ready")
 	basedir = OS.get_executable_path().get_base_dir() #Carpeta base 
-	
+
+
 func DeletePreviousImages():
 	var converterdir = Global.basedir + "/converter"
 	var dir = DirAccess.open(converterdir)

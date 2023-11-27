@@ -1,0 +1,158 @@
+[gd_scene load_steps=13 format=3 uid="uid://civfp3akg3arn"]
+
+[ext_resource type="Script" path="res://Scripts/firstload.gd" id="1_vc6g1"]
+[ext_resource type="Texture2D" uid="uid://dwy5brbfa3l5u" path="res://Sprites/GUI/barra.png" id="2_lsj02"]
+[ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="3_f83oy"]
+[ext_resource type="FontFile" uid="uid://7p3x2o37brcj" path="res://fonts/SassoonSansStd.otf" id="4_hl3iu"]
+[ext_resource type="Texture2D" uid="uid://ds45v4fldxmce" path="res://Sprites/GUI/cuadrosBorde.png" id="5_64sj4"]
+[ext_resource type="Texture2D" uid="uid://dekleyiotfqkq" path="res://Sprites/GUI/cuadrosBordeProgress.png" id="6_wnmsq"]
+[ext_resource type="Script" path="res://Scripts/InternetChecker.gd" id="7_ohpr3"]
+[ext_resource type="Texture2D" uid="uid://dv1v81f4fq6u0" path="res://Sprites/internet_logo.png" id="8_c4hhs"]
+[ext_resource type="Texture2D" uid="uid://jg0cl84gxgjt" path="res://Sprites/cross-png.png" id="9_il380"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gvcg1"]
+font = ExtResource("3_f83oy")
+font_size = 112
+
+[sub_resource type="LabelSettings" id="LabelSettings_sirxj"]
+font = ExtResource("4_hl3iu")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_tqj4a"]
+font = ExtResource("4_hl3iu")
+font_size = 24
+
+[node name="FirstLoad" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vc6g1")
+metadata/_edit_lock_ = true
+
+[node name="BarrasInferiores" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -618.0
+offset_top = -93.0
+offset_right = 596.0
+offset_bottom = 412.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_lsj02")
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -427.0
+offset_top = -175.0
+offset_right = 437.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Sumo Primero"
+label_settings = SubResource("LabelSettings_gvcg1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="statuslabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -575.0
+offset_top = 61.0
+offset_right = 574.0
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Cargando..."
+label_settings = SubResource("LabelSettings_sirxj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="loadingbar" type="TextureProgressBar" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -287.0
+offset_top = -2.0
+offset_right = 289.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_under = ExtResource("5_64sj4")
+texture_progress = ExtResource("6_wnmsq")
+
+[node name="activityDoing" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = 156.0
+offset_right = 574.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_tqj4a")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer/Control"]
+
+[node name="InternetStatus" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 28.0
+offset_right = 108.0
+offset_bottom = 106.0
+script = ExtResource("7_ohpr3")
+
+[node name="InternetIcon" type="TextureRect" parent="CanvasLayer/Control/InternetStatus"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 72.0
+offset_bottom = 73.0
+texture = ExtResource("8_c4hhs")
+expand_mode = 1
+
+[node name="Cross" type="TextureRect" parent="CanvasLayer/Control/InternetStatus"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.5
+anchor_top = -0.512
+anchor_right = -0.5
+anchor_bottom = -0.512
+offset_left = 47.0
+offset_top = 46.936
+offset_right = 115.0
+offset_bottom = 113.936
+texture = ExtResource("9_il380")
+expand_mode = 1
+
+[connection signal="request_completed" from="CanvasLayer/Control/HTTPRequest" to="CanvasLayer/Control" method="_on_http_request_request_completed"]

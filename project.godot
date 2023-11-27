@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Pdf Loader"
-run/main_scene="res://Escenas/Home.tscn"
+run/main_scene="res://Escenas/FirstLoad.tscn"
 config/features=PackedStringArray("4.1")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://backgrounds/logo bg.png"
