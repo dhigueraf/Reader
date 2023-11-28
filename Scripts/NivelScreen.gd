@@ -27,7 +27,8 @@ func llenarPersonajes():
 		var perso = listapersonajes[str(persoid)]
 		
 		var persoIcon = PersonajeIcon.instantiate()
-		persoIcon.setNombre(perso.nombre)
+		var nombrearray = perso.nombre.split("_")
+		persoIcon.setNombre(nombrearray[0])
 		$ContainerEstudiantes/HBoxContainer.add_child(persoIcon)
 
 func llenarTomos():

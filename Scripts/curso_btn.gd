@@ -22,7 +22,16 @@ func openNivel(level):
 	print("Open nivel")
 	Global.nivel = level
 	print(Global.nivel)
+	
 	get_tree().change_scene_to_file("res://Escenas/Nivel.tscn")
 
 func _on_button_pressed():
 	openNivel(nivel)
+
+func setPortada(location):
+	print("set portada")
+	print(location)
+	var image = Image.load_from_file(location)
+	var texture = ImageTexture.create_from_image(image)
+	$TextureRect.texture = texture
+	

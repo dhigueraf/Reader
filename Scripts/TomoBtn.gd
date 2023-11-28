@@ -14,8 +14,10 @@ func setBtnTxt(texto):
 func _on_texture_button_pressed():
 	print("Abrir un PDF")
 	print(tomo)
+	print(tomo.sigla)
 	
-	var dir = DirAccess.open(Global.basedir + "/" + Global.JsonGDD.folders.documentos)
-	print(dir)
+	OS.shell_open("C:/Users/lorde/Desktop/godoto test/documentos/1B/T1/1B-T1-GDD.pdf")
+	#"C:\Users\lorde\Desktop\godoto test\documentos\1B\T1\1B-T1-GDD.pdf"
+	#var dir = DirAccess.open(Global.basedir + "/" + Global.JsonGDD.folders.documentos)
+	#print(dir)
 	
-	if dir.dir_exists( assetsdir ):

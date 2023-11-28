@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbpjyk5q14yw5"]
+[gd_scene load_steps=5 format=3 uid="uid://v8wr3n8chtew"]
 
 [ext_resource type="Script" path="res://Scripts/CursoManager.gd" id="1_d1j7j"]
 [ext_resource type="PackedScene" uid="uid://dfbpy2frau5rn" path="res://Objetos/ModalDocumento.tscn" id="2_m5ict"]

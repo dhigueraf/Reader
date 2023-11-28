@@ -138,7 +138,7 @@ offset_left = 6.0
 offset_top = -22.0
 offset_right = 104.0
 offset_bottom = 15.0
-text = "Estudiantes"
+text = "Amigos"
 label_settings = SubResource("LabelSettings_bccnn")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ContainerEstudiantes"]

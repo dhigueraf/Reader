@@ -121,7 +121,7 @@ label_settings = SubResource("LabelSettings_tqj4a")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer/Control"]
+[node name="JsonRequest" type="HTTPRequest" parent="CanvasLayer/Control"]
 
 [node name="InternetStatus" type="Control" parent="CanvasLayer/Control"]
 layout_mode = 3
@@ -155,4 +155,11 @@ offset_bottom = 113.936
 texture = ExtResource("9_il380")
 expand_mode = 1
 
-[connection signal="request_completed" from="CanvasLayer/Control/HTTPRequest" to="CanvasLayer/Control" method="_on_http_request_request_completed"]
+[node name="DownloadRequest" type="HTTPRequest" parent="CanvasLayer/Control"]
+
+[node name="EndTime" type="Timer" parent="CanvasLayer/Control"]
+one_shot = true
+
+[connection signal="request_completed" from="CanvasLayer/Control/JsonRequest" to="CanvasLayer/Control" method="_on_json_request_request_completed"]
+[connection signal="request_completed" from="CanvasLayer/Control/DownloadRequest" to="CanvasLayer/Control" method="_on_download_request_request_completed"]
+[connection signal="timeout" from="CanvasLayer/Control/EndTime" to="CanvasLayer/Control" method="_on_end_time_timeout"]

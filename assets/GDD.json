@@ -95,40 +95,41 @@
 				4,
 				5
 			],
+			"version": 0,
 			"tomos": [
 				{
 					"nombre": "Tomo 1",
-					"sigla" : "T1",
-					"version": "0.0.1",
+					"sigla": "T1",
+					"version": 0,
 					"unidades": [
 						{
 							"unidad_id": 1,
 							"sigla": "GDD",
 							"url": "https://static.sumoprimero.cmmedu.uchile.cl",
-							"ejemplo":"1B-T1-U1-GDD.pdf",
+							"ejemplo": "1B-T1-U1-GDD.pdf",
 							"extension": "pdf",
 							"presentaciones": [
 								{
 									"nombre": "Presentación 1",
 									"sigla": "PPT1",
 									"url": "https://static.sumoprimero.cmmedu.uchile.cl",
-									"ejemplo":"B-T1-U1-PPT1.pptx",
+									"ejemplo": "B-T1-U1-PPT1.pptx",
 									"extension": "pptx"
 								},
 								{
 									"nombre": "Presentación 2",
 									"sigla": "PPT2",
 									"url": "https://static.sumoprimero.cmmedu.uchile.cl",
-									"ejemplo":"1B-T1-U1-PPT2.pptx",
+									"ejemplo": "1B-T1-U1-PPT2.pptx",
 									"extension": "pptx"
 								}
 							],
 							"evaluaciones": [
 								{
 									"nombre": "Capítulo 1",
-									"sigla" : "EVA1",
+									"sigla": "EVA1",
 									"url": "https://static.sumoprimero.cmmedu.uchile.cl",
-									"ejemplo":"1B-T1-U1-EVA1.docx",
+									"ejemplo": "1B-T1-U1-EVA1.docx",
 									"extension": "docx"
 								},
 								{

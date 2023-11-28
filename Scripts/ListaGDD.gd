@@ -18,10 +18,18 @@ func createNivelButtons():
 	
 	for nivel in listaNiveles:
 		print(nivel.nombre)
+		print(nivel.sigla)
 		
 		var btnniv = btnNivel.instantiate()
 		btnniv.setButtonText(nivel.nombre)
 		btnniv.nivel = nivel
+		
+		var dir = DirAccess.open(Global.basedir + "/" + Global.JsonGDD.folders.documentos + "/" + nivel.sigla)
+		print(dir)
+		if dir.file_exists(nivel.sigla+"_portada.png"):
+			print("existe imagen de portada")
+			btnniv.setPortada(dir.get_current_dir()+"/"+nivel.sigla+"_portada.png")
+		
 		$HBoxContainer.add_child(btnniv)
 
 
