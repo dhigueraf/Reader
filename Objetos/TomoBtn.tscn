@@ -10,43 +10,45 @@
 [sub_resource type="LabelSettings" id="LabelSettings_pbofq"]
 line_spacing = 4.0
 font = ExtResource("5_j1mmo")
-font_size = 32
+font_size = 24
 
 [node name="Tomo" type="Control"]
-custom_minimum_size = Vector2(224, 0)
+custom_minimum_size = Vector2(184, 0)
 layout_mode = 3
-anchor_left = 0.116
-anchor_top = 0.244
-anchor_right = 0.116
-anchor_bottom = 0.244
-offset_left = -133.632
-offset_top = -158.112
-offset_right = 133.368
-offset_bottom = 157.888
+anchor_left = 0.106
+anchor_top = 0.211
+anchor_right = 0.106
+anchor_bottom = 0.211
+offset_left = -122.112
+offset_top = -136.728
+offset_right = 121.888
+offset_bottom = 137.272
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_dpb7h")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.085
-anchor_top = 0.419
-anchor_right = 0.866
-anchor_bottom = 0.419
-offset_left = 0.00499916
-offset_top = -110.404
-offset_right = 0.0979919
-offset_bottom = 110.596
+anchor_left = 0.047
+anchor_top = 0.193
+anchor_right = 0.953
+anchor_bottom = 1.0
+offset_left = 0.031992
+offset_top = 0.117985
+offset_right = -0.0320129
+grow_horizontal = 2
+grow_vertical = 0
 texture = ExtResource("2_kw3yw")
+expand_mode = 3
 
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -52.0
+offset_right = 1.0
+offset_bottom = 46.0
 grow_horizontal = 2
-grow_vertical = 0
 texture_normal = ExtResource("3_jekcd")
 texture_pressed = ExtResource("4_inwuk")
 ignore_texture_size = true

@@ -2,7 +2,7 @@ extends Node
 
 var basedir = ""
 var online = false
-var nivel = {}
+
 
 
 var softwareinfo = {
@@ -13,15 +13,9 @@ var softwareinfo = {
 }
 
 var JsonGDD = {}
-
-var SelectedCurso = {
-	"nombre" : {
-		"carpeta":"Carpeta",
-		"boton":"Botón"
-	},
-	"location" : "",
-	"archivos" : ""
-}
+var nivel = {}
+var tomo = {}
+var SelectedCurso = {}
 
 var FileToRead = {}
 

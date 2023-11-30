@@ -202,6 +202,15 @@ func iiteratenivel(sigla,tomos):
 		
 		if infojson.version < tomo.version:
 			
+			#Descargar GDD
+			var downloadportada = {
+				"url" : tomo.portada,
+				"nombre": sigla + "-" + tomo.sigla + "-portada." + tomo.extension,
+				"location" : dir.get_current_dir() + "/" + tomo.sigla + "/" + sigla + "-" + tomo.sigla + "-portada." + tomo.extension
+			}
+			downloadlist.append(downloadportada)
+			
+			
 			var dir2 = DirAccess.open(Global.basedir + "/" + Global.JsonGDD.folders.documentos + "/" + sigla + "/" + tomo.sigla )
 			for unidad in tomo.unidades:
 				#Descargar GDD
@@ -211,6 +220,7 @@ func iiteratenivel(sigla,tomos):
 					"location" : dir2.get_current_dir() + "/" + sigla + "-" + tomo.sigla + "-" + unidad.sigla + "." + unidad.extension
 				}
 				downloadlist.append(downloadgdd)
+				
 				
 				for presentacion in unidad.presentaciones:
 					var downloadppt = {

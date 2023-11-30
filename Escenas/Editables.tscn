@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://crb70ihk78rqt"]
+[gd_scene load_steps=8 format=3 uid="uid://crb70ihk78rqt"]
 
+[ext_resource type="Script" path="res://Scripts/Editables.gd" id="1_0n843"]
 [ext_resource type="Texture2D" uid="uid://dcfqb5gpl3tb4" path="res://Sprites/GUI/IconFlecha.png" id="1_xvwrt"]
 [ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="2_34s8j"]
 [ext_resource type="Texture2D" uid="uid://dshmwi088ei1a" path="res://Sprites/GUI/btnTxt.png" id="3_fytgk"]
-[ext_resource type="Texture2D" uid="uid://drhpv7ndj3y5x" path="res://Sprites/GUI/btnTxt_click.png" id="4_00ah4"]
+[ext_resource type="Texture2D" uid="uid://dwmwhyxtgcw3g" path="res://Sprites/GUI/btnTxtChecked.png" id="5_7ye0y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ubg6f"]
 font = ExtResource("2_34s8j")
@@ -11,7 +12,7 @@ font_size = 45
 
 [sub_resource type="LabelSettings" id="LabelSettings_xwsyd"]
 font = ExtResource("2_34s8j")
-font_size = 32
+font_size = 24
 
 [node name="Editables" type="Node2D"]
 
@@ -24,6 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0n843")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -50,31 +52,21 @@ label_settings = SubResource("LabelSettings_ubg6f")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PresentacionesContainer" type="HSplitContainer" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.022
-anchor_top = 0.694
-anchor_right = 0.48
-anchor_bottom = 0.694
-offset_left = -0.344002
-offset_top = -167.712
-offset_right = 0.039978
-offset_bottom = 167.288
-
 [node name="BtnPresencaciones" type="TextureButton" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.022
-anchor_top = 0.37
-anchor_right = 0.478
-anchor_bottom = 0.37
-offset_left = -0.344002
-offset_top = -30.76
-offset_right = 0.343994
-offset_bottom = 31.24
+anchor_left = 0.046
+anchor_top = 0.372
+anchor_right = 0.464
+anchor_bottom = 0.443
+offset_left = 0.00799561
+offset_top = -0.0559998
+offset_right = 0.471985
+offset_bottom = -0.0640259
+toggle_mode = true
+button_pressed = true
 texture_normal = ExtResource("3_fytgk")
-texture_pressed = ExtResource("4_00ah4")
+texture_pressed = ExtResource("5_7ye0y")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -93,16 +85,17 @@ vertical_alignment = 1
 [node name="BtnEvaluaciones" type="TextureButton" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.503
-anchor_top = 0.37
-anchor_right = 0.96
-anchor_bottom = 0.37
-offset_left = 0.543945
-offset_top = -30.76
-offset_right = 0.0799561
-offset_bottom = 31.24
+anchor_left = 0.508
+anchor_top = 0.372
+anchor_right = 0.926
+anchor_bottom = 0.443
+offset_left = -0.216003
+offset_top = -0.0559998
+offset_right = 0.247925
+offset_bottom = -0.0640259
+toggle_mode = true
 texture_normal = ExtResource("3_fytgk")
-texture_pressed = ExtResource("4_00ah4")
+texture_pressed = ExtResource("5_7ye0y")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -113,7 +106,38 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Ítems Evaluaciones"
+text = "Ítem de evaluación"
 label_settings = SubResource("LabelSettings_xwsyd")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.022
+anchor_top = 0.444
+anchor_right = 0.963
+anchor_bottom = 0.978
+offset_left = -0.344002
+offset_top = 0.287964
+offset_right = -0.376099
+offset_bottom = 0.255981
+
+[node name="Presentaciones" type="Control" parent="CanvasLayer/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemsEval" type="Control" parent="CanvasLayer/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="CanvasLayer/Control/BtnPresencaciones" to="CanvasLayer/Control" method="_on_btn_presencaciones_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/BtnEvaluaciones" to="CanvasLayer/Control" method="_on_btn_evaluaciones_pressed"]

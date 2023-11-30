@@ -17,21 +17,22 @@ anchor_right = 0.049
 anchor_bottom = 0.108
 offset_left = -56.448
 offset_top = -68.984
-offset_right = 57.552
-offset_bottom = 69.016
+offset_right = 59.552
+offset_bottom = 72.016
 script = ExtResource("1_ah3sj")
 
 [node name="Student" type="TextureRect" parent="."]
 layout_mode = 2
-anchor_left = 0.48
-anchor_top = 0.476
-anchor_right = 0.48
-anchor_bottom = 0.5
-offset_left = -50.04
-offset_top = -52.88
-offset_right = 49.96
-offset_bottom = 48.0
+anchor_left = 0.043
+anchor_top = 0.043
+anchor_right = 0.958
+anchor_bottom = 0.797
+offset_left = 0.0119996
+offset_top = 0.066
+offset_right = -0.102005
+offset_bottom = 0.0139923
 texture = ExtResource("1_laal7")
+expand_mode = 2
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -40,9 +41,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -48.5
-offset_top = -23.0
-offset_right = 42.5
+offset_left = -48.0
+offset_top = -22.0
+offset_right = 43.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Nombre"

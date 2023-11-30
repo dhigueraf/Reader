@@ -5,10 +5,9 @@ func _ready():
 	
 	print("Home JSON:")
 	print(Global.JsonGDD)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	
+	Global.SelectedCurso = {}
+	Global.nivel = {}
 
 
 func _on_button_pressed():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://di27mshkwbdn2"]
+[gd_scene load_steps=14 format=3 uid="uid://di27mshkwbdn2"]
 
 [ext_resource type="Script" path="res://Scripts/NivelScreen.gd" id="1_krwxc"]
 [ext_resource type="Texture2D" uid="uid://dcfqb5gpl3tb4" path="res://Sprites/GUI/IconFlecha.png" id="2_g8vdu"]
@@ -12,6 +12,33 @@
 [sub_resource type="LabelSettings" id="LabelSettings_megrd"]
 font = ExtResource("4_dnabs")
 font_size = 45
+
+[sub_resource type="Theme" id="Theme_utyc1"]
+default_font = ExtResource("4_dnabs")
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(0, 0, 0, 1)
+Button/colors/icon_focus_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_normal_color = Color(0.376471, 0.466667, 0.52549, 1)
+Button/colors/icon_pressed_color = Color(0.341176, 0.427451, 0.482353, 1)
+Button/constants/h_separation = 0
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("4_dnabs")
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+Panel/styles/panel = null
 
 [sub_resource type="LabelSettings" id="LabelSettings_bccnn"]
 font = ExtResource("4_oy8ri")
@@ -72,14 +99,15 @@ offset_bottom = 239.0
 [node name="ContainerMascota" type="Panel" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.47
+anchor_left = 0.437
 anchor_top = 0.386
 anchor_right = 0.912
-anchor_bottom = 0.406
-offset_left = -0.440063
+anchor_bottom = 0.41
+offset_left = 0.575989
 offset_top = -83.128
 offset_right = 0.375977
-offset_bottom = 69.912
+offset_bottom = 67.32
+theme = SubResource("Theme_utyc1")
 
 [node name="Titulo" type="Label" parent="CanvasLayer/Control/ContainerMascota"]
 layout_mode = 0
@@ -108,26 +136,27 @@ autowrap_mode = 3
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/ContainerMascota"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.835
-anchor_top = 1.0
-anchor_right = 0.835
-anchor_bottom = 1.0
-offset_left = -55.905
-offset_top = -188.0
-offset_right = 56.095
-offset_bottom = -10.0
-grow_horizontal = 0
+anchor_left = 0.79
+anchor_top = -0.343
+anchor_right = 0.79
+anchor_bottom = 0.994
+offset_left = -110.9
+offset_top = -0.0619965
+offset_right = 111.1
+offset_bottom = -0.0039978
+grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_33loy")
+expand_mode = 4
 
 [node name="ContainerEstudiantes" type="Panel" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.47
+anchor_left = 0.439
 anchor_top = 0.702
 anchor_right = 0.912
 anchor_bottom = 0.702
-offset_left = -0.440063
+offset_left = 0.271973
 offset_top = -82.896
 offset_right = 1.37598
 offset_bottom = 83.104
@@ -158,13 +187,13 @@ theme_override_constants/separation = 24
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.03
-anchor_top = 0.437
-anchor_right = 0.443
-anchor_bottom = 0.437
+anchor_top = 0.5
+anchor_right = 0.409
+anchor_bottom = 0.5
 offset_left = 0.439999
-offset_top = -191.176
-offset_right = -0.336029
-offset_bottom = 190.824
+offset_top = -160.0
+offset_right = -0.167999
+offset_bottom = 150.0
 theme_override_constants/separation = 30
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/Control"]
