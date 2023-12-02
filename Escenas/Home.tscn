@@ -262,5 +262,5 @@ stretch_mode = 1
 
 [connection signal="pressed" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Button2" to="CanvasLayer/Control" method="_on_button_2_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/Button3" to="CanvasLayer/Control" method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Button3" to="CanvasLayer/Control" method="_on_button_3_pressed"]
 [connection signal="request_completed" from="CanvasLayer/Control/HTTPRequest" to="CanvasLayer/Control" method="_on_http_request_request_completed"]

@@ -1,0 +1,436 @@
+[gd_scene load_steps=11 format=3 uid="uid://8ur7n7cyaa1m"]
+
+[ext_resource type="Script" path="res://Scripts/unidad_evaluaciones.gd" id="1_xwsjb"]
+[ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="2_1uq3y"]
+[ext_resource type="Texture2D" uid="uid://cslvctqng1m6x" path="res://Sprites/GUI/docicon.png" id="3_8nin5"]
+[ext_resource type="FontFile" uid="uid://b0egmodgvdla" path="res://fonts/SassoonSansStd-Medium.otf" id="4_njywp"]
+[ext_resource type="Texture2D" uid="uid://diufjd2y8b2mu" path="res://Sprites/GUI/CircleInterno.png" id="5_e2e1j"]
+[ext_resource type="Texture2D" uid="uid://ckr0nnpww4qm8" path="res://Sprites/GUI/Circle.png" id="6_fqih0"]
+[ext_resource type="FontFile" uid="uid://cfxoy7q6ip6rl" path="res://fonts/SassoonSansStd-Bold.otf" id="7_c786w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_phv3j"]
+font = ExtResource("2_1uq3y")
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_vdks5"]
+font = ExtResource("4_njywp")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0nx84"]
+font = ExtResource("7_c786w")
+font_size = 10
+
+[node name="UnidadEvaluaciones" type="Control"]
+custom_minimum_size = Vector2(332, 132)
+layout_mode = 3
+anchor_right = 0.375
+anchor_bottom = 0.224
+offset_right = -3.05176e-05
+offset_bottom = -0.152008
+script = ExtResource("1_xwsjb")
+
+[node name="UnidadTitulo" type="Label" parent="."]
+layout_mode = 1
+offset_left = -1.0
+offset_top = -13.0
+offset_right = 212.0
+offset_bottom = 41.0
+text = "Unidad N"
+label_settings = SubResource("LabelSettings_phv3j")
+vertical_alignment = 1
+
+[node name="Doc1" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -13.5
+offset_right = -153.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_8nin5")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Doc1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -43.0
+offset_top = -23.0
+offset_right = 43.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Capitulo n"
+label_settings = SubResource("LabelSettings_vdks5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cricle" type="TextureRect" parent="Doc1"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -16.0
+offset_right = 1.0
+offset_bottom = 15.0
+grow_horizontal = 0
+texture = ExtResource("5_e2e1j")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CircleInterior" type="TextureRect" parent="Doc1/Cricle"]
+modulate = Color(0.345098, 0.345098, 0.345098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_fqih0")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Doc1/Cricle"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.471
+anchor_top = 0.5
+anchor_right = 0.471
+anchor_bottom = 0.5
+offset_left = -5.00698
+offset_top = -9.5
+offset_right = 4.99302
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(4.5, 8)
+text = "1"
+label_settings = SubResource("LabelSettings_0nx84")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Doc2" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -13.5
+offset_right = -70.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_8nin5")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Doc2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -43.0
+offset_top = -23.0
+offset_right = 43.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Capitulo n"
+label_settings = SubResource("LabelSettings_vdks5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cricle" type="TextureRect" parent="Doc2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -16.0
+offset_right = 1.0
+offset_bottom = 15.0
+grow_horizontal = 0
+texture = ExtResource("5_e2e1j")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CircleInterior" type="TextureRect" parent="Doc2/Cricle"]
+modulate = Color(0.345098, 0.345098, 0.345098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_fqih0")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Doc2/Cricle"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.471
+anchor_top = 0.5
+anchor_right = 0.471
+anchor_bottom = 0.5
+offset_left = -5.00698
+offset_top = -9.5
+offset_right = 4.99302
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(4.5, 8)
+text = "2"
+label_settings = SubResource("LabelSettings_0nx84")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Doc3" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -13.5
+offset_right = 13.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_8nin5")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Doc3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -43.0
+offset_top = -23.0
+offset_right = 43.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Capitulo n"
+label_settings = SubResource("LabelSettings_vdks5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cricle" type="TextureRect" parent="Doc3"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -16.0
+offset_right = 1.0
+offset_bottom = 15.0
+grow_horizontal = 0
+texture = ExtResource("5_e2e1j")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CircleInterior" type="TextureRect" parent="Doc3/Cricle"]
+modulate = Color(0.345098, 0.345098, 0.345098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_fqih0")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Doc3/Cricle"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.471
+anchor_top = 0.5
+anchor_right = 0.471
+anchor_bottom = 0.5
+offset_left = -5.00698
+offset_top = -9.5
+offset_right = 4.99302
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(4.5, 8)
+text = "3"
+label_settings = SubResource("LabelSettings_0nx84")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Doc4" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 56.0
+offset_top = -13.5
+offset_right = 95.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_8nin5")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Doc4"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -43.0
+offset_top = -23.0
+offset_right = 43.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Capitulo n"
+label_settings = SubResource("LabelSettings_vdks5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cricle" type="TextureRect" parent="Doc4"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -16.0
+offset_right = 1.0
+offset_bottom = 15.0
+grow_horizontal = 0
+texture = ExtResource("5_e2e1j")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CircleInterior" type="TextureRect" parent="Doc4/Cricle"]
+modulate = Color(0.345098, 0.345098, 0.345098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_fqih0")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Doc4/Cricle"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.471
+anchor_top = 0.5
+anchor_right = 0.471
+anchor_bottom = 0.5
+offset_left = -5.00698
+offset_top = -9.5
+offset_right = 4.99302
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(4.5, 8)
+text = "4"
+label_settings = SubResource("LabelSettings_0nx84")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Doc5" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 139.0
+offset_top = -13.5
+offset_right = 178.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_8nin5")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Doc5"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -43.0
+offset_top = -23.0
+offset_right = 43.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Capitulo n"
+label_settings = SubResource("LabelSettings_vdks5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cricle" type="TextureRect" parent="Doc5"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -16.0
+offset_right = 1.0
+offset_bottom = 15.0
+grow_horizontal = 0
+texture = ExtResource("5_e2e1j")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CircleInterior" type="TextureRect" parent="Doc5/Cricle"]
+modulate = Color(0.345098, 0.345098, 0.345098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_fqih0")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Doc5/Cricle"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.471
+anchor_top = 0.5
+anchor_right = 0.471
+anchor_bottom = 0.5
+offset_left = -5.00698
+offset_top = -9.5
+offset_right = 4.99302
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(4.5, 8)
+text = "5"
+label_settings = SubResource("LabelSettings_0nx84")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Doc1" to="." method="_on_doc_1_pressed"]
+[connection signal="pressed" from="Doc2" to="." method="_on_doc_2_pressed"]
+[connection signal="pressed" from="Doc3" to="." method="_on_doc_3_pressed"]
+[connection signal="pressed" from="Doc4" to="." method="_on_doc_4_pressed"]
+[connection signal="pressed" from="Doc5" to="." method="_on_doc_5_pressed"]

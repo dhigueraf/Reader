@@ -60,9 +60,9 @@ anchor_top = 0.372
 anchor_right = 0.464
 anchor_bottom = 0.443
 offset_left = 0.00799561
-offset_top = -0.0559998
+offset_top = 0.944
 offset_right = 0.471985
-offset_bottom = -0.0640259
+offset_bottom = 0.935974
 toggle_mode = true
 button_pressed = true
 texture_normal = ExtResource("3_fytgk")
@@ -90,9 +90,9 @@ anchor_top = 0.372
 anchor_right = 0.926
 anchor_bottom = 0.443
 offset_left = -0.216003
-offset_top = -0.0559998
+offset_top = 0.944
 offset_right = 0.247925
-offset_bottom = -0.0640259
+offset_bottom = 0.935974
 toggle_mode = true
 texture_normal = ExtResource("3_fytgk")
 texture_pressed = ExtResource("5_7ye0y")
@@ -131,6 +131,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="GridContainer" type="HFlowContainer" parent="CanvasLayer/Control/Panel/Presentaciones"]
+custom_minimum_size = Vector2(100, 64)
+layout_direction = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.026
+anchor_top = 0.139
+anchor_right = 0.961
+anchor_bottom = 0.89
+offset_left = -0.183998
+offset_top = -0.0940094
+offset_right = 0.276123
+offset_bottom = 0.059967
+theme_override_constants/h_separation = 85
+theme_override_constants/v_separation = 84
+
 [node name="ItemsEval" type="Control" parent="CanvasLayer/Control/Panel"]
 layout_mode = 1
 anchors_preset = 15
@@ -138,6 +154,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="GridContainer" type="HFlowContainer" parent="CanvasLayer/Control/Panel/ItemsEval"]
+custom_minimum_size = Vector2(100, 64)
+layout_direction = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.093
+anchor_top = 0.139
+anchor_right = 0.937
+anchor_bottom = 0.89
+offset_left = 0.188011
+offset_top = -0.0940094
+offset_right = 0.292053
+offset_bottom = 0.059967
+theme_override_constants/h_separation = 164
+theme_override_constants/v_separation = 12
 
 [connection signal="pressed" from="CanvasLayer/Control/BtnPresencaciones" to="CanvasLayer/Control" method="_on_btn_presencaciones_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/BtnEvaluaciones" to="CanvasLayer/Control" method="_on_btn_evaluaciones_pressed"]

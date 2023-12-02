@@ -4,7 +4,6 @@ var basedir = ""
 var online = false
 
 
-
 var softwareinfo = {
 	"nombre": "Sumo Primero software",
 	"version": 0,
@@ -16,6 +15,7 @@ var JsonGDD = {}
 var nivel = {}
 var tomo = {}
 var SelectedCurso = {}
+var selectedPestanaEditable="presentaciones" #"evaluaciones"
 
 var FileToRead = {}
 
