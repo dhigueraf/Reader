@@ -1,10 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://2m2nhcxj7aaj"]
+[gd_scene load_steps=13 format=3 uid="uid://2m2nhcxj7aaj"]
 
 [ext_resource type="Script" path="res://Scripts/Editables2.gd" id="1_hop3w"]
 [ext_resource type="Texture2D" uid="uid://dcfqb5gpl3tb4" path="res://Sprites/GUI/IconFlecha.png" id="2_b3gj2"]
 [ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="3_nxvjh"]
-[ext_resource type="Texture2D" uid="uid://dshmwi088ei1a" path="res://Sprites/GUI/btnTxt.png" id="4_p38ix"]
-[ext_resource type="Texture2D" uid="uid://dwmwhyxtgcw3g" path="res://Sprites/GUI/btnTxtChecked.png" id="5_o4roa"]
 [ext_resource type="Texture2D" uid="uid://chcl6h1t8i0ei" path="res://Sprites/GUI/btn_transpaente.png" id="6_nop83"]
 [ext_resource type="Texture2D" uid="uid://mslmdufus0g4" path="res://Sprites/GUI/btn_transpaente_relleno.png" id="7_spkvv"]
 [ext_resource type="FontFile" uid="uid://b0egmodgvdla" path="res://fonts/SassoonSansStd-Medium.otf" id="8_f0aod"]
@@ -13,9 +11,30 @@
 font = ExtResource("3_nxvjh")
 font_size = 45
 
-[sub_resource type="LabelSettings" id="LabelSettings_xwsyd"]
-font = ExtResource("3_nxvjh")
-font_size = 24
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qb03l"]
+bg_color = Color(0.388235, 0.47451, 0.52549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqave"]
+bg_color = Color(0.294118, 0.72549, 0.964706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0ab7"]
+bg_color = Color(0.129412, 0.607843, 0.843137, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5n5n6"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.129412, 0.607843, 0.843137, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_w81va"]
 font = ExtResource("8_f0aod")
@@ -59,64 +78,47 @@ label_settings = SubResource("LabelSettings_ubg6f")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BtnPresencaciones" type="TextureButton" parent="CanvasLayer/Control"]
+[node name="BtnPresencaciones" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.046
-anchor_top = 0.321
-anchor_right = 0.464
-anchor_bottom = 0.392
-offset_left = 0.00799179
-offset_top = -0.00801086
-offset_right = 0.471985
-offset_bottom = -0.016037
+anchor_left = 0.021
+anchor_top = 0.323
+anchor_right = 0.439
+anchor_bottom = 0.394
+offset_left = -0.192009
+offset_top = -0.304016
+offset_right = 0.271912
+offset_bottom = -0.312057
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_nxvjh")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_qb03l")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uqave")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_x0ab7")
 toggle_mode = true
 button_pressed = true
-texture_normal = ExtResource("4_p38ix")
-texture_pressed = ExtResource("5_o4roa")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/BtnPresencaciones"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 text = "Presentaciones"
-label_settings = SubResource("LabelSettings_xwsyd")
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="BtnEvaluaciones" type="TextureButton" parent="CanvasLayer/Control"]
+[node name="BtnEvaluaciones" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.508
-anchor_top = 0.321
-anchor_right = 0.926
-anchor_bottom = 0.392
-offset_left = -0.216003
-offset_top = -0.00801086
-offset_right = 0.247925
-offset_bottom = -0.016037
+anchor_left = 0.447
+anchor_top = 0.323
+anchor_right = 0.865
+anchor_bottom = 0.394
+offset_left = 0.0559692
+offset_top = -0.304016
+offset_right = 0.519897
+offset_bottom = -0.312057
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_nxvjh")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_qb03l")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uqave")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_x0ab7")
 toggle_mode = true
-texture_normal = ExtResource("4_p38ix")
-texture_pressed = ExtResource("5_o4roa")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/BtnEvaluaciones"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Ítem de evaluación"
-label_settings = SubResource("LabelSettings_xwsyd")
-horizontal_alignment = 1
-vertical_alignment = 1
+button_pressed = true
+text = "Presentaciones"
 
 [node name="Panel" type="Panel" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -129,6 +131,7 @@ offset_left = -0.344002
 offset_top = -0.0160065
 offset_right = -0.375977
 offset_bottom = 0.255981
+theme_override_styles/panel = SubResource("StyleBoxFlat_5n5n6")
 
 [node name="Presentaciones" type="Control" parent="CanvasLayer/Control/Panel"]
 layout_mode = 1
