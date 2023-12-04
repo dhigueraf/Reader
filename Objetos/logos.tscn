@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://10iiwg8j4f58"]
+[gd_scene load_steps=4 format=3 uid="uid://hpaclwh5b4uj"]
 
 [ext_resource type="Texture2D" uid="uid://bg0xae15rltlu" path="res://Sprites/logos/logoMineduc.png" id="1_1wpeg"]
 [ext_resource type="Texture2D" uid="uid://btaur40ife8wc" path="res://Sprites/logos/logoCMMEdu.png" id="2_us0by"]

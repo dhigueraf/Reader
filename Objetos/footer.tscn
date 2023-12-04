@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx3u6wb2xvxbr"]
+
+[ext_resource type="Texture2D" uid="uid://dwy5brbfa3l5u" path="res://Sprites/GUI/barra.png" id="1_raoeh"]
+
+[node name="Footer" type="Control"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -639.0
+offset_right = 639.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BarrasInferiores" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -726.0
+offset_top = -93.0
+offset_right = 722.0
+offset_bottom = 412.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_raoeh")
+stretch_mode = 1

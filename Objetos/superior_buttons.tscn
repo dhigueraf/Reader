@@ -1,0 +1,156 @@
+[gd_scene load_steps=12 format=3 uid="uid://cmfny35vwsquf"]
+
+[ext_resource type="Texture2D" uid="uid://jfy42c5wi0ry" path="res://Sprites/GUI/homebtn.png" id="1_khki1"]
+[ext_resource type="Script" path="res://Scripts/superior_buttons.gd" id="1_rvrg0"]
+[ext_resource type="Texture2D" uid="uid://bt4srxnu73ifl" path="res://Sprites/GUI/homebtn_hover.png" id="2_0wd60"]
+[ext_resource type="Texture2D" uid="uid://de7oj06a4rkqw" path="res://Sprites/GUI/homebtn_disabled.png" id="3_54glv"]
+[ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="4_1p3w3"]
+[ext_resource type="Texture2D" uid="uid://sn71ydp2ww2s" path="res://Sprites/GUI/arrowbrnborder.png" id="5_sdsqa"]
+[ext_resource type="Texture2D" uid="uid://dcfqb5gpl3tb4" path="res://Sprites/GUI/IconFlecha.png" id="7_q0asj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywjkw"]
+bg_color = Color(0.384314, 0.47451, 0.52549, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbkl6"]
+bg_color = Color(0.439216, 0.541176, 0.6, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_f3doe"]
+font = ExtResource("4_1p3w3")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_55q3j"]
+font = ExtResource("4_1p3w3")
+font_size = 36
+
+[node name="superiorButtons" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rvrg0")
+
+[node name="Homebtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 15.0
+offset_right = 67.0
+offset_bottom = 68.0
+texture_normal = ExtResource("1_khki1")
+texture_hover = ExtResource("2_0wd60")
+texture_disabled = ExtResource("3_54glv")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="ButtonGDD" type="Button" parent="."]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 23.0
+offset_right = 373.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("4_1p3w3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ywjkw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hbkl6")
+
+[node name="TextureRect" type="TextureRect" parent="ButtonGDD"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -13.5
+offset_right = 50.0
+offset_bottom = 14.5
+grow_vertical = 2
+texture = ExtResource("5_sdsqa")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="ButtonGDD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Guía Digital del Docente"
+label_settings = SubResource("LabelSettings_f3doe")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ButtonCurso" type="Button" parent="."]
+layout_mode = 0
+offset_left = 383.0
+offset_top = 23.0
+offset_right = 532.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("4_1p3w3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ywjkw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hbkl6")
+
+[node name="TextureRect" type="TextureRect" parent="ButtonCurso"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -13.5
+offset_right = 50.0
+offset_bottom = 14.5
+grow_vertical = 2
+texture = ExtResource("5_sdsqa")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Curso" type="Label" parent="ButtonCurso"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Curso"
+label_settings = SubResource("LabelSettings_f3doe")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.497
+anchor_right = 0.497
+offset_left = -320.66
+offset_top = 80.0
+offset_right = 328.34
+offset_bottom = 137.0
+grow_horizontal = 2
+rotation = -0.0523599
+texture = ExtResource("7_q0asj")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Titulo"
+label_settings = SubResource("LabelSettings_55q3j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Homebtn" to="." method="_on_homebtn_pressed"]
+[connection signal="pressed" from="ButtonGDD" to="." method="_on_button_gdd_pressed"]
+[connection signal="pressed" from="ButtonCurso" to="." method="_on_button_curso_pressed"]

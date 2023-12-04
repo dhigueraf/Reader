@@ -1,15 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://bhm6etkpaiot3"]
+[gd_scene load_steps=22 format=3 uid="uid://bhm6etkpaiot3"]
 
 [ext_resource type="Script" path="res://Scripts/Home.gd" id="1_omsou"]
 [ext_resource type="Script" path="res://Scripts/InternetChecker.gd" id="1_shcjp"]
 [ext_resource type="Texture2D" uid="uid://dv1v81f4fq6u0" path="res://Sprites/internet_logo.png" id="2_sklh0"]
 [ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="2_us1tt"]
+[ext_resource type="PackedScene" uid="uid://cmfny35vwsquf" path="res://Objetos/superior_buttons.tscn" id="3_3dr4i"]
 [ext_resource type="Texture2D" uid="uid://jg0cl84gxgjt" path="res://Sprites/cross-png.png" id="3_hgf8n"]
 [ext_resource type="FontFile" uid="uid://cfxoy7q6ip6rl" path="res://fonts/SassoonSansStd-Bold.otf" id="3_iwwju"]
 [ext_resource type="FontFile" uid="uid://7p3x2o37brcj" path="res://fonts/SassoonSansStd.otf" id="4_w66uw"]
-[ext_resource type="Texture2D" uid="uid://dshmwi088ei1a" path="res://Sprites/GUI/btnTxt.png" id="5_fvq82"]
-[ext_resource type="Texture2D" uid="uid://drhpv7ndj3y5x" path="res://Sprites/GUI/btnTxt_click.png" id="6_ux75y"]
-[ext_resource type="Texture2D" uid="uid://dwy5brbfa3l5u" path="res://Sprites/GUI/barra.png" id="8_126oc"]
+[ext_resource type="PackedScene" uid="uid://bx3u6wb2xvxbr" path="res://Objetos/footer.tscn" id="10_f8pt2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tmq6b"]
 font = ExtResource("2_us1tt")
@@ -17,19 +16,68 @@ font_size = 42
 
 [sub_resource type="LabelSettings" id="LabelSettings_dfxtu"]
 font = ExtResource("3_iwwju")
-font_size = 33
+font_size = 44
 
 [sub_resource type="LabelSettings" id="LabelSettings_rbpyi"]
 font = ExtResource("4_w66uw")
 font_size = 22
 
-[sub_resource type="LabelSettings" id="LabelSettings_ed1jj"]
-font = ExtResource("2_us1tt")
-font_size = 24
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs8a2"]
+bg_color = Color(0.384314, 0.47451, 0.52549, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
-[sub_resource type="LabelSettings" id="LabelSettings_df6yk"]
+[sub_resource type="LabelSettings" id="LabelSettings_j24dn"]
 font = ExtResource("2_us1tt")
-font_size = 20
+font_size = 38
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aplfh"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 52
+corner_radius_top_right = 52
+corner_radius_bottom_right = 52
+corner_radius_bottom_left = 52
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bags8"]
+bg_color = Color(0.384314, 0.47451, 0.52549, 1)
+corner_radius_top_left = 52
+corner_radius_top_right = 52
+corner_radius_bottom_right = 52
+corner_radius_bottom_left = 52
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8haym"]
+bg_color = Color(0.384314, 0.47451, 0.52549, 1)
+corner_radius_top_left = 52
+corner_radius_top_right = 52
+corner_radius_bottom_right = 52
+corner_radius_bottom_left = 52
+
+[sub_resource type="LabelSettings" id="LabelSettings_obaxc"]
+font = ExtResource("2_us1tt")
+font_size = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jnt4d"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pcsnd"]
+bg_color = Color(0.384314, 0.47451, 0.52549, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6x80"]
+bg_color = Color(0.384314, 0.47451, 0.52549, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
 [node name="Home" type="Node2D"]
 
@@ -45,7 +93,28 @@ grow_vertical = 2
 script = ExtResource("1_omsou")
 metadata/_edit_lock_ = true
 
+[node name="Footer" parent="CanvasLayer/Control" instance=ExtResource("10_f8pt2")]
+layout_mode = 1
+offset_right = 709.0
+offset_bottom = 3.0
+
+[node name="superiorButtons" parent="CanvasLayer/Control" instance=ExtResource("3_3dr4i")]
+layout_mode = 1
+
+[node name="Homebtn" parent="CanvasLayer/Control/superiorButtons" index="0"]
+disabled = true
+
+[node name="ButtonGDD" parent="CanvasLayer/Control/superiorButtons" index="1"]
+visible = false
+
+[node name="ButtonCurso" parent="CanvasLayer/Control/superiorButtons" index="2"]
+visible = false
+
+[node name="TextureRect" parent="CanvasLayer/Control/superiorButtons" index="3"]
+visible = false
+
 [node name="Titulo" type="Label" parent="CanvasLayer/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -77,12 +146,12 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -219.0
+offset_left = -253.352
 offset_top = 16.0
-offset_right = 213.0
+offset_right = 365.648
 offset_bottom = 97.0
 grow_horizontal = 2
-text = "Nombre del curso"
+text = "¿Qué es sumo Primero?"
 label_settings = SubResource("LabelSettings_dfxtu")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -94,9 +163,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
+offset_left = -250.352
 offset_top = -158.0
-offset_right = 221.0
+offset_right = 371.648
 offset_bottom = 247.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -105,21 +174,51 @@ label_settings = SubResource("LabelSettings_rbpyi")
 horizontal_alignment = 3
 autowrap_mode = 2
 
-[node name="Button" type="TextureButton" parent="CanvasLayer/Control"]
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.617
-anchor_top = 0.416
-anchor_right = 0.879
-anchor_bottom = 0.416
-offset_left = 0.216003
-offset_top = -40.568
-offset_right = 0.391968
-offset_bottom = 41.432
-texture_normal = ExtResource("5_fvq82")
-texture_pressed = ExtResource("6_ux75y")
-ignore_texture_size = true
-stretch_mode = 0
+anchor_left = 0.614
+anchor_top = 0.529
+anchor_right = 0.883
+anchor_bottom = 0.529
+offset_left = 0.0799561
+offset_top = -61.88
+offset_right = -0.23999
+offset_bottom = 62.12
+theme_override_styles/panel = SubResource("StyleBoxFlat_bs8a2")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Recursos editables"
+label_settings = SubResource("LabelSettings_j24dn")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.615
+anchor_top = 0.229
+anchor_right = 0.877
+anchor_bottom = 0.229
+offset_left = -1.20001
+offset_top = -47.88
+offset_right = 0.439941
+offset_bottom = 54.12
+theme_override_colors/font_color = Color(0.384314, 0.47451, 0.52549, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_us1tt")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_aplfh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bags8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8haym")
+text_overrun_behavior = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/Button"]
 layout_mode = 1
@@ -128,29 +227,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Guia Digital Docente"
-label_settings = SubResource("LabelSettings_ed1jj")
+text = "Guía Digital del Docente"
+label_settings = SubResource("LabelSettings_obaxc")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
-[node name="subtitulo2" type="Label" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.744
-anchor_top = 0.601
-anchor_right = 0.744
-anchor_bottom = 0.601
-offset_left = -216.088
-offset_top = -40.448
-offset_right = 215.912
-offset_bottom = 40.552
-grow_horizontal = 2
-text = "Recursos editables:"
-label_settings = SubResource("LabelSettings_dfxtu")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button2" type="TextureButton" parent="CanvasLayer/Control"]
+[node name="Button2" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.616
@@ -163,24 +246,16 @@ offset_right = 0.543945
 offset_bottom = 29.304
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("5_fvq82")
-texture_pressed = ExtResource("6_ux75y")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/Button2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+theme_override_colors/font_color = Color(0.384314, 0.47451, 0.52549, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_us1tt")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_jnt4d")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pcsnd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a6x80")
 text = "Presentaciones"
-label_settings = SubResource("LabelSettings_df6yk")
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Button3" type="TextureButton" parent="CanvasLayer/Control"]
+[node name="Button3" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.617
@@ -193,30 +268,26 @@ offset_right = 1.54395
 offset_bottom = 25.744
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("5_fvq82")
-texture_pressed = ExtResource("6_ux75y")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/Button3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Ítem de 	evaluacion"
-label_settings = SubResource("LabelSettings_df6yk")
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_colors/font_color = Color(0.384314, 0.47451, 0.52549, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_us1tt")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_jnt4d")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pcsnd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a6x80")
+text = "Ítems de evaluación"
 
 [node name="InternetStatus" type="Control" parent="CanvasLayer/Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 30.0
-offset_top = 28.0
-offset_right = 108.0
-offset_bottom = 106.0
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_top = 15.0
+offset_right = -18.0
+offset_bottom = 93.0
+grow_horizontal = 0
 script = ExtResource("1_shcjp")
 
 [node name="InternetIcon" type="TextureRect" parent="CanvasLayer/Control/InternetStatus"]
@@ -244,23 +315,11 @@ expand_mode = 1
 
 [node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer/Control"]
 
-[node name="BarrasInferiores" type="TextureRect" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -618.0
-offset_top = -93.0
-offset_right = 596.0
-offset_bottom = 412.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("8_126oc")
-stretch_mode = 1
-
+[connection signal="mouse_entered" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Button2" to="CanvasLayer/Control" method="_on_button_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Button3" to="CanvasLayer/Control" method="_on_button_3_pressed"]
 [connection signal="request_completed" from="CanvasLayer/Control/HTTPRequest" to="CanvasLayer/Control" method="_on_http_request_request_completed"]
+
+[editable path="CanvasLayer/Control/superiorButtons"]

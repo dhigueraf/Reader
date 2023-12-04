@@ -11,6 +11,7 @@ func _ready():
 	var unidades = Global.JsonGDD.Unidad
 	var colores = Global.JsonGDD.Color
 	
+	$superiorButtons.setLabelCurso(Global.nivel.nombre)
 	
 	for tomo in Global.nivel.tomos:
 		for unidad in tomo.unidades:

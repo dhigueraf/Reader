@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://civfp3akg3arn"]
 
 [ext_resource type="Script" path="res://Scripts/firstload.gd" id="1_vc6g1"]
-[ext_resource type="Texture2D" uid="uid://dwy5brbfa3l5u" path="res://Sprites/GUI/barra.png" id="2_lsj02"]
 [ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="3_f83oy"]
 [ext_resource type="FontFile" uid="uid://7p3x2o37brcj" path="res://fonts/SassoonSansStd.otf" id="4_hl3iu"]
 [ext_resource type="Texture2D" uid="uid://ds45v4fldxmce" path="res://Sprites/GUI/cuadrosBorde.png" id="5_64sj4"]
 [ext_resource type="Texture2D" uid="uid://dekleyiotfqkq" path="res://Sprites/GUI/cuadrosBordeProgress.png" id="6_wnmsq"]
 [ext_resource type="Script" path="res://Scripts/InternetChecker.gd" id="7_ohpr3"]
 [ext_resource type="Texture2D" uid="uid://dv1v81f4fq6u0" path="res://Sprites/internet_logo.png" id="8_c4hhs"]
+[ext_resource type="PackedScene" uid="uid://bx3u6wb2xvxbr" path="res://Objetos/footer.tscn" id="9_1gcyi"]
 [ext_resource type="Texture2D" uid="uid://jg0cl84gxgjt" path="res://Sprites/cross-png.png" id="9_il380"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gvcg1"]
@@ -35,22 +35,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vc6g1")
 metadata/_edit_lock_ = true
-
-[node name="BarrasInferiores" type="TextureRect" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -618.0
-offset_top = -93.0
-offset_right = 596.0
-offset_bottom = 412.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("2_lsj02")
-stretch_mode = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -124,12 +108,15 @@ vertical_alignment = 1
 [node name="JsonRequest" type="HTTPRequest" parent="CanvasLayer/Control"]
 
 [node name="InternetStatus" type="Control" parent="CanvasLayer/Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 30.0
-offset_top = 28.0
-offset_right = 108.0
-offset_bottom = 106.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -101.0
+offset_top = 15.0
+offset_right = -23.0
+offset_bottom = 93.0
+grow_horizontal = 0
 script = ExtResource("7_ohpr3")
 
 [node name="InternetIcon" type="TextureRect" parent="CanvasLayer/Control/InternetStatus"]
@@ -159,6 +146,9 @@ expand_mode = 1
 
 [node name="EndTime" type="Timer" parent="CanvasLayer/Control"]
 one_shot = true
+
+[node name="Footer" parent="CanvasLayer/Control" instance=ExtResource("9_1gcyi")]
+layout_mode = 1
 
 [connection signal="request_completed" from="CanvasLayer/Control/JsonRequest" to="CanvasLayer/Control" method="_on_json_request_request_completed"]
 [connection signal="request_completed" from="CanvasLayer/Control/DownloadRequest" to="CanvasLayer/Control" method="_on_download_request_request_completed"]

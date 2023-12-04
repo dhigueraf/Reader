@@ -2,15 +2,25 @@
 
 [ext_resource type="Script" path="res://Scripts/TomoBtn.gd" id="1_dpb7h"]
 [ext_resource type="Texture2D" uid="uid://bcdiq4o3fut0v" path="res://icon.png" id="2_kw3yw"]
-[ext_resource type="Texture2D" uid="uid://dshmwi088ei1a" path="res://Sprites/GUI/btnTxt.png" id="3_jekcd"]
-[ext_resource type="Texture2D" uid="uid://drhpv7ndj3y5x" path="res://Sprites/GUI/btnTxt_click.png" id="4_inwuk"]
 [ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="5_j1mmo"]
 [ext_resource type="Texture2D" uid="uid://bym8sv4dusefl" path="res://Sprites/GUI/pdfIcon.png" id="6_2qayg"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_pbofq"]
-line_spacing = 4.0
-font = ExtResource("5_j1mmo")
-font_size = 24
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nigf3"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ecuf8"]
+bg_color = Color(0.384314, 0.47451, 0.52549, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 23
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogvne"]
+bg_color = Color(0.384314, 0.47451, 0.52549, 1)
 
 [node name="Tomo" type="Control"]
 custom_minimum_size = Vector2(184, 0)
@@ -19,10 +29,10 @@ anchor_left = 0.106
 anchor_top = 0.211
 anchor_right = 0.106
 anchor_bottom = 0.211
-offset_left = -122.112
-offset_top = -136.728
-offset_right = 121.888
-offset_bottom = 137.272
+offset_left = -135.68
+offset_top = -151.92
+offset_right = 108.32
+offset_bottom = 122.08
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dpb7h")
@@ -30,55 +40,51 @@ script = ExtResource("1_dpb7h")
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.047
-anchor_top = 0.193
-anchor_right = 0.953
-anchor_bottom = 1.0
-offset_left = 0.031992
-offset_top = 0.117985
-offset_right = -0.0320129
+anchor_left = 0.037
+anchor_top = 0.12
+anchor_right = 0.984
+anchor_bottom = 0.942
+offset_left = -0.0279999
+offset_top = 0.119999
+offset_right = -0.0960083
+offset_bottom = -0.108002
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("2_kw3yw")
 expand_mode = 3
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_right = 1.0
-offset_bottom = 46.0
+offset_bottom = 29.0
 grow_horizontal = 2
-texture_normal = ExtResource("3_jekcd")
-texture_pressed = ExtResource("4_inwuk")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_colors/font_color = Color(0.384314, 0.47451, 0.52549, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_j1mmo")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_nigf3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ecuf8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ogvne")
+text = "Tomo X"
 
-[node name="Label" type="Label" parent="TextureButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Tomo N"
-label_settings = SubResource("LabelSettings_pbofq")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="TextureButton"]
+[node name="TextureRect" type="TextureRect" parent="Button"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -42.0
-offset_top = -40.0
-offset_right = 21.0
-offset_bottom = 31.0
+offset_left = -36.0
+offset_top = -28.5
+offset_right = 6.0
+offset_bottom = 15.5
 grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("6_2qayg")
+expand_mode = 1
+stretch_mode = 4
 
-[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_texture_button_pressed"]

@@ -1,18 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://crb70ihk78rqt"]
+[gd_scene load_steps=9 format=3 uid="uid://crb70ihk78rqt"]
 
 [ext_resource type="Script" path="res://Scripts/Editables.gd" id="1_0n843"]
-[ext_resource type="Texture2D" uid="uid://dcfqb5gpl3tb4" path="res://Sprites/GUI/IconFlecha.png" id="1_xvwrt"]
 [ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="2_34s8j"]
-[ext_resource type="Texture2D" uid="uid://dshmwi088ei1a" path="res://Sprites/GUI/btnTxt.png" id="3_fytgk"]
-[ext_resource type="Texture2D" uid="uid://dwmwhyxtgcw3g" path="res://Sprites/GUI/btnTxtChecked.png" id="5_7ye0y"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_ubg6f"]
-font = ExtResource("2_34s8j")
-font_size = 45
-
-[sub_resource type="LabelSettings" id="LabelSettings_xwsyd"]
-font = ExtResource("2_34s8j")
-font_size = 24
+[ext_resource type="PackedScene" uid="uid://bx3u6wb2xvxbr" path="res://Objetos/footer.tscn" id="2_thf1w"]
+[ext_resource type="PackedScene" uid="uid://cmfny35vwsquf" path="res://Objetos/superior_buttons.tscn" id="3_81pkq"]
+[ext_resource type="StyleBox" uid="uid://crjsh3ju8qnbb" path="res://themes/tab_button_normal.tres" id="5_utnp1"]
+[ext_resource type="StyleBox" uid="uid://c6udqam74tgpg" path="res://themes/tab_button_hover.tres" id="6_0fo48"]
+[ext_resource type="StyleBox" uid="uid://cvs1pqpwwq2yk" path="res://themes/paneltheme.tres" id="6_751iq"]
+[ext_resource type="StyleBox" uid="uid://b1otd43vx7fwu" path="res://themes/tab_button_pressed.tres" id="7_1j8xx"]
 
 [node name="Editables" type="Node2D"]
 
@@ -27,101 +22,68 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0n843")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+[node name="Footer" parent="CanvasLayer/Control" instance=ExtResource("2_thf1w")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -389.0
-offset_top = 106.0
-offset_right = 392.0
-offset_bottom = 189.0
-grow_horizontal = 2
-rotation = -0.0523599
-texture = ExtResource("1_xvwrt")
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/TextureRect"]
+[node name="superiorButtons" parent="CanvasLayer/Control" instance=ExtResource("3_81pkq")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Recursos editables"
-label_settings = SubResource("LabelSettings_ubg6f")
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="BtnPresencaciones" type="TextureButton" parent="CanvasLayer/Control"]
+[node name="Label" parent="CanvasLayer/Control/superiorButtons/TextureRect" index="0"]
+text = "Recursos Editables"
+
+[node name="BtnPresencaciones" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.046
-anchor_top = 0.372
-anchor_right = 0.464
-anchor_bottom = 0.443
-offset_left = 0.00799561
-offset_top = 0.944
-offset_right = 0.471985
-offset_bottom = 0.935974
+anchor_left = 0.022
+anchor_top = 0.236
+anchor_right = 0.44
+anchor_bottom = 0.305
+offset_left = -0.272005
+offset_top = -0.136017
+offset_right = 0.191956
+offset_bottom = 1.29596
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_34s8j")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("5_utnp1")
+theme_override_styles/hover = ExtResource("6_0fo48")
+theme_override_styles/pressed = ExtResource("7_1j8xx")
 toggle_mode = true
 button_pressed = true
-texture_normal = ExtResource("3_fytgk")
-texture_pressed = ExtResource("5_7ye0y")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/BtnPresencaciones"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 text = "Presentaciones"
-label_settings = SubResource("LabelSettings_xwsyd")
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="BtnEvaluaciones" type="TextureButton" parent="CanvasLayer/Control"]
+[node name="BtnEvaluaciones" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.508
-anchor_top = 0.372
-anchor_right = 0.926
-anchor_bottom = 0.443
-offset_left = -0.216003
-offset_top = 0.944
-offset_right = 0.247925
-offset_bottom = 0.935974
+anchor_left = 0.452
+anchor_top = 0.236
+anchor_right = 0.871
+anchor_bottom = 0.307
+offset_left = 0.463928
+offset_top = -0.136017
+offset_right = -0.352173
+offset_bottom = -0.144043
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_34s8j")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("5_utnp1")
+theme_override_styles/hover = ExtResource("6_0fo48")
+theme_override_styles/pressed = ExtResource("7_1j8xx")
 toggle_mode = true
-texture_normal = ExtResource("3_fytgk")
-texture_pressed = ExtResource("5_7ye0y")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/BtnEvaluaciones"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 text = "Ítem de evaluación"
-label_settings = SubResource("LabelSettings_xwsyd")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.022
-anchor_top = 0.444
+anchor_top = 0.306
 anchor_right = 0.963
-anchor_bottom = 0.978
-offset_left = -0.344002
-offset_top = 0.287964
-offset_right = -0.376099
-offset_bottom = 0.255981
+anchor_bottom = 0.839
+offset_left = -0.344004
+offset_top = -0.352066
+offset_right = -0.376221
+offset_bottom = 0.335938
+theme_override_styles/panel = ExtResource("6_751iq")
 
 [node name="Presentaciones" type="Control" parent="CanvasLayer/Control/Panel"]
 layout_mode = 1
@@ -144,7 +106,7 @@ offset_left = -0.183998
 offset_top = -0.0940094
 offset_right = 0.276123
 offset_bottom = 0.059967
-theme_override_constants/h_separation = 85
+theme_override_constants/h_separation = 100
 theme_override_constants/v_separation = 84
 
 [node name="ItemsEval" type="Control" parent="CanvasLayer/Control/Panel"]
@@ -173,3 +135,5 @@ theme_override_constants/v_separation = 12
 
 [connection signal="pressed" from="CanvasLayer/Control/BtnPresencaciones" to="CanvasLayer/Control" method="_on_btn_presencaciones_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/BtnEvaluaciones" to="CanvasLayer/Control" method="_on_btn_evaluaciones_pressed"]
+
+[editable path="CanvasLayer/Control/superiorButtons"]

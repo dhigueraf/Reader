@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cic3ycjpp7no1"]
+
+[ext_resource type="Texture2D" uid="uid://dcfqb5gpl3tb4" path="res://Sprites/GUI/IconFlecha.png" id="1_xcop0"]
+[ext_resource type="Script" path="res://Scripts/titulo.gd" id="1_yliv3"]
+[ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="2_r5k84"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_megrd"]
+font = ExtResource("2_r5k84")
+font_size = 45
+
+[node name="Titulo" type="Control"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_yliv3")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -323.0
+offset_top = 91.0
+offset_right = 326.0
+offset_bottom = 148.0
+grow_horizontal = 2
+rotation = -0.0523599
+texture = ExtResource("1_xcop0")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Titulo"
+label_settings = SubResource("LabelSettings_megrd")
+horizontal_alignment = 1
+vertical_alignment = 1

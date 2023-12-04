@@ -8,7 +8,7 @@ func _ready():
 	print("Nivel")
 	print(Global.nivel)
 	
-	$TextureRect/Label.text = Global.nivel.nombre
+	$superiorButtons.setTitulo(Global.nivel.nombre)
 	dir = DirAccess.open(Global.basedir +"/"+ Global.JsonGDD.folders.documentos +"/"+ Global.nivel.sigla)
 	
 	agregarMascota()

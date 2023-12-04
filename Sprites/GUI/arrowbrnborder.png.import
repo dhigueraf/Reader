@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chmlinly07l5y"
-path="res://.godot/imported/floppy.png-27fe09cbf0d22d4620ee2c2c3d50ebaa.ctex"
+uid="uid://sn71ydp2ww2s"
+path="res://.godot/imported/arrowbrnborder.png-23e4811b672f22dc99e6d7112b5b8ea6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mapas/floppy.png"
-dest_files=["res://.godot/imported/floppy.png-27fe09cbf0d22d4620ee2c2c3d50ebaa.ctex"]
+source_file="res://Sprites/GUI/arrowbrnborder.png"
+dest_files=["res://.godot/imported/arrowbrnborder.png-23e4811b672f22dc99e6d7112b5b8ea6.ctex"]
 
 [params]
 

@@ -9,7 +9,7 @@ func _ready():
 
 
 func setBtnTxt(texto):
-	$TextureButton/Label.text = texto
+	$Button.text = texto
 
 
 func _on_texture_button_pressed():

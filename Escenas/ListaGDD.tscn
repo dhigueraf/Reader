@@ -1,14 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1qabqhuxs6eb"]
+[gd_scene load_steps=5 format=3 uid="uid://c1qabqhuxs6eb"]
 
 [ext_resource type="Script" path="res://Scripts/ListaGDD.gd" id="1_1ud5k"]
-[ext_resource type="Texture2D" uid="uid://dcfqb5gpl3tb4" path="res://Sprites/GUI/IconFlecha.png" id="2_gs3ng"]
-[ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="3_ohgks"]
+[ext_resource type="PackedScene" uid="uid://bx3u6wb2xvxbr" path="res://Objetos/footer.tscn" id="2_454bu"]
+[ext_resource type="PackedScene" uid="uid://cmfny35vwsquf" path="res://Objetos/superior_buttons.tscn" id="3_q0tu3"]
 
 [sub_resource type="Theme" id="Theme_3wqm4"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_g3bx6"]
-font = ExtResource("3_ohgks")
-font_size = 45
 
 [node name="ListaGDD" type="Node2D"]
 
@@ -22,6 +18,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1ud5k")
+
+[node name="Footer" parent="CanvasLayer/Control" instance=ExtResource("2_454bu")]
+layout_mode = 1
+
+[node name="superiorButtons" parent="CanvasLayer/Control" instance=ExtResource("3_q0tu3")]
+layout_mode = 1
+
+[node name="ButtonGDD" parent="CanvasLayer/Control/superiorButtons" index="1"]
+visible = false
+
+[node name="ButtonCurso" parent="CanvasLayer/Control/superiorButtons" index="2"]
+visible = false
+
+[node name="Label" parent="CanvasLayer/Control/superiorButtons/TextureRect" index="0"]
+text = "Guia Didital del Docente"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
 layout_direction = 2
@@ -38,27 +49,4 @@ theme = SubResource("Theme_3wqm4")
 theme_override_constants/separation = 12
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -386.0
-offset_top = 58.0
-offset_right = 395.0
-offset_bottom = 141.0
-grow_horizontal = 2
-rotation = -0.0523599
-texture = ExtResource("2_gs3ng")
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/TextureRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Guia Digital Docente"
-label_settings = SubResource("LabelSettings_g3bx6")
-horizontal_alignment = 1
-vertical_alignment = 1
+[editable path="CanvasLayer/Control/superiorButtons"]

@@ -9,7 +9,7 @@ font = ExtResource("3_jjj4m")
 font_size = 18
 
 [node name="PersonajeIcon" type="Control"]
-custom_minimum_size = Vector2(112, 0)
+custom_minimum_size = Vector2(85, 0)
 layout_mode = 3
 anchor_left = 0.049
 anchor_top = 0.108

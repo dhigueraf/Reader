@@ -1,17 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://di27mshkwbdn2"]
+[gd_scene load_steps=16 format=3 uid="uid://di27mshkwbdn2"]
 
 [ext_resource type="Script" path="res://Scripts/NivelScreen.gd" id="1_krwxc"]
-[ext_resource type="Texture2D" uid="uid://dcfqb5gpl3tb4" path="res://Sprites/GUI/IconFlecha.png" id="2_g8vdu"]
-[ext_resource type="Texture2D" uid="uid://dshmwi088ei1a" path="res://Sprites/GUI/btnTxt.png" id="3_dinwb"]
+[ext_resource type="PackedScene" uid="uid://bx3u6wb2xvxbr" path="res://Objetos/footer.tscn" id="2_hus7c"]
+[ext_resource type="PackedScene" uid="uid://cmfny35vwsquf" path="res://Objetos/superior_buttons.tscn" id="3_2fo0g"]
 [ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="4_dnabs"]
 [ext_resource type="FontFile" uid="uid://cfxoy7q6ip6rl" path="res://fonts/SassoonSansStd-Bold.otf" id="4_oy8ri"]
 [ext_resource type="FontFile" uid="uid://b0egmodgvdla" path="res://fonts/SassoonSansStd-Medium.otf" id="5_2fmuh"]
+[ext_resource type="StyleBox" uid="uid://cvs1pqpwwq2yk" path="res://themes/paneltheme.tres" id="5_pl7kk"]
 [ext_resource type="Texture2D" uid="uid://bcdiq4o3fut0v" path="res://icon.png" id="6_33loy"]
-[ext_resource type="Texture2D" uid="uid://drhpv7ndj3y5x" path="res://Sprites/GUI/btnTxt_click.png" id="9_2vfe8"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_megrd"]
-font = ExtResource("4_dnabs")
-font_size = 45
 
 [sub_resource type="Theme" id="Theme_utyc1"]
 default_font = ExtResource("4_dnabs")
@@ -40,16 +36,41 @@ Button/styles/normal = null
 Button/styles/pressed = null
 Panel/styles/panel = null
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33fks"]
+bg_color = Color(0.129412, 0.607843, 0.843137, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="LabelSettings" id="LabelSettings_bccnn"]
 font = ExtResource("4_oy8ri")
 font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_fk4s2"]
 font = ExtResource("5_2fmuh")
+font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_vw262"]
-font = ExtResource("4_dnabs")
-font_size = 32
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iajpb"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ftj3h"]
+bg_color = Color(0.384314, 0.47451, 0.52549, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lyn7m"]
+bg_color = Color(0.384314, 0.47451, 0.52549, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
 
 [node name="Nivel" type="Node2D"]
 
@@ -64,30 +85,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_krwxc")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+[node name="Footer" parent="CanvasLayer/Control" instance=ExtResource("2_hus7c")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -386.0
-offset_top = 58.0
-offset_right = 395.0
-offset_bottom = 141.0
-grow_horizontal = 2
-rotation = -0.0523599
-texture = ExtResource("2_g8vdu")
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/TextureRect"]
+[node name="superiorButtons" parent="CanvasLayer/Control" instance=ExtResource("3_2fo0g")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Titulo"
-label_settings = SubResource("LabelSettings_megrd")
-horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="ButtonCurso" parent="CanvasLayer/Control/superiorButtons" index="2"]
+visible = false
+
+[node name="TextureRect" parent="CanvasLayer/Control/superiorButtons" index="3"]
+offset_left = -132.16
+offset_top = 70.0
+offset_right = 159.84
+offset_bottom = 127.0
 
 [node name="Label2" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 2
@@ -108,27 +119,40 @@ offset_top = -83.128
 offset_right = 0.375977
 offset_bottom = 67.32
 theme = SubResource("Theme_utyc1")
+theme_override_styles/panel = ExtResource("5_pl7kk")
 
-[node name="Titulo" type="Label" parent="CanvasLayer/Control/ContainerMascota"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = -22.0
-offset_right = 104.0
-offset_bottom = 15.0
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/ContainerMascota"]
+layout_mode = 1
+offset_left = -5.0
+offset_top = -21.0
+offset_right = 207.0
+offset_bottom = 19.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_33fks")
+
+[node name="Titulo" type="Label" parent="CanvasLayer/Control/ContainerMascota/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Mascota"
 label_settings = SubResource("LabelSettings_bccnn")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Texto" type="Label" parent="CanvasLayer/Control/ContainerMascota"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
-anchor_top = 0.175
-anchor_right = 0.623
+anchor_top = 0.268
+anchor_right = 0.622
 anchor_bottom = 0.819
-offset_left = -0.15
-offset_top = -0.0500011
-offset_right = 0.0109863
-offset_bottom = 0.04599
+offset_left = -0.389999
+offset_top = 0.0488968
+offset_right = -0.0516052
+offset_bottom = -0.369232
 label_settings = SubResource("LabelSettings_fk4s2")
 horizontal_alignment = 3
 autowrap_mode = 3
@@ -140,10 +164,10 @@ anchor_left = 0.79
 anchor_top = -0.343
 anchor_right = 0.79
 anchor_bottom = 0.994
-offset_left = -110.9
-offset_top = -0.0619965
-offset_right = 111.1
-offset_bottom = -0.0039978
+offset_left = -93.162
+offset_top = -0.469299
+offset_right = 104.838
+offset_bottom = -0.721634
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_33loy")
@@ -160,15 +184,28 @@ offset_left = 0.271973
 offset_top = -82.896
 offset_right = 1.37598
 offset_bottom = 83.104
+theme_override_styles/panel = ExtResource("5_pl7kk")
 
-[node name="Titulo" type="Label" parent="CanvasLayer/Control/ContainerEstudiantes"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = -22.0
-offset_right = 104.0
-offset_bottom = 15.0
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/ContainerEstudiantes"]
+layout_mode = 1
+offset_left = -6.0
+offset_top = -24.0
+offset_right = 206.0
+offset_bottom = 16.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_33fks")
+
+[node name="Titulo" type="Label" parent="CanvasLayer/Control/ContainerEstudiantes/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Amigos"
 label_settings = SubResource("LabelSettings_bccnn")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ContainerEstudiantes"]
 layout_mode = 1
@@ -187,49 +224,38 @@ theme_override_constants/separation = 24
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.03
-anchor_top = 0.5
-anchor_right = 0.409
-anchor_bottom = 0.5
-offset_left = 0.439999
-offset_top = -160.0
-offset_right = -0.167999
-offset_bottom = 150.0
+anchor_top = 0.467
+anchor_right = 0.41
+anchor_bottom = 0.467
+offset_left = 1.6
+offset_top = -155.24
+offset_right = -0.287964
+offset_bottom = 154.76
 theme_override_constants/separation = 30
 
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/Control"]
+[node name="TextureButton" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -542.0
-offset_top = -151.0
-offset_right = -108.0
-offset_bottom = -78.0
+offset_left = -599.0
+offset_top = -229.0
+offset_right = -198.0
+offset_bottom = -190.0
 grow_horizontal = 2
 grow_vertical = 0
-texture_normal = ExtResource("3_dinwb")
-texture_pressed = ExtResource("9_2vfe8")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/TextureButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -145.0
-offset_top = -24.0
-offset_right = 145.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
+theme_override_colors/font_color = Color(0.384314, 0.47451, 0.52549, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_dnabs")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_iajpb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ftj3h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lyn7m")
 text = "Recursos Editables"
-label_settings = SubResource("LabelSettings_vw262")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/Control/TextureButton" to="CanvasLayer/Control" method="_on_texture_button_pressed"]
+
+[editable path="CanvasLayer/Control/superiorButtons"]
