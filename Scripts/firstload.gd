@@ -63,7 +63,7 @@ func CheckConfig():
 	#Verificar el online
 	loadingvalue = 5
 	#ahora buscar version online
-	await $JsonRequest.request("https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/Json/GDD.json") #paso2
+	await $JsonRequest.request(Global.jsonUrl) #paso2
 
 
 func _on_json_request_request_completed(result, response_code, headers, body):

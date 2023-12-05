@@ -1,5 +1,8 @@
 extends Control
 
+var nointernet = false
+var llamadoelmodal = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -10,6 +13,8 @@ func _ready():
 	Global.nivel = {}
 	
 	$Button/Label.modulate =  Color("#627986")
+	
+	await $JsonRequest.request(Global.jsonUrl) #chequear internet
 
 
 func _on_button_pressed():
@@ -33,3 +38,32 @@ func _on_button_mouse_entered():
 
 func _on_button_mouse_exited():
 	$Button/Label.modulate =  Color("#627986")
+
+
+func _on_http_request_request_completed(result, response_code, headers, body):
+	print("requested")
+	var prejson = body.get_string_from_utf8()
+	var obtainedjson = JSON.parse_string(prejson)
+	
+	#print("Obtener Json:")
+	#print(obtainedjson)
+	if str(obtainedjson) != "<null>":
+		print("listo web")
+		$InternetStatus.setInternetIcon(true)
+		Global.online = true
+		if(nointernet and not llamadoelmodal):
+			print("llamar al modal")
+			nointernet = false
+			llamadoelmodal = true
+	else:
+		print("No hay internetus")
+		Global.online = false
+		#nointernet = true
+		$InternetStatus.setInternetIcon(false)
+	
+	$CheckInternetAgain.start()
+
+
+func _on_check_internet_again_timeout():
+	print("revisar denuevo")
+	await $JsonRequest.request(Global.jsonUrl) #chequear internet

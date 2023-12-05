@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cic3ycjpp7no1"]
+[gd_scene load_steps=5 format=3 uid="uid://c78um05pxji2c"]
 
 [ext_resource type="Texture2D" uid="uid://dcfqb5gpl3tb4" path="res://Sprites/GUI/IconFlecha.png" id="1_xcop0"]
 [ext_resource type="Script" path="res://Scripts/titulo.gd" id="1_yliv3"]

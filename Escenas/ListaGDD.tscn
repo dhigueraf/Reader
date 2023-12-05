@@ -31,8 +31,8 @@ visible = false
 [node name="ButtonCurso" parent="CanvasLayer/Control/superiorButtons" index="2"]
 visible = false
 
-[node name="Label" parent="CanvasLayer/Control/superiorButtons/TextureRect" index="0"]
-text = "Guia Didital del Docente"
+[node name="Flecha" parent="CanvasLayer/Control/superiorButtons" index="3"]
+visible = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
 layout_direction = 2

@@ -1,64 +1,62 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkfckrc286j4s"]
+[gd_scene load_steps=11 format=3 uid="uid://cbic0bhlr6015"]
 
-[ext_resource type="Script" path="res://Scripts/UnidadPress.gd" id="1_hq7mc"]
-[ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="2_0d723"]
-[ext_resource type="Texture2D" uid="uid://b04xctl640eue" path="res://Sprites/GUI/ppticon.png" id="3_lp132"]
-[ext_resource type="FontFile" uid="uid://b0egmodgvdla" path="res://fonts/SassoonSansStd-Medium.otf" id="4_o2oyo"]
-[ext_resource type="Texture2D" uid="uid://diufjd2y8b2mu" path="res://Sprites/GUI/CircleInterno.png" id="5_l2k8f"]
-[ext_resource type="Texture2D" uid="uid://ckr0nnpww4qm8" path="res://Sprites/GUI/Circle.png" id="6_mouk6"]
-[ext_resource type="FontFile" uid="uid://cfxoy7q6ip6rl" path="res://fonts/SassoonSansStd-Bold.otf" id="7_gosku"]
+[ext_resource type="Script" path="res://Scripts/UnidadPress.gd" id="1_v5ysl"]
+[ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="2_8gtgh"]
+[ext_resource type="Texture2D" uid="uid://b04xctl640eue" path="res://Sprites/GUI/ppticon.png" id="3_1pvxg"]
+[ext_resource type="FontFile" uid="uid://b0egmodgvdla" path="res://fonts/SassoonSansStd-Medium.otf" id="4_0f538"]
+[ext_resource type="Texture2D" uid="uid://diufjd2y8b2mu" path="res://Sprites/GUI/CircleInterno.png" id="5_pfmna"]
+[ext_resource type="Texture2D" uid="uid://ckr0nnpww4qm8" path="res://Sprites/GUI/Circle.png" id="6_w67og"]
+[ext_resource type="FontFile" uid="uid://cfxoy7q6ip6rl" path="res://fonts/SassoonSansStd-Bold.otf" id="7_l0ba5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_phv3j"]
-font = ExtResource("2_0d723")
+font = ExtResource("2_8gtgh")
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_0iemi"]
-font = ExtResource("4_o2oyo")
+font = ExtResource("4_0f538")
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_xrc2x"]
-font = ExtResource("7_gosku")
+font = ExtResource("7_l0ba5")
 font_size = 18
 
 [node name="UnidadPresentaciones" type="Control"]
-custom_minimum_size = Vector2(400, 64)
+custom_minimum_size = Vector2(224, 64)
 layout_mode = 3
-anchor_right = 0.33
-anchor_bottom = 0.224
-offset_right = -22.4
-offset_bottom = -0.279999
-script = ExtResource("1_hq7mc")
+anchor_right = 0.283
+anchor_bottom = 0.272
+offset_right = -0.240021
+offset_bottom = 0.159988
+script = ExtResource("1_v5ysl")
 
 [node name="UnidadTitulo" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -40.5
-offset_right = 213.0
-offset_bottom = 41.5
-grow_vertical = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -106.5
+offset_right = 106.5
+offset_bottom = 82.0
+grow_horizontal = 2
 text = "Unidad N"
 label_settings = SubResource("LabelSettings_phv3j")
 vertical_alignment = 1
 
 [node name="PPt1" type="TextureButton" parent="."]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -201.0
-offset_top = -41.5
-offset_right = -119.0
-offset_bottom = 41.5
-grow_horizontal = 0
-grow_vertical = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -142.5
+offset_top = -88.0
+offset_right = -65.5
+grow_horizontal = 2
+grow_vertical = 0
 action_mode = 0
-texture_normal = ExtResource("3_lp132")
-ignore_texture_size = true
-stretch_mode = 4
+texture_normal = ExtResource("3_1pvxg")
 
 [node name="Label" type="Label" parent="PPt1"]
 layout_mode = 1
@@ -68,9 +66,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -52.5
-offset_top = 39.5
+offset_top = 45.0
 offset_right = 60.5
-offset_bottom = 61.5
+offset_bottom = 67.976
 grow_horizontal = 2
 grow_vertical = 2
 text = "Presentación n"
@@ -83,11 +81,12 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -37.0
-offset_right = -13.0
+offset_left = -30.0
+offset_top = -1.0
+offset_right = -6.0
 offset_bottom = 24.0
 grow_horizontal = 0
-texture = ExtResource("5_l2k8f")
+texture = ExtResource("5_pfmna")
 expand_mode = 1
 stretch_mode = 4
 
@@ -99,7 +98,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_mouk6")
+texture = ExtResource("6_w67og")
 expand_mode = 1
 stretch_mode = 4
 
@@ -124,20 +123,18 @@ vertical_alignment = 1
 
 [node name="PPt2" type="TextureButton" parent="."]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -82.0
-offset_top = -41.5
-offset_bottom = 41.5
-grow_horizontal = 0
-grow_vertical = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -15.5
+offset_top = -88.0
+offset_right = 61.5
+grow_horizontal = 2
+grow_vertical = 0
 action_mode = 0
-texture_normal = ExtResource("3_lp132")
-ignore_texture_size = true
-stretch_mode = 4
+texture_normal = ExtResource("3_1pvxg")
 
 [node name="Label" type="Label" parent="PPt2"]
 layout_mode = 1
@@ -147,9 +144,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -52.5
-offset_top = 39.5
+offset_top = 45.0
 offset_right = 60.5
-offset_bottom = 61.5
+offset_bottom = 67.976
 grow_horizontal = 2
 grow_vertical = 2
 text = "Presentación n"
@@ -162,11 +159,12 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -37.0
-offset_right = -13.0
+offset_left = -30.0
+offset_top = -1.0
+offset_right = -6.0
 offset_bottom = 24.0
 grow_horizontal = 0
-texture = ExtResource("5_l2k8f")
+texture = ExtResource("5_pfmna")
 expand_mode = 1
 stretch_mode = 4
 
@@ -178,7 +176,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_mouk6")
+texture = ExtResource("6_w67og")
 expand_mode = 1
 stretch_mode = 4
 

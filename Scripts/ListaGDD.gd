@@ -6,6 +6,8 @@ var btnNivel = preload("res://Objetos/curso_btn.tscn")
 func _ready():
 	print("lista de Cursos")
 	
+	$superiorButtons.setTitulo("Guía Digital del Docente")
+	
 	listaNiveles = Global.JsonGDD.Niveles
 	
 	print(listaNiveles)

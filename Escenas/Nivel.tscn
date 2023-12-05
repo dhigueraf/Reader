@@ -94,11 +94,8 @@ layout_mode = 1
 [node name="ButtonCurso" parent="CanvasLayer/Control/superiorButtons" index="2"]
 visible = false
 
-[node name="TextureRect" parent="CanvasLayer/Control/superiorButtons" index="3"]
-offset_left = -132.16
-offset_top = 70.0
-offset_right = 159.84
-offset_bottom = 127.0
+[node name="Flecha" parent="CanvasLayer/Control/superiorButtons" index="3"]
+visible = false
 
 [node name="Label2" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 2
@@ -160,18 +157,19 @@ autowrap_mode = 3
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/ContainerMascota"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.79
-anchor_top = -0.343
-anchor_right = 0.79
+anchor_left = 0.815
+anchor_top = -0.525
+anchor_right = 0.815
 anchor_bottom = 0.994
-offset_left = -93.162
-offset_top = -0.469299
-offset_right = 104.838
+offset_left = -108.357
+offset_top = 0.0572052
+offset_right = 108.643
 offset_bottom = -0.721634
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_33loy")
 expand_mode = 4
+stretch_mode = 4
 
 [node name="ContainerEstudiantes" type="Panel" parent="CanvasLayer/Control"]
 layout_mode = 1

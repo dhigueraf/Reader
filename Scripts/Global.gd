@@ -1,5 +1,6 @@
 extends Node
 
+var jsonUrl = "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/Json/GDD.json"
 var basedir = ""
 var online = false
 

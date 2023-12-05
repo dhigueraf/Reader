@@ -1,12 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://bhm6etkpaiot3"]
+[gd_scene load_steps=20 format=3 uid="uid://bhm6etkpaiot3"]
 
 [ext_resource type="Script" path="res://Scripts/Home.gd" id="1_omsou"]
-[ext_resource type="Script" path="res://Scripts/InternetChecker.gd" id="1_shcjp"]
-[ext_resource type="Texture2D" uid="uid://dv1v81f4fq6u0" path="res://Sprites/internet_logo.png" id="2_sklh0"]
 [ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="2_us1tt"]
 [ext_resource type="PackedScene" uid="uid://cmfny35vwsquf" path="res://Objetos/superior_buttons.tscn" id="3_3dr4i"]
-[ext_resource type="Texture2D" uid="uid://jg0cl84gxgjt" path="res://Sprites/cross-png.png" id="3_hgf8n"]
 [ext_resource type="FontFile" uid="uid://cfxoy7q6ip6rl" path="res://fonts/SassoonSansStd-Bold.otf" id="3_iwwju"]
+[ext_resource type="PackedScene" uid="uid://2cpqe74okskv" path="res://Objetos/internet_status.tscn" id="4_tycym"]
 [ext_resource type="FontFile" uid="uid://7p3x2o37brcj" path="res://fonts/SassoonSansStd.otf" id="4_w66uw"]
 [ext_resource type="PackedScene" uid="uid://bx3u6wb2xvxbr" path="res://Objetos/footer.tscn" id="10_f8pt2"]
 
@@ -16,11 +14,15 @@ font_size = 42
 
 [sub_resource type="LabelSettings" id="LabelSettings_dfxtu"]
 font = ExtResource("3_iwwju")
-font_size = 44
+font_size = 52
 
 [sub_resource type="LabelSettings" id="LabelSettings_rbpyi"]
 font = ExtResource("4_w66uw")
 font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_j24dn"]
+font = ExtResource("2_us1tt")
+font_size = 31
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs8a2"]
 bg_color = Color(0.384314, 0.47451, 0.52549, 1)
@@ -28,10 +30,6 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-
-[sub_resource type="LabelSettings" id="LabelSettings_j24dn"]
-font = ExtResource("2_us1tt")
-font_size = 38
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aplfh"]
 bg_color = Color(1, 1, 1, 1)
@@ -110,8 +108,18 @@ visible = false
 [node name="ButtonCurso" parent="CanvasLayer/Control/superiorButtons" index="2"]
 visible = false
 
-[node name="TextureRect" parent="CanvasLayer/Control/superiorButtons" index="3"]
+[node name="Flecha" parent="CanvasLayer/Control/superiorButtons" index="3"]
 visible = false
+
+[node name="Titulo" parent="CanvasLayer/Control/superiorButtons" index="4"]
+visible = false
+
+[node name="InternetStatus" parent="CanvasLayer/Control" instance=ExtResource("4_tycym")]
+layout_mode = 1
+offset_left = -99.0
+offset_top = 20.0
+offset_right = -21.0
+offset_bottom = 98.0
 
 [node name="Titulo" type="Label" parent="CanvasLayer/Control"]
 visible = false
@@ -146,10 +154,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -253.352
-offset_top = 16.0
-offset_right = 365.648
-offset_bottom = 97.0
+offset_left = -249.96
+offset_top = -12.896
+offset_right = 369.04
+offset_bottom = 68.104
 grow_horizontal = 2
 text = "¿Qué es sumo Primero?"
 label_settings = SubResource("LabelSettings_dfxtu")
@@ -174,7 +182,28 @@ label_settings = SubResource("LabelSettings_rbpyi")
 horizontal_alignment = 3
 autowrap_mode = 2
 
+[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -501.0
+offset_top = -3.0
+offset_right = -134.0
+offset_bottom = 53.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Recursos editables:"
+label_settings = SubResource("LabelSettings_j24dn")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Panel" type="Panel" parent="CanvasLayer/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.614
@@ -187,30 +216,17 @@ offset_right = -0.23999
 offset_bottom = 62.12
 theme_override_styles/panel = SubResource("StyleBoxFlat_bs8a2")
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Recursos editables"
-label_settings = SubResource("LabelSettings_j24dn")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
 [node name="Button" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.615
-anchor_top = 0.229
+anchor_left = 0.614
+anchor_top = 0.3
 anchor_right = 0.877
-anchor_bottom = 0.229
-offset_left = -1.20001
-offset_top = -47.88
+anchor_bottom = 0.3
+offset_left = 0.0799561
+offset_top = -51.0
 offset_right = 0.439941
-offset_bottom = 54.12
+offset_bottom = 51.0
 theme_override_colors/font_color = Color(0.384314, 0.47451, 0.52549, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_us1tt")
@@ -240,10 +256,10 @@ anchor_left = 0.616
 anchor_top = 0.677
 anchor_right = 0.878
 anchor_bottom = 0.677
-offset_left = 0.367981
-offset_top = -21.696
+offset_left = 0.36792
+offset_top = -73.696
 offset_right = 0.543945
-offset_bottom = 29.304
+offset_bottom = -22.696
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.384314, 0.47451, 0.52549, 1)
@@ -263,9 +279,9 @@ anchor_top = 0.772
 anchor_right = 0.878
 anchor_bottom = 0.772
 offset_left = 0.215942
-offset_top = -25.256
+offset_top = -77.256
 offset_right = 1.54395
-offset_bottom = 25.744
+offset_bottom = -26.256
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.384314, 0.47451, 0.52549, 1)
@@ -277,49 +293,17 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_pcsnd")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_a6x80")
 text = "Ítems de evaluación"
 
-[node name="InternetStatus" type="Control" parent="CanvasLayer/Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -96.0
-offset_top = 15.0
-offset_right = -18.0
-offset_bottom = 93.0
-grow_horizontal = 0
-script = ExtResource("1_shcjp")
+[node name="JsonRequest" type="HTTPRequest" parent="CanvasLayer/Control"]
 
-[node name="InternetIcon" type="TextureRect" parent="CanvasLayer/Control/InternetStatus"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 6.0
-offset_right = 72.0
-offset_bottom = 73.0
-texture = ExtResource("2_sklh0")
-expand_mode = 1
-
-[node name="Cross" type="TextureRect" parent="CanvasLayer/Control/InternetStatus"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.5
-anchor_top = -0.512
-anchor_right = -0.5
-anchor_bottom = -0.512
-offset_left = 47.0
-offset_top = 46.936
-offset_right = 115.0
-offset_bottom = 113.936
-texture = ExtResource("3_hgf8n")
-expand_mode = 1
-
-[node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer/Control"]
+[node name="CheckInternetAgain" type="Timer" parent="CanvasLayer/Control"]
+one_shot = true
 
 [connection signal="mouse_entered" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Button2" to="CanvasLayer/Control" method="_on_button_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Button3" to="CanvasLayer/Control" method="_on_button_3_pressed"]
-[connection signal="request_completed" from="CanvasLayer/Control/HTTPRequest" to="CanvasLayer/Control" method="_on_http_request_request_completed"]
+[connection signal="request_completed" from="CanvasLayer/Control/JsonRequest" to="CanvasLayer/Control" method="_on_http_request_request_completed"]
+[connection signal="timeout" from="CanvasLayer/Control/CheckInternetAgain" to="CanvasLayer/Control" method="_on_check_internet_again_timeout"]
 
 [editable path="CanvasLayer/Control/superiorButtons"]

@@ -1,5 +1,6 @@
 extends Control
 
+@export var askModal = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,7 +10,9 @@ func _ready():
 func setInternetIcon(value):
 	
 	if value:
-		$Cross.visible = false
+		$InternetNo.visible = false
+		$InternetSi.visible = true
 	else:
-		$Cross.visible = true
+		$InternetNo.visible = true
+		$InternetSi.visible = false
 	

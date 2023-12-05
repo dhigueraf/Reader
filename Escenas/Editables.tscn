@@ -28,7 +28,10 @@ layout_mode = 1
 [node name="superiorButtons" parent="CanvasLayer/Control" instance=ExtResource("3_81pkq")]
 layout_mode = 1
 
-[node name="Label" parent="CanvasLayer/Control/superiorButtons/TextureRect" index="0"]
+[node name="Flecha" parent="CanvasLayer/Control/superiorButtons" index="3"]
+visible = false
+
+[node name="Titulo" parent="CanvasLayer/Control/superiorButtons" index="4"]
 text = "Recursos Editables"
 
 [node name="BtnPresencaciones" type="Button" parent="CanvasLayer/Control"]
