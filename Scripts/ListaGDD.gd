@@ -12,6 +12,7 @@ func _ready():
 	
 	print(listaNiveles)
 	#print(Global.JsonGDD)
+	
 	createNivelButtons()
 
 

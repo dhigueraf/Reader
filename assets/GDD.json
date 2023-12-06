@@ -20,73 +20,83 @@
 	"Personaje": {
 		"1": {
 			"nombre": "Ana_1° y 2°",
-			"foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+			"foto": "https://static.sumaysigue.uchile.cl/cmmeduformacion/produccion/IPE/T01/A02/img/diag_anali.png",
+			"extension": "png"
 		},
 		"2": {
 			"nombre": "Diego_1° y 2°",
-			"foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+			"foto": "https://static.sumaysigue.uchile.cl/cmmeduformacion/produccion/IPE/T01/A02/img/diag_raul.png",
+			"extension": "png"
 		},
 		"3": {
 			"nombre": "Laura_1° y 2°",
-			"foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+			"foto": "https://static.sumaysigue.uchile.cl/cmmeduformacion/produccion/IPE/T01/A02/img/diag_evelyn.png",
+			"extension": "png"
 		},
 		"4": {
 			"nombre": "José_1° y 2°",
-			"foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+			"foto": "https://static.sumaysigue.uchile.cl/cmmeduformacion/produccion/IPE/T01/A02/img/diag_joaquin.png",
+			"extension": "png"
 		},
 		"5": {
 			"nombre": "Paula_1° y 2°",
-			"foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+			"foto": "https://static.sumaysigue.uchile.cl/cmmeduformacion/produccion/IPE/T01/A02/img/diag_macarena.png",
+			"extension": "png"
 		},
 		"6": {
 			"nombre": "Ana_3° y 4°",
-			"foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+			"foto": "https://static.sumaysigue.uchile.cl/cmmeduformacion/produccion/IPE/T02/A02/img/diag_josefina.png",
+			"extension": "png"
 		}
 	},
 	"Mascota": {
 		"1": {
 			"nombre": "Monito del Monte",
 			"descripcion": "Hola soy el monito del bosque, me gusta colgar de la colita, estoy contento en acompañar en esta aventura de aprender",
-			"foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+			"foto": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/zerro2.png",
+			"extension": "png"
 		},
 		"2": {
 			"nombre": "Puma",
 			"descripcion": "Hola soy el monito del bosque, me gusta colgar de la colita, estoy contento en acompañar en esta aventura de aprender",
-			"foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+			"foto": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/zerro1.png",
+			"extension": "png"
 		},
 		"3": {
 			"nombre": "Otro",
 			"descripcion": "Hola soy el monito del bosque, me gusta colgar de la colita, estoy contento en acompañar en esta aventura de aprender",
-			"foto": "https://static.sumoprimero.cmmedu.uchile.cl"
+			"foto": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/zerro2.png",
+			"extension": "png"
 		}
 	},
 	"Unidad": {
 		"1": {
 			"nombre": "Unidad 1",
 			"sigla": "U1",
-			"color_id": 1
+			"color_id": "rojo"
 		},
 		"2": {
 			"nombre": "Unidad 2",
 			"sigla": "U2",
-			"color_id": 2
+			"color_id": "verde"
 		},
 		"3": {
 			"nombre": "Unidad 3",
 			"sigla": "U3",
-			"color_id": 3
+			"color_id": "morado"
 		},
 		"4": {
 			"nombre": "Unidad 4",
 			"sigla": "U4",
-			"color_id": 4
+			"color_id": "naranjo"
 		}
 	},
 	"Niveles": [
 		{
 			"nombre": "1° Básico",
 			"sigla": "1B",
-			"foto": "https://static.sumoprimero.cmmedu.uchile.cl",
+			"foto": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/portadda1B.png",
+			"extension": "png",
 			"mascota_id": 1,
 			"personajes_ids": [
 				1,
@@ -99,57 +109,404 @@
 			"tomos": [
 				{
 					"nombre": "Tomo 1",
-					"sigla": "T1",
-					"version": 0,
+					"sigla" : "T1",
+					"portada": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/portadda1B.png",
+					"extension":"png",
+					"version":1,
 					"unidades": [
 						{
 							"unidad_id": 1,
 							"sigla": "GDD",
-							"url": "https://static.sumoprimero.cmmedu.uchile.cl",
-							"ejemplo": "1B-T1-U1-GDD.pdf",
+							"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
+							"ejemplo":"1B-T1-U1-GDD.pdf",
 							"extension": "pdf",
 							"presentaciones": [
 								{
 									"nombre": "Presentación 1",
 									"sigla": "PPT1",
-									"url": "https://static.sumoprimero.cmmedu.uchile.cl",
-									"ejemplo": "B-T1-U1-PPT1.pptx",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/presentacion1.pptx",
+									"ejemplo":"B-T1-U1-PPT1.pptx",
 									"extension": "pptx"
 								},
 								{
 									"nombre": "Presentación 2",
 									"sigla": "PPT2",
-									"url": "https://static.sumoprimero.cmmedu.uchile.cl",
-									"ejemplo": "1B-T1-U1-PPT2.pptx",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/presentacion2.pptx",
+									"ejemplo":"1B-T1-U1-PPT2.pptx",
 									"extension": "pptx"
 								}
 							],
 							"evaluaciones": [
 								{
 									"nombre": "Capítulo 1",
-									"sigla": "EVA1",
-									"url": "https://static.sumoprimero.cmmedu.uchile.cl",
-									"ejemplo": "1B-T1-U1-EVA1.docx",
+									"sigla" : "EVA1",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo1.docx",
+									"ejemplo":"1B-T1-U1-EVA1.docx",
 									"extension": "docx"
 								},
 								{
 									"nombre": "Capítulo 2",
-									"url": "https://static.sumoprimero.cmmedu.uchile.cl",
+									"sigla" : "EVA2",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo2.docx",
 									"extension": "docx"
 								},
 								{
 									"nombre": "Capítulo 3",
-									"url": "https://static.sumoprimero.cmmedu.uchile.cl",
+									"sigla" : "EVA3",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo3.docx",
 									"extension": "docx"
 								},
 								{
 									"nombre": "Capítulo 4",
-									"url": "https://static.sumoprimero.cmmedu.uchile.cl",
+									"sigla" : "EVA4",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo4.docx",
 									"extension": "docx"
 								},
 								{
 									"nombre": "Capítulo 5",
-									"url": "https://static.sumoprimero.cmmedu.uchile.cl",
+									"sigla" : "EVA5",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo5.docx",
+									"extension": "docx"
+								}
+							]
+						},
+						{
+							"unidad_id": 2,
+							"sigla": "GDD",
+							"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
+							"ejemplo":"1B-T1-U1-GDD.pdf",
+							"extension": "pdf",
+							"presentaciones": [
+								{
+									"nombre": "Presentación 1",
+									"sigla": "PPT1",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/presentacion1.pptx",
+									"ejemplo":"B-T1-U1-PPT1.pptx",
+									"extension": "pptx"
+								},
+								{
+									"nombre": "Presentación 2",
+									"sigla": "PPT2",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/presentacion2.pptx",
+									"ejemplo":"1B-T1-U1-PPT2.pptx",
+									"extension": "pptx"
+								}
+							],
+							"evaluaciones": [
+								{
+									"nombre": "Capítulo 1",
+									"sigla" : "EVA1",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo1.docx",
+									"ejemplo":"1B-T1-U1-EVA1.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 2",
+									"sigla" : "EVA2",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo2.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 3",
+									"sigla" : "EVA3",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo3.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 4",
+									"sigla" : "EVA4",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo4.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 5",
+									"sigla" : "EVA5",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo5.docx",
+									"extension": "docx"
+								}
+							]
+						}
+					]
+				},
+				{
+					"nombre": "Tomo 2",
+					"sigla" : "T2",
+					"portada": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/portadda1B.png",
+					"extension":"png",
+					"version":1,
+					"unidades": [
+						{
+							"unidad_id": 3,
+							"sigla": "GDD",
+							"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
+							"ejemplo":"1B-T1-U1-GDD.pdf",
+							"extension": "pdf",
+							"presentaciones": [
+								{
+									"nombre": "Presentación 1",
+									"sigla": "PPT1",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/presentacion1.pptx",
+									"ejemplo":"B-T1-U1-PPT1.pptx",
+									"extension": "pptx"
+								},
+								{
+									"nombre": "Presentación 2",
+									"sigla": "PPT2",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/presentacion2.pptx",
+									"ejemplo":"1B-T1-U1-PPT2.pptx",
+									"extension": "pptx"
+								}
+							],
+							"evaluaciones": [
+								{
+									"nombre": "Capítulo 1",
+									"sigla" : "EVA1",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo1.docx",
+									"ejemplo":"1B-T1-U1-EVA1.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 2",
+									"sigla" : "EVA2",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo2.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 3",
+									"sigla" : "EVA3",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo3.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 4",
+									"sigla" : "EVA4",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo4.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 5",
+									"sigla" : "EVA5",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo5.docx",
+									"extension": "docx"
+								}
+							]
+						},
+						{
+							"unidad_id": 4,
+							"sigla": "GDD",
+							"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
+							"ejemplo":"1B-T1-U1-GDD.pdf",
+							"extension": "pdf",
+							"presentaciones": [
+								{
+									"nombre": "Presentación 1",
+									"sigla": "PPT1",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/presentacion1.pptx",
+									"ejemplo":"B-T1-U1-PPT1.pptx",
+									"extension": "pptx"
+								},
+								{
+									"nombre": "Presentación 2",
+									"sigla": "PPT2",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/presentacion2.pptx",
+									"ejemplo":"1B-T1-U1-PPT2.pptx",
+									"extension": "pptx"
+								}
+							],
+							"evaluaciones": [
+								{
+									"nombre": "Capítulo 1",
+									"sigla" : "EVA1",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo1.docx",
+									"ejemplo":"1B-T1-U1-EVA1.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 2",
+									"sigla" : "EVA2",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo2.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 3",
+									"sigla" : "EVA3",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo3.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 4",
+									"sigla" : "EVA4",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo4.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 5",
+									"sigla" : "EVA5",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo5.docx",
+									"extension": "docx"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"nombre": "2° Básico",
+			"sigla": "2B",
+			"foto": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/portadda1B.png",
+			"extension": "png",
+			"mascota_id": 2,
+			"personajes_ids": [
+				1,
+				2,
+				3,
+				4,
+				5
+			],
+			"version":1,
+			"tomos": [
+				{
+					"nombre": "Tomo 1",
+					"sigla" : "T1",
+					"portada": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/portadda1B.png",
+					"extension":"png",
+					"version":1,
+					"unidades": [
+						{
+							"unidad_id": 1,
+							"sigla": "GDD",
+							"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
+							"ejemplo":"1B-T1-U1-GDD.pdf",
+							"extension": "pdf",
+							"presentaciones": [
+								{
+									"nombre": "Presentación 1",
+									"sigla": "PPT1",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/presentacion1.pptx",
+									"ejemplo":"B-T1-U1-PPT1.pptx",
+									"extension": "pptx"
+								},
+								{
+									"nombre": "Presentación 2",
+									"sigla": "PPT2",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/presentacion2.pptx",
+									"ejemplo":"1B-T1-U1-PPT2.pptx",
+									"extension": "pptx"
+								}
+							],
+							"evaluaciones": [
+								{
+									"nombre": "Capítulo 1",
+									"sigla" : "EVA1",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo1.docx",
+									"ejemplo":"1B-T1-U1-EVA1.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 2",
+									"sigla" : "EVA2",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo2.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 3",
+									"sigla" : "EVA3",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo3.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 4",
+									"sigla" : "EVA4",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo4.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 5",
+									"sigla" : "EVA5",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo5.docx",
+									"extension": "docx"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"nombre": "3° Básico",
+			"sigla": "3B",
+			"foto": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/portadda1B.png",
+			"extension": "png",
+			"mascota_id": 3,
+			"personajes_ids": [
+				1,
+				2,
+				3,
+				4,
+				5
+			],
+			"version":1,
+			"tomos": [
+				{
+					"nombre": "Tomo 1",
+					"sigla" : "T1",
+					"portada": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/portadda1B.png",
+					"extension":"png",
+					"version":1,
+					"unidades": [
+						{
+							"unidad_id": 1,
+							"sigla": "GDD",
+							"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/4%C2%B0%20B%C3%A1sico/CA/CA4_tomo1.pdf",
+							"ejemplo":"1B-T1-U1-GDD.pdf",
+							"extension": "pdf",
+							"presentaciones": [
+								{
+									"nombre": "Presentación 1",
+									"sigla": "PPT1",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/presentacion1.pptx",
+									"ejemplo":"B-T1-U1-PPT1.pptx",
+									"extension": "pptx"
+								},
+								{
+									"nombre": "Presentación 2",
+									"sigla": "PPT2",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/presentacion2.pptx",
+									"ejemplo":"1B-T1-U1-PPT2.pptx",
+									"extension": "pptx"
+								}
+							],
+							"evaluaciones": [
+								{
+									"nombre": "Capítulo 1",
+									"sigla" : "EVA1",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo1.docx",
+									"ejemplo":"1B-T1-U1-EVA1.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 2",
+									"sigla" : "EVA2",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo2.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 3",
+									"sigla" : "EVA3",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo3.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 4",
+									"sigla" : "EVA4",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo4.docx",
+									"extension": "docx"
+								},
+								{
+									"nombre": "Capítulo 5",
+									"sigla" : "EVA5",
+									"url": "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/assets/Capitulo5.docx",
 									"extension": "docx"
 								}
 							]
@@ -163,5 +520,6 @@
 		"documentos": "documentos",
 		"configuracion": "config",
 		"assets": "assets"
-	}
+	},
+	"analiticsurl" : "https://sumoprimero.app.analitica.cl"
 }

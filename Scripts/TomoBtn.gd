@@ -17,6 +17,9 @@ func _on_texture_button_pressed():
 	#print(tomo)
 	#print(tomo.sigla)
 	OS.shell_open(tomolocation)
+	if Global.online:
+		print("hacer request analitic GDD")
+		Global.askanarenquest(Global.anaUrl+"/GDD/CURSO/Openfile/",[],'{"curso":"'+tomo.sigla+'","file":"'+tomo.sigla+'"}') #enviaranalitica 
 
 
 func setTomoLocation(location):

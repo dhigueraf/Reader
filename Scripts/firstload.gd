@@ -270,6 +270,7 @@ func doDownload(index):
 	await $DownloadRequest.request(download.url)
 
 func end():
+	Global.anaUrl = Global.JsonGDD.analiticsurl
 	get_tree().change_scene_to_file("res://Escenas/Home.tscn")
 
 

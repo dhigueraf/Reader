@@ -1,9 +1,11 @@
 extends Node
 
 var jsonUrl = "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/Json/GDD.json"
+var anaUrl = "https://sumoprimero.app.analitica.cl"
+var anafolders = []
 var basedir = ""
 var online = false
-
+var AnaRequest = null
 
 var softwareinfo = {
 	"nombre": "Sumo Primero software",
@@ -39,7 +41,29 @@ var interactivos = {
 func _ready():
 	print("Global Ready")
 	basedir = OS.get_executable_path().get_base_dir() #Carpeta base 
+	AnaRequest = HTTPRequest.new()
+	add_child(AnaRequest)
+	AnaRequest.request_completed.connect(self._ana_request_completed)
+	
 
+
+func askanarenquest(url,headers,data):
+	print("hacer request a " + str(url) )
+	var error = AnaRequest.request(url, headers, HTTPClient.METHOD_POST, data)
+
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
+
+
+func _ana_request_completed(result, response_code, headers, body):
+	print("Analitic request")
+	print(response_code)
+	print("headers")
+	print(headers)
+
+
+func changeScene(scenename):
+	get_tree().change_scene_to_file(scenename)
 
 func DeletePreviousImages():
 	var converterdir = Global.basedir + "/converter"

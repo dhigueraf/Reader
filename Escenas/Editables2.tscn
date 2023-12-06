@@ -169,16 +169,17 @@ custom_minimum_size = Vector2(64, 64)
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.238
-anchor_top = 0.092
-anchor_right = 0.966
-anchor_bottom = 0.934
+anchor_left = 0.251561
+anchor_top = 0.0922803
+anchor_right = 0.965707
+anchor_bottom = 0.935403
 offset_left = 0.00799561
 offset_top = 0.0399971
 offset_right = -0.144043
 offset_bottom = 0.0799866
-theme_override_constants/h_separation = 64
+theme_override_constants/h_separation = 44
 theme_override_constants/v_separation = 145
+metadata/_edit_use_anchors_ = true
 
 [node name="ItemsEval" type="Control" parent="CanvasLayer/Control/Panel"]
 layout_mode = 1
@@ -193,7 +194,7 @@ custom_minimum_size = Vector2(100, 64)
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.237
+anchor_left = 0.251945
 anchor_top = 0.092
 anchor_right = 0.966
 anchor_bottom = 0.934
@@ -203,6 +204,7 @@ offset_right = -0.49646
 offset_bottom = 0.672485
 theme_override_constants/h_separation = 132
 theme_override_constants/v_separation = 32
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Panel"]
 layout_mode = 1

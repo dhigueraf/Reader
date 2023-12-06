@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://c1qabqhuxs6eb"]
 
-[ext_resource type="Script" path="res://Scripts/ListaGDD.gd" id="1_1ud5k"]
-[ext_resource type="PackedScene" uid="uid://bx3u6wb2xvxbr" path="res://Objetos/footer.tscn" id="2_454bu"]
-[ext_resource type="PackedScene" uid="uid://cmfny35vwsquf" path="res://Objetos/superior_buttons.tscn" id="3_q0tu3"]
+[ext_resource type="Script" path="res://Scripts/ListaGDD.gd" id="1_dfrxt"]
+[ext_resource type="PackedScene" uid="uid://bx3u6wb2xvxbr" path="res://Objetos/footer.tscn" id="2_kepl1"]
+[ext_resource type="PackedScene" uid="uid://cmfny35vwsquf" path="res://Objetos/superior_buttons.tscn" id="3_8trbd"]
 
 [sub_resource type="Theme" id="Theme_3wqm4"]
 
@@ -17,12 +17,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_1ud5k")
+script = ExtResource("1_dfrxt")
 
-[node name="Footer" parent="CanvasLayer/Control" instance=ExtResource("2_454bu")]
+[node name="Footer" parent="CanvasLayer/Control" instance=ExtResource("2_kepl1")]
 layout_mode = 1
 
-[node name="superiorButtons" parent="CanvasLayer/Control" instance=ExtResource("3_q0tu3")]
+[node name="superiorButtons" parent="CanvasLayer/Control" instance=ExtResource("3_8trbd")]
 layout_mode = 1
 
 [node name="ButtonGDD" parent="CanvasLayer/Control/superiorButtons" index="1"]
