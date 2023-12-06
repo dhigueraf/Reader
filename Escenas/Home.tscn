@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bhm6etkpaiot3"]
+[gd_scene load_steps=28 format=3 uid="uid://bhm6etkpaiot3"]
 
 [ext_resource type="Script" path="res://Scripts/Home.gd" id="1_omsou"]
 [ext_resource type="FontFile" uid="uid://b1talsa0wfwtk" path="res://fonts/j foundry - colby black.otf" id="2_us1tt"]
@@ -6,7 +6,10 @@
 [ext_resource type="FontFile" uid="uid://cfxoy7q6ip6rl" path="res://fonts/SassoonSansStd-Bold.otf" id="3_iwwju"]
 [ext_resource type="PackedScene" uid="uid://2cpqe74okskv" path="res://Objetos/internet_status.tscn" id="4_tycym"]
 [ext_resource type="FontFile" uid="uid://7p3x2o37brcj" path="res://fonts/SassoonSansStd.otf" id="4_w66uw"]
+[ext_resource type="Script" path="res://Scripts/ModalNet.gd" id="8_6gef0"]
+[ext_resource type="Texture2D" uid="uid://d0f23cwgfxi7h" path="res://Sprites/GUI/cross.png" id="9_bynxh"]
 [ext_resource type="PackedScene" uid="uid://bx3u6wb2xvxbr" path="res://Objetos/footer.tscn" id="10_f8pt2"]
+[ext_resource type="Texture2D" uid="uid://cqoorftyf4bnp" path="res://Sprites/GUI/cross_hover.png" id="10_rjl4u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tmq6b"]
 font = ExtResource("2_us1tt")
@@ -72,6 +75,44 @@ corner_radius_bottom_left = 24
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6x80"]
 bg_color = Color(0.384314, 0.47451, 0.52549, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bi21"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.129412, 0.607843, 0.843137, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ixde"]
+font = ExtResource("3_iwwju")
+font_size = 37
+font_color = Color(0.388235, 0.47451, 0.52549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0lun"]
+bg_color = Color(0.388235, 0.47451, 0.52549, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dotgt"]
+bg_color = Color(0.129412, 0.607843, 0.843137, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_46avw"]
+bg_color = Color(0.129412, 0.607843, 0.843137, 1)
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
@@ -298,6 +339,82 @@ text = "Ítems de evaluación"
 [node name="CheckInternetAgain" type="Timer" parent="CanvasLayer/Control"]
 one_shot = true
 
+[node name="ModalNet" type="Control" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_6gef0")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/ModalNet"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 229.0
+offset_top = 123.0
+offset_right = -261.0
+offset_bottom = -130.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3bi21")
+
+[node name="CloseModalBtn" type="TextureButton" parent="CanvasLayer/Control/ModalNet/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -34.0
+offset_top = -22.0
+offset_right = 36.0
+offset_bottom = 35.0
+grow_horizontal = 0
+texture_normal = ExtResource("9_bynxh")
+texture_pressed = ExtResource("10_rjl4u")
+texture_hover = ExtResource("10_rjl4u")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ModalNet/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.038
+anchor_top = 0.133
+anchor_right = 0.939
+anchor_bottom = 0.409
+offset_left = -0.0200024
+offset_top = -0.111
+offset_right = 0.189941
+offset_bottom = -0.00300598
+grow_horizontal = 2
+grow_vertical = 2
+text = "Su conección a internet se ha restablecido. ¿quiere revisar si hay actualizaciones en sus documentos?"
+label_settings = SubResource("LabelSettings_1ixde")
+horizontal_alignment = 3
+autowrap_mode = 2
+
+[node name="UpdateBtn" type="Button" parent="CanvasLayer/Control/ModalNet/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.175
+anchor_top = 0.595
+anchor_right = 0.776
+anchor_bottom = 0.79
+offset_left = -0.250015
+offset_top = 0.134979
+offset_right = -0.0400391
+offset_bottom = 0.0699768
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_us1tt")
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("StyleBoxFlat_c0lun")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dotgt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_46avw")
+text = "Verificar actualizaciones de documentos"
+
 [connection signal="mouse_entered" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_pressed"]
@@ -305,5 +422,7 @@ one_shot = true
 [connection signal="pressed" from="CanvasLayer/Control/Button3" to="CanvasLayer/Control" method="_on_button_3_pressed"]
 [connection signal="request_completed" from="CanvasLayer/Control/JsonRequest" to="CanvasLayer/Control" method="_on_http_request_request_completed"]
 [connection signal="timeout" from="CanvasLayer/Control/CheckInternetAgain" to="CanvasLayer/Control" method="_on_check_internet_again_timeout"]
+[connection signal="pressed" from="CanvasLayer/Control/ModalNet/Panel/CloseModalBtn" to="CanvasLayer/Control/ModalNet" method="_on_close_modal_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/ModalNet/Panel/UpdateBtn" to="CanvasLayer/Control/ModalNet" method="_on_update_btn_pressed"]
 
 [editable path="CanvasLayer/Control/superiorButtons"]

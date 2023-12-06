@@ -55,10 +55,11 @@ func _on_http_request_request_completed(result, response_code, headers, body):
 			print("llamar al modal")
 			nointernet = false
 			llamadoelmodal = true
+			$ModalNet.visible = true
 	else:
 		print("No hay internetus")
 		Global.online = false
-		#nointernet = true
+		nointernet = true
 		$InternetStatus.setInternetIcon(false)
 	
 	$CheckInternetAgain.start()

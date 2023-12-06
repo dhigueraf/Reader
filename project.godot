@@ -14,7 +14,7 @@ config/name="SumoPrimeroGDD"
 run/main_scene="res://Escenas/FirstLoad.tscn"
 config/features=PackedStringArray("4.2")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-boot_splash/image="res://backgrounds/logo bg.png"
+boot_splash/image="res://backgrounds/logobg.png"
 config/icon="res://icon.png"
 
 [autoload]

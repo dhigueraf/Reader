@@ -35,18 +35,19 @@ visible = false
 visible = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(164, 0)
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0520833
-anchor_top = 0.243827
-anchor_right = 0.928819
-anchor_bottom = 0.796297
+anchor_left = 0.065625
+anchor_top = 0.297222
+anchor_right = 0.917969
+anchor_bottom = 0.755556
 offset_bottom = -0.000366211
 grow_horizontal = 2
 grow_vertical = 0
 theme = SubResource("Theme_3wqm4")
-theme_override_constants/separation = 12
+theme_override_constants/separation = 16
 metadata/_edit_use_anchors_ = true
 
 [editable path="CanvasLayer/Control/superiorButtons"]
