@@ -2,6 +2,8 @@ extends Control
 
 var locations = ["","",""]
 var color = "627986ff"
+var preurl = ""
+var curso = ""
 
 # Called when the node enters the scene tree for the first time.
 

@@ -14,6 +14,16 @@ func _ready():
 	#print(Global.JsonGDD)
 	
 	createNivelButtons()
+	if Global.online:
+		var evento =  {
+			"name": "GDD",
+				"params": {
+				  "marco": "polaso"
+				}
+		  }
+
+		print("hacer request analitic GDD")
+		Global.askanarenquest(Global.anaUrl+"/GDD",[],[evento]) #enviaranalitica
 
 
 func createNivelButtons():

@@ -29,6 +29,8 @@ func _ready():
 	dir = DirAccess.open( Global.basedir + "/" + Global.JsonGDD.folders.documentos + "/" + Global.nivel.sigla )
 
 	hacerllenados()
+	if Global.online:
+		Global.askanarenquest(Global.anaUrl+"/GDD/CURSO:"+Global.nivel.sigla+"/EDIT",[],'{}') #enviaranalitica 
 	
 func hacerllenados():
 	await llenarPresentaciones()

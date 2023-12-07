@@ -1,7 +1,7 @@
 extends Node
 
 var jsonUrl = "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/Json/GDD.json"
-var anaUrl = "https://sumoprimero.app.analitica.cl"
+var anaUrl = "https://analytics.gdd.sumoprimero.cmmedu.uchile.cl"
 var anafolders = []
 var basedir = ""
 var online = false
@@ -38,19 +38,38 @@ var captituloactual = {
 var interactivos = {
 }
 
+#analiticsvariables
+var clientid = "0"
+
+var ascii_letters_and_digits = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+func gen_unique_string(length):
+	var result = ""
+	for i in range(length):
+		result += ascii_letters_and_digits[randi() % ascii_letters_and_digits.length()]
+	return result
+	
+
 func _ready():
 	print("Global Ready")
 	basedir = OS.get_executable_path().get_base_dir() #Carpeta base 
+	
+	clientid = gen_unique_string(30)
+	print("CLIENT ID " + clientid)
+	
 	AnaRequest = HTTPRequest.new()
 	add_child(AnaRequest)
 	AnaRequest.request_completed.connect(self._ana_request_completed)
-	
 
 
-func askanarenquest(url,headers,data):
-	print("hacer request a " + str(url) )
-	var error = AnaRequest.request(url, headers, HTTPClient.METHOD_POST, data)
-
+func askanarenquest(url,header,events):
+	print("hacer request a " + str("https://www.google-analytics.com/mp/collect?api_secret=u5Z6LvGoQzWIR-YnEGdnpQ&measurement_id=G-CN39F3EHBK") )
+	var datatorequest = {
+		"clientid": clientid,
+		"events" : events
+	}
+	var customheader = ["Content-Type: application/json"] + header
+	var error = AnaRequest.request("https://www.google-analytics.com/mp/collect?api_secret=u5Z6LvGoQzWIR-YnEGdnpQ&measurement_id=G-CN39F3EHBK",customheader, HTTPClient.METHOD_POST, JSON.stringify(datatorequest))
+	print(error)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
@@ -60,6 +79,10 @@ func _ana_request_completed(result, response_code, headers, body):
 	print(response_code)
 	print("headers")
 	print(headers)
+	print("result")
+	print(result)
+	print("body")
+	print(body)
 
 
 func changeScene(scenename):

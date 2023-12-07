@@ -14,12 +14,19 @@ func setBtnTxt(texto):
 
 func _on_texture_button_pressed():
 	print("Abrir un PDF")
-	#print(tomo)
-	#print(tomo.sigla)
+	
+	var evento = {
+		"name": "abrir documento",
+		"params": {
+		 	"formato": "pdf",
+			"documento": "GDD/CURSO:"+Global.nivel.sigla+"/"+tomo.sigla
+		}
+	}
+	
 	OS.shell_open(tomolocation)
 	if Global.online:
 		print("hacer request analitic GDD")
-		Global.askanarenquest(Global.anaUrl+"/GDD/CURSO/Openfile/",[],'{"curso":"'+tomo.sigla+'","file":"'+tomo.sigla+'"}') #enviaranalitica 
+		Global.askanarenquest(Global.anaUrl+"/GDD/CURSO:"+Global.nivel.sigla+"/OpenFile:"+tomo.sigla,[],'{}') #enviaranalitica 
 
 
 func setTomoLocation(location):

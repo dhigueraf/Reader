@@ -11,9 +11,13 @@ var choice = "presentaciones"
 
 var dir 
 
+var preurl = ""
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	print("Ready " + str(Global.selectedPestanaEditable))
 	choice = Global.selectedPestanaEditable
 	
@@ -23,8 +27,9 @@ func _ready():
 	elif choice == "evaluaciones":
 		$BtnEvaluaciones.button_pressed = true
 		$BtnPresencaciones.button_pressed = false
-
 		
+	preurl = Global.anaUrl+"/EDIT"
+	
 	dir = DirAccess.open( Global.basedir + "/" + Global.JsonGDD.folders.documentos)
 		
 	for nivel in Global.JsonGDD.Niveles:
@@ -69,6 +74,9 @@ func _ready():
 	
 	
 	prepareDocuScreen()
+	
+	if Global.online:
+		Global.askanarenquest(preurl + ":" + choice,[],"{}" ) #enviaranalitica 
 
 
 func _on_btn_presencaciones_pressed():
@@ -194,6 +202,6 @@ func setVisibility():
 	if choice == "presentaciones":
 		$Panel/Presentaciones.visible = true
 		$Panel/ItemsEval.visible = false
-	elif choice == "evaluaciones":	
+	elif choice == "evaluaciones":
 		$Panel/Presentaciones.visible = false
 		$Panel/ItemsEval.visible = true

@@ -24,9 +24,6 @@ func openNivel(level):
 	print("Open nivel")
 	Global.nivel = level
 	print(Global.nivel)
-	if Global.online:
-		print("hacer request analitic GDD")
-		Global.askanarenquest(Global.anaUrl+"/GDD/"+Global.nivel.sigla,[],'{}') #enviaranalitica 
 	
 	get_tree().change_scene_to_file("res://Escenas/Nivel.tscn")
 

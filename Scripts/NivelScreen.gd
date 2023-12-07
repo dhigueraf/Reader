@@ -14,6 +14,16 @@ func _ready():
 	agregarMascota()
 	llenarPersonajes()
 	llenarTomos()
+	
+	if Global.online:
+		print("hacer request analitic GDD")
+		var evento=  {
+			"name": "Nivel",
+				"params": {
+				  "curso": Global.nivel.sigla
+				}
+		  }
+		Global.askanarenquest(Global.anaUrl+"/GDD/CURSO:"+Global.nivel.sigla,[],[evento]) #enviaranalitica 
 
 func agregarMascota():
 	var mascota = Global.JsonGDD.Mascota[str(Global.nivel.mascota_id)]
@@ -66,5 +76,5 @@ func llenarTomos():
 
 
 func _on_texture_button_pressed():
-
+	#Global.anaUrl+"/GDD/CURSO:"+Global.nivel.sigla
 	get_tree().change_scene_to_file("res://Escenas/Editables.tscn")
