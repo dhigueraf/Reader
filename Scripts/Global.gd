@@ -1,6 +1,6 @@
 extends Node
 
-var jsonUrl = "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/Json/GDD.json"
+var jsonUrl = "https://static.sumaysigue.uchile.cl/Sumo%20Primero/App/Json/gdd2.json"
 var anaUrl = "https://analytics.gdd.sumoprimero.cmmedu.uchile.cl"
 var anafolders = []
 var basedir = ""
@@ -61,18 +61,39 @@ func _ready():
 	AnaRequest.request_completed.connect(self._ana_request_completed)
 
 
-func askanarenquest(url,header,events):
-	print("hacer request a " + str("https://www.google-analytics.com/mp/collect?api_secret=u5Z6LvGoQzWIR-YnEGdnpQ&measurement_id=G-CN39F3EHBK") )
-	var datatorequest = {
-		"clientid": clientid,
-		"events" : events
-	}
-	var customheader = ["Content-Type: application/json"] + header
-	var error = AnaRequest.request("https://www.google-analytics.com/mp/collect?api_secret=u5Z6LvGoQzWIR-YnEGdnpQ&measurement_id=G-CN39F3EHBK",customheader, HTTPClient.METHOD_POST, JSON.stringify(datatorequest))
-	print(error)
+func askanarenquest(url,header,datatorequest):
+	print("hacer request a " + str(url) )
+	var customheader = ["GDD-Password: NddagN87DNAJKDNAFYQ982KAJbaD7892bJHADBASDMa79QBJKkjfb2h839basjk"] + header
+	print(datatorequest)
+	var error = AnaRequest.request( url,customheader,HTTPClient.METHOD_POST, JSON.stringify(datatorequest) )
+	#print(error)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
+
+func sendevent(events):
+	var eventsurl = "https://www.google-analytics.com/mp/collect?api_secret=u5Z6LvGoQzWIR-YnEGdnpQ&measurement_id=G-CN39F3EHBK"
+	print("hacer request a " + str(eventsurl) )
+	var datatorequest = {
+		"client_id": clientid,
+		"events" : events
+	}
+	print(datatorequest)
+	var error = AnaRequest.request( eventsurl,["Content-Type: application/json"],HTTPClient.METHOD_POST, JSON.stringify(datatorequest) )
+	#print(error)
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
+
+
+func testrquest(url):
+	print("test request")
+	var urltest = "http://localhost:8000"
+	print(urltest+url)
+	var urltosend = urltest + url
+	var customheader = ["GDD-Password: NddagN87DNAJKDNAFYQ982KAJbaD7892bJHADBASDMa79QBJKkjfb2h839basjk"] #+ header
+	var error = AnaRequest.request( urltosend,customheader,HTTPClient.METHOD_GET, JSON.stringify({}) )
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
 
 func _ana_request_completed(result, response_code, headers, body):
 	print("Analitic request")
@@ -81,8 +102,8 @@ func _ana_request_completed(result, response_code, headers, body):
 	print(headers)
 	print("result")
 	print(result)
-	print("body")
-	print(body)
+	#print("body")
+	#print(body)
 
 
 func changeScene(scenename):

@@ -8,7 +8,9 @@ func _ready():
 	
 	$superiorButtons.setTitulo("Guía Digital del Docente")
 	
-	listaNiveles = Global.JsonGDD.Niveles
+	#listaNiveles = []
+	for nivelnum in Global.JsonGDD.niveles.keys():
+		listaNiveles.append(Global.JsonGDD.niveles[nivelnum])
 	
 	print(listaNiveles)
 	#print(Global.JsonGDD)
@@ -23,7 +25,9 @@ func _ready():
 		  }
 
 		print("hacer request analitic GDD")
-		Global.askanarenquest(Global.anaUrl+"/GDD",[],[evento]) #enviaranalitica
+		Global.testrquest("/GDD")
+		#await Global.sendevent([evento]) #enviaranalitica
+		#await Global.askanarenquest(Global.anaUrl+"/GDD",[],[]) #enviaranalitica
 
 
 func createNivelButtons():

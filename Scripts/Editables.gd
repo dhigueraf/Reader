@@ -30,7 +30,16 @@ func _ready():
 
 	hacerllenados()
 	if Global.online:
-		Global.askanarenquest(Global.anaUrl+"/GDD/CURSO:"+Global.nivel.sigla+"/EDIT",[],'{}') #enviaranalitica 
+		var evento =  {
+			"name": "Editables del nivel",
+				"params": {
+				  "nivel": Global.nivel.sigla
+				}
+		  }
+
+		print("hacer request analitic GDD")
+		await Global.sendevent([evento]) #enviaranalitica
+		#await Global.askanarenquest(Global.anaUrl+"/GDD/CURSO:"+Global.nivel.sigla+"/EDIT",[],[]) #enviaranalitica 
 	
 func hacerllenados():
 	await llenarPresentaciones()

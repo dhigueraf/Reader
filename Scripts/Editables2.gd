@@ -32,7 +32,7 @@ func _ready():
 	
 	dir = DirAccess.open( Global.basedir + "/" + Global.JsonGDD.folders.documentos)
 		
-	for nivel in Global.JsonGDD.Niveles:
+	for nivel in Global.JsonGDD.niveles:
 		print(nivel.nombre)
 		
 		var unidades = Global.JsonGDD.Unidad
@@ -76,7 +76,16 @@ func _ready():
 	prepareDocuScreen()
 	
 	if Global.online:
-		Global.askanarenquest(preurl + ":" + choice,[],"{}" ) #enviaranalitica 
+		var evento =  {
+			"name": "Editables todos los niveles",
+				"params": {
+				  "llegodesde": choice
+				}
+		  }
+
+		print("hacer request analitic GDD")
+		Global.sendevent([evento]) #enviaranalitica
+		#Global.askanarenquest(preurl + ":" + choice,[],"{}" ) #enviaranalitica 
 
 
 func _on_btn_presencaciones_pressed():

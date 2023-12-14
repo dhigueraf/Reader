@@ -73,8 +73,8 @@ func _on_json_request_request_completed(result, response_code, headers, body):
 	
 	Global.online = false
 	
-	print("Obtener Json:")
-	print(obtainedjson)
+	#print("Obtener Json:")
+	#print(obtainedjson)
 	if str(obtainedjson) != "<null>":
 		print("listo web")
 		textActivity = "descargada web"
@@ -110,7 +110,11 @@ func checkFilesystem():
 		
 	dir = DirAccess.open(Global.basedir + "/" + Global.JsonGDD.folders.documentos)
 		
-	var niveles = Global.JsonGDD.Niveles
+	var niveles = []
+	
+	for nivelnum in Global.JsonGDD.niveles.keys():
+		niveles.append(Global.JsonGDD.niveles[nivelnum])
+	
 	print("iterar niveles")
 	for nivel in niveles:
 		print(nivel)
@@ -178,7 +182,12 @@ func checkFilesystem():
 func iiteratenivel(sigla,tomos):
 	print("iterar nivel " + sigla )
 	var dir = DirAccess.open(Global.basedir + "/" + Global.JsonGDD.folders.documentos + "/" + sigla )
-	for tomo in tomos:
+	var listatomos = []
+	
+	for tomokey in tomos.keys():
+		listatomos.append(tomos[tomokey])
+	
+	for tomo in listatomos:
 		if dir.dir_exists(tomo.sigla):
 			pass
 		else:
@@ -205,8 +214,8 @@ func iiteratenivel(sigla,tomos):
 			#Descargar GDD
 			var downloadportada = {
 				"url" : tomo.portada,
-				"nombre": sigla + "-" + tomo.sigla + "-portada." + tomo.extension,
-				"location" : dir.get_current_dir() + "/" + tomo.sigla + "/" + sigla + "-" + tomo.sigla + "-portada." + tomo.extension
+				"nombre": sigla + "-" + tomo.sigla + "-portada." + tomo.extension_portada,
+				"location" : dir.get_current_dir() + "/" + tomo.sigla + "/" + sigla + "-" + tomo.sigla + "-portada." + tomo.extension_portada
 			}
 			downloadlist.append(downloadportada)
 			

@@ -26,7 +26,7 @@ func _ready():
 		Global.askanarenquest(Global.anaUrl+"/GDD/CURSO:"+Global.nivel.sigla,[],[evento]) #enviaranalitica 
 
 func agregarMascota():
-	var mascota = Global.JsonGDD.Mascota[str(Global.nivel.mascota_id)]
+	var mascota = Global.JsonGDD.mascotas[str(Global.nivel.mascota_id)]
 	print(mascota)
 	$ContainerMascota/Texto.text = mascota.descripcion
 	if dir.file_exists(mascota.nombre + ".png"):
@@ -37,7 +37,7 @@ func agregarMascota():
 
 
 func llenarPersonajes():
-	var listapersonajes = Global.JsonGDD.Personaje
+	var listapersonajes = Global.JsonGDD.personajes
 	
 	print("lista de personajes")
 	print(Global.basedir +"/"+ Global.JsonGDD.folders.documentos +"/"+ Global.nivel.sigla)
