@@ -12,7 +12,6 @@ func _ready():
 	for nivelnum in Global.JsonGDD.niveles.keys():
 		listaNiveles.append(Global.JsonGDD.niveles[nivelnum])
 	
-	print(listaNiveles)
 	#print(Global.JsonGDD)
 	
 	createNivelButtons()
@@ -28,6 +27,8 @@ func _ready():
 		Global.testrquest("/GDD")
 		#await Global.sendevent([evento]) #enviaranalitica
 		#await Global.askanarenquest(Global.anaUrl+"/GDD",[],[]) #enviaranalitica
+	print("Lista Niveles:")
+	print(listaNiveles)
 
 
 func createNivelButtons():

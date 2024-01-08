@@ -4,6 +4,8 @@ var PersonajeIcon = preload("res://Objetos/PersoIcon.tscn")
 var tomoButton = preload("res://Objetos/TomoBtn.tscn")
 var dir
 
+var listaTomos = []
+
 func _ready():
 	print("Nivel")
 	print(Global.nivel)
@@ -58,16 +60,21 @@ func llenarPersonajes():
 		$ContainerEstudiantes/HBoxContainer.add_child(persoIcon)
 
 func llenarTomos():
-	var tomos =  Global.nivel.tomos
 	
-	for tomo in tomos:
+	for tomonum in Global.nivel.tomos.keys():
+		listaTomos.append(Global.nivel.tomos[tomonum])
+	
+	
+	for tomo in listaTomos:
 		var tomobtn = tomoButton.instantiate()
 		tomobtn.setBtnTxt(tomo.nombre)
 		tomobtn.tomo = tomo
 		
+		print(tomo)
+		
 		if dir.dir_exists(tomo.sigla):
 			var subdir = DirAccess.open( dir.get_current_dir() + "/" + tomo.sigla )
-			if subdir.file_exists( Global.nivel.sigla + "-" + tomo.sigla + "-portada." + tomo.extension ):
+			if subdir.file_exists( Global.nivel.sigla + "-" + tomo.sigla + "-portada." + tomo.extension_portada ):
 				tomobtn.setImage( dir.get_current_dir() + "/" + tomo.sigla + "/" + Global.nivel.sigla + "-" + tomo.sigla + "-portada." + tomo.extension )
 				
 			tomobtn.setTomoLocation( dir.get_current_dir() + "/" + tomo.sigla + "/" + Global.nivel.sigla + "-" + tomo.sigla + "-GDD.pdf" )

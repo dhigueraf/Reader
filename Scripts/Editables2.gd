@@ -31,24 +31,45 @@ func _ready():
 	preurl = Global.anaUrl+"/EDIT"
 	
 	dir = DirAccess.open( Global.basedir + "/" + Global.JsonGDD.folders.documentos)
+	
+	var niveles = []
+	for nivelnum in Global.JsonGDD.niveles.keys():
+		niveles.append(Global.JsonGDD.niveles[str(nivelnum)])
 		
-	for nivel in Global.JsonGDD.niveles:
+	for nivel in niveles:
 		print(nivel.nombre)
 		
-		var unidades = Global.JsonGDD.Unidad
-		var colores = Global.JsonGDD.Color
+		var unidades = Global.JsonGDD.unidades
+		var colores = Global.JsonGDD.colores
 	
 		var conjutnounidades = {}
 		var iteratorunidad = 0
-		for tomo in nivel.tomos:
-			for unidad in tomo.unidades:
-				
+		
+		var tomos = []
+		for tomonum in nivel.tomos.keys():
+			tomos.append(nivel.tomos[str(tomonum)])
+		
+		for tomo in tomos:
+			
+			var listaunidades = []
+			for uninum in tomo.unidades.keys():
+				var utoadd = tomo.unidades[str(uninum)]
+				utoadd.color = colores[ unidades[str(uninum)].color ]
+				utoadd.unidad_id = uninum
+				listaunidades.append( tomo.unidades[str(uninum)] )
+			
+			for unidad in listaunidades:
+			
 				var unidaddict = {"presentaciones":[],"evaluaciones":[]}
-				unidaddict.color = colores[ str(unidades[ str(unidad.unidad_id) ].color_id) ]
 				
 				var subdir = DirAccess.open( dir.get_current_dir() + "/" + nivel.sigla + "/" + tomo.sigla )
 				var index = 0
-				for press in unidad.presentaciones:
+				
+				var presentaciones = []
+				for presnum in unidad.presentaciones.keys():
+					presentaciones.append(unidad.presentaciones[str(presnum)])
+					
+				for press in presentaciones:
 					if subdir.file_exists( nivel.sigla + "-" + tomo.sigla + "-" + press.sigla +"."+ press.extension ):
 						var presentacion = {}
 						presentacion.nombre = press.nombre
@@ -57,7 +78,12 @@ func _ready():
 					index += 1
 					
 				var index2 = 0
-				for eval in unidad.evaluaciones:
+				
+				var evaluaciones = []
+				for evalnum in unidad.evaluaciones.keys():
+					evaluaciones.append(unidad.presentaciones[str(evalnum)])
+				
+				for eval in evaluaciones:
 					if subdir.file_exists(nivel.sigla + "-" + tomo.sigla + "-" + eval.sigla +"."+ eval.extension):
 						var evaluacion = {}
 						evaluacion.nombre = eval.nombre
@@ -171,18 +197,20 @@ func cleanAndPrepare():
 	prepareDocuScreen()
 	
 func prepareDocuScreen():
+	var colores = Global.JsonGDD.colores
 	print("armar")
-
+	print(cursos)
 	print( cursos[ cursoindex ] )
-	print("ahora")
 	for unidadkey in cursos[ cursoindex ].keys():
 		var unidadamondar = cursos[cursoindex][unidadkey]
 		var nombre = unidadkey
-		var color = unidadamondar.color
-		
+		print(unidadamondar)
+		print(nombre)
+		var color = colores.rojo #colores[(unidades[str(cursoindex)]).color]
+		print("paso una")
 		if choice == "presentaciones":
 			var unidad_PBtn = unidadP_Btn.instantiate()
-			unidad_PBtn.setNameAndColor(nombre,color.hexadecimal)
+			unidad_PBtn.setNameAndColor(nombre,color.hex)
 			
 			var iterator = 1
 			for pres in unidadamondar.presentaciones:
@@ -194,7 +222,7 @@ func prepareDocuScreen():
 
 		elif choice == "evaluaciones":
 			var unidad_EBtn = unidadE_Btn.instantiate()
-			unidad_EBtn.setNameAndColor(nombre,color.hexadecimal)
+			unidad_EBtn.setNameAndColor(nombre,color.hex)
 			
 			
 			var iterator = 1

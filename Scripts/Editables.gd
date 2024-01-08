@@ -8,20 +8,23 @@ var dir
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var unidades = Global.JsonGDD.Unidad
-	var colores = Global.JsonGDD.Color
+	var unidades = Global.JsonGDD.unidades
+	var colores = Global.JsonGDD.colores
+	#print(global.tomo)
 	
 	$superiorButtons.setLabelCurso(Global.nivel.nombre)
-	
-	for tomo in Global.nivel.tomos:
-		for unidad in tomo.unidades:
-			var unitoadd = unidad
-			unitoadd.nombre = unidades[ str(unidad.unidad_id) ].nombre
-			unitoadd.color = colores[ str(unidades[ str(unidad.unidad_id) ].color_id) ]
-			unitoadd.sigla = unidades[ str(unidad.unidad_id) ].sigla
+	print("tomos")
+	for tomonum in Global.nivel.tomos.keys():
+		var tomo = Global.nivel.tomos[tomonum]
+		print("tomo:")
+		print(tomo)
+		for unidadnum in tomo.unidades.keys():
+			var unitoadd = tomo.unidades[unidadnum]
+			unitoadd.color = colores[(unidades[str(unidadnum)]).color]
 			unitoadd.tomo = tomo.sigla
-			listaunidades.append(unidad)
+			listaunidades.append(unitoadd)
 	
+	print("unidades")
 	for unidad in listaunidades:
 		print(unidad.nombre)
 		print(unidad)
@@ -62,8 +65,7 @@ func llenarPresentaciones():
 	print("presentaciones")
 	for unidad in listaunidades:
 		var unidad_PBtn = unidadP_Btn.instantiate()
-		#var unidad_PBtn1 = unidadP_Btn.instantiate()
-		unidad_PBtn.setNameAndColor(unidad.nombre,unidad.color.hexadecimal)
+		unidad_PBtn.setNameAndColor(unidad.nombre,unidad.color.hex)
 		
 		print("unidad:")
 		print(unidad)
@@ -71,29 +73,42 @@ func llenarPresentaciones():
 		if dir.dir_exists(unidad.tomo):
 			var subdir = DirAccess.open( dir.get_current_dir() + "/" + unidad.tomo )
 			var iterator = 1
-			for pres in unidad.presentaciones:
+			print("uni")
+			print(unidad)
+			
+			var presentaciones = []
+			for prennum in unidad.presentaciones.keys():
+				presentaciones.append(unidad.presentaciones[str(prennum)])
+			
+			for pres in presentaciones:
 				if subdir.file_exists(Global.nivel.sigla +"-"+unidad.tomo+"-"+pres.sigla +"."+ pres.extension):
 					print("econttrada")
 					unidad_PBtn.setFileLocation(iterator, subdir.get_current_dir() + "/" + Global.nivel.sigla +"-"+unidad.tomo+"-"+pres.sigla +"."+ pres.extension ,pres.nombre)
 				iterator += 1
 		
 		$Panel/Presentaciones/GridContainer.add_child(unidad_PBtn)
-		#$Panel/Presentaciones/GridContainer.add_child(unidad_PBtn1)
 
 
 func llenarEvaluaciones():	
 	print("evaluaciones")
 	for unidad in listaunidades:
 		var unidad_EBtn = unidadE_Btn.instantiate()
-		unidad_EBtn.setNameAndColor(unidad.nombre,unidad.color.hexadecimal)
+		unidad_EBtn.setNameAndColor(unidad.nombre,unidad.color.hex)
 		
 		print("unidad:")
 		print(unidad)
 		
+		
+		
 		if dir.dir_exists(unidad.tomo):
 			var subdir = DirAccess.open( dir.get_current_dir() + "/" + unidad.tomo )
 			var iterator = 1
-			for eval in unidad.evaluaciones:
+			
+			var evaluaciones = []
+			for evalnum in unidad.evaluaciones.keys():
+				evaluaciones.append(unidad.evaluaciones[str(evalnum)])
+			
+			for eval in evaluaciones:
 				if subdir.file_exists(Global.nivel.sigla +"-"+unidad.tomo+"-"+eval.sigla +"."+ eval.extension):
 					print("econttrada")
 					unidad_EBtn.setFileLocation(iterator, subdir.get_current_dir() + "/" + Global.nivel.sigla +"-"+unidad.tomo+"-"+ eval.sigla +"."+ eval.extension ,eval.nombre)
