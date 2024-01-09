@@ -54,13 +54,13 @@ func _ready():
 			var listaunidades = []
 			for uninum in tomo.unidades.keys():
 				var utoadd = tomo.unidades[str(uninum)]
-				utoadd.color = colores[ unidades[str(uninum)].color ]
+				utoadd.color = unidades[str(uninum)].color
 				utoadd.unidad_id = uninum
-				listaunidades.append( tomo.unidades[str(uninum)] )
+				listaunidades.append( utoadd )
 			
 			for unidad in listaunidades:
 			
-				var unidaddict = {"presentaciones":[],"evaluaciones":[]}
+				var unidaddict = {"presentaciones":[],"evaluaciones":[],"color":"rojo"}
 				
 				var subdir = DirAccess.open( dir.get_current_dir() + "/" + nivel.sigla + "/" + tomo.sigla )
 				var index = 0
@@ -91,6 +91,9 @@ func _ready():
 						unidaddict.evaluaciones.append(evaluacion) 
 					index2 += 1
 				iteratorunidad+= 1
+				
+				unidaddict.color = unidad.color
+				
 				conjutnounidades[   unidades[str(unidad.unidad_id)].nombre  ] = unidaddict
 			
 		cursos.append(conjutnounidades)
@@ -198,15 +201,16 @@ func cleanAndPrepare():
 	
 func prepareDocuScreen():
 	var colores = Global.JsonGDD.colores
+	var unidades = Global.JsonGDD.unidades
 	print("armar")
-	print(cursos)
 	print( cursos[ cursoindex ] )
 	for unidadkey in cursos[ cursoindex ].keys():
 		var unidadamondar = cursos[cursoindex][unidadkey]
 		var nombre = unidadkey
-		print(unidadamondar)
-		print(nombre)
-		var color = colores.rojo #colores[(unidades[str(cursoindex)]).color]
+		#print(unidadkey)
+		#print(unidadamondar.color)
+		#print(colores[unidadamondar.color])
+		var color = colores[unidadamondar.color] #colores[(unidades[str(cursoindex)]).color]
 		print("paso una")
 		if choice == "presentaciones":
 			var unidad_PBtn = unidadP_Btn.instantiate()
